@@ -47,9 +47,9 @@
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
+      gtag('js', new Date());
 
-      gtag("config", "UA-94034622-3");
+      gtag('config', 'UA-94034622-3');
     </script>
     <!-- /END GA -->
     <style>
@@ -806,7 +806,7 @@
               </div>
             </div>
             <div class="section-body">
-              <h2 class="section-title">Jake님, 안녕하세요!</h2>
+              <h2 class="section-title" id="greeting"></h2>
               <p class="section-lead">Out Body에 오신 것을 환영합니다.</p>
 
               <div class="row mt-sm-4">
@@ -821,7 +821,9 @@
                       <div class="profile-widget-items">
                         <div class="profile-widget-item">
                           <div class="profile-widget-item-label">Point</div>
-                          <div class="profile-widget-item-value">820</div>
+                          <div class="profile-widget-item-value" id="myPoint">
+                            820
+                          </div>
                         </div>
                         <div class="profile-widget-item">
                           <div class="profile-widget-item-label">Ranks</div>
@@ -829,24 +831,31 @@
                         </div>
                         <div class="profile-widget-item">
                           <div class="profile-widget-item-label">friends</div>
-                          <div class="profile-widget-item-value">32</div>
+                          <div
+                            class="profile-widget-item-value"
+                            id="friendCount"
+                          >
+                            32
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div class="profile-widget-description">
                       <div class="profile-widget-name">
-                        Jake Lee
+                        <div id="descriptionName">Jake Lee</div>
                         <div class="text-muted d-inline font-weight-normal">
                           <div class="slash"></div>
-                          BackEnd Developer
+                          <div id="status">BackEnd Developer</div>
                         </div>
                       </div>
-                      저는 원래 허약한 체질을 갖고 있었고, 운동과는 거리가 먼
-                      삶을 살고 있었습니다. 하지만 OutBody 어플을 이용함으로써
-                      운동에 점점 흥미를 붙이게 되었고, 지금은 운동을 통해 더욱
-                      건강한 삶을 살고 있습니다. 저와 함께 같은 목표를 갖고
-                      운동하고 싶은 분들, 모두 제게 친구요청해주시고 같이
-                      도전해봐요!
+                      <div id="self-description">
+                        저는 원래 허약한 체질을 갖고 있었고, 운동과는 거리가 먼
+                        삶을 살고 있었습니다. 하지만 OutBody 어플을 이용함으로써
+                        운동에 점점 흥미를 붙이게 되었고, 지금은 운동을 통해
+                        더욱 건강한 삶을 살고 있습니다. 저와 함께 같은 목표를
+                        갖고 운동하고 싶은 분들, 모두 제게 친구요청해주시고 같이
+                        도전해봐요!
+                      </div>
                     </div>
                     <br />
                     <br />
@@ -881,30 +890,30 @@
                   <div class="card">
                     <form method="post" class="needs-validation" novalidate="">
                       <div class="card-header">
-                        <h4>Jake's Information</h4>
+                        <h4 id="informationName">Jake's Information</h4>
                       </div>
                       <div class="card-body">
                         <div class="row">
                           <div class="form-group col-md-6 col-12">
                             <label>E-mail: </label>
-                            a26484638@gmail.com
+                            <div id="emailaddress">a26484638@gmail.com</div>
                             <div class="invalid-feedback"></div>
                           </div>
                           <div class="form-group col-md-6 col-12">
                             <label>Gender: </label>
-                            Male
+                            <div id="mygender">Male</div>
                             <div class="invalid-feedback"></div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="form-group col-md-6 col-12">
                             <label>Birth Day: </label>
-                            September 9th, 1992
+                            <div id="bdaytag">September 9th, 1992</div>
                             <div class="invalid-feedback"></div>
                           </div>
                           <div class="form-group col-md-6 col-12">
                             <label>CreatedAt: </label>
-                            August 15th, 2023
+                            <div id="createdate">August 15th, 2023</div>
                             <div class="invalid-feedback"></div>
                           </div>
                         </div>
@@ -914,48 +923,50 @@
                           </div>
                         </div>
                         <div class="table-responsive">
-                          <table class="table table-sm">
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">E-mail</th>
-                                <th scope="col">Point</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>ABC@naver.com</td>
-                                <td>380</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Sarah</td>
-                                <td>DEF@naver.com</td>
-                                <td>720</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Jean</td>
-                                <td>HIG@naver.com</td>
-                                <td>470</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">4</th>
-                                <td>Dominic</td>
-                                <td>KLM@naver.com</td>
-                                <td>450</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">5</th>
-                                <td>James</td>
-                                <td>KLM@naver.com</td>
-                                <td>370</td>
-                              </tr>
-                            </tbody>
-                          </table>
+                          <div style="overflow-y: scroll; height: 200px">
+                            <table class="table table-sm">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Name</th>
+                                  <th scope="col">E-mail</th>
+                                  <th scope="col">Point</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">1</th>
+                                  <td>Mark</td>
+                                  <td>ABC@naver.com</td>
+                                  <td>380</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">2</th>
+                                  <td>Sarah</td>
+                                  <td>DEF@naver.com</td>
+                                  <td>720</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">3</th>
+                                  <td>Jean</td>
+                                  <td>HIG@naver.com</td>
+                                  <td>470</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">4</th>
+                                  <td>Dominic</td>
+                                  <td>KLM@naver.com</td>
+                                  <td>450</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">5</th>
+                                  <td>James</td>
+                                  <td>KLM@naver.com</td>
+                                  <td>370</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
                       </div>
 
@@ -1043,13 +1054,7 @@
               <div class="card-footer text-right">
                 <button class="btn btn-primary" id="editcancel">취소</button>
 
-                <button
-                  class="btn btn-primary"
-                  id="submit"
-                  onclick="infoPost();"
-                >
-                  등록
-                </button>
+                <button class="btn btn-primary" id="submitmyInfo">등록</button>
               </div>
               <div class="modal-footer bg-whitesmoke br"></div>
             </div>
@@ -1176,7 +1181,7 @@
                       <button
                         class="btn btn-primary"
                         type="button"
-                        onclick="searchFriend();"
+                        id="searchFriendByEmail"
                       >
                         검색
                       </button>
@@ -1200,7 +1205,11 @@
                   취소
                 </button>
 
-                <button class="btn btn-primary" onclick="requestFriend();">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  id="requestFriendByEmail"
+                >
                   친구 요청
                 </button>
               </div>
@@ -1239,6 +1248,6 @@
 
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
-    <script src="assets/js/users.js"></script>
+    <script src="assets/js/my-Info.js"></script>
   </body>
 </html>
