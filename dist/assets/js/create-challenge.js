@@ -8,7 +8,7 @@
 'use strict';
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzMjk0NjU0LCJleHAiOjE2OTMyOTgyNTR9.uhiXOiC03OrKhPdt43gq5_O5phJzdVD1PThtvjf5dTQ';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjkzMzI1NzkwLCJleHAiOjE2OTMzMjkzOTB9.NVtahJT_2y5cK4fAbDLic7I-sjW9Rm7aSg5oM95O5Ew';
 
 const createButton = document.querySelector('#create-challenge-button');
 createButton.addEventListener('click', createChallenge);
@@ -70,7 +70,7 @@ async function createChallenge() {
         location.reload();
       }
     })
-    .catch((response) => {
-      alert(response.response.data.message);
+    .catch((error) => {
+      alert(error.response.data.message);
     });
 }
