@@ -41,7 +41,7 @@ document.getElementById('findChallenges').onclick = function () {
 
 // 토큰 저장
 const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImlhdCI6MTY5MzM3NzAzOCwiZXhwIjoxNjkzMzg0MjM4fQ.1JfvG4KNOCBnZ1rWOxTG1Oa4fGIJMF_DWXW-ycu-bUc';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzM5OTg2OSwiZXhwIjoxNjkzNDA3MDY5fQ.vCQY71TKyMq34VVv5Ft2EL4l3nDsyluf9Zp30_mhSpQ';
 // localStorage.setItem('jwtToken', jwtToken);
 
 // 저장된 JWT토큰 가져오기 = storedToken
@@ -52,6 +52,10 @@ document.getElementById('submitmyInfo').addEventListener('click', function () {
   const photo = document.querySelector('#image-upload');
   const Bday = document.getElementById('bday').value;
   const description = document.getElementById('description').value;
+
+  console.log(photo);
+  console.log(Bday);
+  console.log(description);
 
   if (Bday === '') {
     alert('생년월일을 입력해주세요.');
@@ -97,7 +101,7 @@ axios
   .then((response) => {
     const userInfo = response.data;
 
-    // 내정보
+    //   // 내정보
     const selfDescriptionElement = document.getElementById('self-description'); //자기소개
     const bdayTagElement = document.getElementById('bdaytag'); //생일
     const greetingElement = document.getElementById('greeting'); // 이름1 (제목 이름)
@@ -128,6 +132,7 @@ axios
       day: 'numeric',
     });
     createdateElement.textContent = create;
+    pointElement.innerText = userInfo.point;
 
     // 친구정보
   })
@@ -293,4 +298,4 @@ axios
     console.error('Error message:', error.response.data.message);
   });
 
-// 포인트 조회
+// 나에게온 친구요청 메시지 조회
