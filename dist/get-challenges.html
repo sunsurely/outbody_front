@@ -455,9 +455,7 @@
                   <div class="card-body">
                     <div class="float-left">
                       <select class="form-control selectric">
-                        <option>참여 가능한 도전</option>
-                        <option>친구가 생성한 도전</option>
-                        <option>친구가 참여한 도전</option>
+                        <option>전체</option>
                       </select>
                     </div>
                     <div class="float-right">
@@ -472,7 +470,7 @@
                     </div>
                     <div class="clearfix mb-3"></div>
                     <div class="table-responsive">
-                      <table class="table table-striped">
+                      <table id="challenge-table" class="table table-striped">
                         <tr>
                           <th>제목</th>
                           <th>기간</th>
@@ -481,12 +479,10 @@
                           <th>인원</th>
                           <th>작성자</th>
                           <th>생성일</th>
+                          <th>공개 여부</th>
+                          <th></th>
                         </tr>
-
-                        <tr id="challenge-list">
-                          <!-- 도전 -->
-                        </tr>
-
+                        <!-- 도전 목록이 들어가는 자리 -->
                       </table>
                     </div>
                     <div class="float-right">
