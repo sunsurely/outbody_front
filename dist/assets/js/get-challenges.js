@@ -8,7 +8,7 @@
 'use strict';
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjkzMzU2MjEzLCJleHAiOjE2OTMzNTk4MTN9.ddPkkiuVkA_csmuNutPzsAaLvsKTdfWxdc9mBxHM_Tk';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkzMzgwODk2LCJleHAiOjE2OTMzODQ0OTZ9.BIsSCR5vfNLl2xUPBZQu0m2Uf7sPHIeGviAPTOv59mo';
 
 window.onload = function () {
   getChallenges();
@@ -25,8 +25,8 @@ async function getChallenges() {
     .then((response) => {
       console.log(response.data.data);
 
-      const challengeList = document.querySelector('#challenge-list');
-      challengeList.innerHTML = response.data.data
+      const challengeTable = document.querySelector('#challenge-table');
+      challengeTable.innerHTML += response.data.data
         .map((challenge) => {
           const startDate = new Date(challenge.startDate);
           startDate.setDate(startDate.getDate() + 1);
@@ -47,56 +47,63 @@ async function getChallenges() {
             publicView = '비공개';
           }
 
-          return `<td>${challenge.title}</td>
-                  <td>${formattedstartDate} ~ ${formattedendDate}</td>
-                  <td>
-                    <button class="btn btn-primary">
-                      오운완 출석<span class="badge badge-transparent">${
-                        challenge.attend
-                      }일</span>
-                    </button>
-                    <button class="btn btn-primary">
-                      체중 <span class="badge badge-transparent">-${
-                        challenge.weight
-                      }kg</span>
-                    </button>
-                    <button class="btn btn-primary">
-                      골격근량 <span class="badge badge-transparent">+${
-                        challenge.muscle
-                      }kg</span>
-                    </button>
-                    <button class="btn btn-primary">
-                      체지방률 <span class="badge badge-transparent">-${
-                        challenge.fat
-                      }%</span>
-                    </button>
-                  </td>
-                  <td>
-                    <button class="btn btn-danger">
-                      실패 시<span class="badge badge-transparent">-${
-                        challenge.entryPoint
-                      }점</span>
-                    </button>
-                    <button class="btn btn-success">
-                      성공 시 최대<span class="badge badge-transparent">+${
-                        challenge.entryPoint * challenge.userNumber
-                      }점</span>
-                    </button>
-                  </td>
-                  <td>${challenge.userNumber} / ${
-            challenge.userNumberLimit
-          }명</td>
-                  <td>
-                    <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle" width="35"
-                      data-toggle="title" title="">
-                    <div class="d-inline-block ml-1">${challenge.hostName}</div>
-                  </td>
-                  <td>${formattedCreatedAt}</td>
-                  <td>${publicView}</td>`;
+          return `<tr id="${challenge.id}">
+          <td>${challenge.title}</td>
+          <td>${formattedstartDate} ~ ${formattedendDate}</td>
+          <td>
+            <button class="btn btn-primary">
+              오운완 출석<span class="badge badge-transparent">${
+                challenge.attend
+              }일</span>
+            </button>
+            <button class="btn btn-primary">
+              체중 <span class="badge badge-transparent">-${
+                challenge.weight
+              }kg</span>
+            </button>
+            <button class="btn btn-primary">
+              골격근량 <span class="badge badge-transparent">+${
+                challenge.muscle
+              }kg</span>
+            </button>
+            <button class="btn btn-primary">
+              체지방률 <span class="badge badge-transparent">-${
+                challenge.fat
+              }%</span>
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-danger">
+              실패 시<span class="badge badge-transparent">-${
+                challenge.entryPoint
+              }점</span>
+            </button>
+            <button class="btn btn-success">
+              성공 시 최대<span class="badge badge-transparent">+${
+                challenge.entryPoint * challenge.userNumber
+              }점</span>
+            </button>
+          </td>
+          <td>${challenge.userNumber} / ${challenge.userNumberLimit}명</td>
+          <td>
+            <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle" width="35"
+              data-toggle="title" title="">
+            <div class="d-inline-block ml-1">${challenge.hostName}</div>
+          </td>
+          <td>${formattedCreatedAt}</td>
+          <td>${publicView}</td>
+          <td>
+            <a href="get-one-challenge.html?id=${challenge.id}">
+              <button class="btn btn-primary" style="border-radius: 15px;">
+                보기
+              </button>
+            </a>
+          </td>
+          </tr>`;
         })
         .join('');
     })
-    .catch((response) => {
-      alert(response);
+    .catch((error) => {
+      alert(error.response.data.message);
     });
 }

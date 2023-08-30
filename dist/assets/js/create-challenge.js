@@ -8,7 +8,7 @@
 'use strict';
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjkzMzI1NzkwLCJleHAiOjE2OTMzMjkzOTB9.NVtahJT_2y5cK4fAbDLic7I-sjW9Rm7aSg5oM95O5Ew';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkzMzYzMjgxLCJleHAiOjE2OTMzNjY4ODF9.R8jBhIQ_ohMu-TEYatvUHihlaDEdVKo2V21LCwfYql8';
 
 const createButton = document.querySelector('#create-challenge-button');
 createButton.addEventListener('click', createChallenge);
