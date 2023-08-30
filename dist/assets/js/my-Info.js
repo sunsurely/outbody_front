@@ -45,7 +45,7 @@ document.getElementById('searchfriendCancel').onclick = function () {
 
 // 토큰 저장
 const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzMzk4MzMzLCJleHAiOjE2OTM0MzQzMzN9.7_VVpqGRN2iBGx-rTfbwpr9T1nBKWfAeSLgGOD_pY-g';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzM5OTg2OSwiZXhwIjoxNjkzNDA3MDY5fQ.vCQY71TKyMq34VVv5Ft2EL4l3nDsyluf9Zp30_mhSpQ';
 // localStorage.setItem('jwtToken', jwtToken);
 
 // 저장된 JWT토큰 가져오기 = storedToken
@@ -75,7 +75,7 @@ const storedToken =
 //   }
 //   //내정보수정(업로드)
 //   axios
-//     .patch(`http://localhost:8080/user/me`, formData, {
+//     .patch(`http://localhost:3000/user/me`, formData, {
 //       headers: {
 //         // 'Content-Type': 'multipart/form-data',
 //         Authorization: `Bearer ${storedToken}`,
@@ -93,7 +93,7 @@ const storedToken =
 
 // // 내정보 조회2 (description, birthday, image(x), username, email, Gender, CreatedAt, point, friendList)
 // axios
-//   .get('http://localhost:8080/me/profile', {
+//   .get('http://localhost:3000/me/profile', {
 //     headers: {
 //       Authorization: `Bearer ${storedToken}`,
 //     },
@@ -155,7 +155,7 @@ const storedToken =
 //   };
 
 //   await axios
-//     .patch(`http://localhost:8080/user/me/password`, data, {
+//     .patch(`http://localhost:3000/user/me/password`, data, {
 //       headers: {
 //         Authorization: `Bearer ${storedToken}`,
 //       },
@@ -185,7 +185,7 @@ const storedToken =
 //     const data = { email: searchEmail };
 
 //     axios
-//       .get('http://localhost:8080/user/me/searchEmail', data, {
+//       .get('http://localhost:3000/user/me/searchEmail', data, {
 //         headers: {
 //           Authorization: `Bearer ${storedToken}`,
 //         },
@@ -210,7 +210,7 @@ const storedToken =
 //     const requestEmail = requestEmailInput.value;
 
 //     axios
-//       .post(`http://localhost:8080/follow/${userId}/request`, {
+//       .post(`http://localhost:3000/follow/${userId}/request`, {
 //         headers: {
 //           Authorization: `Bearer ${storedToken}`,
 //         },
@@ -227,22 +227,6 @@ const storedToken =
 //       });
 //   });
 // });
-
-// //친구수 조회
-// // const friendCountElement = document.getElementById('friendCount');
-// // axios
-// .get('http://localhost:8080/user/me/friendCount', {
-//   headers: {
-//     Authorization: `Bearer ${storedToken}`,
-//   },
-// })
-// //   .then((response) => {
-// //     const friendCount = response.data;
-// //     friendCountElement.innerText = friendCount;
-// //   })
-// //   .catch((error) => {
-// //     console.error('Error message:', error.response.data.message);
-// //   });
 
 //내 정보 조회
 async function initMyPage() {
@@ -330,6 +314,5 @@ $(signoutBtn).click(async () => {
     alert('서비스를 탈퇴하셨습니다');
   } catch (error) {
     console.error('Error message:', error.response.data.message);
-  };
-
-// 포인트 조회
+  }
+});

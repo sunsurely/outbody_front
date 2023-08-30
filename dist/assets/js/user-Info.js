@@ -1,3 +1,7 @@
+$(document).ready(function () {
+  userPage();
+});
+
 // 오운완 목록 모달
 document.getElementById('postlist').onclick = function (e) {
   e.preventDefault();
@@ -7,31 +11,66 @@ document.getElementById('backtopage').onclick = function () {
   $('#postlistModal').modal('hide');
 };
 
-const token = '';
+// 토큰값 선언
+const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzQxMDc1NiwiZXhwIjoxNjkzNDE3OTU2fQ.aTidnbLstwJNe_qu9ekr1L7AH4f_FOWtmWt2vCkblZg';
 
-// 사용자 정보조회 (name, status, point, email, gender, birthday, createdAt)
-const userId = data.userId;
-console.log('userId');
+// 사용자 정보조회
+async function userPage() {
+  const nameTag = $('#nametag');
+  const statusTag = $('#statustag');
+  const descriptionTag = $('#descriptiontag');
+  const pointTag = $('#pointtag');
+  const ranksTag = $('#rankstag');
+  const friendTag = $('#friendtag');
+  const emailTag = $('#emailtag');
+  const genderTag = $('#gendertag');
+  const bdayTag = $('#birthdaytag');
+  const createdAtTag = $('#createdAttag');
 
-axios.get(`http://localhost:3000/user/:${userId}`),
-  {
-    headers: {
-      Authorization: `Bearer ${storedToken}`,
-    },
-  }
-    .then((response) => {
-      const userData = response.data;
-      document.getElementById('nametag').textContent = userData.name;
-      document.getElementById('statustag').textContent = userData.status;
-      document.getElementById('pointtag').textContent = userData.point;
-      document.getElementById('emailtag').textContent = userData.email;
-      document.getElementById('gendertag').textContent = userData.gender;
-      document.getElementById('birthdaytag').textContent = userData.birthday;
-      document.getElementById('datetag').textContent = userData.createdAt;
-    })
-    .catch((error) => {
-      console.error('Error message:', error.response.data.message);
+  try {
+    const { data } = await axios.get(`http://localhost:3000/user/13`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
+    const rankData = await axios.get('http://localhost:3000/user/me/rank', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const myData = data.data.rest;
+    const followersInfo = data.data.followersInfo;
+
+    $(nameTag).text(myData.point);
+    $(statusTag).text(myData.status);
+    $(descriptionTag).text(myData.description);
+    $(pointTag).text(myData.point);
+    $(ranksTag).text(rankData.data.data);
+    $(friendTag).text(followersInfo.length);
+    $(emailTag).text(myData.email);
+    $(genderTag).text(myData.gender ? myData.gender : '성별을 입력해 주세요');
+    $(bdayTag).text(myData.birthday ? myData.birthday : '생일을 입력해 주세요');
+
+    const date = new Date(myData.createdAt);
+    const year = date.getFullYear().toString().slice(-2);
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+
+    const myCreatedAt = `${year}.${month}.${day}`;
+    $(createdAtTag).text(myCreatedAt);
+  } catch (error) {
+    alert(error.response.data.message);
+  }
+}
+
+// $('#descriptiontag').click(() => {
+//   // descriptiontag 클릭했을때
+//   $('.author-box-job').text('이름');
+// });
+
+// 오운완 목록보기
 
 // 팔로우-언팔로우
 const usersCarousel = document.getElementById('users-carousel');
