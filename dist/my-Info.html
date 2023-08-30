@@ -824,19 +824,21 @@
                       <div class="profile-widget-items">
                         <div class="profile-widget-item">
                           <div class="profile-widget-item-label">Point</div>
-                          <div class="profile-widget-item-value" id="myPoint">
+                          <div class="profile-widget-item-value" id="my-point">
                             820
                           </div>
                         </div>
                         <div class="profile-widget-item">
                           <div class="profile-widget-item-label">Ranks</div>
-                          <div class="profile-widget-item-value">28</div>
+                          <div id="my-rank" class="profile-widget-item-value">
+                            28
+                          </div>
                         </div>
                         <div class="profile-widget-item">
                           <div class="profile-widget-item-label">friends</div>
                           <div
                             class="profile-widget-item-value"
-                            id="friendCount"
+                            id="friend-count"
                           >
                             32
                           </div>
@@ -1144,13 +1146,7 @@
               <div class="card-footer text-right">
                 <button class="btn btn-primary" id="signoutcancel">취소</button>
 
-                <button
-                  class="btn btn-primary"
-                  id="submit"
-                  onclick="signout();"
-                >
-                  제출
-                </button>
+                <button class="btn btn-primary" id="signout-btn">제출</button>
               </div>
               <div class="modal-footer bg-whitesmoke br"></div>
             </div>

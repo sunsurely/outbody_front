@@ -17,7 +17,7 @@ $(document).ready(function () {
 });
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzMzcxMTI2LCJleHAiOjE2OTM0MDcxMjZ9._gsGRp0bRoNDtCNcuhtpuyH7vX-s4mNb0rdzzai2BdI';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzMzk4MzMzLCJleHAiOjE2OTM0MzQzMzN9.7_VVpqGRN2iBGx-rTfbwpr9T1nBKWfAeSLgGOD_pY-g';
 
 async function initializeChart() {
   const bmrArr = [];
