@@ -43,9 +43,9 @@
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
+      gtag('js', new Date());
 
-      gtag("config", "UA-94034622-3");
+      gtag('config', 'UA-94034622-3');
     </script>
     <!-- /END GA -->
   </head>
@@ -1136,15 +1136,6 @@
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/custom.js"></script>
-    <script>
-      // 오운완 목록 모달
-      $("#postlist").click(function (e) {
-        e.preventDefault();
-        $("#postlistModal").modal("show");
-      });
-      $("#backtopage").click(function () {
-        $("#postlistModal").modal("hide");
-      });
-    </script>
+    <script src="assets/js/user-Info.js"></script>
   </body>
 </html>
