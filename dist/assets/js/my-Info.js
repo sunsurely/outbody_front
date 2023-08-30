@@ -251,6 +251,10 @@ async function initMyPage() {
   const friendTag = $('#friend-count');
   const nameTag = $('#descriptionName');
   const description = $('#self-description');
+  const email = $('#emailaddress');
+  const birthday = $('#bdaytag');
+  const gender = $('#mygender');
+  const createdAt = $('#createdate');
   try {
     const { data } = await axios.get('http://localhost:3000/user/me/profile', {
       headers: {
@@ -272,6 +276,19 @@ async function initMyPage() {
     $(nameTag).text(myData.name);
     $(description).text(myData.description);
     $(rankTag).text(rankData.data.data);
+    $(email).text(myData.email);
+    $(birthday).text(
+      myData.birthday ? myData.birthday : '생일을 입력해 주세요',
+    );
+    $(gender).text(myData.gender ? myData.gender : '성별을 입력해 주세요');
+
+    const date = new Date(myData.createdAt);
+    const year = date.getFullYear().toString().slice(-2);
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+
+    const myCreatedAt = `${year}.${month}.${day}`;
+    $(createdAt).text(myCreatedAt);
   } catch (error) {
     alert(error.response.data.message);
   }
