@@ -1,0 +1,7 @@
+.modal-open {
+  overflow: auto !important;
+}
+
+.user-detail-remove {
+  float: right;
+}

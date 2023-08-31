@@ -16,8 +16,18 @@ $(document).ready(function () {
   });
 });
 
+const modal = $('#modal-background');
+
+$('.modal-up').on('click', () => {
+  $(modal).css('display', 'block');
+});
+
+$('.cancle-regist').on('click', () => {
+  $(modal).css('display', 'none');
+});
+
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzMzk4MzMzLCJleHAiOjE2OTM0MzQzMzN9.7_VVpqGRN2iBGx-rTfbwpr9T1nBKWfAeSLgGOD_pY-g';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNDQxMjY0LCJleHAiOjE2OTM0NzcyNjR9.b8c5kP73rUNWB6Cz1hUGNkT_jY1wmE4mymszx5q4hj0';
 
 async function initializeChart() {
   const bmrArr = [];
@@ -61,10 +71,10 @@ async function initializeChart() {
   $(recentDatas[2]).text(fatArr[6]);
   $(recentDatas[3]).text(muscleArr[6]);
 
-  initChart('myChart', bmrArr, dateArr);
-  initChart('myChart2', weightArr, dateArr);
-  initChart('myChart3', muscleArr, dateArr);
-  initChart('myChart4', fatArr, dateArr);
+  initChart('myChart', bmrArr, dateArr, 0, '기초대사량(kcal)');
+  initChart('myChart2', weightArr, dateArr, 10, '체중(kg)');
+  initChart('myChart3', muscleArr, dateArr, 10, '근육량(kg)');
+  initChart('myChart4', fatArr, dateArr, 10, '체지방률');
 }
 
 async function getBodyResults() {
@@ -130,26 +140,21 @@ async function initializeList(page, pageSize) {
 
     const recordDate = `${year}.${month}.${day}`;
 
-    const temp = `  <tr>
+    const temp = `  <tr style="border-bottom:solid 2px rgba(0,0,0,0.1)">
     <td>
-      <div>${recordDate}</div>
-      <div class="table-links">
-        in <a href="#">Web Development</a>
-        <div class="bullet"></div>
-        <a href="#">View</a>
-      </div>
+      <div style="margin-top:10px; ">${recordDate}</div>
     </td>
     <td>
-      <p href="#" class="font-weight-600">${record.weight}kg</p>
+      <p href="#" class="font-weight-600" style="margin-top:25px;">${record.weight}kg</p>
     </td>
     <td>
-      <p href="#" class="font-weight-600">${record.fat}%</p>
+      <p href="#" class="font-weight-600" style="margin-top:25px;">${record.fat}%</p>
     </td>
     <td>
-      <p href="#" class="font-weight-600">${record.muscle}kg</p>
+      <p href="#" class="font-weight-600" style="margin-top:25px;">${record.muscle}kg</p>
     </td>
     <td>
-      <p href="#" class="font-weight-600">${record.bmr}kcal</p>
+      <p href="#" class="font-weight-600" style="margin-top:25px;">${record.bmr}kcal</p>
     </td>
   </tr>`;
 
@@ -280,29 +285,23 @@ async function initializeList(page, pageSize) {
 
       const recordDate = `${year}.${month}.${day}`;
 
-      const temp = `  <tr>
-        <td>
-          <div>${recordDate}</div>
-          <div class="table-links">
-            in <a href="#">Web Development</a>
-            <div class="bullet"></div>
-            <a href="#">View</a>
-          </div>
-        </td>
-        <td>
-          <p href="#" class="font-weight-600">${record.weight}kg</p>
-        </td>
-        <td>
-          <p href="#" class="font-weight-600">${record.fat}%</p>
-        </td>
-        <td>
-          <p href="#" class="font-weight-600">${record.muscle}kg</p>
-        </td>
-        <td>
-          <p href="#" class="font-weight-600">${record.bmr}kcal</p>
-        </td>
-      </tr>`;
-
+      const temp = `  <tr style="border-bottom:solid 2px rgba(0,0,0,0.1)">
+    <td>
+      <div style="margin-top:10px; ">${recordDate}</div>
+    </td>
+    <td>
+      <p href="#" class="font-weight-600" style="margin-top:25px;">${record.weight}kg</p>
+    </td>
+    <td>
+      <p href="#" class="font-weight-600" style="margin-top:25px;">${record.fat}%</p>
+    </td>
+    <td>
+      <p href="#" class="font-weight-600" style="margin-top:25px;">${record.muscle}kg</p>
+    </td>
+    <td>
+      <p href="#" class="font-weight-600" style="margin-top:25px;">${record.bmr}kcal</p>
+    </td>
+  </tr>`;
       recordsHtml += temp;
     });
 
@@ -452,8 +451,9 @@ async function getRecordData(page, pageSize) {
   orderList = 'normal';
   return data.data;
 }
+Chart.register(ChartDataLabels);
 
-async function initChart(chartName, recordArr, dateArr) {
+async function initChart(chartName, recordArr, dateArr, stepSize, title) {
   var statistics_chart = document.getElementById(chartName).getContext('2d');
 
   var myChart = new Chart(statistics_chart, {
@@ -462,7 +462,7 @@ async function initChart(chartName, recordArr, dateArr) {
       labels: [...dateArr],
       datasets: [
         {
-          label: '체중(kg)',
+          label: title,
           data: [...recordArr],
           borderWidth: 2,
           borderColor: '#6777ef',
@@ -475,8 +475,21 @@ async function initChart(chartName, recordArr, dateArr) {
       ],
     },
     options: {
+      plugins: {
+        datalabels: {
+          align: 'end',
+          anchor: 'end',
+          formatter: (value, context) => {
+            return value + ' kg';
+          },
+        },
+      },
       legend: {
-        display: false,
+        display: true,
+        labels: {
+          boxWidth: 0,
+          usePointStyle: false,
+        },
       },
       scales: {
         yAxes: [
@@ -486,7 +499,7 @@ async function initChart(chartName, recordArr, dateArr) {
               drawBorder: false,
             },
             ticks: {
-              stepSize: 10,
+              stepSize: stepSize,
             },
           },
         ],
@@ -506,6 +519,7 @@ async function initChart(chartName, recordArr, dateArr) {
 function setRecordList(records) {
   let recordsHtml = '';
   const recordTable = $('#record-table');
+  $(recordTable).html('');
 
   records.forEach((record) => {
     const date = new Date(record.createdAt);
@@ -515,26 +529,21 @@ function setRecordList(records) {
 
     const recordDate = `${year}.${month}.${day}`;
 
-    const temp = `  <tr>
+    const temp = `  <tr style="border-bottom:solid 2px rgba(0,0,0,0.1)">
     <td>
-      <div>${recordDate}</div>
-      <div class="table-links">
-        in <a href="#">Web Development</a>
-        <div class="bullet"></div>
-        <a href="#">View</a>
-      </div>
+      <div style="margin-top:10px; ">${recordDate}</div>
     </td>
     <td>
-      <p href="#" class="font-weight-600">${record.weight}kg</p>
+      <p href="#" class="font-weight-600" style="margin-top:25px;">${record.weight}kg</p>
     </td>
     <td>
-      <p href="#" class="font-weight-600">${record.fat}%</p>
+      <p href="#" class="font-weight-600" style="margin-top:25px;">${record.fat}%</p>
     </td>
     <td>
-      <p href="#" class="font-weight-600">${record.muscle}kg</p>
+      <p href="#" class="font-weight-600" style="margin-top:25px;">${record.muscle}kg</p>
     </td>
     <td>
-      <p href="#" class="font-weight-600">${record.bmr}kcal</p>
+      <p href="#" class="font-weight-600" style="margin-top:25px;">${record.bmr}kcal</p>
     </td>
   </tr>`;
 
