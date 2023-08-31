@@ -13,14 +13,14 @@ document.getElementById('backtopage').onclick = function () {
 
 // 토큰값 선언
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzQ4NTM3NCwiZXhwIjoxNjkzNDkyNTc0fQ.GKTkl-SAAcWta52fxNiVc2o0HIVT06n0Bjg-173wiLI';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsImlhdCI6MTY5MzQ4OTcyMywiZXhwIjoxNjkzNDk2OTIzfQ.YXMpPVKO8nzesypz6GL2DusRz4nNIgPWxgBkNLZA0Zg';
 
 // 나에게 온 친구요청 확인메시지 (우측상단 메시지함)
 const requestlists = $('#requestlists');
 
-$(requestlists).click(() => {
+$(requestlists).click(async () => {
   try {
-    const response = axios.get('http://localhost:3000/follow/request', {
+    const response = await axios.get('http://localhost:3000/follow/request', {
       headers: { Authorization: `Bearer ${token}` },
     });
     const messages = response.data;
@@ -49,17 +49,19 @@ $(requestlists).click(() => {
     });
 
     // 수락 버튼을 클릭했을 경우
-    $('#accept-friend').click(function () {
+    $('.accept-friend').click(async function () {
       const followerId = $(this).data('follower-id');
+      console.log('followerId', followerId);
       try {
-        const response = axios.post(
-          `http://localhost:3000/follow/${followerId}/accept`,
+        const data = { response: 'yes' };
+        const response = await axios.post(
+          `http://localhost:3000/follow/${Number(followerId)}/accept`,
+          data,
           {
-            response: 'yes',
             headers: { Authorization: `Bearer ${token}` },
           },
         );
-        alert(`${followId.name}님의 친구 요청을 수락했습니다.`);
+        alert(`${response.data.name}님의 친구 요청을 수락했습니다.`);
         console.log('친구 수락:', response.data);
       } catch (error) {
         console.error(error.response.data.message);
@@ -67,17 +69,19 @@ $(requestlists).click(() => {
     });
 
     //거절 버튼을 클릭했을 경우
-    $('#deny-friend').click(function () {
+    $('.deny-friend').click(async function () {
       const followerId = $(this).data('follower-id');
+      console.log('followerId', followerId);
       try {
-        const response = axios.post(
-          `http://localhost:3000/follow/${followerId}/accept`,
+        const data = { response: 'no' };
+        const response = await axios.post(
+          `http://localhost:3000/follow/${Number(followerId)}/accept`,
+          data,
           {
-            response: 'no',
             headers: { Authorization: `Bearer ${token}` },
           },
         );
-        alert(`${followId.name}님의 친구 요청을 거절했습니다.`);
+        alert(`${response.data.name}님의 친구 요청을 거절했습니다.`);
         console.log('친구 거절:', response.data);
       } catch (error) {
         console.error(error.response.data.message);
@@ -113,11 +117,14 @@ async function userPage() {
   const createdAtTag = $('#createdAttag');
 
   try {
-    const { data } = await axios.get(`http://localhost:3000/user/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    const { data } = await axios.get(
+      `http://localhost:3000/user/${Number(userId)}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
     const rankData = await axios.get('http://localhost:3000/user/me/rank', {
       headers: {
         Authorization: `Bearer ${token}`,
