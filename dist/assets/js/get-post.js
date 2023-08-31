@@ -51,6 +51,35 @@ const getPosts = async () => {
       $('.card').html(allPosts);
     });
   } catch (error) {
-    console.error('Error message:', error.response.data.data.message);
+    console.error('Error message:', error.response.data.message);
   }
 };
+
+// 오운완 생성
+// challengeId 받아오기 필요
+const createPost = async () => {
+  try {
+    if (!$('.desc_input').val()) {
+      alert('내용을 입력해주세요');
+      return;
+    }
+
+    const response = await axios.post(
+      'http://localhost:3000/challenge/1/post',
+      { description: $('.desc_input').val(), imgUrl: $('.url_input').val() },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    alert('오운완 생성이 완료되었습니다.');
+    location.reload();
+  } catch (error) {
+    console.error('Error message:', error.response.data.message);
+    alert(error.response.data.message);
+    location.reload();
+  }
+};
+$('#createBtn').click(createPost);
