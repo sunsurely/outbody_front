@@ -12,6 +12,7 @@ document.getElementById('backtopage').onclick = function () {
 };
 
 // href="userinfo.html"
+
 // param에 userId
 
 // const urlParams = new URLSearchParams(window.location.search);
@@ -19,48 +20,6 @@ document.getElementById('backtopage').onclick = function () {
 // http://localhost:3000/challenge/${challengeId}
 
 // 비동기함수 //
-
-// 친구 검색모달
-$(document).ready(function () {
-  const searchFriendButton = $('#searchFriendByEmail');
-  const searchEmailInput = $('#searchEmail');
-  const searchfriendCancel = $('#searchfriendCancel');
-
-  // 검색 버튼 클릭 시
-  searchFriendButton.click(function () {
-    const email = searchEmailInput.val();
-
-    // 서버로 이메일 전송하여 사용자 정보 조회
-    axios
-      .get(`http://localhost:3000/user/me/searchEmail?email=${email}`)
-      .then((response) => {
-        const userId = response.data.id;
-
-        // 유저 정보 조회
-        axios
-          .get(`http://localhost:3000/user/${userId}`)
-          .then((userInfo) => {
-            // 유저 정보를 이용하여 모달 내용 업데이트
-            // 예시: $('#username').text(userInfo.data.name);
-            // ...
-          })
-          .catch((error) => {
-            alert('유저 정보 조회 중 에러가 발생했습니다.');
-            console.error(error);
-          });
-      })
-      .catch((error) => {
-        alert('존재하지 않는 유저입니다.');
-        console.error(error);
-      });
-  });
-
-  // 취소 버튼 클릭 시
-  searchfriendCancel.click(function () {
-    // 모달 닫기
-    $('#searchfriendModal').modal('hide');
-  });
-});
 
 // 토큰값 선언
 const token =
@@ -283,3 +242,41 @@ axios
   .catch((error) => {
     console.error('Error message:', error.response.data.message);
   });
+
+//
+//
+
+// 나에게 온 친구요청 확인메시지 (화면우측상단)
+const requestlists = $('#requestlists');
+
+$(requestlists).click(async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/follow/request', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const messages = response.data;
+
+    const messagesContainer = $('.dropdown-list-message');
+    messagesContainer.empty();
+
+    messages.forEach((message) => {
+      const messageItem = `
+        <a href="#" class="dropdown-item dropdown-item-unread">
+          <div class="dropdown-item-avatar">
+            <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" />
+            <div class="is-online"></div>
+          </div>
+          <div class="dropdown-item-desc">
+            <b id="inviteUserName">${message.name}</b>
+            <b id="inviteUserEmail">${message.email}</b>
+            <p id="inviteUserMessage">${message.message}</p>
+            <div id="inviteUsercreatedAt">${message.createdAt}</div>
+          </div>
+        </a>
+      `;
+      messagesContainer.append(messageItem);
+    });
+  } catch (error) {
+    console.error('Error loading invitation messages:', error);
+  }
+});

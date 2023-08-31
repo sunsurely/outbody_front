@@ -113,73 +113,106 @@
                     </div>
                 </form>
                 <ul class="navbar-nav navbar-right">
-                    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-                            class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+                    <li class="dropdown dropdown-list-toggle">
+                        <a
+                          href="#"
+                          data-toggle="dropdown"
+                          class="nav-link nav-link-lg message-toggle beep"
+                          id="requestlists"
+                          ><i class="far fa-envelope"></i
+                        ></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
-                            <div class="dropdown-header">Messages
-                                <div class="float-right">
-                                    <a href="#">Mark All As Read</a>
-                                </div>
+                          <div class="dropdown-header">
+                            Messages
+                            <div class="float-right">
+                              <a href="#">Mark All As Read</a>
                             </div>
-                            <div class="dropdown-list-content dropdown-list-message">
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle">
-                                        <div class="is-online"></div>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Kusnaedi</b>
-                                        <p>Hello, Bro!</p>
-                                        <div class="time">10 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle">
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Dedik Sugiharto</b>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                                        <div class="time">12 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-3.png" class="rounded-circle">
-                                        <div class="is-online"></div>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Agung Ardiansyah</b>
-                                        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                        <div class="time">12 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-4.png" class="rounded-circle">
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Ardian Rahardiansyah</b>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit ess</p>
-                                        <div class="time">16 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle">
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Alfa Zulkarnain</b>
-                                        <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
-                                        <div class="time">Yesterday</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="dropdown-footer text-center">
-                                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-                            </div>
+                          </div>
+                          <div
+                            class="dropdown-list-content dropdown-list-message"
+                            style="overflow-y: scroll; height: 300px"
+                          >
+                            <a href="#" class="dropdown-item dropdown-item-unread">
+                              <div class="dropdown-item-avatar">
+                                <img
+                                  alt="image"
+                                  src="assets/img/avatar/avatar-1.png"
+                                  class="rounded-circle"
+                                />
+                                <div class="is-online"></div>
+                              </div>
+                              <div class="dropdown-item-desc">
+                                <b id="inviteUserName">Kusnaedi</b>
+                                <b id="inviteUserEmail">abcd@naver.com</b>
+                                <p id="inviteUserMessage">Hello, Bro!</p>
+                                <div id="inviteUsercreatedAt">2023.08.31</div>
+                              </div>
+                            </a>
+                            <a href="#" class="dropdown-item dropdown-item-unread">
+                              <div class="dropdown-item-avatar">
+                                <img
+                                  alt="image"
+                                  src="assets/img/avatar/avatar-2.png"
+                                  class="rounded-circle"
+                                />
+                              </div>
+                              <div class="dropdown-item-desc">
+                                <b id="inviteUserName">Kusnaedi</b>
+                                <b id="inviteUserEmail">abcd@naver.com</b>
+                                <p id="inviteUserMessage">Hello, Bro!</p>
+                                <div id="inviteUsercreatedAt">2023.08.31</div>
+                              </div>
+                            </a>
+                            <a href="#" class="dropdown-item dropdown-item-unread">
+                              <div class="dropdown-item-avatar">
+                                <img
+                                  alt="image"
+                                  src="assets/img/avatar/avatar-3.png"
+                                  class="rounded-circle"
+                                />
+                                <div class="is-online"></div>
+                              </div>
+                              <div class="dropdown-item-desc">
+                                <b id="inviteUserName">Kusnaedi</b>
+                                <b id="inviteUserEmail">abcd@naver.com</b>
+                                <p id="inviteUserMessage">Hello, Bro!</p>
+                                <div id="inviteUsercreatedAt">2023.08.31</div>
+                              </div>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                              <div class="dropdown-item-avatar">
+                                <img
+                                  alt="image"
+                                  src="assets/img/avatar/avatar-4.png"
+                                  class="rounded-circle"
+                                />
+                              </div>
+                              <div class="dropdown-item-desc">
+                                <b id="inviteUserName">Kusnaedi</b>
+                                <b id="inviteUserEmail">abcd@naver.com</b>
+                                <p id="inviteUserMessage">Hello, Bro!</p>
+                                <div id="inviteUsercreatedAt">2023.08.31</div>
+                              </div>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                              <div class="dropdown-item-avatar">
+                                <img
+                                  alt="image"
+                                  src="assets/img/avatar/avatar-5.png"
+                                  class="rounded-circle"
+                                />
+                              </div>
+                              <div class="dropdown-item-desc">
+                                <b id="inviteUserName">Kusnaedi</b>
+                                <b id="inviteUserEmail">abcd@naver.com</b>
+                                <p id="inviteUserMessage">Hello, Bro!</p>
+                                <div id="inviteUsercreatedAt">2023.08.31</div>
+                              </div>
+                            </a>
+                          </div>
+                          <div class="dropdown-footer text-center"></div>
                         </div>
-                    </li>
+                      </li>
                     <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                             class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -583,6 +616,7 @@
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/get-post.js"></script>
+    <script src="assets/js/user-Info.js"></script>
 </body>
 
 </html>
