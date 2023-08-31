@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjkzNDU4MjA4LCJleHAiOjE2OTM0NjU0MDh9.AuAKkmvgbKLXox-LbIMoIuJSgZ7HVKqiI9iHQ69COHs';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjkzNDYzODcxLCJleHAiOjE2OTM0NzEwNzF9.sj0I0utdHzygTezZDi8ROM0d3jbhOPiwEOxgsaVtO_4';
 
 // 오운완 전체 조회
 // challengeId 받아오는거 아직 안함.
@@ -17,7 +17,6 @@ const getPosts = async () => {
         },
       },
     );
-    console.log(response.data);
 
     let allPosts = '';
     response.data.data.forEach((post) => {
@@ -38,12 +37,15 @@ const getPosts = async () => {
                                       <div class="article-user">
                                           <img alt="image" src="assets/img/avatar/avatar-3.png">
                                           <div class="article-user-details">
-                                            <div class="user-detail-name">
-                                                <a href="#">${post.username}</a>
-                                            </div>
+                                          <div class="user-detail-remove">
+                                            <a href="#" class="btn btn-icon btn-primary"><i class="fas fa-times delPost-btn" postId=${post.id}></i></a>
+                                          </div>
+                                          <div class="user-detail-name">
+                                          <a href="#">${post.username}</a>
+                                          </div>
                                           <div class="text-job">${post.comment}</div>
-                                      </div>
-                                  </div>
+                                          </div>
+                                          </div>
                               </div>
                           </article>
                       </div>`;
@@ -83,3 +85,25 @@ const createPost = async () => {
   }
 };
 $('#createBtn').click(createPost);
+
+// 오운완 삭제
+// challengeId 받아오기 필요
+const deletePost = async (postId) => {
+  try {
+    await axios.delete(`http://localhost:3000/challenge/1/post/${postId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    alert('오운완 삭제가 완료 되었습니다.');
+    location.reload();
+  } catch (error) {
+    console.error('Error message:', error.response.data.message);
+    alert(error.response.data.message);
+    location.reload();
+  }
+};
+$(document).on('click', '.delPost-btn', function () {
+  deletePost($(this).attr('postid'));
+});
