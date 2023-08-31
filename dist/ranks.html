@@ -30,9 +30,9 @@
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
+      gtag('js', new Date());
 
-      gtag("config", "UA-94034622-3");
+      gtag('config', 'UA-94034622-3');
     </script>
     <!-- /END GA -->
   </head>
@@ -786,8 +786,8 @@
               <h2 class="section-title">Ranks</h2>
               <div style="display: flex; align-items: center">
                 <p class="section-lead" style="flex: 1">
-                  ※ 15,000point 이상 Gold, 12,000point 이상 Silver, 9,000point
-                  이상 Bronze
+                  ※ 15,000point 이상 Gold / 12,000point 이상 Silver / 9,000point
+                  이상 Bronze / 9,000point 이하 Iron
                 </p>
                 <p style="text-align: right"></p>
               </div>
@@ -799,7 +799,10 @@
                     </div>
                     <div class="card-body p-0">
                       <div class="table-responsive">
-                        <table class="table table-striped table-md">
+                        <table
+                          class="table table-striped table-md"
+                          id="rank-table"
+                        >
                           <tr>
                             <th>Ranks</th>
                             <th>Name</th>
@@ -1093,6 +1096,7 @@
 
     <!-- JS Libraies -->
     <script src="assets/modules/jquery-ui/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Page Specific JS File -->
     <script src="assets/js/page/components-table.js"></script>
@@ -1100,5 +1104,6 @@
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/users.js"></script>
+    <script src="assets/js/ranks.js"></script>
   </body>
 </html>

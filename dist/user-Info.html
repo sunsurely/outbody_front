@@ -816,11 +816,13 @@
                       </div>
                       <div class="author-box-details">
                         <div class="author-box-name">
-                          <a href="#">Theo Kim</a>
+                          <a href="#" id="nametag">name</a>
                         </div>
-                        <div class="author-box-job">Web Developer</div>
+                        <div class="author-box-job" id="statustag">
+                          Web Developer
+                        </div>
                         <div class="author-box-description">
-                          <p>
+                          <p id="descriptiontag">
                             저는 운동을 좋아했지만, OutBody 앱을 통해서 운동을
                             더더욱 좋아하게 되었어요. 우리 모두 운동을 통해
                             건강해져요! 3대 500 가즈아!!
@@ -1001,15 +1003,21 @@
                       <div class="profile-widget-items">
                         <div class="profile-widget-item">
                           <div class="profile-widget-item-label">Point</div>
-                          <div class="profile-widget-item-value">2100</div>
+                          <div class="profile-widget-item-value" id="pointtag">
+                            2100
+                          </div>
                         </div>
                         <div class="profile-widget-item">
                           <div class="profile-widget-item-label">Ranks</div>
-                          <div class="profile-widget-item-value">32</div>
+                          <div class="profile-widget-item-value" id="rankstag">
+                            32
+                          </div>
                         </div>
                         <div class="profile-widget-item">
                           <div class="profile-widget-item-label">Friends</div>
-                          <div class="profile-widget-item-value">54</div>
+                          <div class="profile-widget-item-value" id="friendtag">
+                            54
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1020,22 +1028,22 @@
                         <h4>Information</h4>
                         <br />
                         <label>E-mail: </label>
-                        a26484638@gmail.com
+                        <div id="emailtag">Email@com</div>
                         <div class="invalid-feedback"></div>
                       </div>
                       <div class="form-group col-md-6 col-12">
                         <label>Gender: </label>
-                        <br />Male
+                        <div id="gendertag">Male</div>
                         <div class="invalid-feedback"></div>
                       </div>
                       <div class="form-group col-md-6 col-12">
                         <label>Birthday: </label>
-                        <br />September 9th, 1992
+                        <div id="birthdaytag">September 9th, 1992</div>
                         <div class="invalid-feedback"></div>
                       </div>
                       <div class="form-group col-md-6 col-12">
                         <label>CreatedAt: </label>
-                        <br />August 15th, 2023
+                        <div id="createdAttag">August 15th, 2023</div>
                         <div class="invalid-feedback"></div>
                       </div>
                       <br />
@@ -1060,10 +1068,10 @@
               </div>
               <div class="card-body">
                 <div style="overflow-y: scroll; height: 200px">
-                  <table class="table table-sm">
+                  <table class="table table-sm" id="posts-table">
                     <thead>
-                      <tr>
-                        Total Posts : 5
+                      <tr class="total-posts">
+                        Total Posts: 0
                       </tr>
                       <tr>
                         <th scope="col">Post Id</th>

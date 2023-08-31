@@ -75,7 +75,7 @@ const storedToken =
 //   }
 //   //내정보수정(업로드)
 //   axios
-//     .patch(`http://localhost:8080/user/me`, formData, {
+//     .patch(`http://localhost:3000/user/me`, formData, {
 //       headers: {
 //         // 'Content-Type': 'multipart/form-data',
 //         Authorization: `Bearer ${storedToken}`,
@@ -93,7 +93,7 @@ const storedToken =
 
 // // 내정보 조회2 (description, birthday, image(x), username, email, Gender, CreatedAt, point, friendList)
 // axios
-//   .get('http://localhost:8080/me/profile', {
+//   .get('http://localhost:3000/me/profile', {
 //     headers: {
 //       Authorization: `Bearer ${storedToken}`,
 //     },
@@ -155,7 +155,7 @@ const storedToken =
 //   };
 
 //   await axios
-//     .patch(`http://localhost:8080/user/me/password`, data, {
+//     .patch(`http://localhost:3000/user/me/password`, data, {
 //       headers: {
 //         Authorization: `Bearer ${storedToken}`,
 //       },
@@ -185,7 +185,7 @@ const storedToken =
 //     const data = { email: searchEmail };
 
 //     axios
-//       .get('http://localhost:8080/user/me/searchEmail', data, {
+//       .get('http://localhost:3000/user/me/searchEmail', data, {
 //         headers: {
 //           Authorization: `Bearer ${storedToken}`,
 //         },
@@ -210,7 +210,7 @@ const storedToken =
 //     const requestEmail = requestEmailInput.value;
 
 //     axios
-//       .post(`http://localhost:8080/follow/${userId}/request`, {
+//       .post(`http://localhost:3000/follow/${userId}/request`, {
 //         headers: {
 //           Authorization: `Bearer ${storedToken}`,
 //         },
