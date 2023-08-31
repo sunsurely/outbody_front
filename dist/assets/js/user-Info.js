@@ -11,79 +11,96 @@ document.getElementById('backtopage').onclick = function () {
   $('#postlistModal').modal('hide');
 };
 
-// href="userinfo.html"
+// 토큰값 선언
+const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzQ4NTM3NCwiZXhwIjoxNjkzNDkyNTc0fQ.GKTkl-SAAcWta52fxNiVc2o0HIVT06n0Bjg-173wiLI';
 
-// param에 userId
+// 나에게 온 친구요청 확인메시지 (우측상단 메시지함)
+const requestlists = $('#requestlists');
 
-// const urlParams = new URLSearchParams(window.location.search);
-// const challengeId = urlParams.get('id');"
-// http://localhost:3000/challenge/${challengeId}
+$(requestlists).click(() => {
+  try {
+    const response = axios.get('http://localhost:3000/follow/request', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const messages = response.data;
+
+    const messagesContainer = $('.dropdown-list-message');
+    messagesContainer.empty();
+
+    messages.forEach((message) => {
+      const messageItem = `
+      <a href="#" class="dropdown-item dropdown-item-unread">
+          <div class="dropdown-item-avatar">
+            <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" />
+            <div class="is-online"></div>
+          </div>
+          <div class="dropdown-item-desc">
+            <b id="inviteUserName">${message.name}</b>
+            <b id="inviteUserEmail">${message.email}</b>
+            <p id="inviteUserMessage">${message.message}</p>
+            <div id="inviteUsercreatedAt">${message.createdAt}</div>
+            <button class="btn btn-sm btn accept-friend" data-follower-id="${message.userId}">수락</button>
+            <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">거절</button>
+          </div>
+        </a>
+      `;
+      messagesContainer.append(messageItem);
+    });
+
+    // 수락 버튼을 클릭했을 경우
+    $('#accept-friend').click(function () {
+      const followerId = $(this).data('follower-id');
+      try {
+        const response = axios.post(
+          `http://localhost:3000/follow/${followerId}/accept`,
+          {
+            response: 'yes',
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        );
+        alert(`${followId.name}님의 친구 요청을 수락했습니다.`);
+        console.log('친구 수락:', response.data);
+      } catch (error) {
+        console.error(error.response.data.message);
+      }
+    });
+
+    //거절 버튼을 클릭했을 경우
+    $('#deny-friend').click(function () {
+      const followerId = $(this).data('follower-id');
+      try {
+        const response = axios.post(
+          `http://localhost:3000/follow/${followerId}/accept`,
+          {
+            response: 'no',
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        );
+        alert(`${followId.name}님의 친구 요청을 거절했습니다.`);
+        console.log('친구 거절:', response.data);
+      } catch (error) {
+        console.error(error.response.data.message);
+      }
+    });
+  } catch (error) {
+    console.error(
+      'Error loading invitation messages:',
+      error.response.data.message,
+    );
+  }
+});
 
 // 비동기함수 //
 
-// 토큰값 선언
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzQ0OTEzNCwiZXhwIjoxNjkzNDU2MzM0fQ.45__UIi0zWP6mKTdm2RjWSm0FSO1XHzbsQOlU7rsX8Y';
-
 // 모달로부터 받은 친구정보
-
-document.addEventListener('DOMContentLoaded', function () {
-  // const searchButton = document.getElementById('searchFriendByEmail'); // 유저검색
-  const searchEmailInput = document.getElementById('searchEmail'); // 검색에넣은 Email값
-  const requestEmailInput = document.getElementById('requestEmail'); //친구요청보낸 Email값
-  const requestFriendButton = document.getElementById('requestFriendByEmail'); // 친구요청
-
-  // 이메일로 유저 검색
-  searchButton.addEventListener('click', function () {
-    const searchEmail = searchEmailInput.value;
-    const data = { email: searchEmail };
-
-    axios
-      .get('http://localhost:3000/user/me/searchEmail', data, {
-        headers: {
-          Authorization: `Bearer ${storedToken}`,
-        },
-      })
-      .then((response) => {
-        const userId = response.data.userId;
-        if (userId) {
-          alert(`Email: ${searchEmail} 유저가 존재합니다.`);
-        } else {
-          alert(`Email: ${searchEmail} 유저가 존재하지 않습니다.`);
-        }
-        requestFriendButton.setAttribute('searched-userId', userId);
-      })
-      .catch((error) => {
-        console.error('Error message:', error.response.data.message);
-      });
-  });
-
-  // 친구 요청
-  requestFriendButton.addEventListener('click', function () {
-    const userId = this.getAttribute('searched-userId'); // 검색해서 나온 유저아이디
-    const requestEmail = requestEmailInput.value;
-
-    axios
-      .post(`http://localhost:3000/follow/${userId}/request`, {
-        headers: {
-          Authorization: `Bearer ${storedToken}`,
-        },
-      })
-      .then((response) => {
-        if (response.data.success) {
-          alert(`E-mail: ${requestEmail} 유저에게 친구 요청을 보냈습니다`);
-        } else {
-          alert(`친구 요청에 실패했습니다.`);
-        }
-      })
-      .catch((error) => {
-        console.error('Error message:', error.response.data.message);
-      });
-  });
-});
 
 // 사용자 정보조회
 async function userPage() {
+  // href="userinfo.html"
+  const urlParams = new URLSearchParams(window.location.search);
+  const userId = urlParams.get('id');
+
   const nameTag = $('#nametag');
   const statusTag = $('#statustag');
   const descriptionTag = $('#descriptiontag');
@@ -180,6 +197,7 @@ axios
       usersCarousel.insertAdjacentHTML('beforeend', carouselItem);
     });
   });
+
 // 팔로우(친구요청)
 followButtons.forEach((button) => {
   button.addEventListener('click', (event) => {
@@ -198,6 +216,7 @@ followButtons.forEach((button) => {
       });
   });
 });
+
 // 언팔로우(친구취소)
 followingButtons.forEach((button) => {
   button.addEventListener('click', (event) => {
@@ -244,39 +263,58 @@ axios
   });
 
 //
-//
 
-// 나에게 온 친구요청 확인메시지 (화면우측상단)
-const requestlists = $('#requestlists');
+document.addEventListener('DOMContentLoaded', function () {
+  // const searchButton = document.getElementById('searchFriendByEmail'); // 유저검색
+  const searchEmailInput = document.getElementById('searchEmail'); // 검색에넣은 Email값
+  const requestEmailInput = document.getElementById('requestEmail'); //친구요청보낸 Email값
+  const requestFriendButton = document.getElementById('requestFriendByEmail'); // 친구요청
 
-$(requestlists).click(async () => {
-  try {
-    const response = await axios.get('http://localhost:3000/follow/request', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const messages = response.data;
+  // 이메일로 유저 검색
+  searchButton.addEventListener('click', function () {
+    const searchEmail = searchEmailInput.value;
+    const data = { email: searchEmail };
 
-    const messagesContainer = $('.dropdown-list-message');
-    messagesContainer.empty();
+    axios
+      .get('http://localhost:3000/user/me/searchEmail', data, {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      })
+      .then((response) => {
+        const userId = response.data.userId;
+        if (userId) {
+          alert(`Email: ${searchEmail} 유저가 존재합니다.`);
+        } else {
+          alert(`Email: ${searchEmail} 유저가 존재하지 않습니다.`);
+        }
+        requestFriendButton.setAttribute('searched-userId', userId);
+      })
+      .catch((error) => {
+        console.error('Error message:', error.response.data.message);
+      });
+  });
 
-    messages.forEach((message) => {
-      const messageItem = `
-        <a href="#" class="dropdown-item dropdown-item-unread">
-          <div class="dropdown-item-avatar">
-            <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" />
-            <div class="is-online"></div>
-          </div>
-          <div class="dropdown-item-desc">
-            <b id="inviteUserName">${message.name}</b>
-            <b id="inviteUserEmail">${message.email}</b>
-            <p id="inviteUserMessage">${message.message}</p>
-            <div id="inviteUsercreatedAt">${message.createdAt}</div>
-          </div>
-        </a>
-      `;
-      messagesContainer.append(messageItem);
-    });
-  } catch (error) {
-    console.error('Error loading invitation messages:', error);
-  }
+  // 친구 요청
+  requestFriendButton.addEventListener('click', function () {
+    const userId = this.getAttribute('searched-userId'); // 검색해서 나온 유저아이디
+    const requestEmail = requestEmailInput.value;
+
+    axios
+      .post(`http://localhost:3000/follow/${userId}/request`, {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      })
+      .then((response) => {
+        if (response.data.success) {
+          alert(`E-mail: ${requestEmail} 유저에게 친구 요청을 보냈습니다`);
+        } else {
+          alert(`친구 요청에 실패했습니다.`);
+        }
+      })
+      .catch((error) => {
+        console.error('Error message:', error.response.data.message);
+      });
+  });
 });
