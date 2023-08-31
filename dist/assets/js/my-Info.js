@@ -45,7 +45,7 @@ document.getElementById('searchfriendCancel').onclick = function () {
 
 // 토큰 저장
 const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzMzk4MzMzLCJleHAiOjE2OTM0MzQzMzN9.7_VVpqGRN2iBGx-rTfbwpr9T1nBKWfAeSLgGOD_pY-g';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNDQxMjY0LCJleHAiOjE2OTM0NzcyNjR9.b8c5kP73rUNWB6Cz1hUGNkT_jY1wmE4mymszx5q4hj0';
 // localStorage.setItem('jwtToken', jwtToken);
 
 // 저장된 JWT토큰 가져오기 = storedToken
@@ -227,22 +227,6 @@ const storedToken =
 //       });
 //   });
 // });
-
-// //친구수 조회
-// // const friendCountElement = document.getElementById('friendCount');
-// // axios
-// .get('http://localhost:8080/user/me/friendCount', {
-//   headers: {
-//     Authorization: `Bearer ${storedToken}`,
-//   },
-// })
-// //   .then((response) => {
-// //     const friendCount = response.data;
-// //     friendCountElement.innerText = friendCount;
-// //   })
-// //   .catch((error) => {
-// //     console.error('Error message:', error.response.data.message);
-// //   });
 
 //내 정보 조회
 async function initMyPage() {
