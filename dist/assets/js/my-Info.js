@@ -172,62 +172,6 @@ const storedToken =
 //     });
 // }
 
-// // 친구 찾기
-// document.addEventListener('DOMContentLoaded', function () {
-//   const searchButton = document.getElementById('searchFriendByEmail'); // 유저검색
-//   const searchEmailInput = document.getElementById('searchEmail'); // 검색에넣은 Email값
-//   const requestEmailInput = document.getElementById('requestEmail'); //친구요청보낸 Email값
-//   const requestFriendButton = document.getElementById('requestFriendByEmail'); // 친구요청
-
-//   // 이메일로 유저 검색
-//   searchButton.addEventListener('click', function () {
-//     const searchEmail = searchEmailInput.value;
-//     const data = { email: searchEmail };
-
-//     axios
-//       .get('http://localhost:3000/user/me/searchEmail', data, {
-//         headers: {
-//           Authorization: `Bearer ${storedToken}`,
-//         },
-//       })
-//       .then((response) => {
-//         const userId = response.data.userId;
-//         if (userId) {
-//           alert(`Email: ${searchEmail} 유저가 존재합니다.`);
-//         } else {
-//           alert(`Email: ${searchEmail} 유저가 존재하지 않습니다.`);
-//         }
-//         requestFriendButton.setAttribute('searched-userId', userId);
-//       })
-//       .catch((error) => {
-//         console.error('Error message:', error.response.data.message);
-//       });
-//   });
-
-//   // 친구 요청
-//   requestFriendButton.addEventListener('click', function () {
-//     const userId = this.getAttribute('searched-userId'); // 검색해서 나온 유저아이디
-//     const requestEmail = requestEmailInput.value;
-
-//     axios
-//       .post(`http://localhost:3000/follow/${userId}/request`, {
-//         headers: {
-//           Authorization: `Bearer ${storedToken}`,
-//         },
-//       })
-//       .then((response) => {
-//         if (response.data.success) {
-//           alert(`E-mail: ${requestEmail} 유저에게 친구 요청을 보냈습니다`);
-//         } else {
-//           alert(`친구 요청에 실패했습니다.`);
-//         }
-//       })
-//       .catch((error) => {
-//         console.error('Error message:', error.response.data.message);
-//       });
-//   });
-// });
-
 //내 정보 조회
 async function initMyPage() {
   const pointTag = $('#my-point');

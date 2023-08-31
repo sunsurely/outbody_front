@@ -11,9 +11,117 @@ document.getElementById('backtopage').onclick = function () {
   $('#postlistModal').modal('hide');
 };
 
+// href="userinfo.html"
+// param에 userId
+
+// const urlParams = new URLSearchParams(window.location.search);
+// const challengeId = urlParams.get('id');"
+// http://localhost:3000/challenge/${challengeId}
+
+// 비동기함수 //
+
+// 친구 검색모달
+$(document).ready(function () {
+  const searchFriendButton = $('#searchFriendByEmail');
+  const searchEmailInput = $('#searchEmail');
+  const searchfriendCancel = $('#searchfriendCancel');
+
+  // 검색 버튼 클릭 시
+  searchFriendButton.click(function () {
+    const email = searchEmailInput.val();
+
+    // 서버로 이메일 전송하여 사용자 정보 조회
+    axios
+      .get(`http://localhost:3000/user/me/searchEmail?email=${email}`)
+      .then((response) => {
+        const userId = response.data.id;
+
+        // 유저 정보 조회
+        axios
+          .get(`http://localhost:3000/user/${userId}`)
+          .then((userInfo) => {
+            // 유저 정보를 이용하여 모달 내용 업데이트
+            // 예시: $('#username').text(userInfo.data.name);
+            // ...
+          })
+          .catch((error) => {
+            alert('유저 정보 조회 중 에러가 발생했습니다.');
+            console.error(error);
+          });
+      })
+      .catch((error) => {
+        alert('존재하지 않는 유저입니다.');
+        console.error(error);
+      });
+  });
+
+  // 취소 버튼 클릭 시
+  searchfriendCancel.click(function () {
+    // 모달 닫기
+    $('#searchfriendModal').modal('hide');
+  });
+});
+
 // 토큰값 선언
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzQxMDc1NiwiZXhwIjoxNjkzNDE3OTU2fQ.aTidnbLstwJNe_qu9ekr1L7AH4f_FOWtmWt2vCkblZg';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzQ0OTEzNCwiZXhwIjoxNjkzNDU2MzM0fQ.45__UIi0zWP6mKTdm2RjWSm0FSO1XHzbsQOlU7rsX8Y';
+
+// 모달로부터 받은 친구정보
+
+document.addEventListener('DOMContentLoaded', function () {
+  // const searchButton = document.getElementById('searchFriendByEmail'); // 유저검색
+  const searchEmailInput = document.getElementById('searchEmail'); // 검색에넣은 Email값
+  const requestEmailInput = document.getElementById('requestEmail'); //친구요청보낸 Email값
+  const requestFriendButton = document.getElementById('requestFriendByEmail'); // 친구요청
+
+  // 이메일로 유저 검색
+  searchButton.addEventListener('click', function () {
+    const searchEmail = searchEmailInput.value;
+    const data = { email: searchEmail };
+
+    axios
+      .get('http://localhost:3000/user/me/searchEmail', data, {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      })
+      .then((response) => {
+        const userId = response.data.userId;
+        if (userId) {
+          alert(`Email: ${searchEmail} 유저가 존재합니다.`);
+        } else {
+          alert(`Email: ${searchEmail} 유저가 존재하지 않습니다.`);
+        }
+        requestFriendButton.setAttribute('searched-userId', userId);
+      })
+      .catch((error) => {
+        console.error('Error message:', error.response.data.message);
+      });
+  });
+
+  // 친구 요청
+  requestFriendButton.addEventListener('click', function () {
+    const userId = this.getAttribute('searched-userId'); // 검색해서 나온 유저아이디
+    const requestEmail = requestEmailInput.value;
+
+    axios
+      .post(`http://localhost:3000/follow/${userId}/request`, {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      })
+      .then((response) => {
+        if (response.data.success) {
+          alert(`E-mail: ${requestEmail} 유저에게 친구 요청을 보냈습니다`);
+        } else {
+          alert(`친구 요청에 실패했습니다.`);
+        }
+      })
+      .catch((error) => {
+        console.error('Error message:', error.response.data.message);
+      });
+  });
+});
 
 // 사용자 정보조회
 async function userPage() {
@@ -29,7 +137,7 @@ async function userPage() {
   const createdAtTag = $('#createdAttag');
 
   try {
-    const { data } = await axios.get(`http://localhost:3000/user/13`, {
+    const { data } = await axios.get(`http://localhost:3000/user/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -64,11 +172,6 @@ async function userPage() {
     alert(error.response.data.message);
   }
 }
-
-// $('#descriptiontag').click(() => {
-//   // descriptiontag 클릭했을때
-//   $('.author-box-job').text('이름');
-// });
 
 // 오운완 목록보기
 

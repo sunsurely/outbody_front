@@ -3,89 +3,108 @@ $(document).ready(function () {
 });
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzQxMDc1NiwiZXhwIjoxNjkzNDE3OTU2fQ.aTidnbLstwJNe_qu9ekr1L7AH4f_FOWtmWt2vCkblZg';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzQ2ODExOSwiZXhwIjoxNjkzNDc1MzE5fQ._3N1ZK0lqpreo-aL2v0hTSG1JWJmm63gW08L1cptRlk';
 
 async function rankPage() {
-  // 전체랭킹 조회
-  const table = $('#rank-table');
-  try {
-    const response = await axios.get('http://localhost:3000/rank/total', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+  // 초기 페이지 설정
+  let currentPage = 1;
+  const pageSize = 10; // 한 페이지당 보여줄 아이템 수
 
-    const userData = response.data;
-    populateTable(userData);
-  } catch (error) {
-    alert('Error message:', error.response.data.message);
+  // 전체랭킹 페이지 이동 버튼 클릭 이벤트 핸들러
+  $('#total-prev-btn').on('click', function () {
+    if (currentPage > 1) {
+      currentPage--;
+      fetchTotalRank(currentPage); // 전체랭킹 조회 호출
+    }
+  });
+
+  $('#total-next-btn').on('click', function () {
+    currentPage++;
+    fetchTotalRank(currentPage);
+  });
+
+  // 친구랭킹 페이지 이동 버튼 클릭 이벤트 핸들러
+  $('#friend-prev-btn').on('click', function () {
+    if (currentPage > 1) {
+      currentPage--;
+      fetchFriendRank(currentPage); // 친구랭킹 조회 호출
+    }
+  });
+
+  $('#friend-next-btn').on('click', function () {
+    currentPage++;
+    fetchFriendRank(currentPage);
+  });
+
+  // 전체랭킹 조회
+  async function fetchTotalRank(page) {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/rank/total?page=${page}&pageSize=${pageSize}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
+
+      const userData = response.data.paginationTotalRanks;
+      populateTable('#total-rank-table', userData, (page - 1) * pageSize);
+    } catch (error) {
+      alert('Error message:', error.response.data.message);
+    }
   }
 
-  function populateTable(data) {
-    const table = $('#rank-table');
+  // 친구랭킹 조회
+  async function fetchFriendRank(page) {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/rank/followings?page=${page}&pageSize=${pageSize}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
+
+      const friendRankings = response.data.paginationFollowerRanks;
+      populateTable(
+        '#friend-rank-table',
+        friendRankings,
+        (page - 1) * pageSize,
+      );
+    } catch (error) {
+      alert('Error message:', error.response.data.message);
+    }
+  }
+
+  function populateTable(tableId, data) {
+    const table = $(tableId);
+    table.empty(); // 기존 행 삭제
 
     data.forEach(function (user, index) {
-      if (user.point >= 15000) {
-        user.level = 'Gold';
-      } else if (user.point >= 12000) {
-        user.level = 'Silver';
-      } else if (user.point >= 9000) {
-        user.level = 'Bronze';
-      } else {
-        user.level = 'Iron';
-      }
+      const level =
+        user.point >= 15000
+          ? 'Gold'
+          : user.point >= 12000
+          ? 'Silver'
+          : user.point >= 9000
+          ? 'Bronze'
+          : 'Iron';
 
       const row = `
-      <tr>
-        <td>${index + 1}</td>
-        <td>${user.name}</td>
-        <td>${user.createdAt}</td>
-        <td>
-          <div class="badge badge-success">${user.level}</div>
-        </td>
-        <td>${user.point}</td>
-      </tr>
-    `;
+        <tr>
+          <td>${(currentPage - 1) * pageSize + index + 1}</td>
+          <td>${user.name}</td>
+          <td>${user.createdAt}</td>
+          <td>
+            <div class="level">${level}</div>
+          </td>
+          <td>${user.point}</td>
+        </tr>
+      `;
+
       table.append(row);
     });
   }
 
-  // 친구랭킹 조회
-  try {
-    const response = await axios.get('http://localhost:3000/rank/followings', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    const friendRankings = response.data;
-    populateTable(friendRankings);
-  } catch (error) {
-    alert('Error message:', error.response.data.message);
-  }
-}
-
-function populateTable(data) {
-  const table = $('#friend-rank-table');
-
-  data.forEach(function (user, index) {
-    if (user.point >= 15000) {
-      user.level = 'Gold';
-    } else if (user.point >= 12000) {
-      user.level = 'Silver';
-    } else if (user.point >= 9000) {
-      user.level = 'Bronze';
-    } else {
-      user.level = 'Iron';
-    }
-
-    const row = `
-      <tr>
-        <td>${index + 1}</td>
-        <td>${user.name}</td>
-        <td>${user.createdAt}</td>
-        <td>
-          <div class="badge badge-success">${user.level}</div>
-        </td>
-        <td>${user.point}</td>
-      </tr>
-    `;
-    table.append(row);
-  });
+  // 초기 페이지 로드 시 데이터 조회
+  fetchTotalRank(currentPage);
+  fetchFriendRank(currentPage);
 }

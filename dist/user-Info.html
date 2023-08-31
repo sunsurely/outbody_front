@@ -1114,6 +1114,50 @@
           </div>
         </div>
 
+        <!-- 모달 4: 친구 찾기  -->
+        <div
+          class="modal fade"
+          tabindex="-1"
+          role="dialog"
+          id="searchfriendModal"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">친구 찾기</h5>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="친구요청을 보내고 싶은 유저의 E-mail을 입력해주세요."
+                      aria-label=""
+                      id="searchEmail"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-primary"
+                        type="button"
+                        id="searchFriendByEmail"
+                      >
+                        검색
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer text-right">
+                <button class="btn btn-primary" id="searchfriendCancel">
+                  취소
+                </button>
+              </div>
+              <div class="modal-footer bg-whitesmoke br"></div>
+            </div>
+          </div>
+        </div>
+
         <footer class="main-footer">
           <div class="footer-left">
             Copyright &copy; 2018
