@@ -11,6 +11,12 @@
     <!-- General CSS Files -->
     <link
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link
+      rel="stylesheet"
       href="assets/modules/bootstrap/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css" />
@@ -163,6 +169,7 @@
                 href="#"
                 data-toggle="dropdown"
                 class="nav-link nav-link-lg message-toggle beep"
+                id="requestlists"
                 ><i class="far fa-envelope"></i
               ></a>
               <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -172,7 +179,10 @@
                     <a href="#">Mark All As Read</a>
                   </div>
                 </div>
-                <div class="dropdown-list-content dropdown-list-message">
+                <div
+                  class="dropdown-list-content dropdown-list-message"
+                  style="overflow-y: scroll; height: 300px"
+                >
                   <a href="#" class="dropdown-item dropdown-item-unread">
                     <div class="dropdown-item-avatar">
                       <img
@@ -183,9 +193,10 @@
                       <div class="is-online"></div>
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Kusnaedi</b>
-                      <p>Hello, Bro!</p>
-                      <div class="time">10 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item dropdown-item-unread">
@@ -197,11 +208,10 @@
                       />
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Dedik Sugiharto</b>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                      </p>
-                      <div class="time">12 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item dropdown-item-unread">
@@ -214,12 +224,10 @@
                       <div class="is-online"></div>
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Agung Ardiansyah</b>
-                      <p>
-                        Sunt in culpa qui officia deserunt mollit anim id est
-                        laborum.
-                      </p>
-                      <div class="time">12 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item">
@@ -231,12 +239,10 @@
                       />
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Ardian Rahardiansyah</b>
-                      <p>
-                        Duis aute irure dolor in reprehenderit in voluptate
-                        velit ess
-                      </p>
-                      <div class="time">16 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item">
@@ -248,12 +254,10 @@
                       />
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Alfa Zulkarnain</b>
-                      <p>
-                        Exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo
-                      </p>
-                      <div class="time">Yesterday</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
                     </div>
                   </a>
                 </div>
@@ -1177,6 +1181,8 @@
     <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
     <script src="assets/modules/moment.min.js"></script>
     <script src="assets/js/stisla.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <!-- JS Libraies -->
