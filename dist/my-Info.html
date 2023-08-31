@@ -990,10 +990,10 @@
                                   <th scope="col">#</th>
                                   <th scope="col">Name</th>
                                   <th scope="col">E-mail</th>
-                                  <th scope="col">Point</th>
+                                  <th scope="col">Ranks</th>
                                 </tr>
                               </thead>
-                              <tbody>
+                              <tbody id="my-friends-list">
                                 <tr>
                                   <th scope="row">1</th>
                                   <td>Mark</td>
@@ -1219,7 +1219,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">친구 찾기</h5>
+                <h5 class="modal-title">유저 찾기</h5>
               </div>
               <div class="card-body">
                 <div class="form-group">
@@ -1242,8 +1242,15 @@
                     </div>
                   </div>
                 </div>
+
+                <div id="searched-friend" class="form-group mb-0">
+                  <br />
+                </div>
               </div>
               <div class="card-footer text-right">
+                <button class="btn btn-primary" type="button" id="send-invite">
+                  친구요청
+                </button>
                 <button class="btn btn-primary" id="searchfriendCancel">
                   취소
                 </button>

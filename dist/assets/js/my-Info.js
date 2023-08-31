@@ -38,36 +38,13 @@ document.getElementById('searchfriendCancel').onclick = function () {
   $('#searchfriendModal').modal('hide');
 };
 
-// // 5. 내 도전목록조회 페이지 이동
-// document.getElementById('findChallenges').onclick = function () {
-//   window.location.href = 'challenge-list.html';
-// };
-
 // 토큰 저장
 const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzQ4NTM3NCwiZXhwIjoxNjkzNDkyNTc0fQ.GKTkl-SAAcWta52fxNiVc2o0HIVT06n0Bjg-173wiLI';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNDY5ODcwLCJleHAiOjE2OTM1MDU4NzB9.ne2We3Falr3vZYAk99tGkJwJOSAr9j-RUzBCOLvOZ8s';
 // localStorage.setItem('jwtToken', jwtToken);
 
 // 저장된 JWT토큰 가져오기 = storedToken
 // const storedToken = localStorage.getItem('jwtToken');
-
-// Profile 정보수정
-// document.getElementById('submitmyInfo').addEventListener('click', function () {
-//   const photo = document.querySelector('#image-upload');
-//   const Bday = document.getElementById('bday').value;
-//   const description = document.getElementById('description').value;
-
-//   if (Bday === '') {
-//     alert('생년월일을 입력해주세요.');
-//     return;
-//   } else if (description === '') {
-//     alert('자기소개 내용을 입력해주세요.');
-//     return;
-//   }
-
-//   const formData = new FormData();
-//   formData.append('birthday', Bday); //new Date(Bday).toISOString()
-//   formData.append('description', description);
 
 //   // 이미지 파일이 선택되었을 때
 //   if (photo.files.length > 0) {
@@ -91,55 +68,7 @@ const storedToken =
 //     });
 // });
 
-// // 내정보 조회2 (description, birthday, image(x), username, email, Gender, CreatedAt, point, friendList)
-// axios
-//   .get('http://localhost:3000/me/profile', {
-//     headers: {
-//       Authorization: `Bearer ${storedToken}`,
-//     },
-//   })
-//   .then((response) => {
-//     const userInfo = response.data;
-
-//     // 내정보
-//     const selfDescriptionElement = document.getElementById('self-description'); //자기소개
-//     const bdayTagElement = document.getElementById('bdaytag'); //생일
-//     const greetingElement = document.getElementById('greeting'); // 이름1 (제목 이름)
-//     const descriptionNameElement = document.getElementById('descriptionName'); // 이름2 (자기소개 위 이름)
-//     const informationNameElement = document.getElementById('informationName'); // 이름3 (카드 위 이름)
-//     const statusElement = document.getElementById('status'); // 내 상태
-//     const emailaddressElement = document.getElementById('emailaddress'); // 내 이메일
-//     const mygenderElement = document.getElementById('mygender'); // 내 성별
-//     const createdateElement = document.getElementById('createdate'); // 생성일
-//     const pointElement = document.getElementById('myPoint'); // 내 포인트
-
-//     selfDescriptionElement.innerText = userInfo.description;
-//     const bday = new Date(userInfo.birthday).toLocaleDateString('en-US', {
-//       year: 'numeric',
-//       month: 'long',
-//       day: 'numeric',
-//     });
-//     bdayTagElement.innerText = bday;
-//     greetingElement.innerText = `${userInfo.name}님, 안녕하세요!`;
-//     descriptionNameElement.innerText = userInfo.name;
-//     informationNameElement.innerText = `${userInfo.name}'s Information`;
-//     statusElement.innerText = userInfo.status;
-//     emailaddressElement.innerText = userInfo.email;
-//     mygenderElement.innerText = userInfo.gender;
-//     const create = new Date(userInfo.createdAt).toLocaleDateString('en-US', {
-//       year: 'numeric',
-//       month: 'long',
-//       day: 'numeric',
-//     });
-//     createdateElement.textContent = create;
-
-//     // 친구정보
-//   })
-//   .catch((error) => {
-//     console.log('Error message:', error.response.data.message);
-//   });
-
-// // 이미지 파일 선택 시에 호출되는 부분
+// 이미지 파일 선택 시에 호출되는 부분
 // document.querySelector('#image-upload').addEventListener('change', function () {
 //   const imageLabel = document.querySelector('#image-label');
 //   if (this.files.length > 0) {
@@ -148,29 +77,6 @@ const storedToken =
 //     imageLabel.textContent = 'Choose File';
 //   }
 // });
-
-//   const data = {
-//     password: current,
-//     newPassword: newpw,
-//   };
-
-//   await axios
-//     .patch(`http://localhost:3000/user/me/password`, data, {
-//       headers: {
-//         Authorization: `Bearer ${storedToken}`,
-//       },
-//     })
-//     .then((response) => {
-//       if (response.data) {
-//         alert(`회원님의 비밀번호가 ${newpw}로 성공적으로 변경되었습니다.`);
-//       } else {
-//         alert('비밀번호 변경에 실패했습니다.');
-//       }
-//     })
-//     .catch((error) => {
-//       console.log('Error message:', error.response.data.message);
-//     });
-// }
 
 //내 정보 조회
 async function initMyPage() {
@@ -183,6 +89,7 @@ async function initMyPage() {
   const birthday = $('#bdaytag');
   const gender = $('#mygender');
   const createdAt = $('#createdate');
+  const myFriends = $('#my-friends-list');
   try {
     const { data } = await axios.get('http://localhost:3000/user/me/profile', {
       headers: {
@@ -198,7 +105,6 @@ async function initMyPage() {
 
     const myData = data.data.rest;
     const followersInfo = data.data.followersInfo;
-
     $(pointTag).text(myData.point);
     $(friendTag).text(followersInfo.length);
     $(nameTag).text(myData.name);
@@ -209,7 +115,20 @@ async function initMyPage() {
       myData.birthday ? myData.birthday : '생일을 입력해 주세요',
     );
     $(gender).text(myData.gender ? myData.gender : '성별을 입력해 주세요');
+    let num = 1;
+    let followTemp = '';
+    for (follower of followersInfo) {
+      const temp = `  <tr>
+      <th scope="row">${num}</th>
+      <td>${follower.name}</td>
+      <td>${follower.email}</td>
+      <td>${follower.ranking}</td>
+    </tr>`;
+      followTemp += temp;
+      num++;
+    }
 
+    $(myFriends).html(followTemp);
     const date = new Date(myData.createdAt);
     const year = date.getFullYear().toString().slice(-2);
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -244,7 +163,6 @@ async function editPassword() {
 }
 
 //회원탈퇴
-
 const signoutBtn = $('#signout-btn');
 $(signoutBtn).click(async () => {
   const password = $('#signoutpassword').val();
@@ -260,3 +178,45 @@ $(signoutBtn).click(async () => {
     console.error('Error message:', error.response.data.message);
   }
 });
+
+//친구찾기 , 친구요청 보내기
+$('#searchFriendByEmail').on('click', async () => {
+  const email = $('#searchEmail').val();
+  const searchUser = $('#searched-friend');
+  $(searchUser).html('');
+
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/user/me/searchEmail/?email=${email}`,
+      {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      },
+    );
+
+    const user = response.data.data;
+
+    const temp = `<div id=${user.id}><img src=${user.imgUrl}><span>${user.name}(${user.email})</span></div> <br/>`;
+    $(searchUser).html(temp);
+
+    const userId = user.id;
+    $('#send-invite').on('click', async () => {
+      try {
+        axios.post(`http://localhost:3000/follow/${userId}/request`, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        });
+        alert(`${user.name}(${user.email})님에게 친구요청을 보냈습니다`);
+      } catch (error) {
+        console.error('Error message:', error.response.data.message);
+      }
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// 내 도전목록조회 페이지 이동
+document.getElementById('findChallenges').onclick = function () {
+  window.location.href = `challenge-list.html`;
+};
