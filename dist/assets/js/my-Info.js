@@ -38,11 +38,6 @@ document.getElementById('searchfriendCancel').onclick = function () {
   $('#searchfriendModal').modal('hide');
 };
 
-// // 5. 내 도전목록조회 페이지 이동
-// document.getElementById('findChallenges').onclick = function () {
-//   window.location.href = 'challenge-list.html';
-// };
-
 // 토큰 저장
 const storedToken =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNDY5ODcwLCJleHAiOjE2OTM1MDU4NzB9.ne2We3Falr3vZYAk99tGkJwJOSAr9j-RUzBCOLvOZ8s';
@@ -132,7 +127,7 @@ async function initMyPage() {
       followTemp += temp;
       num++;
     }
-    console.log(followersInfo);
+
     $(myFriends).html(followTemp);
     const date = new Date(myData.createdAt);
     const year = date.getFullYear().toString().slice(-2);
@@ -202,13 +197,7 @@ $('#searchFriendByEmail').on('click', async () => {
 
     const user = response.data.data;
 
-    const temp = `<div id=${user.id}><img src=${user.imgUrl}><span>${user.name}(${user.email})<button
-    class="btn btn-primary"
-    type="button"
-    id="send-invite"
-  >
-    친구요청
-  </button></span></div> <br/>`;
+    const temp = `<div id=${user.id}><img src=${user.imgUrl}><span>${user.name}(${user.email})</span></div> <br/>`;
     $(searchUser).html(temp);
 
     const userId = user.id;
@@ -226,3 +215,8 @@ $('#searchFriendByEmail').on('click', async () => {
     console.error(error);
   }
 });
+
+// 내 도전목록조회 페이지 이동
+document.getElementById('findChallenges').onclick = function () {
+  window.location.href = `challenge-list.html`;
+};
