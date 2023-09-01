@@ -41,7 +41,7 @@ document.getElementById('searchfriendCancel').onclick = function () {
 
 // 토큰 저장
 const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzU0ODQwMywiZXhwIjoxNjkzNTU1NjAzfQ.MLrVeLEXIiOmn3dE-OwduqqJ618__zw3wJD15P3rAbE';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNTU4MzQ1LCJleHAiOjE2OTM2MzAzNDV9.wU3G6yyePWfZsnsdWdYWMUXEEW-Tiqz219uvwPj9ChU';
 // localStorage.setItem('jwtToken', jwtToken);
 
 // 저장된 JWT토큰 가져오기 = storedToken
@@ -263,8 +263,8 @@ async function initMessagesBox() {
     });
 
     const messages = response.data.data;
-    console.log(messages);
-    for (msg of messages) {
+
+    for (const msg of messages) {
       const email = msg.email;
       const index = email.indexOf('@');
       const preString = email.slice(0, index);
