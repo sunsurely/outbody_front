@@ -8,7 +8,7 @@
 'use strict';
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkzMzgwODk2LCJleHAiOjE2OTMzODQ0OTZ9.BIsSCR5vfNLl2xUPBZQu0m2Uf7sPHIeGviAPTOv59mo';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNDg5ODYzLCJleHAiOjE2OTM1NjE4NjN9.F_pB8oQlISsQPdp-d1LUDxxy5onP3S4G8x3MbQrT5-s';
 
 window.onload = function () {
   getChallenges();

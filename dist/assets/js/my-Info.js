@@ -1,5 +1,6 @@
 $(document).ready(function () {
   initMyPage();
+  initMessagesBox();
 });
 
 // 1. 정보수정 모달
@@ -40,7 +41,7 @@ document.getElementById('searchfriendCancel').onclick = function () {
 
 // 토큰 저장
 const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNDY5ODcwLCJleHAiOjE2OTM1MDU4NzB9.ne2We3Falr3vZYAk99tGkJwJOSAr9j-RUzBCOLvOZ8s';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNTM2NTI0LCJleHAiOjE2OTM2MDg1MjR9.uhYW7ZzCQwgaeOubw6ZBdSDoiTeUamtCTa4qh2SaoNs';
 // localStorage.setItem('jwtToken', jwtToken);
 
 // 저장된 JWT토큰 가져오기 = storedToken
@@ -199,20 +200,25 @@ $('#searchFriendByEmail').on('click', async () => {
 
     const temp = `<div id=${user.id}><img src=${user.imgUrl}><span>${user.name}(${user.email})</span></div> <br/>`;
     $(searchUser).html(temp);
-
+    console.log(storedToken);
     const userId = user.id;
+
     $('#send-invite').on('click', async () => {
       try {
-        axios.post(`http://localhost:3000/follow/${userId}/request`, {
-          headers: { Authorization: `Bearer ${storedToken}` },
-        });
+        axios.post(
+          `http://localhost:3000/follow/${userId}/request`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${storedToken}` },
+          },
+        );
         alert(`${user.name}(${user.email})님에게 친구요청을 보냈습니다`);
       } catch (error) {
         console.error('Error message:', error.response.data.message);
       }
     });
   } catch (error) {
-    console.error(error);
+    console.error('Error message:', error.response.data.message);
   }
 });
 
@@ -220,3 +226,41 @@ $('#searchFriendByEmail').on('click', async () => {
 document.getElementById('findChallenges').onclick = function () {
   window.location.href = `challenge-list.html`;
 };
+
+//친구 & 도전  초대 메세지함
+async function initMessagesBox() {
+  const messageBox = $('.dropdown-list-message');
+  try {
+    const response = await axios.get('http://localhost:3000/follow/request', {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    });
+
+    const messages = response.data.data;
+    console.log(messages);
+    let messagesHtml = '';
+    for (msg of messages) {
+      const date = new Date(msg.createdAt);
+      const year = date.getFullYear().toString().slice(-2);
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      const id = msg.id;
+      const temp = `<div>${msg.message}           
+       <button
+       class="btn btn-primary"
+       style="display: inline-block"
+     >
+       수락
+     </button>       <button
+     class="btn btn-primary"
+     style="display: inline-block"
+   >
+     거절
+   </button></div>`;
+
+      messagesHtml += temp;
+    }
+    $(messageBox).html(messagesHtml);
+  } catch (error) {
+    console.error('Error message:', error.response.data.message);
+  }
+}
