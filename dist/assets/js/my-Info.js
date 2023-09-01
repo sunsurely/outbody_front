@@ -41,7 +41,7 @@ document.getElementById('searchfriendCancel').onclick = function () {
 
 // 토큰 저장
 const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNTM2NTI0LCJleHAiOjE2OTM2MDg1MjR9.uhYW7ZzCQwgaeOubw6ZBdSDoiTeUamtCTa4qh2SaoNs';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzU0ODQwMywiZXhwIjoxNjkzNTU1NjAzfQ.MLrVeLEXIiOmn3dE-OwduqqJ618__zw3wJD15P3rAbE';
 // localStorage.setItem('jwtToken', jwtToken);
 
 // 저장된 JWT토큰 가져오기 = storedToken

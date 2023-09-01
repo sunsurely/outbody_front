@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzQ2ODExOSwiZXhwIjoxNjkzNDc1MzE5fQ._3N1ZK0lqpreo-aL2v0hTSG1JWJmm63gW08L1cptRlk';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzUzMTQzOCwiZXhwIjoxNjkzNTM4NjM4fQ.bjAz9dNWEbS6BpBAVtwjn648O04FFzr2Owr8LfWnmUI';
 
 async function rankPage() {
   // 초기 페이지 설정
@@ -46,7 +46,7 @@ async function rankPage() {
         },
       );
 
-      const userData = response.data.paginationTotalRanks;
+      const userData = response.data.paginationTotalRanks; // paginationTotalRanks 이게 백엔드에 있는데, 조회가 안됨!
       populateTable('#total-rank-table', userData, (page - 1) * pageSize);
     } catch (error) {
       alert('Error message:', error.response.data.message);
