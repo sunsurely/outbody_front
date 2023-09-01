@@ -4,7 +4,7 @@ $(document).ready(function () {
 });
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjkzNTU3MDM5LCJleHAiOjE2OTM1NjQyMzl9.VcRki05Pf4E94bFmuN4k_a-SrsNrybWbJGt9m74Wy_g';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjkzNTY0MjUzLCJleHAiOjE2OTM1NzE0NTN9.whzBFTowUpJFnXtjPZr_LochXwo9KCvnjO0jAg86Tf0';
 
 // 오운완 상세 조회
 // challengeId 받아오는거 아직 안함.
@@ -92,7 +92,7 @@ const getComment = async () => {
                                 <div class="bullet"></div>
                                 <a href="#editInput-${comment.commentId}" class="text-primary" data-toggle="collapse">수정</a>
                                 <div class="bullet"></div>
-                                <a href="#">삭제</a>
+                                <a href="#" class='delCmt_btn' commentId="${comment.commentId}">삭제</a>
                                 <div class="bullet"></div>
                                 <a href="#" class="text-danger">신고</a>
                                 <div class="collapse" id="editInput-${comment.commentId}">
@@ -159,7 +159,7 @@ $('#createCmt_btn').click(createComment);
 // postId 받아오는거 아직 안함.
 const updateComment = async (commentId) => {
   try {
-    const response = await axios.patch(
+    await axios.patch(
       `http://localhost:3000/challenge/3/post/24/comment/${commentId}`,
       { comment: $('#updateCmt_input').val() },
       {
@@ -179,4 +179,28 @@ const updateComment = async (commentId) => {
 };
 $(document).on('click', '#updateCmt_btn', function () {
   updateComment($(this).attr('commentid'));
+});
+
+// 댓글 삭제
+// challengeId 받아오는거 아직 안함.
+// postId 받아오는거 아직 안함.
+const deleteComment = async (commentId) => {
+  try {
+    await axios.delete(
+      `http://localhost:3000/challenge/3/post/24/comment/${commentId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    alert('댓글이 삭제되었습니다.');
+    location.reload();
+  } catch (error) {
+    console.error('Error message:', error);
+  }
+};
+$(document).on('click', '.delCmt_btn', function () {
+  deleteComment($(this).attr('commentid'));
 });
