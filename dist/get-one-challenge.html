@@ -146,6 +146,18 @@
                     <b id="inviteUserEmail">abcd@naver.com</b>
                     <p id="inviteUserMessage">Hello, Bro!</p>
                     <div id="inviteUsercreatedAt">2023.08.31</div>
+                    <button
+                    class="btn btn-sm btn accept-friend"
+                    data-follower-id="${message.userId}"
+                  >
+                    수락
+                  </button>
+                  <button
+                    class="btn btn-sm btn deny-friend"
+                    data-follower-id="${message.userId}"
+                  >
+                    거절
+                  </button>
                   </div>
                 </a>
                 <a href="#" class="dropdown-item dropdown-item-unread">
@@ -161,6 +173,18 @@
                     <b id="inviteUserEmail">abcd@naver.com</b>
                     <p id="inviteUserMessage">Hello, Bro!</p>
                     <div id="inviteUsercreatedAt">2023.08.31</div>
+                    <button
+                    class="btn btn-sm btn accept-friend"
+                    data-follower-id="${message.userId}"
+                  >
+                    수락
+                  </button>
+                  <button
+                    class="btn btn-sm btn deny-friend"
+                    data-follower-id="${message.userId}"
+                  >
+                    거절
+                  </button>
                   </div>
                 </a>
                 <a href="#" class="dropdown-item dropdown-item-unread">
@@ -177,6 +201,18 @@
                     <b id="inviteUserEmail">abcd@naver.com</b>
                     <p id="inviteUserMessage">Hello, Bro!</p>
                     <div id="inviteUsercreatedAt">2023.08.31</div>
+                    <button
+                        class="btn btn-sm btn accept-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        수락
+                      </button>
+                      <button
+                        class="btn btn-sm btn deny-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        거절
+                      </button>
                   </div>
                 </a>
                 <a href="#" class="dropdown-item">
@@ -192,6 +228,18 @@
                     <b id="inviteUserEmail">abcd@naver.com</b>
                     <p id="inviteUserMessage">Hello, Bro!</p>
                     <div id="inviteUsercreatedAt">2023.08.31</div>
+                    <button
+                    class="btn btn-sm btn accept-friend"
+                    data-follower-id="${message.userId}"
+                  >
+                    수락
+                  </button>
+                  <button
+                    class="btn btn-sm btn deny-friend"
+                    data-follower-id="${message.userId}"
+                  >
+                    거절
+                  </button>
                   </div>
                 </a>
                 <a href="#" class="dropdown-item">
@@ -207,6 +255,18 @@
                     <b id="inviteUserEmail">abcd@naver.com</b>
                     <p id="inviteUserMessage">Hello, Bro!</p>
                     <div id="inviteUsercreatedAt">2023.08.31</div>
+                    <button
+                    class="btn btn-sm btn accept-friend"
+                    data-follower-id="${message.userId}"
+                  >
+                    수락
+                  </button>
+                  <button
+                    class="btn btn-sm btn deny-friend"
+                    data-follower-id="${message.userId}"
+                  >
+                    거절
+                  </button>
                   </div>
                 </a>
               </div>
@@ -492,35 +552,8 @@
                     </div>
                   </div>
                   <div class="card-body">
-                    <ul class="list-unstyled list-unstyled-border">
-                      <li class="media">
-                        <img alt="image" class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-1.png">
-                        <div class="media-body">
-                          <div class="mt-0 mb-1 font-weight-bold">김필선</div>
-                          <div class="font-1000-bold"><i class="fas fa-circle"></i> 3600점</div>
-                        </div>
-                      </li>
-                      <li class="media">
-                        <img alt="image" class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-2.png">
-                        <div class="media-body">
-                          <div class="mt-0 mb-1 font-weight-bold">김재용</div>
-                          <div class="font-1000-bold"><i class="fas fa-circle"></i> 2400점</div>
-                        </div>
-                      </li>
-                      <li class="media">
-                        <img alt="image" class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-3.png">
-                        <div class="media-body">
-                          <div class="mt-0 mb-1 font-weight-bold">이상우</div>
-                          <div class="font-1000-bold"><i class="fas fa-circle"></i> 4800점</div>
-                        </div>
-                      </li>
-                      <li class="media">
-                        <img alt="image" class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-4.png">
-                        <div class="media-body">
-                          <div class="mt-0 mb-1 font-weight-bold">이연오</div>
-                          <div class="font-1000-bold"><i class="fas fa-circle"></i> 1200점</div>
-                        </div>
-                      </li>
+                    <ul id="challenger-list" class="list-unstyled list-unstyled-border">
+                      <!-- 참가자 목록이 들어가는 자리 -->
                     </ul>
                   </div>
                 </div>

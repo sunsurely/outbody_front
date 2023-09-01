@@ -148,6 +148,10 @@ async function editPassword() {
   const newpw = $('#newpw').val();
   const confirmpw = $('#confirmpw').val();
 
+  console.log('현재 비밀번호', current);
+  console.log('새로운 비밀번호', newpw);
+  console.log('컨펌 비밀번호', confirmpw);
+
   if (current === '') {
     alert('현재 비밀번호를 입력해주세요.');
     return;
@@ -161,6 +165,28 @@ async function editPassword() {
     alert('변경 비밀번호와 비밀번호 확인이 일치하지 않습니다.');
     return;
   }
+
+  const data = {
+    password: current,
+    newPassword: newpw,
+  };
+
+  await axios
+    .patch(`http://localhost:8080/user/me/password`, data, {
+      headers: {
+        Authorization: `Bearer ${storedToken}`,
+      },
+    })
+    .then((response) => {
+      if (response.data) {
+        alert(`회원님의 비밀번호가 변경되었습니다.`);
+      } else {
+        alert('비밀번호 변경에 실패했습니다.');
+      }
+    })
+    .catch((error) => {
+      console.log('Error message:', error.response.data.message);
+    });
 }
 
 //회원탈퇴
