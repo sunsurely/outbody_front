@@ -3,8 +3,8 @@ $(document).ready(function () {
   getComment();
 });
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjkzNTY0MjUzLCJleHAiOjE2OTM1NzE0NTN9.whzBFTowUpJFnXtjPZr_LochXwo9KCvnjO0jAg86Tf0';
+let token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjkzNTY2MTczLCJleHAiOjE2OTM1NzMzNzN9.jORQn9_igSLn5BjaemMAJa-uv6XywuL-xy_c2ziPrEc';
 
 // 오운완 상세 조회
 // challengeId 받아오는거 아직 안함.
@@ -12,7 +12,7 @@ const token =
 const getOnePost = async () => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/3/post/24`,
+      `http://localhost:3000/challenge/3/post/25`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -25,6 +25,10 @@ const getOnePost = async () => {
 
     if (post.comment === null) {
       post.comment = '';
+    }
+    if (post.imgUrl === '') {
+      post.imgUrl =
+        'https://play-lh.googleusercontent.com/1-7v30iLJqe5WHewpiMJ2pe8wU1GJrxG8KRdJ92I71xaYwx2F50gxbNwulS2k-9-Iw=w240-h480-rw';
     }
     if (post.userImg === null) {
       post.userImg =
@@ -66,7 +70,7 @@ const getOnePost = async () => {
 const getComment = async () => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/3/post/24/comment`,
+      `http://localhost:3000/challenge/3/post/25/comment`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -128,7 +132,7 @@ const createComment = async () => {
     }
 
     await axios.post(
-      `http://localhost:3000/challenge/3/post/24/comment`,
+      `http://localhost:3000/challenge/3/post/25/comment`,
       { comment: $('#comment_input').val() },
       {
         headers: {
@@ -159,8 +163,13 @@ $('#createCmt_btn').click(createComment);
 // postId 받아오는거 아직 안함.
 const updateComment = async (commentId) => {
   try {
+    if (!$('#updateCmt_input').val()) {
+      alert('댓글을 입력해주세요');
+      return;
+    }
+
     await axios.patch(
-      `http://localhost:3000/challenge/3/post/24/comment/${commentId}`,
+      `http://localhost:3000/challenge/3/post/25/comment/${commentId}`,
       { comment: $('#updateCmt_input').val() },
       {
         headers: {
@@ -187,7 +196,7 @@ $(document).on('click', '#updateCmt_btn', function () {
 const deleteComment = async (commentId) => {
   try {
     await axios.delete(
-      `http://localhost:3000/challenge/3/post/24/comment/${commentId}`,
+      `http://localhost:3000/challenge/3/post/25/comment/${commentId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
