@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    <!-- CSS Libraries -->
-
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/components.css">
@@ -520,16 +518,17 @@
                     <div class="section-title">댓글 달기</div>
                     <div class="form-group">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="댓글을 입력해주세요" aria-label="">
+                            <input type="text" class="form-control" id='comment_input' placeholder="댓글을 입력해주세요"
+                                aria-label="">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">작성</button>
+                                <button class="btn btn-primary" type="button" id="createCmt_btn">작성</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="card">
                         <div class="card-body">
-                            <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
+                            <ul class="list-unstyled list-unstyled-border list-unstyled-noborder" id="comment-card">
                                 <li class="media">
                                     <img alt="image" class="mr-3 rounded-circle" width="70"
                                         src="assets/img/avatar/avatar-1.png">
@@ -548,6 +547,8 @@
                                             <a href="#" class="text-danger">Report</a>
                                         </div>
                                     </div>
+
+
 
                                     <!-- 댓글 신고 모달
                   <div class="row">
@@ -586,48 +587,15 @@
                   </div> -->
 
                                 </li>
-                                <li class="media">
-                                    <img alt="image" class="mr-3 rounded-circle" width="70"
-                                        src="assets/img/avatar/avatar-3.png">
-                                    <div class="media-body">
-                                        <div class="media-title mb-1">이상우</div>
-                                        <!-- <div class="text-time">Yesterday</div> -->
-                                        <div class="media-description text-muted">
-                                            너무 귀여운 헬린이네
-                                        </div>
-                                        <div class="media-links">
-                                            <div class="bullet"></div>
-                                            <a href="#">Edit</a>
-                                            <div class="bullet"></div>
-                                            <a href="#">Delete</a>
-                                            <div class="bullet"></div>
-                                            <a href="#" class="text-danger">Report</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="media">
-                                    <img alt="image" class="mr-3 rounded-circle" width="70"
-                                        src="assets/img/avatar/avatar-2.png">
-                                    <div class="media-body">
-                                        <div class="media-title mb-1">이상우</div>
-                                        <!-- <div class="text-time">Yesterday</div> -->
-                                        <div class="media-description text-muted">
-                                            너무 귀여운 헬린이네
-                                        </div>
-                                        <div class="media-links">
-                                            <div class="bullet"></div>
-                                            <a href="#">Edit</a>
-                                            <div class="bullet"></div>
-                                            <a href="#">Delete</a>
-                                            <div class="bullet"></div>
-                                            <a href="#" class="text-danger">Report</a>
-                                        </div>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                 </section>
             </div>
+
+
+
+
+
             <footer class="main-footer">
                 <div class="footer-left">
                     Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad
@@ -658,7 +626,7 @@
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/post-comment.js"></script>
-    <script src="assets/js/user-Info.js"></script>
+    <!-- <script src="assets/js/user-Info.js"></script> -->
 </body>
 
 </html>

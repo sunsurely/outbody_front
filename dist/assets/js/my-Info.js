@@ -253,10 +253,11 @@ document.getElementById('findChallenges').onclick = function () {
   window.location.href = `challenge-list.html`;
 };
 
-//친구 & 도전  초대 메세지함
+//친구 & 도전  초대 메세지함  , 초대 수락기능 같이 구현
 async function initMessagesBox() {
   // 친구초대 메시지함
   const messageBox = $('.dropdown-list-message');
+  $(messageBox).html('');
   try {
     const response = await axios.get('http://localhost:3000/follow/request', {
       headers: { Authorization: `Bearer ${storedToken}` },
@@ -284,47 +285,9 @@ async function initMessagesBox() {
      거절
    </button></div>`;
 
-      messagesHtml += temp;
+      $(messageBox).append(temp);
     }
     $(messageBox).html(messagesHtml);
-  } catch (error) {
-    console.error('Error message:', error.response.data.message);
-  }
-
-  // 도전초대 메시지함
-  const challengeMessageBox = $('.dropdown-list-message');
-  try {
-    const response = await axios.get(
-      'http://localhost:3000/challenge/invite/list',
-      {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      },
-    );
-    const challengeInvitedmessages = response.data.data;
-    console.log(challengeInvitedmessages);
-    let messagesHtml = '';
-    for (msg of challengeInvitedmessages) {
-      const date = new Date(msg.createdAt);
-      const year = date.getFullYear().toString().slice(-2);
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
-      const id = msg.id;
-      const temp = `<div>${msg.message}           
-       <button
-       class="btn btn-primary"
-       style="display: inline-block"
-     >
-       수락
-     </button>       <button
-     class="btn btn-primary"
-     style="display: inline-block"
-   >
-     거절
-   </button></div>`;
-
-      messagesHtml += temp;
-    }
-    $(challengeMessageBox).html(messagesHtml);
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
