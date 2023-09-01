@@ -6,11 +6,17 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>Layout &rsaquo; Default &mdash; Stisla</title>
 
+    <!-- 제이쿼리 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <!-- General CSS Files -->
     <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css">
 
     <!-- CSS Libraries -->
+    <link rel="stylesheet" href="assets/css/get-post.css">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -107,73 +113,166 @@
                     </div>
                 </form>
                 <ul class="navbar-nav navbar-right">
-                    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-                            class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+                    <li class="dropdown dropdown-list-toggle">
+                        <a
+                          href="#"
+                          data-toggle="dropdown"
+                          class="nav-link nav-link-lg message-toggle beep"
+                          id="requestlists"
+                          ><i class="far fa-envelope"></i
+                        ></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
-                            <div class="dropdown-header">Messages
-                                <div class="float-right">
-                                    <a href="#">Mark All As Read</a>
-                                </div>
+                          <div class="dropdown-header">
+                            Messages
+                            <div class="float-right">
+                              <a href="#">Mark All As Read</a>
                             </div>
-                            <div class="dropdown-list-content dropdown-list-message">
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle">
-                                        <div class="is-online"></div>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Kusnaedi</b>
-                                        <p>Hello, Bro!</p>
-                                        <div class="time">10 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle">
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Dedik Sugiharto</b>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                                        <div class="time">12 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-3.png" class="rounded-circle">
-                                        <div class="is-online"></div>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Agung Ardiansyah</b>
-                                        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                        <div class="time">12 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-4.png" class="rounded-circle">
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Ardian Rahardiansyah</b>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit ess</p>
-                                        <div class="time">16 Hours Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle">
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Alfa Zulkarnain</b>
-                                        <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
-                                        <div class="time">Yesterday</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="dropdown-footer text-center">
-                                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-                            </div>
+                          </div>
+                          <div
+                            class="dropdown-list-content dropdown-list-message"
+                            style="overflow-y: scroll; height: 300px"
+                          >
+                            <a href="#" class="dropdown-item dropdown-item-unread">
+                              <div class="dropdown-item-avatar">
+                                <img
+                                  alt="image"
+                                  src="assets/img/avatar/avatar-1.png"
+                                  class="rounded-circle"
+                                />
+                                <div class="is-online"></div>
+                              </div>
+                              <div class="dropdown-item-desc">
+                                <b id="inviteUserName">Kusnaedi</b>
+                                <b id="inviteUserEmail">abcd@naver.com</b>
+                                <p id="inviteUserMessage">Hello, Bro!</p>
+                                <div id="inviteUsercreatedAt">2023.08.31</div>
+                                <button
+                                class="btn btn-sm btn accept-friend"
+                                data-follower-id="${message.userId}"
+                              >
+                                수락
+                              </button>
+                              <button
+                                class="btn btn-sm btn deny-friend"
+                                data-follower-id="${message.userId}"
+                              >
+                                거절
+                              </button>
+                              </div>
+                            </a>
+                            <a href="#" class="dropdown-item dropdown-item-unread">
+                              <div class="dropdown-item-avatar">
+                                <img
+                                  alt="image"
+                                  src="assets/img/avatar/avatar-2.png"
+                                  class="rounded-circle"
+                                />
+                              </div>
+                              <div class="dropdown-item-desc">
+                                <b id="inviteUserName">Kusnaedi</b>
+                                <b id="inviteUserEmail">abcd@naver.com</b>
+                                <p id="inviteUserMessage">Hello, Bro!</p>
+                                <div id="inviteUsercreatedAt">2023.08.31</div>
+                                <button
+                        class="btn btn-sm btn accept-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        수락
+                      </button>
+                      <button
+                        class="btn btn-sm btn deny-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        거절
+                      </button>
+                              </div>
+                            </a>
+                            <a href="#" class="dropdown-item dropdown-item-unread">
+                              <div class="dropdown-item-avatar">
+                                <img
+                                  alt="image"
+                                  src="assets/img/avatar/avatar-3.png"
+                                  class="rounded-circle"
+                                />
+                                <div class="is-online"></div>
+                              </div>
+                              <div class="dropdown-item-desc">
+                                <b id="inviteUserName">Kusnaedi</b>
+                                <b id="inviteUserEmail">abcd@naver.com</b>
+                                <p id="inviteUserMessage">Hello, Bro!</p>
+                                <div id="inviteUsercreatedAt">2023.08.31</div>
+                                <button
+                                class="btn btn-sm btn accept-friend"
+                                data-follower-id="${message.userId}"
+                              >
+                                수락
+                              </button>
+                              <button
+                                class="btn btn-sm btn deny-friend"
+                                data-follower-id="${message.userId}"
+                              >
+                                거절
+                              </button>
+                              </div>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                              <div class="dropdown-item-avatar">
+                                <img
+                                  alt="image"
+                                  src="assets/img/avatar/avatar-4.png"
+                                  class="rounded-circle"
+                                />
+                              </div>
+                              <div class="dropdown-item-desc">
+                                <b id="inviteUserName">Kusnaedi</b>
+                                <b id="inviteUserEmail">abcd@naver.com</b>
+                                <p id="inviteUserMessage">Hello, Bro!</p>
+                                <div id="inviteUsercreatedAt">2023.08.31</div>
+                                <button
+                        class="btn btn-sm btn accept-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        수락
+                      </button>
+                      <button
+                        class="btn btn-sm btn deny-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        거절
+                      </button>
+                              </div>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                              <div class="dropdown-item-avatar">
+                                <img
+                                  alt="image"
+                                  src="assets/img/avatar/avatar-5.png"
+                                  class="rounded-circle"
+                                />
+                              </div>
+                              <div class="dropdown-item-desc">
+                                <b id="inviteUserName">Kusnaedi</b>
+                                <b id="inviteUserEmail">abcd@naver.com</b>
+                                <p id="inviteUserMessage">Hello, Bro!</p>
+                                <div id="inviteUsercreatedAt">2023.08.31</div>
+                                <button
+                                class="btn btn-sm btn accept-friend"
+                                data-follower-id="${message.userId}"
+                              >
+                                수락
+                              </button>
+                              <button
+                                class="btn btn-sm btn deny-friend"
+                                data-follower-id="${message.userId}"
+                              >
+                                거절
+                              </button>
+                              </div>
+                            </a>
+                          </div>
+                          <div class="dropdown-footer text-center"></div>
                         </div>
-                    </li>
+                      </li>
                     <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                             class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -447,191 +546,117 @@
 
                     <div class="section-body">
                         <h2 class="section-title">오운완
-                            <a href="#" class="btn btn-icon icon-left btn-primary" style="float: right;"><i
-                                    class="far fa-edit"></i>
-                                오운완 생성</a>
+                            <a href="#" class="btn btn-icon icon-left btn-primary" style="float: right;"
+                                data-toggle="modal" data-target="#createModal">
+                                <i class="far fa-edit"></i> 오운완 생성
+                            </a>
                         </h2>
 
                         <!-- 모달창 -->
-                        <!-- <div class="modal-dialog m-0" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">오운완 생성</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="form-group">
-                    <label>내용</label>
-                    <input type="text" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label>이미지 Url</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">작성</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                </div>
-              </div>
-            </div> -->
-
-                        <!-- <p class="section-lead">This page is just an example for you to create your own page.</p> -->
-                        <div class="card">
-                            <!-- <div class="card-header">
-                <h4>Example Card</h4>
-              </div> -->
-                            <div class="card-body">
-                                <!-- <h2 class="section-title">Article Style C</h2> -->
-                                <div class="row">
-                                    <div class="col-12 col-md-4 col-lg-4">
-                                        <article class="article article-style-c">
-                                            <div class="article-header">
-                                                <div class="article-image" data-background="assets/img/news/img13.jpg">
-                                                </div>
-                                            </div>
-                                            <div class="article-details">
-                                                <div class="article-category"><a href="#"></a>
-                                                    <div class="bullet"></div> <a href="#">1시간 전</a>
-                                                </div>
-                                                <div class="article-title">
-                                                    <h2><a href="#">오늘도 운동 완료!</a></h2>
-                                                </div>
-                                                <!-- <p>Duis aute irure dolor in reprehenderit in voluptate velit esse
-                          cillum dolore eu fugiat nulla pariatur. </p> -->
-                                                <div class="article-user">
-                                                    <img alt="image" src="assets/img/avatar/avatar-1.png">
-                                                    <div class="article-user-details">
-                                                        <div class="user-detail-name">
-                                                            <a href="#">이연오</a>
-                                                        </div>
-                                                        <div class="text-job">나는야 헬린이</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </article>
+                        <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel"
+                            aria-hidden="true" data-backdrop="false">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content" style="overflow: hidden;">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">오운완 생성</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                    <div class="col-12 col-md-4 col-lg-4">
-                                        <article class="article article-style-c">
-                                            <div class="article-header">
-                                                <div class="article-image" data-background="assets/img/news/img14.jpg">
-                                                </div>
-                                            </div>
-                                            <div class="article-details">
-                                                <div class="article-category"><a href="#"></a>
-                                                    <div class="bullet"></div> <a href="#">2시간 전</a>
-                                                </div>
-                                                <div class="article-title">
-                                                    <h2><a href="#">오운완임다</a></h2>
-                                                </div>
-                                                <div class="article-user">
-                                                    <img alt="image" src="assets/img/avatar/avatar-3.png">
-                                                    <div class="article-user-details">
-                                                        <div class="user-detail-name">
-                                                            <a href="#">이상우</a>
-                                                        </div>
-                                                        <div class="text-job">나는야 핑크 헬린이</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </article>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label>내용</label>
+                                            <input type="text" class="form-control desc_input" placeholder="내용을 입력해주세요">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>이미지 Url</label>
+                                            <input type="text" class="form-control url_input"
+                                                placeholder="이미지 Url을 입력해주세요">
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-4 col-lg-4">
-                                        <article class="article article-style-c">
-                                            <div class="article-header">
-                                                <div class="article-image" data-background="assets/img/news/img01.jpg">
-                                                </div>
-                                            </div>
-                                            <div class="article-details">
-                                                <div class="article-category"><a href="#"></a>
-                                                    <div class="bullet"></div> <a href="#">4시간 전</a>
-                                                </div>
-                                                <div class="article-title">
-                                                    <h2><a href="#">오늘도 힘차게 운동 완료!</a></h2>
-                                                </div>
-                                                <div class="article-user">
-                                                    <img alt="image" src="assets/img/avatar/avatar-2.png">
-                                                    <div class="article-user-details">
-                                                        <div class="user-detail-name">
-                                                            <a href="#">김필선</a>
-                                                        </div>
-                                                        <div class="text-job">코딩이 좋은 헬린이</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </article>
-                                    </div>
-                                    <div class="col-12 col-md-4 col-lg-4">
-                                        <article class="article article-style-c">
-                                            <div class="article-header">
-                                                <div class="article-image" data-background="assets/img/news/img01.jpg">
-                                                </div>
-                                            </div>
-                                            <div class="article-details">
-                                                <div class="article-category"><a href="#"></a>
-                                                    <div class="bullet"></div> <a href="#">5시간 전</a>
-                                                </div>
-                                                <div class="article-title">
-                                                    <h2><a href="#">운동 별거 없네요</a></h2>
-                                                </div>
-                                                <div class="article-user">
-                                                    <img alt="image" src="assets/img/avatar/avatar-1.png">
-                                                    <div class="article-user-details">
-                                                        <div class="user-detail-name">
-                                                            <a href="#">김재용</a>
-                                                        </div>
-                                                        <div class="text-job">코딩하는 헬린이</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </article>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" id="createBtn">작성</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                                     </div>
                                 </div>
-
-                            </div>
-
-                            <div class="card-footer text-right">
-                                <nav class="d-inline-block">
-                                    <ul class="pagination mb-0">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1"><i
-                                                    class="fas fa-chevron-left"></i></a>
-                                        </li>
-                                        <li class="page-item active"><a class="page-link" href="#">1 <span
-                                                    class="sr-only">(current)</span></a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">2</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">3</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">4</a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
-                                        </li>
-                                    </ul>
-                                </nav>
                             </div>
                         </div>
                     </div>
-                </section>
-            </div>
-            <footer class="main-footer">
-                <div class="footer-left">
-                    Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad
-                        Nauval
-                        Azhar</a>
-                </div>
-                <div class="footer-right">
 
-                </div>
-            </footer>
+
+                    <!-- <p class="section-lead">This page is just an example for you to create your own page.</p> -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- <div class="col-12 col-md-4 col-lg-4">
+                                    <article class="article article-style-c">
+                                        <div class="article-header">
+                                            <div class="article-image" data-background="assets/img/news/img14.jpg">
+                                            </div>
+                                        </div>
+                                        <div class="article-details">
+                                            <div class="article-category"><a href="#"></a>
+                                                <div class="bullet"></div> <a href="#">2시간 전</a>
+                                            </div>
+                                            <div class="article-title">
+                                                <h2><a href="#">오운완임다</a></h2>
+                                            </div>
+                                            <div class="article-user">
+                                                <img alt="image" src="assets/img/avatar/avatar-3.png">
+                                                <div class="article-user-details">
+                                                    <div class="user-detail-name">
+                                                        <a href="#">이상우</a>
+                                                    </div>
+                                                    <div class="text-job">나는야 핑크 헬린이</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div> -->
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer text-right">
+                            <nav class="d-inline-block">
+                                <ul class="pagination mb-0">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1"><i
+                                                class="fas fa-chevron-left"></i></a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1 <span
+                                                class="sr-only">(current)</span></a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">2</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">3</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">4</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+            </div>
+            </section>
         </div>
+        <footer class="main-footer">
+            <div class="footer-left">
+                Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad
+                    Nauval
+                    Azhar</a>
+            </div>
+            <div class="footer-right">
+
+            </div>
+        </footer>
+    </div>
     </div>
 
     <!-- General JS Scripts -->
@@ -650,6 +675,8 @@
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script src="assets/js/get-post.js"></script>
+    <script src="assets/js/user-Info.js"></script>
 </body>
 
 </html>

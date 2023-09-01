@@ -31,7 +31,10 @@
       rel="stylesheet"
       href="assets/modules/summernote/summernote-bs4.css"
     />
-    <link rel="stylesheet" href="./bootstrapt/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="assets/modules/bootstrap/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="assets/modules/prism/prism.css" />
 
     <!-- Template CSS -->
@@ -175,6 +178,7 @@
                 href="#"
                 data-toggle="dropdown"
                 class="nav-link nav-link-lg message-toggle beep"
+                id="requestlists"
                 ><i class="far fa-envelope"></i
               ></a>
               <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -184,7 +188,10 @@
                     <a href="#">Mark All As Read</a>
                   </div>
                 </div>
-                <div class="dropdown-list-content dropdown-list-message">
+                <div
+                  class="dropdown-list-content dropdown-list-message"
+                  style="overflow-y: scroll; height: 300px"
+                >
                   <a href="#" class="dropdown-item dropdown-item-unread">
                     <div class="dropdown-item-avatar">
                       <img
@@ -195,9 +202,22 @@
                       <div class="is-online"></div>
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Kusnaedi</b>
-                      <p>Hello, Bro!</p>
-                      <div class="time">10 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                        class="btn btn-sm btn accept-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        수락
+                      </button>
+                      <button
+                        class="btn btn-sm btn deny-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        거절
+                      </button>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item dropdown-item-unread">
@@ -209,11 +229,22 @@
                       />
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Dedik Sugiharto</b>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                      </p>
-                      <div class="time">12 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                        class="btn btn-sm btn accept-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        수락
+                      </button>
+                      <button
+                        class="btn btn-sm btn deny-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        거절
+                      </button>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item dropdown-item-unread">
@@ -226,12 +257,22 @@
                       <div class="is-online"></div>
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Agung Ardiansyah</b>
-                      <p>
-                        Sunt in culpa qui officia deserunt mollit anim id est
-                        laborum.
-                      </p>
-                      <div class="time">12 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                        class="btn btn-sm btn accept-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        수락
+                      </button>
+                      <button
+                        class="btn btn-sm btn deny-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        거절
+                      </button>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item">
@@ -243,12 +284,22 @@
                       />
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Ardian Rahardiansyah</b>
-                      <p>
-                        Duis aute irure dolor in reprehenderit in voluptate
-                        velit ess
-                      </p>
-                      <div class="time">16 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                        class="btn btn-sm btn accept-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        수락
+                      </button>
+                      <button
+                        class="btn btn-sm btn deny-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        거절
+                      </button>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item">
@@ -260,18 +311,26 @@
                       />
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Alfa Zulkarnain</b>
-                      <p>
-                        Exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo
-                      </p>
-                      <div class="time">Yesterday</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                        class="btn btn-sm btn accept-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        수락
+                      </button>
+                      <button
+                        class="btn btn-sm btn deny-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        거절
+                      </button>
                     </div>
                   </a>
                 </div>
-                <div class="dropdown-footer text-center">
-                  <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-                </div>
+                <div class="dropdown-footer text-center"></div>
               </div>
             </li>
             <li class="dropdown dropdown-list-toggle">
@@ -821,19 +880,21 @@
                       <div class="profile-widget-items">
                         <div class="profile-widget-item">
                           <div class="profile-widget-item-label">Point</div>
-                          <div class="profile-widget-item-value" id="myPoint">
+                          <div class="profile-widget-item-value" id="my-point">
                             820
                           </div>
                         </div>
                         <div class="profile-widget-item">
                           <div class="profile-widget-item-label">Ranks</div>
-                          <div class="profile-widget-item-value">28</div>
+                          <div id="my-rank" class="profile-widget-item-value">
+                            28
+                          </div>
                         </div>
                         <div class="profile-widget-item">
                           <div class="profile-widget-item-label">friends</div>
                           <div
                             class="profile-widget-item-value"
-                            id="friendCount"
+                            id="friend-count"
                           >
                             32
                           </div>
@@ -844,7 +905,6 @@
                       <div class="profile-widget-name">
                         <div id="descriptionName">Jake Lee</div>
                         <div class="text-muted d-inline font-weight-normal">
-                          <div class="slash"></div>
                           <div id="status">BackEnd Developer</div>
                         </div>
                       </div>
@@ -930,10 +990,10 @@
                                   <th scope="col">#</th>
                                   <th scope="col">Name</th>
                                   <th scope="col">E-mail</th>
-                                  <th scope="col">Point</th>
+                                  <th scope="col">Ranks</th>
                                 </tr>
                               </thead>
-                              <tbody>
+                              <tbody id="my-friends-list">
                                 <tr>
                                   <th scope="row">1</th>
                                   <td>Mark</td>
@@ -1037,7 +1097,7 @@
                   <input
                     id="bday"
                     type="text"
-                    class="form-control datemask"
+                    class="form-control datepicker"
                     placeholder="YYYY/MM/DD (ex: 2000/01/01)"
                   />
                 </div>
@@ -1142,20 +1202,14 @@
               <div class="card-footer text-right">
                 <button class="btn btn-primary" id="signoutcancel">취소</button>
 
-                <button
-                  class="btn btn-primary"
-                  id="submit"
-                  onclick="signout();"
-                >
-                  제출
-                </button>
+                <button class="btn btn-primary" id="signout-btn">제출</button>
               </div>
               <div class="modal-footer bg-whitesmoke br"></div>
             </div>
           </div>
         </div>
 
-        <!-- 모달 4: 친구 찾기 -->
+        <!-- 모달 4: 친구 찾기  -->
         <div
           class="modal fade"
           tabindex="-1"
@@ -1165,7 +1219,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">친구 찾기</h5>
+                <h5 class="modal-title">유저 찾기</h5>
               </div>
               <div class="card-body">
                 <div class="form-group">
@@ -1189,28 +1243,16 @@
                   </div>
                 </div>
 
-                <div class="form-group mb-0">
-                  <label>유저 E-mail 입력</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    required=""
-                    id="requestEmail"
-                  />
+                <div id="searched-friend" class="form-group mb-0">
                   <br />
                 </div>
               </div>
               <div class="card-footer text-right">
+                <button class="btn btn-primary" type="button" id="send-invite">
+                  친구요청
+                </button>
                 <button class="btn btn-primary" id="searchfriendCancel">
                   취소
-                </button>
-
-                <button
-                  class="btn btn-primary"
-                  type="button"
-                  id="requestFriendByEmail"
-                >
-                  친구 요청
                 </button>
               </div>
               <div class="modal-footer bg-whitesmoke br"></div>
@@ -1228,7 +1270,6 @@
         </footer>
       </div>
     </div>
-
     <!-- General JS Scripts -->
     <script src="assets/modules/jquery.min.js"></script>
     <script src="assets/modules/popper.js"></script>
@@ -1245,9 +1286,11 @@
 
     <!-- Page Specific JS File -->
     <script src="assets/js/page/bootstrap-modal.js"></script>
+    <script src="assets/js/page/forms-advanced-forms.js"></script>
 
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/my-Info.js"></script>
+    <script src="assets/js/user-Info.js"></script>
   </body>
 </html>

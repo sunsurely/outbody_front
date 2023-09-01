@@ -20,6 +20,14 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
     <!-- Start GA -->
     <script
       async
@@ -30,9 +38,9 @@
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
+      gtag('js', new Date());
 
-      gtag("config", "UA-94034622-3");
+      gtag('config', 'UA-94034622-3');
     </script>
     <!-- /END GA -->
   </head>
@@ -150,6 +158,7 @@
                 href="#"
                 data-toggle="dropdown"
                 class="nav-link nav-link-lg message-toggle beep"
+                id="requestlists"
                 ><i class="far fa-envelope"></i
               ></a>
               <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -159,7 +168,10 @@
                     <a href="#">Mark All As Read</a>
                   </div>
                 </div>
-                <div class="dropdown-list-content dropdown-list-message">
+                <div
+                  class="dropdown-list-content dropdown-list-message"
+                  style="overflow-y: scroll; height: 300px"
+                >
                   <a href="#" class="dropdown-item dropdown-item-unread">
                     <div class="dropdown-item-avatar">
                       <img
@@ -170,9 +182,22 @@
                       <div class="is-online"></div>
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Kusnaedi</b>
-                      <p>Hello, Bro!</p>
-                      <div class="time">10 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                        class="btn btn-sm btn accept-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        수락
+                      </button>
+                      <button
+                        class="btn btn-sm btn deny-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        거절
+                      </button>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item dropdown-item-unread">
@@ -184,11 +209,22 @@
                       />
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Dedik Sugiharto</b>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                      </p>
-                      <div class="time">12 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                        class="btn btn-sm btn accept-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        수락
+                      </button>
+                      <button
+                        class="btn btn-sm btn deny-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        거절
+                      </button>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item dropdown-item-unread">
@@ -201,12 +237,22 @@
                       <div class="is-online"></div>
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Agung Ardiansyah</b>
-                      <p>
-                        Sunt in culpa qui officia deserunt mollit anim id est
-                        laborum.
-                      </p>
-                      <div class="time">12 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                        class="btn btn-sm btn accept-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        수락
+                      </button>
+                      <button
+                        class="btn btn-sm btn deny-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        거절
+                      </button>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item">
@@ -218,12 +264,22 @@
                       />
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Ardian Rahardiansyah</b>
-                      <p>
-                        Duis aute irure dolor in reprehenderit in voluptate
-                        velit ess
-                      </p>
-                      <div class="time">16 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                        class="btn btn-sm btn accept-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        수락
+                      </button>
+                      <button
+                        class="btn btn-sm btn deny-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        거절
+                      </button>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item">
@@ -235,18 +291,26 @@
                       />
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Alfa Zulkarnain</b>
-                      <p>
-                        Exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo
-                      </p>
-                      <div class="time">Yesterday</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                        class="btn btn-sm btn accept-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        수락
+                      </button>
+                      <button
+                        class="btn btn-sm btn deny-friend"
+                        data-follower-id="${message.userId}"
+                      >
+                        거절
+                      </button>
                     </div>
                   </a>
                 </div>
-                <div class="dropdown-footer text-center">
-                  <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-                </div>
+                <div class="dropdown-footer text-center"></div>
               </div>
             </li>
             <li class="dropdown dropdown-list-toggle">
@@ -786,8 +850,8 @@
               <h2 class="section-title">Ranks</h2>
               <div style="display: flex; align-items: center">
                 <p class="section-lead" style="flex: 1">
-                  ※ 15,000point 이상 Gold, 12,000point 이상 Silver, 9,000point
-                  이상 Bronze
+                  ※ 15,000point 이상 Gold / 12,000point 이상 Silver / 9,000point
+                  이상 Bronze / 9,000point 이하 Iron
                 </p>
                 <p style="text-align: right"></p>
               </div>
@@ -799,7 +863,10 @@
                     </div>
                     <div class="card-body p-0">
                       <div class="table-responsive">
-                        <table class="table table-striped table-md">
+                        <table
+                          class="table table-striped table-md"
+                          id="total-rank-table"
+                        >
                           <tr>
                             <th>Ranks</th>
                             <th>Name</th>
@@ -812,7 +879,7 @@
                             <td>Conor McGregor</td>
                             <td>2017-01-09</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>10000</td>
                           </tr>
@@ -821,7 +888,7 @@
                             <td>Max Hollyway</td>
                             <td>2017-01-09</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>9000</td>
                           </tr>
@@ -830,7 +897,7 @@
                             <td>Dustin Poirier</td>
                             <td>2017-01-11</td>
                             <td>
-                              <div class="badge badge-danger">Gold</div>
+                              <div class="level">Gold</div>
                             </td>
                             <td>8000</td>
                           </tr>
@@ -839,7 +906,7 @@
                             <td>Dan Hooker</td>
                             <td>2017-01-11</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>7000</td>
                           </tr>
@@ -848,7 +915,7 @@
                             <td>Alexander Volkanovski</td>
                             <td>2017-01-17</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>6000</td>
                           </tr>
@@ -857,7 +924,7 @@
                             <td>Jon Jones</td>
                             <td>2017-01-17</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>5000</td>
                           </tr>
@@ -866,7 +933,7 @@
                             <td>Israel Adesanya</td>
                             <td>2017-01-17</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>4000</td>
                           </tr>
@@ -875,7 +942,7 @@
                             <td>Michael Bisping</td>
                             <td>2017-01-17</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>3000</td>
                           </tr>
@@ -884,7 +951,7 @@
                             <td>Khabib nurmagomedov</td>
                             <td>2017-01-17</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>2000</td>
                           </tr>
@@ -893,7 +960,7 @@
                             <td>George St. Pierre</td>
                             <td>2017-01-17</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>1000</td>
                           </tr>
@@ -903,7 +970,7 @@
                     <div class="card-footer text-right">
                       <nav class="d-inline-block">
                         <ul class="pagination mb-0">
-                          <li class="page-item disabled">
+                          <li class="page-item disabled" id="total-prev-btn">
                             <a class="page-link" href="#" tabindex="-1"
                               ><i class="fas fa-chevron-left"></i
                             ></a>
@@ -920,6 +987,27 @@
                             <a class="page-link" href="#">3</a>
                           </li>
                           <li class="page-item">
+                            <a class="page-link" href="#">4</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">5</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">6</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">7</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">8</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">9</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">10</a>
+                          </li>
+                          <li class="page-item" id="total-next-btn">
                             <a class="page-link" href="#"
                               ><i class="fas fa-chevron-right"></i
                             ></a>
@@ -936,7 +1024,10 @@
                     </div>
                     <div class="card-body p-0">
                       <div class="table-responsive">
-                        <table class="table table-striped table-md">
+                        <table
+                          class="table table-striped table-md"
+                          id="friend-rank-table"
+                        >
                           <tr>
                             <th>Ranks</th>
                             <th>Name</th>
@@ -949,7 +1040,7 @@
                             <td>정찬성</td>
                             <td>2017-01-09</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>1000</td>
                           </tr>
@@ -958,7 +1049,7 @@
                             <td>김동현</td>
                             <td>2017-01-09</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>900</td>
                           </tr>
@@ -967,7 +1058,7 @@
                             <td>추성훈</td>
                             <td>2017-01-11</td>
                             <td>
-                              <div class="badge badge-danger">Gold</div>
+                              <div class="level">Gold</div>
                             </td>
                             <td>800</td>
                           </tr>
@@ -976,7 +1067,7 @@
                             <td>최두호</td>
                             <td>2017-01-11</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>700</td>
                           </tr>
@@ -985,7 +1076,7 @@
                             <td>정다운</td>
                             <td>2017-01-17</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>600</td>
                           </tr>
@@ -994,7 +1085,7 @@
                             <td>김종국</td>
                             <td>2017-01-09</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>500</td>
                           </tr>
@@ -1003,7 +1094,7 @@
                             <td>말왕</td>
                             <td>2017-01-09</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>400</td>
                           </tr>
@@ -1012,7 +1103,7 @@
                             <td>김계란</td>
                             <td>2017-01-09</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>300</td>
                           </tr>
@@ -1021,7 +1112,7 @@
                             <td>코리안 헤라클레스</td>
                             <td>2017-01-09</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>200</td>
                           </tr>
@@ -1030,7 +1121,7 @@
                             <td>갓성환</td>
                             <td>2017-01-09</td>
                             <td>
-                              <div class="badge badge-success">Bronze</div>
+                              <div class="level">Bronze</div>
                             </td>
                             <td>100</td>
                           </tr>
@@ -1040,7 +1131,7 @@
                     <div class="card-footer text-right">
                       <nav class="d-inline-block">
                         <ul class="pagination mb-0">
-                          <li class="page-item disabled">
+                          <li class="page-item disabled" id="friend-prev-btn">
                             <a class="page-link" href="#" tabindex="-1"
                               ><i class="fas fa-chevron-left"></i
                             ></a>
@@ -1057,6 +1148,27 @@
                             <a class="page-link" href="#">3</a>
                           </li>
                           <li class="page-item">
+                            <a class="page-link" href="#">4</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">5</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">6</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">7</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">8</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">9</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">10</a>
+                          </li>
+                          <li class="page-item" id="friend-next-btn">
                             <a class="page-link" href="#"
                               ><i class="fas fa-chevron-right"></i
                             ></a>
@@ -1091,8 +1203,11 @@
     <script src="assets/js/stisla.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- JS Libraies -->
     <script src="assets/modules/jquery-ui/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Page Specific JS File -->
     <script src="assets/js/page/components-table.js"></script>
@@ -1100,5 +1215,7 @@
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/users.js"></script>
+    <script src="assets/js/ranks.js"></script>
+    <script src="assets/js/user-Info.js"></script>
   </body>
 </html>

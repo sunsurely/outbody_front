@@ -168,6 +168,7 @@
                 href="#"
                 data-toggle="dropdown"
                 class="nav-link nav-link-lg message-toggle beep"
+                id="requestlists"
                 ><i class="far fa-envelope"></i
               ></a>
               <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -177,7 +178,10 @@
                     <a href="#">Mark All As Read</a>
                   </div>
                 </div>
-                <div class="dropdown-list-content dropdown-list-message">
+                <div
+                  class="dropdown-list-content dropdown-list-message"
+                  style="overflow-y: scroll; height: 300px"
+                >
                   <a href="#" class="dropdown-item dropdown-item-unread">
                     <div class="dropdown-item-avatar">
                       <img
@@ -188,9 +192,22 @@
                       <div class="is-online"></div>
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Kusnaedi</b>
-                      <p>Hello, Bro!</p>
-                      <div class="time">10 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                      class="btn btn-sm btn accept-friend"
+                      data-follower-id="${message.userId}"
+                    >
+                      수락
+                    </button>
+                    <button
+                      class="btn btn-sm btn deny-friend"
+                      data-follower-id="${message.userId}"
+                    >
+                      거절
+                    </button>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item dropdown-item-unread">
@@ -202,11 +219,22 @@
                       />
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Dedik Sugiharto</b>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                      </p>
-                      <div class="time">12 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                      class="btn btn-sm btn accept-friend"
+                      data-follower-id="${message.userId}"
+                    >
+                      수락
+                    </button>
+                    <button
+                      class="btn btn-sm btn deny-friend"
+                      data-follower-id="${message.userId}"
+                    >
+                      거절
+                    </button>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item dropdown-item-unread">
@@ -219,12 +247,22 @@
                       <div class="is-online"></div>
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Agung Ardiansyah</b>
-                      <p>
-                        Sunt in culpa qui officia deserunt mollit anim id est
-                        laborum.
-                      </p>
-                      <div class="time">12 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                      class="btn btn-sm btn accept-friend"
+                      data-follower-id="${message.userId}"
+                    >
+                      수락
+                    </button>
+                    <button
+                      class="btn btn-sm btn deny-friend"
+                      data-follower-id="${message.userId}"
+                    >
+                      거절
+                    </button>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item">
@@ -236,12 +274,22 @@
                       />
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Ardian Rahardiansyah</b>
-                      <p>
-                        Duis aute irure dolor in reprehenderit in voluptate
-                        velit ess
-                      </p>
-                      <div class="time">16 Hours Ago</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                      class="btn btn-sm btn accept-friend"
+                      data-follower-id="${message.userId}"
+                    >
+                      수락
+                    </button>
+                    <button
+                      class="btn btn-sm btn deny-friend"
+                      data-follower-id="${message.userId}"
+                    >
+                      거절
+                    </button>
                     </div>
                   </a>
                   <a href="#" class="dropdown-item">
@@ -253,18 +301,26 @@
                       />
                     </div>
                     <div class="dropdown-item-desc">
-                      <b>Alfa Zulkarnain</b>
-                      <p>
-                        Exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo
-                      </p>
-                      <div class="time">Yesterday</div>
+                      <b id="inviteUserName">Kusnaedi</b>
+                      <b id="inviteUserEmail">abcd@naver.com</b>
+                      <p id="inviteUserMessage">Hello, Bro!</p>
+                      <div id="inviteUsercreatedAt">2023.08.31</div>
+                      <button
+                      class="btn btn-sm btn accept-friend"
+                      data-follower-id="${message.userId}"
+                    >
+                      수락
+                    </button>
+                    <button
+                      class="btn btn-sm btn deny-friend"
+                      data-follower-id="${message.userId}"
+                    >
+                      거절
+                    </button>
                     </div>
                   </a>
                 </div>
-                <div class="dropdown-footer text-center">
-                  <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-                </div>
+                <div class="dropdown-footer text-center"></div>
               </div>
             </li>
             <li class="dropdown dropdown-list-toggle">
@@ -791,10 +847,67 @@
           <section class="section">
             <div class="section-header">
               <h1>Dashboard</h1>
+              <div class="form-group" style="width: 350px; height: 50px; margin-top:25px;">
+                <div
+                  class="input-group"
+                  style="
+                    position: absolute;
+                    width: 400px;
+                    height: 50px;
+                    margin-bottom: 50px;
+                    margin-left: 100px;
+                    right: 0;
+                  "
+                >
+                  <div class="input-group-prepend">
+                    <div
+                      class="input-group-text"
+                      style="height: 36px; margin-top: 1px"
+                    >
+                      <i class="fas fa-calendar"></i>
+                    </div>
+                  </div>
+                  <input
+                    type="text"
+                    class="daterange-cus"
+                    style="
+                      width: 200px;
+                      height: 36px;
+                      margin-top: 1px;
+                      text-align: center;
+                    "
+                  />
+                  <a
+                    href="javascript:;"
+                    class="btn btn-primary daterange-btn icon-left btn-icon"
+                    style="
+                      border-radius: 0;
+                      height: 36px;
+                      padding-top: 5px;
+                      margin-bottom: 5px;
+                      margin-left: 5px;
+                    "
+                    >조회</a
+                  >
+                  <a 
+                    href="javascript:;"
+                    class="btn btn-primary modal-up  icon-left btn-icon"
+                    style="
+                      border-radius: 0;
+                      height: 36px;
+                      padding-top: 5px;
+                      margin-bottom: 5px;
+                      margin-left: 5px;
+                    "
+                    >등록</a
+                  >
+                </div>
+              </div>
             </div>
+
             <div class="row">
-              <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
+              <div class="col-lg-3 col-md-6 col-sm-6 col-12" >
+                <div class="card card-statistic-1" style="border:2px solid rgba(3, 62, 255, 0.288);">
                   <div class="card-wrap">
                     <div class="card-header">
                       <h4>기초대사량</h4>
@@ -804,7 +917,7 @@
                 </div>
               </div>
               <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
+                <div class="card card-statistic-1" style="border:2px solid rgba(3, 62, 255, 0.288);">
                   <div class="card-wrap">
                     <div class="card-header">
                       <h4>체중</h4>
@@ -814,7 +927,7 @@
                 </div>
               </div>
               <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
+                <div class="card card-statistic-1" style="border:2px solid rgba(3, 62, 255, 0.288);">
                   <div class="card-wrap">
                     <div class="card-header">
                       <h4>체지방률</h4>
@@ -824,7 +937,7 @@
                 </div>
               </div>
               <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
+                <div class="card card-statistic-1" style="border:2px solid rgba(3, 62, 255, 0.288);">
                   <div class="card-wrap">
                     <div class="card-header">
                       <h4>골격근량</h4>
@@ -835,269 +948,21 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-8 col-md-12 col-12 col-sm-12">
-                <div class="card">
+              <div class="col-lg-4 col-md-12 col-12 col-sm-12" >
+                <div class="card" style="height: 950px;border:2px solid rgba(3, 62, 255, 0.288); padding:5px;">
                   <div class="card-header">
-                    <h4>기초대사량(kcal)</h4>
-                    <div class="card-header-action">
-                      <p>(월)</p>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <canvas id="myChart" height="50"></canvas>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header">
-                    <h4>체중(kg)</h4>
-                    <div class="card-header-action">
-                      <p>(월)</p>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <canvas id="myChart2" height="50"></canvas>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header">
-                    <h4>골격근량(kg)</h4>
-                    <div class="card-header-action">
-                      <p>(월)</p>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <canvas id="myChart3" height="50"></canvas>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header">
-                    <h4>체지방량률(%)</h4>
-                    <div class="card-header-action">
-                      <p>(월)</p>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <canvas id="myChart4" height="50"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-12 col-12 col-sm-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>종합 평가</h4>
-                  </div>
-                  <div class="card-body">
-                    <ul class="list-unstyled list-unstyled-border">
-                      <li class="media">
-                        <div class="media-body">
-                          <div class="media-title">체중조절</div>
-                          <ul>
-                            <li style="font-weight: bold">
-                              적정체중
-                              <span
-                                class="body-result"
-                                style="margin-left: 20px"
-                                >69.7kg</span
-                              >
-                            </li>
-                            <li style="font-weight: bold">
-                              체중조절
-                              <span
-                                class="body-result"
-                                style="margin-left: 20px"
-                                >+3.4kg</span
-                              >
-                            </li>
-                            <li style="font-weight: bold">
-                              적정체지방률
-                              <span
-                                class="body-result"
-                                style="margin-left: 20px"
-                              >
-                                15%</span
-                              >
-                            </li>
-                            <li style="font-weight: bold">
-                              체지방 조절
-                              <span
-                                class="body-result"
-                                style="margin-left: 20px"
-                              >
-                                +2%</span
-                              >
-                            </li>
-                            <li style="font-weight: bold">
-                              적정 골격근량
-                              <span
-                                class="body-result"
-                                style="margin-left: 20px"
-                              >
-                                35kg</span
-                              >
-                            </li>
-                            <li style="font-weight: bold">
-                              골격근량 조절
-                              <span
-                                class="body-result"
-                                style="margin-left: 20px"
-                              >
-                                +2.8kg</span
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li class="media">
-                        <div class="media-body">
-                          <div class="media-title">식단조절</div>
-                          <span class="text-small text-muted"
-                            >단백질 위주로 많이 드시고 탄수화물도 같이
-                            챙겨드시면 좋습니다.</span
-                          >
-                        </div>
-                      </li>
-                      <li class="media">
-                        <div class="media-body">
-                          <div class="media-title">운동법</div>
-                          <span class="text-small text-muted"
-                            >남자는 하체입니다. 하체를 조지세요</span
-                          >
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-lg-5 col-md-12 col-12 col-sm-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4 style="margin-top: 30px">측정표 등록</h4>
-                  </div>
-                  <div class="card-body pb-0">
-                    <div class="form-group" style="margin-top: 20px">
-                      <label>키(cm)</label>
-                      <input
-                        type="text"
-                        name="title"
-                        class="form-control body-data"
-                        required
-                      />
-                      <div class="invalid-feedback">
-                        Please fill in the title
-                      </div>
-                    </div>
-                    <div class="form-group" style="margin-top: 50px">
-                      <label>체중(kg)</label>
-                      <input
-                        type="text"
-                        name="title"
-                        class="form-control body-data"
-                        required
-                      />
-                      <div class="invalid-feedback">
-                        Please fill in the title
-                      </div>
-                    </div>
-                    <div class="form-group" style="margin-top: 50px">
-                      <label>체지방률(%)</label>
-                      <input
-                        type="text"
-                        name="title"
-                        class="form-control body-data"
-                        required
-                      />
-                      <div class="invalid-feedback">
-                        Please fill in the title
-                      </div>
-                    </div>
-                    <div class="form-group" style="margin-top: 50px">
-                      <label>골격근량(kg)</label>
-                      <input
-                        type="text"
-                        name="title"
-                        class="form-control body-data"
-                        required
-                      />
-                      <div class="invalid-feedback">
-                        Please fill in the title
-                      </div>
-                    </div>
-                    <div class="form-group" style="margin-top: 50px">
-                      <label>기초대사량(kcal)</label>
-                      <input
-                        type="text"
-                        name="title"
-                        class="form-control body-data"
-                        required
-                      />
-                      <div class="invalid-feedback">
-                        Please fill in the title
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer pt-0">
-                    <button
-                      class="btn btn-primary regist-record"
-                      style="margin-top: 35px; margin-left: 250px"
-                    >
-                      등록
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-7 col-md-12 col-12 col-sm-12">
-                <div class="card" style="height: 800px">
-                  <div class="card-header">
-                    <h4>측정표</h4>
-                    <div class="card" style="background: none">
-                      <div class="card-header"></div>
-                      <div class="form-group">
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <div
-                              class="input-group-text"
-                              style="
-                                margin-left: 500px;
-                                height: 36px;
-                                margin-top: 1px;
-                              "
-                            >
-                              <i class="fas fa-calendar"></i>
-                            </div>
-                          </div>
-                          <input
-                            type="text"
-                            class="daterange-cus"
-                            style="height: 36px; margin-top: 1px"
-                          />
-                          <a
-                            href="javascript:;"
-                            class="btn btn-primary daterange-btn icon-left btn-icon"
-                            style="
-                              border-radius: 0;
-                              height: 36px;
-                              padding-top: 5px;
-                              margin-bottom: 5px;
-                            "
-                            >조회</a
-                          >
-                        </div>
-                      </div>
-                    </div>
+                    <h4 style="margin-left: 200px">측정표</h4>
                   </div>
                   <div class="card-body p-0">
-                    <div class="table-responsive">
-                      <table class="table table-striped mb-0">
+                    <div class="table-responsive"  style="height:800px">
+                      <table class="table">
                         <thead>
                           <tr>
-                            <th>날짜</th>
-                            <th>체중</th>
-                            <th>체지방률</th>
-                            <th>근육량</th>
-                            <th>기초대사량</th>
+                            <th style="padding:0 10px 0 40px">날짜</th>
+                            <th style="padding:0 30px">체중</th>
+                            <th style="padding:0 15px">체지방률</th>
+                            <th style="padding:0 30px">근육량</th>
+                            <th style="padding:0 15px">기초대사량</th>
                           </tr>
                         </thead>
                         <tbody id="record-table"></tbody>
@@ -1106,12 +971,124 @@
                   </div>
                   <div
                     class="card-body"
-                    style="width: 916px; display: flex; justify-content: center"
+                    style="width: 200px; display: flex; justify-content: center; margin-left:150px;"
                   >
-                    <nav aria-label="Page navigation example">
+                    <nav aria-label="Page navigation example" >
                       <ul id="record-pagenation" class="pagination"></ul>
                     </nav>
                   </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-12 col-12 col-sm-12">
+                <div class="card" style="width:550px; height: 950px;border:2px solid rgba(3, 62, 255, 0.288); padding:5px;">
+                  <div class="card-header">
+                    <h4 style="margin-left:200px ; ">변화그래프</h4>
+                    <div class="card-header-action">
+                      
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="myChart" height="100"></canvas>
+                  </div>
+                  
+                  <div class="card-body">
+                    <canvas id="myChart2" height="100"></canvas>
+                  </div>
+      
+                  <div class="card-body">
+                    <canvas id="myChart3" height="100"></canvas>
+                  </div>
+               
+                  <div class="card-body">
+                    <canvas id="myChart4" height="100"></canvas>
+                  </div>
+                </div>               
+              
+            </div>
+            <div class="col-lg-4 col-md-12 col-12 col-sm-12">
+              <div class="card" style="height:950px; width:450px; margin-left:50px; height: 950px;border:2px solid rgba(3, 62, 255, 0.288); padding:5px;">
+                <div class="card-header">
+                  <h4 style="margin-left: 170px;">종합 평가</h4>
+                </div>
+                <div class="card-body">
+                  <ul class="list-unstyled list-unstyled-border">
+                    <li class="media">
+                      <div class="media-body">
+                        <div class="media-title">체중조절</div>
+                        <ul>
+                          <li style="font-weight: bold">
+                            적정체중
+                            <span
+                              class="body-result"
+                              style="margin-left: 20px"
+                              >69.7kg</span
+                            >
+                          </li>
+                          <li style="font-weight: bold">
+                            체중조절
+                            <span
+                              class="body-result"
+                              style="margin-left: 20px"
+                              >+3.4kg</span
+                            >
+                          </li>
+                          <li style="font-weight: bold">
+                            적정체지방률
+                            <span
+                              class="body-result"
+                              style="margin-left: 20px"
+                            >
+                              15%</span
+                            >
+                          </li>
+                          <li style="font-weight: bold">
+                            체지방 조절
+                            <span
+                              class="body-result"
+                              style="margin-left: 20px"
+                            >
+                              +2%</span
+                            >
+                          </li>
+                          <li style="font-weight: bold">
+                            적정 골격근량
+                            <span
+                              class="body-result"
+                              style="margin-left: 20px"
+                            >
+                              35kg</span
+                            >
+                          </li>
+                          <li style="font-weight: bold">
+                            골격근량 조절
+                            <span
+                              class="body-result"
+                              style="margin-left: 20px"
+                            >
+                              +2.8kg</span
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li class="media">
+                      <div class="media-body">
+                        <div class="media-title">식단조절</div>
+                        <span class="text-small text-muted"
+                          >단백질 위주로 많이 드시고 탄수화물도 같이
+                          챙겨드시면 좋습니다.</span
+                        >
+                      </div>
+                    </li>
+                    <li class="media">
+                      <div class="media-body">
+                        <div class="media-title">운동법</div>
+                        <span class="text-small text-muted"
+                          >남자는 하체입니다. 하체를 조지세요</span
+                        >
+                      </div>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -1128,6 +1105,100 @@
       </div>
     </div>
 
+    <div
+      id="modal-background"
+      style="
+        width: 100%;
+        height: 1500px;
+        background-color: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 0;
+        z-index: 10;
+        display: none;
+      "
+    >
+      <div
+        class="card"
+        style="
+          position: absolute;
+          z-index: 15;
+          left: 45%;
+          top: 30%;
+          width: 500px;
+          padding: 10px;
+        "
+      >
+        <div class="card-header">
+          <h4 style="margin-top: 30px; margin-left:170px;">측정표 등록</h4>
+        </div>
+        <div class="card-body pb-0">
+          <div class="form-group" style="margin-top: 20px">
+            <label>키(cm)</label>
+            <input
+              type="text"
+              name="title"
+              class="form-control body-data"
+              required
+            />
+            <div class="invalid-feedback">Please fill in the title</div>
+          </div>
+          <div class="form-group" style="margin-top: 30px">
+            <label>체중(kg)</label>
+            <input
+              type="text"
+              name="title"
+              class="form-control body-data"
+              required
+            />
+            <div class="invalid-feedback">Please fill in the title</div>
+          </div>
+          <div class="form-group" style="margin-top: 30px">
+            <label>체지방률(%)</label>
+            <input
+              type="text"
+              name="title"
+              class="form-control body-data"
+              required
+            />
+            <div class="invalid-feedback">Please fill in the title</div>
+          </div>
+          <div class="form-group" style="margin-top: 30px">
+            <label>골격근량(kg)</label>
+            <input
+              type="text"
+              name="title"
+              class="form-control body-data"
+              required
+            />
+            <div class="invalid-feedback">Please fill in the title</div>
+          </div>
+          <div class="form-group" style="margin-top: 30px">
+            <label>기초대사량(kcal)</label>
+            <input
+              type="text"
+              name="title"
+              class="form-control body-data"
+              required
+            />
+            <div class="invalid-feedback">Please fill in the title</div>
+          </div>
+        </div>
+        <div class="card-footer pt-0" style="display: flex">
+          <button
+            class="btn btn-primary regist-record"
+            style="margin-top: 35px; margin-left: 150px"
+          >
+            등록
+          </button>
+          <button
+            class="btn btn-primary cancle-regist"
+            style="margin-top: 35px; margin-left: 20px"
+          >
+            취소
+          </button>
+        </div>
+      </div>
+    </div>
     <!-- General JS Scripts -->
     <script src="assets/modules/jquery.min.js"></script>
     <script src="assets/modules/popper.js"></script>
@@ -1137,7 +1208,7 @@
     <!-- <script src="assets/modules/moment.min.js"></script> -->
     <script src="assets/js/stisla.js"></script>
     <!-- <script src="assets/js/page//components-statistic.js"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@1.0.0/dist/chartjs-plugin-datalabels.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@1.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <!-- JS Libraies -->
     <script src="assets/modules/chart.min.js"></script>
     <!-- <script src="assets/modules/jqvmap/dist/jquery.vmap.min.js"></script> -->
@@ -1156,7 +1227,8 @@
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/custom.js"></script>
-
+    <script src="assets/js/user-Info.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </body>
 </html>
