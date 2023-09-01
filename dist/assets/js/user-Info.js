@@ -14,7 +14,7 @@ $('#backtopage').click(function () {
 
 // 토큰값 선언
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzUzMTQzOCwiZXhwIjoxNjkzNTM4NjM4fQ.bjAz9dNWEbS6BpBAVtwjn648O04FFzr2Owr8LfWnmUI';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzU2MzYwNSwiZXhwIjoxNjkzNTcwODA1fQ.0ITkltfHHFSeK5vr7LF9iU5oA9giuUBJYwuirVaq0ww';
 
 // 나에게 온 친구요청 확인메시지 (화면 우측상단 메시지함)
 const requestlists = $('#requestlists');

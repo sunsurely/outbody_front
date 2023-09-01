@@ -41,7 +41,7 @@ document.getElementById('searchfriendCancel').onclick = function () {
 
 // 토큰 저장
 const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzU0ODQwMywiZXhwIjoxNjkzNTU1NjAzfQ.MLrVeLEXIiOmn3dE-OwduqqJ618__zw3wJD15P3rAbE';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzU2MzYwNSwiZXhwIjoxNjkzNTcwODA1fQ.0ITkltfHHFSeK5vr7LF9iU5oA9giuUBJYwuirVaq0ww';
 // localStorage.setItem('jwtToken', jwtToken);
 
 // 저장된 JWT토큰 가져오기 = storedToken
@@ -255,6 +255,7 @@ document.getElementById('findChallenges').onclick = function () {
 
 //친구 & 도전  초대 메세지함
 async function initMessagesBox() {
+  // 친구초대 메시지함
   const messageBox = $('.dropdown-list-message');
   try {
     const response = await axios.get('http://localhost:3000/follow/request', {
@@ -286,6 +287,44 @@ async function initMessagesBox() {
       messagesHtml += temp;
     }
     $(messageBox).html(messagesHtml);
+  } catch (error) {
+    console.error('Error message:', error.response.data.message);
+  }
+
+  // 도전초대 메시지함
+  const challengeMessageBox = $('.dropdown-list-message');
+  try {
+    const response = await axios.get(
+      'http://localhost:3000/challenge/invite/list',
+      {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      },
+    );
+    const challengeInvitedmessages = response.data.data;
+    console.log(challengeInvitedmessages);
+    let messagesHtml = '';
+    for (msg of challengeInvitedmessages) {
+      const date = new Date(msg.createdAt);
+      const year = date.getFullYear().toString().slice(-2);
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      const id = msg.id;
+      const temp = `<div>${msg.message}           
+       <button
+       class="btn btn-primary"
+       style="display: inline-block"
+     >
+       수락
+     </button>       <button
+     class="btn btn-primary"
+     style="display: inline-block"
+   >
+     거절
+   </button></div>`;
+
+      messagesHtml += temp;
+    }
+    $(challengeMessageBox).html(messagesHtml);
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
