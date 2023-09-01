@@ -73,7 +73,7 @@ const getComment = async () => {
         },
       },
     );
-    console.log(response);
+
     let allComments = '';
     response.data.data.forEach((comment) => {
       if (comment.userImg === null) {
@@ -107,3 +107,40 @@ const getComment = async () => {
     console.error('Error message:', error.response.data.message);
   }
 };
+
+// 댓글 작성
+// challengeId 받아오는거 아직 안함.
+// postId 받아오는거 아직 안함.
+const createComment = async () => {
+  try {
+    if (!$('#comment_input').val()) {
+      alert('댓글을 입력해주세요.');
+      return;
+    }
+
+    await axios.post(
+      `http://localhost:3000/challenge/3/post/24/comment`,
+      { comment: $('#comment_input').val() },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    alert('댓글이 작성되었습니다.');
+    location.reload();
+  } catch (error) {
+    console.error('Error message:', error.response.data.message);
+    alert(error.response.data.message);
+    location.reload();
+  }
+};
+// 엔터 키를 눌렀을 때 작성버튼 눌리게
+$('#comment_input').keydown((event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    createComment();
+  }
+});
+$('#createCmt_btn').click(createComment);
