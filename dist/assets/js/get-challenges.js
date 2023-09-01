@@ -8,7 +8,7 @@
 'use strict';
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkzMzgwODk2LCJleHAiOjE2OTMzODQ0OTZ9.BIsSCR5vfNLl2xUPBZQu0m2Uf7sPHIeGviAPTOv59mo';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkzNDY4NTk1LCJleHAiOjE2OTM0NzIxOTV9.AIiEoI6K-a6NdxvLxjU9h0l5XRi4KDLnshSpQzGy7z0';
 
 window.onload = function () {
   getChallenges();
@@ -49,7 +49,9 @@ async function getChallenges() {
 
           return `<tr id="${challenge.id}">
           <td>${challenge.title}</td>
-          <td>${formattedstartDate} ~ ${formattedendDate}</td>
+          <td>${formattedstartDate} ~ ${formattedendDate} (${
+            challenge.challengeWeek
+          }주)</td>
           <td>
             <button class="btn btn-primary">
               오운완 출석<span class="badge badge-transparent">${
