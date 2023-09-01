@@ -253,9 +253,10 @@ document.getElementById('findChallenges').onclick = function () {
   window.location.href = `challenge-list.html`;
 };
 
-//친구 & 도전  초대 메세지함
+//친구 & 도전  초대 메세지함  , 초대 수락기능 같이 구현
 async function initMessagesBox() {
   const messageBox = $('.dropdown-list-message');
+  $(messageBox).html('');
   try {
     const response = await axios.get('http://localhost:3000/follow/request', {
       headers: { Authorization: `Bearer ${storedToken}` },
@@ -263,29 +264,92 @@ async function initMessagesBox() {
 
     const messages = response.data.data;
     console.log(messages);
-    let messagesHtml = '';
     for (msg of messages) {
-      const date = new Date(msg.createdAt);
-      const year = date.getFullYear().toString().slice(-2);
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
-      const id = msg.id;
-      const temp = `<div>${msg.message}           
-       <button
-       class="btn btn-primary"
-       style="display: inline-block"
-     >
-       수락
-     </button>       <button
-     class="btn btn-primary"
-     style="display: inline-block"
-   >
-     거절
-   </button></div>`;
+      const email = msg.email;
+      const index = email.indexOf('@');
+      const preString = email.slice(0, index);
+      const nextString = email.slice(index, index + 3);
 
-      messagesHtml += temp;
+      const emailText = `${preString}${nextString}...`;
+
+      const now = new Date();
+      const msgDate = new Date(msg.createdAt);
+      const diffInMilliseconds = now - msgDate;
+      const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
+      const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
+
+      let msgTime;
+
+      if (diffInDays >= 1) {
+        msgTime = `${diffInDays}일전`;
+      } else {
+        msgTime = `${diffInHours}시간전`;
+      }
+      const id = msg.userId;
+      const temp = `
+      <div class="dropdown-item-avatar">
+       <a href="user-info.html?userId=${msg.userId}">
+          <img
+            alt="image"
+            src="${msg.imgUrl ? msg.imgUrl : 'assets/img/avatar/avatar-1.png'}"
+            class="rounded-circle"
+            style="width:50px; htight:50px;"
+          />
+       </a>
+        <div class="is-online"></div>
+      </div>
+      <div class="dropdown-item-desc">      
+        <p id="inviteUserMessage" style="margin-bottom:0px;"><span style="font-weight:bold;">${
+          msg.name
+        }</span>(${emailText})님이 친구요청을 보냈습니다.</p>
+   
+        <button id="accept${id}"
+          class="btn btn-sm btn accept-friend"
+          style="margin-bottom:20px; margin-left:250px"
+        >
+          수락
+        </button>
+        <button
+        id="cancel${id}"
+          class="btn btn-sm btn deny-friend" 
+          style="margin-bottom:20px;"
+        >
+          거절
+        </button>
+        <span style="font-size:12px; margin-top:0px; margin-left:10px; font-weight:bold"; >${msgTime}</span>
+      </div>
+    </a>`;
+
+      $(messageBox).append(temp);
     }
-    $(messageBox).html(messagesHtml);
+
+    $('.accept-friend').each(function (idx, acc) {
+      $(acc).on('click', async function (e) {
+        e.preventDefault();
+        const tagId = $(this).attr('id');
+        const id = tagId.charAt(tagId.length - 1);
+        const data = { response: 'yes' };
+        await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        });
+
+        alert('친구요청을 수락했습니다.');
+      });
+    });
+
+    $('.deny-friend').each(function (idx, acc) {
+      $(acc).on('click', async function (e) {
+        e.preventDefault();
+        const tagId = $(this).attr('id');
+        const id = tagId.charAt(tagId.length - 1);
+        const data = { response: 'no' };
+        await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        });
+
+        alert('친구요청을 거절했습니다.');
+      });
+    });
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }

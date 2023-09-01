@@ -22,7 +22,7 @@ $('.modal-up').on('click', () => {
   $(modal).css('display', 'block');
 });
 
-$('.cancle-regist').on('click', () => {
+$('.cancel-regist').on('click', () => {
   $(modal).css('display', 'none');
 });
 
