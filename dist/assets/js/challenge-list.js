@@ -4,8 +4,8 @@ $(document).ready(function () {
   challengeListPage();
 });
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzU0ODQwMywiZXhwIjoxNjkzNTU1NjAzfQ.MLrVeLEXIiOmn3dE-OwduqqJ618__zw3wJD15P3rAbE';
+const thattoken =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzU2MzYwNSwiZXhwIjoxNjkzNTcwODA1fQ.0ITkltfHHFSeK5vr7LF9iU5oA9giuUBJYwuirVaq0ww';
 
 async function challengeListPage() {
   const titleTag = $('.challengeTitle');
@@ -18,18 +18,23 @@ async function challengeListPage() {
     const { data } = await axios.get(
       'http://localhost:3000/challenge/user/list',
       {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${thattoken}` },
       },
     );
     const challengeData = data.data;
-    console.log('data', data);
-    console.log('challengeData', challengeData);
+    console.log(challengeData);
 
-    $(titleTag).text(challengeData.title);
-    $(startDateTag).text(challengeData.startDate);
-    $(endDateTag).text(challengeData.endDate);
-    $(challengeWeekTag).text(challengeData.challengeWeek);
-    $(descriptionTag).text(challengeData.description);
+    // $(titleTag).text(challengeData.title);
+    // $(startDateTag).text(challengeData.startDate);
+    // $(endDateTag).text(challengeData.endDate);
+    // $(challengeWeekTag).text(challengeData.challengeWeek);
+    // $(descriptionTag).text(challengeData.description);
+
+    $(titleTag).text(challengeData[0].title);
+    $(startDateTag).text(challengeData[0].startDate);
+    $(endDateTag).text(challengeData[0].endDate);
+    $(challengeWeekTag).text(challengeData[0].challengeWeek);
+    $(descriptionTag).text(challengeData[0].description);
 
     // 생성날짜
     const date = new Date(challengeData.createdAt);
@@ -39,11 +44,6 @@ async function challengeListPage() {
 
     const myCreatedAt = `${year}.${month}.${day}`;
     $(createdAtTag).text(myCreatedAt);
-
-    // 날짜 내림차순(최근날짜부터)
-    challengeData = challengeData.sort((a, b) => {
-      return new Date(b.createdAt) - new Date(a.createdAt);
-    });
 
     let num = 1;
     let challengeTemp = '';
@@ -86,7 +86,8 @@ async function challengeListPage() {
       num++;
     }
   } catch (error) {
-    alert(error.response.data.message);
+    console.log(error);
+    // alert(error);
   }
   // 상단 날짜. 현재 날짜 (September 2023 이런식으로) 객체 생성
   const currentDate = new Date();
