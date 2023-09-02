@@ -42,8 +42,6 @@ document.getElementById('searchfriendCancel').onclick = function () {
   $('#searchfriendModal').modal('hide');
 };
 
-// 토큰 저장
-
 // localStorage.setItem('jwtToken', jwtToken);
 
 // 저장된 JWT토큰 가져오기 = storedToken
