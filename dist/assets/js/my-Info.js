@@ -354,105 +354,103 @@ async function initMessagesBox() {
     console.error('Error message:', error.response.data.message);
   }
 
-  // 2. 도전방 초대메시지
-  try {
-    const response = await axios.get(
-      'http://localhost:3000/challenge/invite/list',
-      {
-        headers: {
-          Authorization: `Bearer ${storedToken}`,
-        },
-      },
-    );
-    const messages = response.data.data;
-    for (const msg of messages) {
-      const email = msg.email;
-      const index = email.indexOf('@');
-      const preString = email.slice(0, index);
-      const nextString = email.slice(index, index + 3);
+  // // 2. 도전방 초대메시지
+  // try {
+  //   const response = await axios.get(
+  //     'http://localhost:3000/challenge/invite/list',
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${storedToken}`,
+  //       },
+  //     },
+  //   );
+  //   const messages = response.data.data;
+  //   for (const msg of messages) {
+  //     const email = msg.email;
+  //     const index = email.indexOf('@');
+  //     const preString = email.slice(0, index);
+  //     const nextString = email.slice(index, index + 3);
 
-      const emailText = `${preString}${nextString}...`;
+  //     const emailText = `${preString}${nextString}...`;
 
-      const now = new Date();
-      const msgDate = new Date(msg.createdAt);
-      const diffInMilliseconds = now - msgDate;
-      const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
-      const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
+  //     const now = new Date();
+  //     const msgDate = new Date(msg.createdAt);
+  //     const diffInMilliseconds = now - msgDate;
+  //     const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
+  //     const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
 
-      let msgTime;
+  //     let msgTime;
 
-      if (diffInDays >= 1) {
-        msgTime = `${diffInDays}일전`;
-      } else {
-        msgTime = `${diffInHours}시간전`;
-      }
-      const id = msg.userId;
-      console.log('id', id);
-      const temp = `
-      <div class="dropdown-item-avatar" id="challenger">
-       <a href="user-info.html?userId=${msg.userId}">
-          <img
-            alt="image"
-            src="${msg.imgUrl ? msg.imgUrl : 'assets/img/avatar/avatar-2.png'}"
-            class="rounded-circle"
-            style="width:50px; htight:50px;"
-          />
-       </a>
-        <div class="is-online"></div>
-      </div>
-      <div class="dropdown-item-desc">      
-        <p id="challengeMessage" style="margin-bottom:0px;"><span style="font-weight:bold;">${
-          msg.name
-        }</span>(${emailText})님이 도전방에 초대했습니다. 수락하시겠습니까?.</p>
-   
-        <button id="accept${id}"
-          class="btn btn-sm btn accept-challenge"
-          style="margin-bottom:20px; margin-left:250px"
-        >
-          수락
-        </button>
-        <button
-        id="cancel${id}"
-          class="btn btn-sm btn deny-challenge"
-          style="margin-bottom:20px;"
-        >
-          거절
-        </button>
-        <span style="font-size:12px; margin-top:0px; margin-left:10px; font-weight:bold"; >${msgTime}</span>
-      </div>
-    `;
+  //     if (diffInDays >= 1) {
+  //       msgTime = `${diffInDays}일전`;
+  //     } else {
+  //       msgTime = `${diffInHours}시간전`;
+  //     }
+  //     const id = msg.userId;
+  //     const temp = `
+  //     <div class="dropdown-item-avatar" id="challenger">
+  //      <a href="user-info.html?userId=${msg.userId}">
+  //         <img
+  //           alt="image"
+  //           src="${msg.imgUrl ? msg.imgUrl : 'assets/img/avatar/avatar-2.png'}"
+  //           class="rounded-circle"
+  //           style="width:50px; htight:50px;"
+  //         />
+  //      </a>
+  //       <div class="is-online"></div>
+  //     </div>
+  //     <div class="dropdown-item-desc">
+  //       <p id="challengeMessage" style="margin-bottom:0px;"><span style="font-weight:bold;">${
+  //         msg.name
+  //       }</span>(${emailText})님이 도전방에 초대했습니다. 수락하시겠습니까?.</p>
 
-      $(messageBox).append(temp);
-    }
-    $('.accept-challenge').each(function (idx, acc) {
-      $(acc).on('click', async function (e) {
-        e.preventDefault();
-        const tagId = $(this).attr('id');
-        const id = tagId.charAt(tagId.length - 1);
-        const data = { response: 'yes' };
-        await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-          headers: { Authorization: `Bearer ${storedToken}` },
-        });
+  //       <button id="accept${id}"
+  //         class="btn btn-sm btn accept-challenge"
+  //         style="margin-bottom:20px; margin-left:250px"
+  //       >
+  //         수락
+  //       </button>
+  //       <button
+  //       id="cancel${id}"
+  //         class="btn btn-sm btn deny-challenge"
+  //         style="margin-bottom:20px;"
+  //       >
+  //         거절
+  //       </button>
+  //       <span style="font-size:12px; margin-top:0px; margin-left:10px; font-weight:bold"; >${msgTime}</span>
+  //     </div>
+  //   `;
 
-        alert('도전방 초대를 수락했습니다.');
-      });
-    });
+  //     $(messageBox).append(temp);
+  //   }
+  //   $('.accept-challenge').each(function (idx, acc) {
+  //     $(acc).on('click', async function (e) {
+  //       e.preventDefault();
+  //       const tagId = $(this).attr('id');
+  //       const id = tagId.charAt(tagId.length - 1);
+  //       const data = { response: 'yes' };
+  //       await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
+  //         headers: { Authorization: `Bearer ${storedToken}` },
+  //       });
 
-    $('.deny-challenge').each(function (idx, acc) {
-      $(acc).on('click', async function (e) {
-        e.preventDefault();
-        const tagId = $(this).attr('id');
-        const id = tagId.charAt(tagId.length - 1);
-        const data = { response: 'no' };
-        await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-          headers: { Authorization: `Bearer ${storedToken}` },
-        });
+  //       alert('도전방 초대를 수락했습니다.');
+  //     });
+  //   });
 
-        alert('도전방 초대를 거절했습니다.');
-      });
-    });
-  } catch (error) {
-    console.log(error);
-    console.error('Error message:', error.answer.data.message);
-  }
+  //   $('.deny-challenge').each(function (idx, acc) {
+  //     $(acc).on('click', async function (e) {
+  //       e.preventDefault();
+  //       const tagId = $(this).attr('id');
+  //       const id = tagId.charAt(tagId.length - 1);
+  //       const data = { response: 'no' };
+  //       await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
+  //         headers: { Authorization: `Bearer ${storedToken}` },
+  //       });
+
+  //       alert('도전방 초대를 거절했습니다.');
+  //     });
+  //   });
+  // } catch (error) {
+  //   console.error('Error message:', error.answer.data.message);
+  // }
 }
