@@ -805,7 +805,7 @@
                     style="display: inline-block"
                     href="#"
                   >
-                    정보수정
+                    프로필 수정
                   </a>
                 </div>
                 <!-- <div class="breadcrumb-item">Profile</div> -->
@@ -872,14 +872,7 @@
                         <div class="col-12 col-md-6 col-lg-12">
                           <div class="card card-primary">
                             <div class="card-header">
-                              <h4>
-                                <a
-                                  href="#"
-                                  class="currentChallenge"
-                                  id="findChallenges"
-                                  >현재 참여중인 도전</a
-                                >
-                              </h4>
+                              <h4>현재 참여중인 도전</h4>
                             </div>
                             <div class="card-body">
                               <b id="title" style="font-size: 100%">Title</b>
@@ -890,6 +883,23 @@
                                 startDate
                               </p>
                               <p id="endDate" style="font-size: 80%">endDate</p>
+                            </div>
+                            <div
+                              style="
+                                text-align: right;
+                                margin-bottom: 20px;
+                                margin-right: 20px;
+                              "
+                            >
+                              <a
+                                id="findChallenges"
+                                data-toggle="modal"
+                                data-target="#exampleModal"
+                                style="font-size: 80%"
+                                href="#"
+                              >
+                                자세히 보기
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -990,7 +1000,7 @@
                           data-target="#exampleModal"
                           style="display: inline-block"
                         >
-                          친구 찾기
+                          유저 검색
                         </button>
                       </div>
                     </form>
@@ -1006,7 +1016,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">회원정보 수정</h5>
+                <h5 class="modal-title">프로필 수정</h5>
               </div>
               <div class="card-body">
                 <div class="form-group">
