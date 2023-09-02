@@ -28,7 +28,6 @@ $('.cancel-regist').on('click', () => {
 });
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNTM3NjA0LCJleHAiOjE2OTM1NDEyMDR9.wj6X6wr5rnthyyeIxw5c4LWMOB1kH2wxllHqH8skq6I';
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNTU5NDE0LCJleHAiOjE2OTM2MzE0MTR9.JIncCu0iPbIK8EGt3gEHv7_HYbAfB0Kpd2JTKl3OScw';
 
 async function initMessagesBox() {

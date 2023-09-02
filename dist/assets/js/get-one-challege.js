@@ -2,7 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNjMzNjQ1LCJleHAiOjE2OTM2MzcyNDV9.JeZEfbw837WJtpMtC14vBj_goUOzrVlNYaQli_hXsEQ';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNjQzNDE3LCJleHAiOjE2OTM2NDcwMTd9.yQYSSxqQFZQ_K2m43HbccatpgGgZNMSHeFGkICnYQbs';
 
 window.onload = function () {
   getChallengeDetail();
@@ -105,6 +105,23 @@ async function getChallengers() {
     .then((response) => {
       console.log(response.data.data);
 
+      const challengerCardHeader = document.querySelector(
+        '#challenger-card-header',
+      );
+      challengerCardHeader.innerHTML = `
+        <div class="card card-primary">
+          <div class="card-header">
+            <h4>참가자 목록</h4>
+            <div class="card-header-action">
+              <a href="get-post.html?id=${challengeId}" class="btn btn-primary" style="color: white;">오운완 인증</a>
+              <a class="btn btn-primary" style="color: white;">친구 초대</a>
+            </div>
+          </div>
+          <div class="card-body">
+            <ul id="challenger-list" class="list-unstyled list-unstyled-border">
+            </ul>
+          </div>
+        </div>`;
       const challengerList = document.querySelector('#challenger-list');
       challengerList.innerHTML += response.data.data
         .map((challenger) => {
