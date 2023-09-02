@@ -1,3 +1,6 @@
+const storedToken =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNjQ4NTg5LCJleHAiOjE2OTM3MjA1ODl9.Xs0DmK3RWZHRt2-J1nVAJxSqjeC7Jv3IhkOx3E9k0GA';
+
 $(document).ready(function () {
   initMyPage();
   initMessagesBox();
@@ -12,7 +15,7 @@ document.getElementById('editcancel').onclick = function () {
   $('#infoEditModal').modal('hide');
 };
 
-// 2. 비밀번호수정 모달 dddd
+// 2. 비밀번호수정 모달
 document.getElementById('passwordEdit').onclick = function (e) {
   e.preventDefault();
   $('#pwEditModal').modal('show');
@@ -39,9 +42,6 @@ document.getElementById('searchfriendCancel').onclick = function () {
   $('#searchfriendModal').modal('hide');
 };
 
-// 토큰 저장
-const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjkzNjQ2NDQ3LCJleHAiOjE2OTM2NTAwNDd9.1Q991awsIM5s7q89VtvBBJO7_g9BOVF2JQO8OpaWkbQ';
 // localStorage.setItem('jwtToken', jwtToken);
 
 // 저장된 JWT토큰 가져오기 = storedToken
@@ -91,6 +91,7 @@ async function initMyPage() {
   const gender = $('#mygender');
   const createdAt = $('#createdate');
   const myFriends = $('#my-friends-list');
+  const profileImg = $('#profile-image');
   try {
     const { data } = await axios.get('http://localhost:3000/user/me/profile', {
       headers: {
@@ -128,7 +129,10 @@ async function initMyPage() {
       followTemp += temp;
       num++;
     }
-
+    $(profileImg).attr(
+      'src',
+      myData.imgUrl ? myData.imgUrl : 'assets/img/avatar/avatar-1.png',
+    );
     $(myFriends).html(followTemp);
     const date = new Date(myData.createdAt);
     const year = date.getFullYear().toString().slice(-2);
@@ -138,7 +142,7 @@ async function initMyPage() {
     const myCreatedAt = `${year}.${month}.${day}`;
     $(createdAt).text(myCreatedAt);
   } catch (error) {
-    alert(error.response.data.message);
+    console.error('Error message:', error.response.data.message);
   }
 }
 
@@ -185,7 +189,7 @@ async function editPassword() {
       }
     })
     .catch((error) => {
-      console.log('Error message:', error.response.data.message);
+      console.error('Error message:', error.response.data.message);
     });
 }
 
@@ -263,17 +267,9 @@ async function initMessagesBox() {
     const response = await axios.get('http://localhost:3000/follow/request', {
       headers: { Authorization: `Bearer ${storedToken}` },
     });
-
     const messages = response.data.data;
 
     for (const msg of messages) {
-      const email = msg.email;
-      const index = email.indexOf('@');
-      const preString = email.slice(0, index);
-      const nextString = email.slice(index, index + 3);
-
-      const emailText = `${preString}${nextString}...`;
-
       const now = new Date();
       const msgDate = new Date(msg.createdAt);
       const diffInMilliseconds = now - msgDate;
@@ -303,7 +299,7 @@ async function initMessagesBox() {
       <div class="dropdown-item-desc">      
         <p id="inviteUserMessage" style="margin-bottom:0px;"><span style="font-weight:bold;">${
           msg.name
-        }</span>(${emailText})님이 친구요청을 보냈습니다.</p>
+        }</span>(${msg.email})님이 친구요청을 보냈습니다.</p>
    
         <button id="accept${id}"
           class="btn btn-sm btn accept-friend"

@@ -28,7 +28,8 @@ $('.cancel-regist').on('click', () => {
 });
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNTU5NDE0LCJleHAiOjE2OTM2MzE0MTR9.JIncCu0iPbIK8EGt3gEHv7_HYbAfB0Kpd2JTKl3OScw';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNjM4OTI1LCJleHAiOjE2OTM3MTA5MjV9.k7fqbze3LeoZjoM6xGG9K2yGQ2V1JZ-s-Sim0swE2f0';
+
 
 async function initMessagesBox() {
   const messageBox = $('.dropdown-list-message');
@@ -172,10 +173,10 @@ async function initializeChart() {
   $(recentDatas[2]).text(fatArr[6]);
   $(recentDatas[3]).text(muscleArr[6]);
 
-  initChart('myChart', bmrArr, dateArr, 0, '기초대사량(kcal)');
-  initChart('myChart2', weightArr, dateArr, 10, '체중(kg)');
-  initChart('myChart3', muscleArr, dateArr, 10, '근육량(kg)');
-  initChart('myChart4', fatArr, dateArr, 10, '체지방률');
+  initChart('myChart', bmrArr, dateArr, 50, '기초대사량(kcal)');
+  initChart('myChart2', weightArr, dateArr, 1, '체중(kg)');
+  initChart('myChart3', muscleArr, dateArr, 5, '근육량(kg)');
+  initChart('myChart4', fatArr, dateArr, 5, '체지방률');
 }
 
 async function getBodyResults() {
@@ -188,7 +189,7 @@ async function getBodyResults() {
         },
       },
     );
-
+    const avgDatas = data.data.avgDatas;
     const stdWeight = data.data.stdWeight;
     const stdFat = data.data.stdFat;
     const stdMuscle = data.data.stdMuscle;
@@ -198,6 +199,10 @@ async function getBodyResults() {
     const resMuscle = data.data.resMuscle;
 
     const bodyResults = $('.body-result');
+    const avgWeight = $('#avg-weight');
+    const avgFat = $('#avg-fat');
+    const avgMuscle = $('#avg-muscle');
+
     $(bodyResults[0]).text(`${stdWeight}kg`);
     $(bodyResults[1]).text(
       resWeight < 0 ? `${resWeight}kg` : `+${resWeight}kg`,
@@ -208,6 +213,10 @@ async function getBodyResults() {
     $(bodyResults[5]).text(
       resMuscle < 0 ? `${resMuscle}kg` : `+${resMuscle}kg`,
     );
+
+    $(avgWeight).text(`평균 체중 : ${avgDatas.avgWgt}kg`);
+    $(avgFat).text(`평균 체지방률 : ${avgDatas.avgFat}%`);
+    $(avgMuscle).text(`평균 골격근량 : ${avgDatas.avgMus}kg`);
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
