@@ -8,19 +8,72 @@
 'use strict';
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjkzNDYyMTQ5LCJleHAiOjE2OTM0NjU3NDl9.lB30JU2TnfqQqeMlD6cGFaM41Zpzgno9YGgQ6X_CoG8';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNjMzNjQ1LCJleHAiOjE2OTM2MzcyNDV9.JeZEfbw837WJtpMtC14vBj_goUOzrVlNYaQli_hXsEQ';
 
+// 도전 세부 설정
+let startDate = null;
+let endDate = null;
+
+$('.daterange-cus').daterangepicker({
+  locale: { format: 'YYYY-MM-DD' },
+  drops: 'down',
+  opens: 'right',
+  singleDatePicker: true,
+});
+
+$('#apply-button').click(function () {
+  const startDateString = $('.daterange-cus').val();
+  startDate = moment(startDateString);
+
+  if (startDate) {
+    const today = moment();
+
+    if (startDate.isSameOrBefore(today, 'day')) {
+      alert('도전 시작일은 오늘 이후여야 합니다.');
+      return;
+    }
+
+    $('.daterange-btn span').html(startDate.format('YYYY-MM-DD'));
+    $('.daterange-cus').data('daterangepicker').setStartDate(startDate);
+  }
+
+  alert('도전 시작일이 적용되었습니다.');
+});
+
+$('.week-selector').on('change', function () {
+  const selectedWeeks = parseInt($(this).val());
+  endDate = startDate.clone().add(selectedWeeks, 'weeks');
+
+  $('.daterange-cus').data('daterangepicker').setStartDate(startDate);
+  $('.daterange-cus').data('daterangepicker').setEndDate(endDate);
+
+  $('.daterange-cus').val(
+    startDate.format('YYYY-MM-DD') + ' - ' + endDate.format('YYYY-MM-DD'),
+  );
+});
+
+$('.daterange-cus').prop('readonly', true);
+
+// 도전 생성
 const createButton = document.querySelector('#create-challenge-button');
 createButton.addEventListener('click', createChallenge);
 
-// 도전 생성
 async function createChallenge() {
   const title = $('#challenge-title').val();
   const description = $('#challenge-description').val();
   if (title === '' || description === '') {
-    alert('제목과 내용은 필수 입력값입니다.');
+    alert('도전 제목과 도전 내용을 입력해주세요.');
     return;
   }
+
+  if (startDate === null || endDate === null) {
+    alert('도전 시작일과 도전 기간을 설정해주세요.');
+    return;
+  }
+
+  startDate.add(1, 'day');
+  endDate.add(1, 'day');
+
   let publicView = $('#challenge-publicView').val();
   if (publicView === '전체 공개') {
     publicView = true;
@@ -45,10 +98,12 @@ async function createChallenge() {
   } else {
     fat = parseInt(fat);
   }
+
   const data = {
     title,
     description,
-    startDate: $('#challenge-startDate').val(),
+    startDate: startDate,
+    endDate: endDate,
     challengeWeek: parseInt($('#challenge-week').val()),
     userNumberLimit: parseInt($('#challenge-userNumberLimit').val()),
     publicView,

@@ -2,7 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkzNDY4NTk1LCJleHAiOjE2OTM0NzIxOTV9.AIiEoI6K-a6NdxvLxjU9h0l5XRi4KDLnshSpQzGy7z0';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNjMzNjQ1LCJleHAiOjE2OTM2MzcyNDV9.JeZEfbw837WJtpMtC14vBj_goUOzrVlNYaQli_hXsEQ';
 
 window.onload = function () {
   getChallengeDetail();
@@ -28,7 +28,9 @@ async function getChallengeDetail() {
             <div class="card-header-action">
               <a id="enter-challenge" class="btn btn-primary" style="color: white;">도전 입장</a>
               <a id="leave-challenge" class="btn btn-primary" style="color: white;">도전 퇴장</a>
-              <a class="btn btn-primary" style="color: white;">친구 초대</a>
+              <a class="btn btn-secondary" style="color: white;">${
+                challenge.userNumber
+              } / ${challenge.userNumberLimit}명</a>
               <a id="delete-challenge" class="btn btn-danger" style="color: white;">삭제</a>
             </div>
           </div>
@@ -149,21 +151,25 @@ document.addEventListener('click', async (event) => {
   const target = event.target;
 
   if (target.matches('#leave-challenge')) {
-    await axios
-      .delete(`http://localhost:3000/challenge/${challengeId}/leave`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        if (response.data.success === true) {
-          alert('도전 퇴장 완료');
-          location.reload();
-        }
-      })
-      .catch((error) => {
-        alert(error.response.data.message);
-      });
+    const leaveConfirm = confirm('정말로 퇴장하시겠습니까?');
+
+    if (leaveConfirm) {
+      await axios
+        .delete(`http://localhost:3000/challenge/${challengeId}/leave`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          if (response.data.success === true) {
+            alert('도전 퇴장 완료');
+            location.reload();
+          }
+        })
+        .catch((error) => {
+          alert(error.response.data.message);
+        });
+    }
   }
 });
 

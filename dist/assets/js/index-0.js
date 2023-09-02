@@ -27,7 +27,7 @@ $('.cancle-regist').on('click', () => {
 });
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNDg5ODYzLCJleHAiOjE2OTM1NjE4NjN9.F_pB8oQlISsQPdp-d1LUDxxy5onP3S4G8x3MbQrT5-s';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNTM3NjA0LCJleHAiOjE2OTM1NDEyMDR9.wj6X6wr5rnthyyeIxw5c4LWMOB1kH2wxllHqH8skq6I';
 
 async function initializeChart() {
   const bmrArr = [];
