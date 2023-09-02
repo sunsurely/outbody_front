@@ -16,7 +16,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css" />
-    <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
     <script src="assets/modules/tooltip.js"></script>
     <scripy src="assets/modules/modal.js"></scripy>
 
@@ -779,9 +778,37 @@
               <h1>Profile</h1>
               <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active">
-                  <a href="#">Dashboard</a>
+                  <!-- <a href="#">Dashboard</a> -->
+                  <a
+                    id="signout"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                    style="margin-right: 5px"
+                    href="#"
+                  >
+                    회원 탈퇴
+                  </a>
+                  <a
+                    id="passwordEdit"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                    style="margin-right: 5px"
+                    href="#"
+                  >
+                    비밀번호 수정
+                  </a>
+
+                  <a
+                    id="userInfoEdit"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                    style="display: inline-block"
+                    href="#"
+                  >
+                    정보수정
+                  </a>
                 </div>
-                <div class="breadcrumb-item">Profile</div>
+                <!-- <div class="breadcrumb-item">Profile</div> -->
               </div>
             </div>
             <div class="section-body">
@@ -823,11 +850,14 @@
                     </div>
                     <div class="profile-widget-description">
                       <div class="profile-widget-name">
-                        <div id="descriptionName">Jake Lee</div>
+                        <div id="descriptionName" style="font-weight: bold">
+                          Jake Lee
+                        </div>
                         <div class="text-muted d-inline font-weight-normal">
-                          <div id="status">BackEnd Developer</div>
+                          <!-- <div id="status">BackEnd Developer</div> -->
                         </div>
                       </div>
+
                       <div id="self-description">
                         저는 원래 허약한 체질을 갖고 있었고, 운동과는 거리가 먼
                         삶을 살고 있었습니다. 하지만 OutBody 어플을 이용함으로써
@@ -836,34 +866,36 @@
                         갖고 운동하고 싶은 분들, 모두 제게 친구요청해주시고 같이
                         도전해봐요!
                       </div>
+                      <br />
+                      <!-- 내부카드 -->
+                      <div style="position: relative; overflow: hidden">
+                        <div class="col-12 col-md-6 col-lg-12">
+                          <div class="card card-primary">
+                            <div class="card-header">
+                              <h4>
+                                <a
+                                  href="#"
+                                  class="currentChallenge"
+                                  id="findChallenges"
+                                  >현재 참여중인 도전</a
+                                >
+                              </h4>
+                            </div>
+                            <div class="card-body">
+                              <b id="title" style="font-size: 100%">Title</b>
+                              <p id="description" style="font-size: 80%">
+                                description
+                              </p>
+                              <p id="startDate" style="font-size: 80%">
+                                startDate
+                              </p>
+                              <p id="endDate" style="font-size: 80%">endDate</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <div class="card-footer text-right">
-                      <button
-                        class="btn btn-primary"
-                        id="findChallenges"
-                        data-toggle="modal"
-                        data-target="#exampleModal"
-                        style="display: inline-block"
-                      >
-                        내 도전목록
-                      </button>
-                      <button
-                        class="btn btn-primary"
-                        id="searchfriend"
-                        data-toggle="modal"
-                        data-target="#exampleModal"
-                        style="display: inline-block"
-                      >
-                        친구 찾기
-                      </button>
-                    </div>
+                    <div class="card-footer text-right"></div>
                   </div>
                 </div>
                 <div class="col-12 col-md-12 col-lg-7">
@@ -953,31 +985,12 @@
                       <div class="card-footer text-right">
                         <button
                           class="btn btn-primary"
-                          id="signout"
+                          id="searchfriend"
                           data-toggle="modal"
                           data-target="#exampleModal"
                           style="display: inline-block"
                         >
-                          회원 탈퇴
-                        </button>
-                        <button
-                          class="btn btn-primary"
-                          id="passwordEdit"
-                          data-toggle="modal"
-                          data-target="#exampleModal"
-                          style="display: inline-block"
-                        >
-                          비밀번호 수정
-                        </button>
-
-                        <button
-                          class="btn btn-primary"
-                          id="userInfoEdit"
-                          data-toggle="modal"
-                          data-target="#exampleModal"
-                          style="display: inline-block"
-                        >
-                          정보수정
+                          친구 찾기
                         </button>
                       </div>
                     </form>
@@ -1195,7 +1208,7 @@
     <script src="assets/modules/popper.js"></script>
     <script src="assets/modules/tooltip.js"></script>
     <script src="assets/modules/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <!-- <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script> -->
     <script src="assets/modules/moment.min.js"></script>
     <script src="assets/js/stisla.js"></script>
     <scripy src="assets/modules/modal.js"></scripy>
@@ -1209,7 +1222,7 @@
     <script src="assets/js/page/forms-advanced-forms.js"></script>
 
     <!-- Template JS File -->
-    <script src="assets/js/scripts.js"></script>
+    <!-- <script src="assets/js/scripts.js"></script> -->
     <script src="assets/js/my-Info.js"></script>
     <!-- <script src="assets/js/user-Info.js"></script> -->
   </body>

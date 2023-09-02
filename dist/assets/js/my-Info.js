@@ -41,7 +41,7 @@ document.getElementById('searchfriendCancel').onclick = function () {
 
 // 토큰 저장
 const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTY5MzU4MDgwNCwiZXhwIjoxNjkzNTg4MDA0fQ.t0Sa1H0BiSsMvUld96En-cWaWxArshe0i5ZP1Mli7yE';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTY5MzYyNTQxNSwiZXhwIjoxNjkzNjMyNjE1fQ.a_DhiNLxZyFzyyKk_DYW-ECtmzgRrOTta_2FFgpVJ-s';
 // localStorage.setItem('jwtToken', jwtToken);
 
 // 저장된 JWT토큰 가져오기 = storedToken
@@ -258,7 +258,7 @@ async function initMessagesBox() {
   const messageBox = $('.dropdown-list-message');
   $(messageBox).html('');
 
-  // 친구요청 메시지
+  // 1. 친구요청 메시지
   try {
     const response = await axios.get('http://localhost:3000/follow/request', {
       headers: { Authorization: `Bearer ${storedToken}` },
@@ -356,13 +356,13 @@ async function initMessagesBox() {
     console.error('Error message:', error.response.data.message);
   }
 
-  // 도전방 초대메시지
+  // 2. 도전방 초대메시지
   try {
     const response = await axios.get(
       'http://localhost:3000/challenge/invite/list',
       {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTY5MzU3NzIzMSwiZXhwIjoxNjkzNTg0NDMxfQ.TIxLHR8badzk3c34QRwJ_rkghlUsvA0TNPnLb_cOUyI`,
+          Authorization: `Bearer ${storedToken}`,
         },
       },
     );
@@ -426,28 +426,32 @@ async function initMessagesBox() {
 
       $(messageBox).append(temp);
     }
-    $(document).on('click', '.accept-challenge', async function (e) {
-      e.preventDefault();
-      const tagId = $(this).attr('id');
-      const id = tagId.charAt(tagId.length - 1);
-      const data = { response: 'yes' };
-      await axios.post(`http://localhost:3000/challenge/${id}/accept`, data, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      });
+    $('.accept-challenge').each(function (idx, acc) {
+      $(acc).on('click', async function (e) {
+        e.preventDefault();
+        const tagId = $(this).attr('id');
+        const id = tagId.charAt(tagId.length - 1);
+        const data = { response: 'yes' };
+        await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        });
 
-      alert('도전방 초대를 수락했습니다.');
+        alert('도전방 초대를 수락했습니다.');
+      });
     });
 
-    $(document).on('click', '.deny-challenge', async function (e) {
-      e.preventDefault();
-      const tagId = $(this).attr('id');
-      const id = tagId.charAt(tagId.length - 1);
-      const data = { response: 'no' };
-      await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      });
+    $('.deny-challenge').each(function (idx, acc) {
+      $(acc).on('click', async function (e) {
+        e.preventDefault();
+        const tagId = $(this).attr('id');
+        const id = tagId.charAt(tagId.length - 1);
+        const data = { response: 'no' };
+        await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        });
 
-      alert('도전방 초대를 거절했습니다.');
+        alert('도전방 초대를 거절했습니다.');
+      });
     });
   } catch (error) {
     console.log(error);
