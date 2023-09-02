@@ -15,8 +15,6 @@
     <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    
-    <!-- CSS Libraries -->
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -114,165 +112,113 @@
                 </form>
                 <ul class="navbar-nav navbar-right">
                     <li class="dropdown dropdown-list-toggle">
-                        <a
-                          href="#"
-                          data-toggle="dropdown"
-                          class="nav-link nav-link-lg message-toggle beep"
-                          id="requestlists"
-                          ><i class="far fa-envelope"></i
-                        ></a>
+                        <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"
+                            id="requestlists"><i class="far fa-envelope"></i></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
-                          <div class="dropdown-header">
-                            Messages
-                            <div class="float-right">
-                              <a href="#">Mark All As Read</a>
+                            <div class="dropdown-header">
+                                Messages
+                                <div class="float-right">
+                                    <a href="#">Mark All As Read</a>
+                                </div>
                             </div>
-                          </div>
-                          <div
-                            class="dropdown-list-content dropdown-list-message"
-                            style="overflow-y: scroll; height: 300px"
-                          >
-                            <a href="#" class="dropdown-item dropdown-item-unread">
-                              <div class="dropdown-item-avatar">
-                                <img
-                                  alt="image"
-                                  src="assets/img/avatar/avatar-1.png"
-                                  class="rounded-circle"
-                                />
-                                <div class="is-online"></div>
-                              </div>
-                              <div class="dropdown-item-desc">
-                                <b id="inviteUserName">Kusnaedi</b>
-                                <b id="inviteUserEmail">abcd@naver.com</b>
-                                <p id="inviteUserMessage">Hello, Bro!</p>
-                                <div id="inviteUsercreatedAt">2023.08.31</div>
-                                <button
-                                class="btn btn-sm btn accept-friend"
-                                data-follower-id="${message.userId}"
-                              >
-                                수락
-                              </button>
-                              <button
-                                class="btn btn-sm btn deny-friend"
-                                data-follower-id="${message.userId}"
-                              >
-                                거절
-                              </button>
-                              </div>
-                            </a>
-                            <a href="#" class="dropdown-item dropdown-item-unread">
-                              <div class="dropdown-item-avatar">
-                                <img
-                                  alt="image"
-                                  src="assets/img/avatar/avatar-2.png"
-                                  class="rounded-circle"
-                                />
-                              </div>
-                              <div class="dropdown-item-desc">
-                                <b id="inviteUserName">Kusnaedi</b>
-                                <b id="inviteUserEmail">abcd@naver.com</b>
-                                <p id="inviteUserMessage">Hello, Bro!</p>
-                                <div id="inviteUsercreatedAt">2023.08.31</div>
-                                <button
-                                    class="btn btn-sm btn accept-friend"
-                                    data-follower-id="${message.userId}"
-                                >
-                                    수락
-                                </button>
-                                <button
-                                    class="btn btn-sm btn deny-friend"
-                                    data-follower-id="${message.userId}"
-                                >
-                                    거절
-                                </button>
-                              </div>
-                            </a>
-                            <a href="#" class="dropdown-item dropdown-item-unread">
-                              <div class="dropdown-item-avatar">
-                                <img
-                                  alt="image"
-                                  src="assets/img/avatar/avatar-3.png"
-                                  class="rounded-circle"
-                                />
-                                <div class="is-online"></div>
-                              </div>
-                              <div class="dropdown-item-desc">
-                                <b id="inviteUserName">Kusnaedi</b>
-                                <b id="inviteUserEmail">abcd@naver.com</b>
-                                <p id="inviteUserMessage">Hello, Bro!</p>
-                                <div id="inviteUsercreatedAt">2023.08.31</div>
-                                <button
-                                class="btn btn-sm btn accept-friend"
-                                data-follower-id="${message.userId}"
-                              >
-                                수락
-                              </button>
-                              <button
-                                class="btn btn-sm btn deny-friend"
-                                data-follower-id="${message.userId}"
-                              >
-                                거절
-                              </button>
-                              </div>
-                            </a>
-                            <a href="#" class="dropdown-item">
-                              <div class="dropdown-item-avatar">
-                                <img
-                                  alt="image"
-                                  src="assets/img/avatar/avatar-4.png"
-                                  class="rounded-circle"
-                                />
-                              </div>
-                              <div class="dropdown-item-desc">
-                                <b id="inviteUserName">Kusnaedi</b>
-                                <b id="inviteUserEmail">abcd@naver.com</b>
-                                <p id="inviteUserMessage">Hello, Bro!</p>
-                                <div id="inviteUsercreatedAt">2023.08.31</div>
-                                <button
-                                class="btn btn-sm btn accept-friend"
-                                data-follower-id="${message.userId}"
-                              >
-                                수락
-                              </button>
-                              <button
-                                class="btn btn-sm btn deny-friend"
-                                data-follower-id="${message.userId}"
-                              >
-                                거절
-                              </button>
-                              </div>
-                            </a>
-                            <a href="#" class="dropdown-item">
-                              <div class="dropdown-item-avatar">
-                                <img
-                                  alt="image"
-                                  src="assets/img/avatar/avatar-5.png"
-                                  class="rounded-circle"
-                                />
-                              </div>
-                              <div class="dropdown-item-desc">
-                                <b id="inviteUserName">Kusnaedi</b>
-                                <b id="inviteUserEmail">abcd@naver.com</b>
-                                <p id="inviteUserMessage">Hello, Bro!</p>
-                                <div id="inviteUsercreatedAt">2023.08.31</div>
-                                <button
-                                class="btn btn-sm btn accept-friend"
-                                data-follower-id="${message.userId}"
-                              >
-                                수락
-                              </button>
-                              <button
-                                class="btn btn-sm btn deny-friend"
-                                data-follower-id="${message.userId}"
-                              >
-                                거절
-                              </button>
-                              </div>
-                            </a>
-                          </div>
-                          <div class="dropdown-footer text-center"></div>
+                            <div class="dropdown-list-content dropdown-list-message"
+                                style="overflow-y: scroll; height: 300px">
+                                <a href="#" class="dropdown-item dropdown-item-unread">
+                                    <div class="dropdown-item-avatar">
+                                        <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" />
+                                        <div class="is-online"></div>
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        <b id="inviteUserName">Kusnaedi</b>
+                                        <b id="inviteUserEmail">abcd@naver.com</b>
+                                        <p id="inviteUserMessage">Hello, Bro!</p>
+                                        <div id="inviteUsercreatedAt">2023.08.31</div>
+                                        <button class="btn btn-sm btn accept-friend"
+                                            data-follower-id="${message.userId}">
+                                            수락
+                                        </button>
+                                        <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
+                                            거절
+                                        </button>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item dropdown-item-unread">
+                                    <div class="dropdown-item-avatar">
+                                        <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle" />
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        <b id="inviteUserName">Kusnaedi</b>
+                                        <b id="inviteUserEmail">abcd@naver.com</b>
+                                        <p id="inviteUserMessage">Hello, Bro!</p>
+                                        <div id="inviteUsercreatedAt">2023.08.31</div>
+                                        <button class="btn btn-sm btn accept-friend"
+                                            data-follower-id="${message.userId}">
+                                            수락
+                                        </button>
+                                        <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
+                                            거절
+                                        </button>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item dropdown-item-unread">
+                                    <div class="dropdown-item-avatar">
+                                        <img alt="image" src="assets/img/avatar/avatar-3.png" class="rounded-circle" />
+                                        <div class="is-online"></div>
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        <b id="inviteUserName">Kusnaedi</b>
+                                        <b id="inviteUserEmail">abcd@naver.com</b>
+                                        <p id="inviteUserMessage">Hello, Bro!</p>
+                                        <div id="inviteUsercreatedAt">2023.08.31</div>
+                                        <button class="btn btn-sm btn accept-friend"
+                                            data-follower-id="${message.userId}">
+                                            수락
+                                        </button>
+                                        <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
+                                            거절
+                                        </button>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-item-avatar">
+                                        <img alt="image" src="assets/img/avatar/avatar-4.png" class="rounded-circle" />
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        <b id="inviteUserName">Kusnaedi</b>
+                                        <b id="inviteUserEmail">abcd@naver.com</b>
+                                        <p id="inviteUserMessage">Hello, Bro!</p>
+                                        <div id="inviteUsercreatedAt">2023.08.31</div>
+                                        <button class="btn btn-sm btn accept-friend"
+                                            data-follower-id="${message.userId}">
+                                            수락
+                                        </button>
+                                        <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
+                                            거절
+                                        </button>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-item-avatar">
+                                        <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle" />
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        <b id="inviteUserName">Kusnaedi</b>
+                                        <b id="inviteUserEmail">abcd@naver.com</b>
+                                        <p id="inviteUserMessage">Hello, Bro!</p>
+                                        <div id="inviteUsercreatedAt">2023.08.31</div>
+                                        <button class="btn btn-sm btn accept-friend"
+                                            data-follower-id="${message.userId}">
+                                            수락
+                                        </button>
+                                        <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
+                                            거절
+                                        </button>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer text-center"></div>
                         </div>
-                      </li>
+                    </li>
                     <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                             class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -544,8 +490,8 @@
                     </div>
 
                     <div class="section-body" style="text-align: center;">
-                        <div class="card">
-                            <div class="card-header">
+                        <div class="card" id="card">
+                            <!-- <div class="card-header">
                                 <ul class="list-unstyled user-details list-unstyled-border list-unstyled-noborder">
                                     <li class="media">
                                         <img alt="image" class="mr-3 rounded-circle" width="50"
@@ -554,20 +500,6 @@
                                             <div class="media-title">이연오</div>
                                             <div class="text-job text-muted">나는야 헬린이</div>
                                         </div>
-                                        <!-- <div class="media-items">
-                      <div class="media-item">
-                        <div class="media-value">1,239</div>
-                        <div class="media-label">Posts</div>
-                      </div>
-                      <div class="media-item">
-                        <div class="media-value">10K</div>
-                        <div class="media-label">Followers</div>
-                      </div>
-                      <div class="media-item">
-                        <div class="media-value">2,312</div>
-                        <div class="media-label">Following</div>
-                      </div>
-                    </div> -->
                                     </li>
                                 </ul>
                             </div>
@@ -580,29 +512,29 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
-
                     <div class="section-title">댓글 달기</div>
                     <div class="form-group">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="댓글을 입력해주세요" aria-label="">
+                            <input type="text" class="form-control" id='comment_input' placeholder="댓글을 입력해주세요"
+                                aria-label="">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">작성</button>
+                                <button class="btn btn-primary" type="button" id="createCmt_btn">작성</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="card">
                         <div class="card-body">
-                            <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
-                                <li class="media">
+                            <ul class="list-unstyled list-unstyled-border list-unstyled-noborder" id="comment-card">
+                                <!-- <li class="media">
                                     <img alt="image" class="mr-3 rounded-circle" width="70"
                                         src="assets/img/avatar/avatar-1.png">
                                     <div class="media-body">
                                         <div class="media-title mb-1">이상우</div>
-                                        <!-- <div class="text-time">Yesterday</div> -->
+                                        <div class="text-time">Yesterday</div>
                                         <div class="media-description text-muted">
                                             너무 귀여운 헬린이네
                                         </div>
@@ -614,9 +546,11 @@
                                             <div class="bullet"></div>
                                             <a href="#" class="text-danger">Report</a>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <!-- 댓글 신고 모달
+
+
+                                <!-- 댓글 신고 모달
                   <div class="row">
                     <div class="col-12 col-md-6 col-lg-6">
                       <div class="card">
@@ -652,49 +586,16 @@
                     </div>
                   </div> -->
 
-                                </li>
-                                <li class="media">
-                                    <img alt="image" class="mr-3 rounded-circle" width="70"
-                                        src="assets/img/avatar/avatar-3.png">
-                                    <div class="media-body">
-                                        <div class="media-title mb-1">이상우</div>
-                                        <!-- <div class="text-time">Yesterday</div> -->
-                                        <div class="media-description text-muted">
-                                            너무 귀여운 헬린이네
-                                        </div>
-                                        <div class="media-links">
-                                            <div class="bullet"></div>
-                                            <a href="#">Edit</a>
-                                            <div class="bullet"></div>
-                                            <a href="#">Delete</a>
-                                            <div class="bullet"></div>
-                                            <a href="#" class="text-danger">Report</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="media">
-                                    <img alt="image" class="mr-3 rounded-circle" width="70"
-                                        src="assets/img/avatar/avatar-2.png">
-                                    <div class="media-body">
-                                        <div class="media-title mb-1">이상우</div>
-                                        <!-- <div class="text-time">Yesterday</div> -->
-                                        <div class="media-description text-muted">
-                                            너무 귀여운 헬린이네
-                                        </div>
-                                        <div class="media-links">
-                                            <div class="bullet"></div>
-                                            <a href="#">Edit</a>
-                                            <div class="bullet"></div>
-                                            <a href="#">Delete</a>
-                                            <div class="bullet"></div>
-                                            <a href="#" class="text-danger">Report</a>
-                                        </div>
-                                    </div>
-                                </li>
+                                <!-- </li> -->
                             </ul>
                         </div>
                 </section>
             </div>
+
+
+
+
+
             <footer class="main-footer">
                 <div class="footer-left">
                     Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad
@@ -716,9 +617,7 @@
     <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
     <script src="assets/modules/moment.min.js"></script>
     <script src="assets/js/stisla.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  
+
     <!-- JS Libraies -->
 
     <!-- Page Specific JS File -->
@@ -726,7 +625,8 @@
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/custom.js"></script>
-    <script src="assets/js/user-Info.js"></script>
+    <script src="assets/js/post-comment.js"></script>
+    <!-- <script src="assets/js/user-Info.js"></script> -->
 </body>
 
 </html>
