@@ -1,16 +1,19 @@
+const urlParams = new URLSearchParams(window.location.search);
+const challengeId = urlParams.get('id');
+
 $(document).ready(function () {
   getPosts();
 });
 
 let token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjkzNTY2MTczLCJleHAiOjE2OTM1NzMzNzN9.jORQn9_igSLn5BjaemMAJa-uv6XywuL-xy_c2ziPrEc';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNjQ0MzY2LCJleHAiOjE2OTM2NDc5NjZ9.J6v08T1_fxnVWRQ62qGl_FJrBPxV3jIVr9ChfMCC2LU';
 
 // 오운완 전체 조회
 // challengeId 받아오는거 아직 안함.
 const getPosts = async () => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/3/post?page=1&pageSize=6`,
+      `http://localhost:3000/challenge/${challengeId}/post?page=1&pageSize=6`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -75,7 +78,7 @@ const createPost = async () => {
     }
 
     const response = await axios.post(
-      'http://localhost:3000/challenge/3/post',
+      `http://localhost:3000/challenge/${challengeId}/post`,
       { description: $('.desc_input').val(), imgUrl: $('.url_input').val() },
       {
         headers: {
@@ -98,11 +101,14 @@ $('#createBtn').click(createPost);
 // challengeId 받아오기 필요
 const deletePost = async (postId) => {
   try {
-    await axios.delete(`http://localhost:3000/challenge/3/post/${postId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    await axios.delete(
+      `http://localhost:3000/challenge/${challengeId}/post/${postId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
 
     alert('오운완 삭제가 완료 되었습니다.');
     location.reload();

@@ -2,7 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkzNDY4NTk1LCJleHAiOjE2OTM0NzIxOTV9.AIiEoI6K-a6NdxvLxjU9h0l5XRi4KDLnshSpQzGy7z0';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNjUwOTgzLCJleHAiOjE2OTM2NTQ1ODN9.JYC8K1BLJNt-Ta72ffReQpcPNbfHvUNVNPU8km1_RL4';
 
 window.onload = function () {
   getChallengeDetail();
@@ -28,7 +28,9 @@ async function getChallengeDetail() {
             <div class="card-header-action">
               <a id="enter-challenge" class="btn btn-primary" style="color: white;">도전 입장</a>
               <a id="leave-challenge" class="btn btn-primary" style="color: white;">도전 퇴장</a>
-              <a class="btn btn-primary" style="color: white;">친구 초대</a>
+              <a class="btn btn-secondary" style="color: white;">${
+                challenge.userNumber
+              } / ${challenge.userNumberLimit}명</a>
               <a id="delete-challenge" class="btn btn-danger" style="color: white;">삭제</a>
             </div>
           </div>
@@ -103,6 +105,23 @@ async function getChallengers() {
     .then((response) => {
       console.log(response.data.data);
 
+      const challengerCardHeader = document.querySelector(
+        '#challenger-card-header',
+      );
+      challengerCardHeader.innerHTML = `
+        <div class="card card-primary">
+          <div class="card-header">
+            <h4>참가자 목록</h4>
+            <div class="card-header-action">
+              <a id="send-invitation-button" href="get-post.html?id=${challengeId}" class="btn btn-primary" style="color: white;">오운완 인증</a>
+              <a class="btn btn-primary" style="color: white;" data-toggle="modal" data-target="#createModal">친구 초대</a>
+            </div>
+          </div>
+          <div class="card-body">
+            <ul id="challenger-list" class="list-unstyled list-unstyled-border">
+            </ul>
+          </div>
+        </div>`;
       const challengerList = document.querySelector('#challenger-list');
       challengerList.innerHTML += response.data.data
         .map((challenger) => {
@@ -149,21 +168,25 @@ document.addEventListener('click', async (event) => {
   const target = event.target;
 
   if (target.matches('#leave-challenge')) {
-    await axios
-      .delete(`http://localhost:3000/challenge/${challengeId}/leave`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        if (response.data.success === true) {
-          alert('도전 퇴장 완료');
-          location.reload();
-        }
-      })
-      .catch((error) => {
-        alert(error.response.data.message);
-      });
+    const leaveConfirm = confirm('정말로 퇴장하시겠습니까?');
+
+    if (leaveConfirm) {
+      await axios
+        .delete(`http://localhost:3000/challenge/${challengeId}/leave`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          if (response.data.success === true) {
+            alert('도전 퇴장 완료');
+            location.reload();
+          }
+        })
+        .catch((error) => {
+          alert(error.response.data.message);
+        });
+    }
   }
 });
 
@@ -189,5 +212,59 @@ document.addEventListener('click', async (event) => {
           alert(error.response.data.message);
         });
     }
+  }
+});
+
+// 도전 초대
+$('#send-invitation-button').on('click', async () => {
+  const emailInput = $('#search-email-input').val();
+
+  const searchedFriend = $('#searched-friend');
+  $(searchedFriend).html('');
+
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/user/me/searchEmail/?email=${emailInput}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    const friend = response.data.data;
+
+    const temp = `
+    <div class="card card-primary">
+      <div class="card-body">
+        <div id=${friend.id}>
+          <img src="" />
+          <span> ${friend.name}(${friend.email})</span>
+        </div>
+      </div>
+    </div>`;
+    $(searchedFriend).html(temp);
+
+    $('#send-invitation').on('click', async () => {
+      const data = {
+        email: friend.email,
+      };
+
+      await axios
+        .post(`http://localhost:3000/challenge/${challengeId}/invite`, data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          alert(
+            `${friend.name}(${friend.email})님에게 도전 초대문을 보냈습니다.`,
+          );
+        })
+        .catch((error) => {
+          console.error(error.response.data.message);
+        });
+    });
+  } catch (error) {
+    console.error(error.response.data.message);
   }
 });

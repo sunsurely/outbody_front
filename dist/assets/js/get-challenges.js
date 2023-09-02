@@ -8,16 +8,18 @@
 'use strict';
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkzNDY4NTk1LCJleHAiOjE2OTM0NzIxOTV9.AIiEoI6K-a6NdxvLxjU9h0l5XRi4KDLnshSpQzGy7z0';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNjUwOTgzLCJleHAiOjE2OTM2NTQ1ODN9.JYC8K1BLJNt-Ta72ffReQpcPNbfHvUNVNPU8km1_RL4';
 
-window.onload = function () {
-  getChallenges();
-};
+const filterApplyButton = document.querySelector('#filter-apply-button');
+filterApplyButton.addEventListener('click', () => {
+  const option = $('#challenge-filter').val();
+  getChallenges(option);
+});
 
 // 도전 목록 조회
-async function getChallenges() {
-  axios
-    .get('http://localhost:3000/challenge', {
+async function getChallenges(option) {
+  await axios
+    .get(`http://localhost:3000/challenge?filter=${option}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -26,51 +28,49 @@ async function getChallenges() {
       console.log(response.data.data);
 
       const challengeTable = document.querySelector('#challenge-table');
+      challengeTable.innerHTML = `<tr>
+          <th>제목</th>
+          <th>기간</th>
+          <th>목표</th>
+          <th>점수</th>
+          <th>인원</th>
+          <th>작성자</th>
+          <th>공개 여부</th>
+          <th></th>
+        </tr>`;
       challengeTable.innerHTML += response.data.data
         .map((challenge) => {
-          const startDate = new Date(challenge.startDate);
-          startDate.setDate(startDate.getDate() + 1);
-          const formattedstartDate = startDate.toISOString().split('T')[0];
-
-          const endDate = new Date(challenge.endDate);
-          endDate.setDate(endDate.getDate() + 1);
-          const formattedendDate = endDate.toISOString().split('T')[0];
-
-          const createdAt = new Date(challenge.createdAt);
-          createdAt.setDate(createdAt.getDate() + 1);
-          const formattedCreatedAt = createdAt.toISOString().split('T')[0];
-
           let publicView = challenge.publicView;
-          if (publicView === 1) {
+          if (publicView === true) {
             publicView = '전체';
-          } else if (publicView === 0) {
+          } else if (publicView === false) {
             publicView = '비공개';
           }
 
           return `<tr id="${challenge.id}">
           <td>${challenge.title}</td>
-          <td>${formattedstartDate} ~ ${formattedendDate} (${
+          <td>${challenge.startDate} ~ ${challenge.endDate} (${
             challenge.challengeWeek
           }주)</td>
           <td>
             <button class="btn btn-primary">
               오운완 출석<span class="badge badge-transparent">${
-                challenge.attend
+                challenge.goalAttend
               }일</span>
             </button>
             <button class="btn btn-primary">
               체중 <span class="badge badge-transparent">-${
-                challenge.weight
+                challenge.goalWeight
               }kg</span>
             </button>
             <button class="btn btn-primary">
               골격근량 <span class="badge badge-transparent">+${
-                challenge.muscle
+                challenge.goalMuscle
               }kg</span>
             </button>
             <button class="btn btn-primary">
               체지방률 <span class="badge badge-transparent">-${
-                challenge.fat
+                challenge.goalFat
               }%</span>
             </button>
           </td>
@@ -92,7 +92,6 @@ async function getChallenges() {
               data-toggle="title" title="">
             <div class="d-inline-block ml-1">${challenge.hostName}</div>
           </td>
-          <td>${formattedCreatedAt}</td>
           <td>${publicView}</td>
           <td>
             <a href="get-one-challenge.html?id=${challenge.id}">
