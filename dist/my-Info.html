@@ -196,7 +196,8 @@
                   style="overflow-y: scroll; height: 300px"
                 >
                   <a href="#" class="dropdown-item dropdown-item-unread">
-                    <div class="dropdown-item-avatar">
+                    <!-- 친구요청 메시지함 -->
+                    <div class="dropdown-item-avatar" id="friend">
                       <img
                         alt="image"
                         src="assets/img/avatar/avatar-1.png"
@@ -220,11 +221,38 @@
                         거절
                       </button>
                     </div>
+
+                    <!-- 도전 초대메시지함 -->
+                    <div class="dropdown-item-avatar" id="challenger">
+                      <img
+                        alt="image"
+                        src="assets/img/avatar/avatar-2.png"
+                        class="rounded-circle"
+                      />
+                      <div class="is-online"></div>
+                    </div>
+                    <div class="dropdown-item-desc">
+                      <p id="challengeMessage">Hello, Bro!</p>
+                      <div id="challengeCreatedAt">2023.08.31</div>
+                      <button
+                        class="btn btn-sm btn accept-challenge"
+                        id="${message.userId}"
+                      >
+                        수락
+                      </button>
+                      <button
+                        class="btn btn-sm btn deny-challenge"
+                        id="${message.userId}"
+                      >
+                        거절
+                      </button>
+                    </div>
                   </a>
                 </div>
                 <div class="dropdown-footer text-center"></div>
               </div>
             </li>
+
             <li class="dropdown dropdown-list-toggle">
               <a
                 href="#"
@@ -1183,6 +1211,6 @@
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/my-Info.js"></script>
-    <script src="assets/js/user-Info.js"></script>
+    <!-- <script src="assets/js/user-Info.js"></script> -->
   </body>
 </html>
