@@ -8,7 +8,7 @@
 'use strict';
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNjQzNDE3LCJleHAiOjE2OTM2NDcwMTd9.yQYSSxqQFZQ_K2m43HbccatpgGgZNMSHeFGkICnYQbs';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNjUwOTgzLCJleHAiOjE2OTM2NTQ1ODN9.JYC8K1BLJNt-Ta72ffReQpcPNbfHvUNVNPU8km1_RL4';
 
 const filterApplyButton = document.querySelector('#filter-apply-button');
 filterApplyButton.addEventListener('click', () => {

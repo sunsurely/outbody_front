@@ -503,6 +503,41 @@
   </div>
   </div>
 
+  <!-- Modal -->
+  <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true"
+    data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content" style="overflow: hidden;">
+        <div class="modal-header">
+          <h5 class="modal-title">도전 친구 초대</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <input id="search-email-input" type="text" class="form-control"
+                placeholder="초대할 친구의 계정(e-mail) 입력해주세요." />
+              <div class="input-group-append">
+                <button id="send-invitation-button" class="btn btn-primary" type="button">
+                  검색
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="searched-friend" class="form-group mb-0">
+            <br />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="send-invitation">초대하기</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">돌아가기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- General JS Scripts -->
   <script src="assets/modules/jquery.min.js"></script>
   <script src="assets/modules/popper.js"></script>
