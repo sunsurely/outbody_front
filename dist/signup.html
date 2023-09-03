@@ -2,152 +2,144 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Register &mdash; Stisla</title>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport" />
+  <title>Register &mdash; OutBody</title>
 
-    <!-- 제이쿼리 -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <!-- axios -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- 제이쿼리 -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <!-- axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- fontawesome -->
+  <script src="https://kit.fontawesome.com/89de84782a.js" crossorigin="anonymous"></script>
 
-    <!-- General CSS Files -->
-    <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css">
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css" />
 
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="assets/modules/jquery-selectric/selectric.css">
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="assets/modules/jquery-selectric/selectric.css" />
 
-    <!-- Template CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/components.css">
-    <!-- Start GA -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/signup.css" />
+  <!-- Start GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
-        gtag('config', 'UA-94034622-3');
-    </script>
-    <!-- /END GA -->
+    gtag('config', 'UA-94034622-3');
+  </script>
+  <!-- /END GA -->
 </head>
 
 <body>
-    <div id="app">
-        <section class="section">
-            <div class="container mt-5">
-                <div class="row">
-                    <div
-                        class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
-                        <div class="login-brand">
-                            <img src="assets/img/stisla-fill.svg" alt="logo" width="100"
-                                class="shadow-light rounded-circle">
-                        </div>
-
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h4>회원가입</h4>
-                            </div>
-
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="form-group col-6">
-                                        <label for="frist_name">이름</label>
-                                        <input id="name" type="text" class="form-control" name="name" autofocus>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="email">이메일</label>
-                                        <input id="email" type="email" class="form-control" name="email" autofocus>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="form-group col-6">
-                                        <label for="password" class="d-block">비밀번호</label>
-                                        <input id="password" type="password" class="form-control pwstrength"
-                                            data-indicator="pwindicator" name="password">
-                                        <div id="pwindicator" class="pwindicator">
-                                            <div class="bar"></div>
-                                            <div class="label"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="password2" class="d-block">비밀번호 확인</label>
-                                        <input id="confirm_password" type="password" class="form-control"
-                                            name="password-confirm">
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="form-group col-6">
-                                        <label>성별</label>
-                                        <select id="gender" class="form-control selectric">
-                                            <option>-- 선택 --</option>
-                                            <option>남자</option>
-                                            <option>여자</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-
-                                <div class="text-center mt-4 mb-3">
-                                    <div class="text-job text-muted">소셜로 간편 로그인</div>
-                                </div>
-                                <div class="row sm-gutters">
-                                    <div class="col-6">
-                                        <a class="btn btn-block btn-social btn-facebook">
-                                            <span class="fab fa-facebook"></span> Kakao
-                                        </a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a class="btn btn-block btn-social btn-twitter">
-                                            <span class="fab fa-twitter"></span> Naver
-                                        </a>
-                                    </div>
-                                </div>
-
-
-                                <div class="mt-5 text-muted text-center" style="margin:auto 0px 30px;">
-                                    이미 회원가입 하셨나요? <a href="./login.html">로그인</a>
-                                </div>
-
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-primary btn-lg btn-block" id="signUp_btn">
-                                        회원가입
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="simple-footer">
-                            Copyright &copy; Stisla 2018
-                        </div>
-                    </div>
-                </div>
+  <div id="app">
+    <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+            <div class="login-brand">
+              <img src="assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle" />
             </div>
-        </section>
-    </div>
 
-    <!-- General JS Scripts -->
-    <script src="assets/modules/jquery.min.js"></script>
-    <script src="assets/modules/popper.js"></script>
-    <script src="assets/modules/tooltip.js"></script>
-    <script src="assets/modules/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
-    <script src="assets/modules/moment.min.js"></script>
-    <script src="assets/js/stisla.js"></script>
+            <div class="card card-primary">
+              <div class="card-header">
+                <h4>회원가입</h4>
+              </div>
 
-    <!-- JS Libraies -->
-    <script src="assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-    <script src="assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+              <div class="card-body">
+                <div class="row">
+                  <div class="form-group col-6">
+                    <label for="frist_name">이름</label>
+                    <input id="name" type="text" class="form-control" name="name" autofocus />
+                  </div>
+                  <div class="form-group col-6">
+                    <label for="email">이메일</label>
+                    <input id="email" type="email" class="form-control" name="email" autofocus />
+                  </div>
+                </div>
 
-    <!-- Page Specific JS File -->
-    <script src="assets/js/page/auth-register.js"></script>
+                <div class="row">
+                  <div class="form-group col-6">
+                    <label for="password" class="d-block">비밀번호</label>
+                    <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator"
+                      name="password" />
+                    <div id="pwindicator" class="pwindicator">
+                      <div class="bar"></div>
+                      <div class="label"></div>
+                    </div>
+                  </div>
+                  <div class="form-group col-6">
+                    <label for="password2" class="d-block">비밀번호 확인</label>
+                    <input id="confirm_password" type="password" class="form-control" name="password-confirm" />
+                  </div>
+                </div>
 
-    <!-- Template JS File -->
-    <script src="assets/js/scripts.js"></script>
-    <script src="assets/js/custom.js"></script>
-    <script src="assets/js/signup.js"></script>
+                <div class="row">
+                  <div class="form-group col-6">
+                    <label>성별</label>
+                    <select id="gender" class="form-control selectric">
+                      <option>-- 선택 --</option>
+                      <option>남자</option>
+                      <option>여자</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="text-center mt-4 mb-3">
+                  <div class="text-job text-muted">소셜로 간편 로그인</div>
+                </div>
+                <div class="row sm-gutters">
+                  <div class='button-container'>
+                    <button class="kakao-btn"><i class="fa-solid fa-comment" style="color: #000000;"></i>카카오
+                      로그인</button>
+                  </div>
+                </div>
+
+                <div class="mt-5 text-muted text-center" style="margin: auto 0px 30px">
+                  이미 회원가입 하셨나요? <a href="./login.html">로그인</a>
+                </div>
+
+                <div class="form-group">
+                  <button type="button" class="btn btn-primary btn-lg btn-block" id="signUp_btn">
+                    회원가입
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="simple-footer">Copyright &copy; OutBody</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="assets/modules/jquery.min.js"></script>
+  <script src="assets/modules/popper.js"></script>
+  <script src="assets/modules/tooltip.js"></script>
+  <script src="assets/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="assets/modules/moment.min.js"></script>
+  <script src="assets/js/stisla.js"></script>
+
+  <!-- JS Libraies -->
+  <script src="assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
+  <script src="assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="assets/js/page/auth-register.js"></script>
+
+  <!-- Template JS File -->
+  <script src="assets/js/scripts.js"></script>
+  <script src="assets/js/custom.js"></script>
+  <script src="assets/js/signup.js"></script>
 </body>
 
 </html>

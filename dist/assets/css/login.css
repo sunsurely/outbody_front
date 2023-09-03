@@ -1,0 +1,22 @@
+.sm-gutters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container {
+  margin-top: 10px;
+}
+
+.fa-solid {
+  margin-right: 5px;
+}
+
+.kakao-btn {
+  background-color: #fee500;
+  border: none;
+  height: 50px;
+  width: 150px;
+  border-radius: 12px;
+  color: #000000 85%;
+}
