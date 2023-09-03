@@ -6,6 +6,11 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>Register &mdash; Stisla</title>
 
+    <!-- 제이쿼리 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <!-- General CSS Files -->
     <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css">
@@ -46,87 +51,87 @@
                             </div>
 
                             <div class="card-body">
-                                <form method="POST">
-                                    <div class="row">
-                                        <div class="form-group col-6">
-                                            <label for="frist_name">Name</label>
-                                            <input id="frist_name" type="text" class="form-control" name="frist_name"
-                                                autofocus>
-                                        </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="frist_name">이름</label>
+                                        <input id="name" type="text" class="form-control" name="name" autofocus>
                                     </div>
+                                    <div class="form-group col-6">
+                                        <label for="email">이메일</label>
+                                        <input id="email" type="email" class="form-control" name="email" autofocus>
+                                    </div>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input id="email" type="email" class="form-control" name="email">
-                                        <div class="invalid-feedback">
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="password" class="d-block">비밀번호</label>
+                                        <input id="password" type="password" class="form-control pwstrength"
+                                            data-indicator="pwindicator" name="password">
+                                        <div id="pwindicator" class="pwindicator">
+                                            <div class="bar"></div>
+                                            <div class="label"></div>
                                         </div>
                                     </div>
+                                    <div class="form-group col-6">
+                                        <label for="password2" class="d-block">비밀번호 확인</label>
+                                        <input id="confirm_password" type="password" class="form-control"
+                                            name="password-confirm">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label>나이</label>
+                                        <input id="age" type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label>성별</label>
+                                        <select id="gender" class="form-control selectric">
+                                            <option>-- 선택 --</option>
+                                            <option>남자</option>
+                                            <option>여자</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="height">키</label>
+                                        <input id="height" type="text" class="form-control" name="height" autofocus>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label>생일</label>
+                                        <input id="birthday" type="date" class="form-control">
+                                    </div>
+                                </div>
 
 
-                                    <div class="row">
-                                        <div class="form-group col-6">
-                                            <label for="password" class="d-block">Password</label>
-                                            <input id="password" type="password" class="form-control pwstrength"
-                                                data-indicator="pwindicator" name="password">
-                                            <div id="pwindicator" class="pwindicator">
-                                                <div class="bar"></div>
-                                                <div class="label"></div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-6">
-                                            <label for="password2" class="d-block">Confirm Password</label>
-                                            <input id="password2" type="password" class="form-control"
-                                                name="password-confirm">
-                                        </div>
+                                <div class="text-center mt-4 mb-3">
+                                    <div class="text-job text-muted">소셜로 간편 로그인</div>
+                                </div>
+                                <div class="row sm-gutters">
+                                    <div class="col-6">
+                                        <a class="btn btn-block btn-social btn-facebook">
+                                            <span class="fab fa-facebook"></span> Kakao
+                                        </a>
                                     </div>
+                                    <div class="col-6">
+                                        <a class="btn btn-block btn-social btn-twitter">
+                                            <span class="fab fa-twitter"></span> Naver
+                                        </a>
+                                    </div>
+                                </div>
 
-                                    <div class="row">
-                                        <div class="form-group col-6">
-                                            <label for="frist_name">height</label>
-                                            <input id="frist_name" type="text" class="form-control" name="frist_name"
-                                                autofocus>
-                                        </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="form-group col-6">
-                                            <label>age</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                        <div class="form-group col-6">
-                                            <label>birthday</label>
-                                            <input type="date" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-6">
-                                            <label>Gender</label>
-                                            <select class="form-control selectric">
-                                                <option>-- 선택 --</option>
-                                                <option>남자</option>
-                                                <option>여자</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-6">
-                                            <label>Status</label>
-                                            <select class="form-control selectric">
-                                                <option>-- 선택 --</option>
-                                                <option>normal</option>
-                                                <option>admin</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                <div class="mt-5 text-muted text-center" style="margin:auto 0px 30px;">
+                                    이미 회원가입 하셨나요? <a href="./login.html">로그인</a>
+                                </div>
 
-                                    <div class="mt-5 text-muted text-center" style="margin:auto 0px 30px;">
-                                        이미 회원가입 하셨나요? <a href="./login.html">로그인</a>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                            Sign Up
-                                        </button>
-                                    </div>
-                                </form>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary btn-lg btn-block" id="signUp_btn">
+                                        회원가입
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div class="simple-footer">
@@ -157,6 +162,7 @@
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script src="assets/js/signup.js"></script>
 </body>
 
 </html>
