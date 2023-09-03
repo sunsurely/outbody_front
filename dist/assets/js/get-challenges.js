@@ -8,7 +8,7 @@
 'use strict';
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNzEzMDA5LCJleHAiOjE2OTM3MTY2MDl9.C7X15wYe2YRvvyuMJaWfXD9NZqszacmlBXK6vZ1d3WI';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkzNzMwNDgxLCJleHAiOjE2OTM3MzQwODF9.ssoKprK0b0rZlHMPk4kL_2_H-S49SvuTifkUaxZUREM';
 
 const filterApplyButton = document.querySelector('#filter-apply-button');
 filterApplyButton.addEventListener('click', () => {
@@ -88,8 +88,11 @@ async function getChallenges(option) {
           </td>
           <td>${challenge.userNumber} / ${challenge.userNumberLimit}명</td>
           <td>
-            <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle" width="35"
-              data-toggle="title" title="">
+            <img id="profile-image" alt="image"
+            src="https://inflearn-nest-cat.s3.amazonaws.com/${
+              challenge.hostImageUrl
+            }"
+            class="rounded-circle" width="35" data-toggle="title" title="">
             <div class="d-inline-block ml-1">${challenge.hostName}</div>
           </td>
           <td>${publicView}</td>
@@ -108,3 +111,8 @@ async function getChallenges(option) {
       alert(error.response.data.message);
     });
 }
+
+$('#profile-image').attr(
+  'src',
+  `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImgUrl}`,
+);
