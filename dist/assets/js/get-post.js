@@ -6,7 +6,7 @@ $(document).ready(function () {
 });
 
 let token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNzEzMDA5LCJleHAiOjE2OTM3MTY2MDl9.C7X15wYe2YRvvyuMJaWfXD9NZqszacmlBXK6vZ1d3WI';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNzMxMDY2LCJleHAiOjE2OTM3MzQ2NjZ9.OqqyCEk-C0umc70nc-lg2JEYoZcxBr_fxy7iIleQXa8';
 
 // 오운완 전체 조회
 const getPosts = async () => {
@@ -39,7 +39,7 @@ const getPosts = async () => {
                 </h2>
               </div>
               <div class="article-user">
-                <img alt="image" userId=${post.userId} src="${post.userImageUrl}">
+                <img alt="image" src="https://inflearn-nest-cat.s3.amazonaws.com/${post.userImageUrl}">
                 <div class="article-user-details">
                   <div class="user-detail-remove">
                     <a href="#" class="btn btn-icon btn-primary"><i class="fas fa-times delPost-btn" postId=${post.id}></i></a>

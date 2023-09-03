@@ -1,5 +1,5 @@
 const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNzIxMTc2LCJleHAiOjE2OTM3MjQ3NzZ9.e_m2mel9JBgHgtesLEH0bTwhdRin_FyGf9r6NeM-FX8';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNzMxNjI0LCJleHAiOjE2OTM3MzUyMjR9.nkBzP12ixmWKqJVDdYx64f-va-uLuIO93XqHbroHxd4';
 
 // localStorage.setItem('jwtToken', jwtToken);
 // const storedToken = localStorage.getItem('jwtToken');
@@ -128,7 +128,9 @@ async function initMyPage() {
     }
     $(profileImg).attr(
       'src',
-      myData.imgUrl ? myData.imgUrl : 'assets/img/avatar/avatar-1.png',
+      myData.imgUrl
+        ? `https://inflearn-nest-cat.s3.amazonaws.com/${myData.imgUrl}`
+        : 'assets/img/avatar/avatar-1.png',
     );
     $(myFriends).html(followTemp);
     const date = new Date(myData.createdAt);
