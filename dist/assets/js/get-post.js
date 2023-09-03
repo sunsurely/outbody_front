@@ -1,12 +1,11 @@
 const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
 
+const accessToken = localStorage.getItem('cookie');
+
 $(document).ready(function () {
   getPosts();
 });
-
-let token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNzMxMDY2LCJleHAiOjE2OTM3MzQ2NjZ9.OqqyCEk-C0umc70nc-lg2JEYoZcxBr_fxy7iIleQXa8';
 
 // 오운완 전체 조회
 const getPosts = async () => {
@@ -15,7 +14,7 @@ const getPosts = async () => {
       `http://localhost:3000/challenge/${challengeId}/post?page=1&pageSize=6`,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: accessToken,
         },
       },
     );
@@ -82,7 +81,7 @@ const createPost = async () => {
     await axios
       .post(`http://localhost:3000/challenge/${challengeId}/post`, formData, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: accessToken,
           'Content-Type': 'multipart/form-data',
         },
       })
@@ -106,7 +105,7 @@ const deletePost = async (postId) => {
       `http://localhost:3000/challenge/${challengeId}/post/${postId}`,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: accessToken,
         },
       },
     );

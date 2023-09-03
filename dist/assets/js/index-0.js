@@ -1,4 +1,8 @@
-'use strict';
+const urlParams = new URLSearchParams(window.location.search);
+const challengeId = urlParams.get('id');
+
+const accessToken = localStorage.getItem('cookie');
+
 let nowPage = 1;
 let orderList = 'normal';
 let totalPages = 0;
@@ -27,15 +31,12 @@ $('.cancel-regist').on('click', () => {
   $(modal).css('display', 'none');
 });
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNzE1MDE4LCJleHAiOjE2OTM3ODcwMTh9.pus-xt0YC7DrpCeRKMy3cdzRwOwtXZwuIg2GAc03qgg';
-
 async function initMessagesBox() {
   const messageBox = $('.dropdown-list-message');
   $(messageBox).html('');
   try {
     const response = await axios.get('http://localhost:3000/follow/request', {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: accessToken },
     });
     const messages = response.data.data;
 
@@ -105,7 +106,7 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'yes' };
         await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-          headers: { Authorization: `Bearer ${storedToken}` },
+          headers: { Authorization: accessToken },
         });
 
         alert('친구요청을 수락했습니다.');
@@ -119,7 +120,7 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'no' };
         await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-          headers: { Authorization: `Bearer ${storedToken}` },
+          headers: { Authorization: accessToken },
         });
 
         alert('친구요청을 거절했습니다.');
@@ -184,7 +185,7 @@ async function getBodyResults() {
       'http://localhost:3000/record/result/detail',
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: accessToken,
         },
       },
     );
@@ -582,7 +583,7 @@ $('.regist-record').click(async () => {
   try {
     await axios.post('http://localhost:3000/record', data, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: accessToken,
       },
     });
     alert('데이터를 등록했습니다.');
@@ -597,7 +598,7 @@ async function getRecordData(page, pageSize) {
     `http://localhost:3000/record/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: accessToken,
       },
     },
   );
@@ -711,7 +712,7 @@ async function getDateRangeRecord(startDate, endDate, page) {
 
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: accessToken,
       },
     },
   );

@@ -1,3 +1,5 @@
+const accessToken = localStorage.getItem('cookie');
+
 $(document).ready(function () {
   userPage();
 });
@@ -12,17 +14,13 @@ $('#backtopage').click(function () {
   $('#postlistModal').modal('hide');
 });
 
-// 토큰값 선언
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzU2MzYwNSwiZXhwIjoxNjkzNTcwODA1fQ.0ITkltfHHFSeK5vr7LF9iU5oA9giuUBJYwuirVaq0ww';
-
 // 나에게 온 친구요청 확인메시지 (화면 우측상단 메시지함)
 const requestlists = $('#requestlists');
 
 $(requestlists).click(async () => {
   try {
     const response = await axios.get('http://localhost:3000/follow/request', {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: accessToken },
     });
     const messages = response.data;
 
@@ -60,7 +58,7 @@ $(requestlists).click(async () => {
           `http://localhost:3000/follow/${Number(followerId)}/accept`,
           data,
           {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: accessToken },
           },
         );
         alert(`${response.data.name}님의 친구 요청을 수락했습니다.`);
@@ -80,7 +78,7 @@ $(requestlists).click(async () => {
           `http://localhost:3000/follow/${Number(followerId)}/accept`,
           data,
           {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: accessToken },
           },
         );
         alert(`${response.data.name}님의 친구 요청을 거절했습니다.`);
@@ -121,13 +119,13 @@ async function userPage() {
       `http://localhost:3000/user/${Number(userId)}`,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: accessToken,
         },
       },
     );
     const rankData = await axios.get('http://localhost:3000/user/me/rank', {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: accessToken,
       },
     });
 
@@ -161,7 +159,7 @@ async function userPage() {
       'http://localhost:3000/user/me/recommendation',
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: accessToken,
         },
       },
     );
@@ -204,7 +202,7 @@ async function userPage() {
               `http://localhost:3000/follow/${Number(targetUserId)}/request`,
               null,
               {
-                headers: { Authorization: `Bearer ${token}` },
+                headers: { Authorization: accessToken },
               },
             )
             .then((response) => {
@@ -215,7 +213,7 @@ async function userPage() {
         } else if (action === 'unfollow') {
           await axios
             .delete(`http://localhost:3000/follow/${Number(targetUserId)}`, {
-              headers: { Authorization: `Bearer ${token}` },
+              headers: { Authorization: accessToken },
             })
             .then((response) => {
               alert(`${response.data.name}님과 친구 취소되었습니다.`);
@@ -241,172 +239,3 @@ async function userPage() {
     alert('Error:', error.response.data.message);
   }
 }
-
-// 오운완 목록보기
-
-// const usersCarousel = document.getElementById('users-carousel');
-// const followButtons = document.querySelectorAll('.follow-btn');
-// const followingButtons = document.querySelectorAll('.following-btn');
-
-// function createCarouselItem(user) {
-//   return `
-//     <div>
-//       <div class="user-item">
-//         <img
-//           alt="image"
-//           src="${user.imgUrl}"
-//           class="img-fluid"
-//         />
-//         <div class="user-details">
-//           <div class="user-name">${user.name}</div>
-//           <div class="text-job text-muted">${user.status}</div>
-//           <div class="user-cta">
-//             <button
-//               class="btn btn-primary follow-btn"
-//               data-user-id="${user.id}"
-//               data-follow-action="alert('${user.name} followed');"
-//               data-unfollow-action="alert('${user.name} unfollowed');"
-//             >
-//               Follow
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   `;
-// }
-
-// axios
-//   .get('http://localhost:3000/users', {
-//     headers: { Authorization: `Bearer ${token}` },
-//   })
-//   .then((response) => {
-//     const users = response.data; // 서버에서 받아온 사용자 정보 배열
-
-//     // 사용자 정보를 기반으로 템플릿을 생성하고 페이지에 추가
-//     users.forEach((user) => {
-//       const carouselItem = createCarouselItem(user);
-//       usersCarousel.insertAdjacentHTML('beforeend', carouselItem);
-//     });
-//   });
-
-// // 팔로우(친구요청)
-// followButtons.forEach((button) => {
-//   button.addEventListener('click', (event) => {
-//     const userId = event.target.getAttribute('data-user-id');
-//     alert(`Follow button clicked for user ${user.name}`);
-
-//     axios
-//       .post(`http://localhost:3000/follow/${userId}/request`, null, {
-//         headers: { Authorization: `Bearer ${token}` },
-//       })
-//       .then((response) => {
-//         alert(`${response.data.name}님에게 친구요청을 보냈습니다.`);
-//       })
-//       .catch((error) => {
-//         console.error('Error message:', error.response.data.message);
-//       });
-//   });
-// });
-
-// // 언팔로우(친구취소)
-// followingButtons.forEach((button) => {
-//   button.addEventListener('click', (event) => {
-//     const userId = event.target.getAttribute('data-user-id');
-//     alert(`Following button clicked for user ${user.name}`);
-
-//     axios
-//       .delete(`http://localhost:3000/follow/${userId}`, {
-//         headers: { Authorization: `Bearer ${token}` },
-//       })
-//       .then(() => {
-//         alert(`${response.data.name}님과 친구 취소되었습니다.`);
-//       })
-//       .catch((error) => {
-//         console.error('Error message:', error.response.data.message);
-//       });
-//   });
-// });
-
-// // 오운완 목록조회
-// const postsTable = document.querySelector('posts-table');
-// const totalPostsElement = document.querySelector('.total-posts');
-
-// axios
-//   .get('http://localhost:3000/post/user', {
-//     headers: { Authorization: `Bearer ${token}` },
-//   })
-//   .then((response) => {
-//     const { totalPosts, usersPosts } = response.data;
-
-//     totalPostsElement.textContent = `Total Posts: ${totalPosts}`;
-
-//     usersPosts.forEach((post) => {
-//       const row = document.createElement('tr');
-//       row.innerHTML = `
-//         <th scope="row">${post.postId}</th>
-//         <td>${post.description}</td>
-//       `;
-//       postsTable.querySelector('tbody').appendChild(row);
-//     });
-//   })
-//   .catch((error) => {
-//     console.error('Error message:', error.response.data.message);
-//   });
-
-// //
-
-// document.addEventListener('DOMContentLoaded', function () {
-//   // const searchButton = document.getElementById('searchFriendByEmail'); // 유저검색
-//   const searchEmailInput = document.getElementById('searchEmail'); // 검색에넣은 Email값
-//   const requestEmailInput = document.getElementById('requestEmail'); //친구요청보낸 Email값
-//   const requestFriendButton = document.getElementById('requestFriendByEmail'); // 친구요청
-
-//   // 이메일로 유저 검색
-//   searchButton.addEventListener('click', function () {
-//     const searchEmail = searchEmailInput.value;
-//     const data = { email: searchEmail };
-
-//     axios
-//       .get('http://localhost:3000/user/me/searchEmail', data, {
-//         headers: {
-//           Authorization: `Bearer ${storedToken}`,
-//         },
-//       })
-//       .then((response) => {
-//         const userId = response.data.userId;
-//         if (userId) {
-//           alert(`Email: ${searchEmail} 유저가 존재합니다.`);
-//         } else {
-//           alert(`Email: ${searchEmail} 유저가 존재하지 않습니다.`);
-//         }
-//         requestFriendButton.setAttribute('searched-userId', userId);
-//       })
-//       .catch((error) => {
-//         console.error('Error message:', error.response.data.message);
-//       });
-//   });
-
-//   // 친구 요청
-//   requestFriendButton.addEventListener('click', function () {
-//     const userId = this.getAttribute('searched-userId'); // 검색해서 나온 유저아이디
-//     const requestEmail = requestEmailInput.value;
-
-//     axios
-//       .post(`http://localhost:3000/follow/${userId}/request`, {
-//         headers: {
-//           Authorization: `Bearer ${storedToken}`,
-//         },
-//       })
-//       .then((response) => {
-//         if (response.data.success) {
-//           alert(`E-mail: ${requestEmail} 유저에게 친구 요청을 보냈습니다`);
-//         } else {
-//           alert(`친구 요청에 실패했습니다.`);
-//         }
-//       })
-//       .catch((error) => {
-//         console.error('Error message:', error.response.data.message);
-//       });
-//   });
-// });
