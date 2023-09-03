@@ -1,3 +1,4 @@
+// 로그인
 const login = async () => {
   if (!$('#email').val()) {
     alert('계정(e-mail)을 입력해주세요');
@@ -60,3 +61,14 @@ $('#login-btn').click(login);
 //     }
 //   }
 // }
+
+// 카카오 로그인
+const kakaoLogin = async () => {
+  try {
+    await axios.get(`http://localhost:3000/auth/kakao/redirect`);
+  } catch (error) {
+    // alert(error.response.data.message);
+    console.error('Error message:', error);
+  }
+};
+$('.kakao-btn').click(kakaoLogin);

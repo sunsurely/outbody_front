@@ -20,3 +20,7 @@
   border-radius: 12px;
   color: #000000 85%;
 }
+
+.kakao-btn:hover {
+  background-color: #ffde00;
+}
