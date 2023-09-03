@@ -141,7 +141,6 @@ async function initializeChart() {
 
   try {
     const { data } = await getRecordData(1, 7);
-
     const records = data.pageinatedUsersRecords;
 
     for (const rec of records) {
@@ -162,16 +161,17 @@ async function initializeChart() {
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
+
   dateArr.reverse();
   bmrArr.reverse();
   weightArr.reverse();
   muscleArr.reverse();
   fatArr.reverse();
 
-  $(recentDatas[0]).text(bmrArr[6]);
-  $(recentDatas[1]).text(weightArr[6]);
-  $(recentDatas[2]).text(fatArr[6]);
-  $(recentDatas[3]).text(muscleArr[6]);
+  $(recentDatas[0]).text(bmrArr[bmrArr.length - 1]);
+  $(recentDatas[1]).text(weightArr[weightArr.length - 1]);
+  $(recentDatas[2]).text(fatArr[fatArr.length - 1]);
+  $(recentDatas[3]).text(muscleArr[muscleArr.length - 1]);
 
   initChart('myChart', bmrArr, dateArr, 50, '기초대사량(kcal)');
   initChart('myChart2', weightArr, dateArr, 1, '체중(kg)');
@@ -189,6 +189,7 @@ async function getBodyResults() {
         },
       },
     );
+
     const avgDatas = data.data.avgDatas;
     const stdWeight = data.data.stdWeight;
     const stdFat = data.data.stdFat;
@@ -197,6 +198,50 @@ async function getBodyResults() {
     const resWeight = data.data.resWeight;
     const resFat = data.data.resFat;
     const resMuscle = data.data.resMuscle;
+
+    let diet = '';
+    let workout = '';
+
+    if (resWeight > 5 && resFat < -5 && resMuscle > 5) {
+      diet =
+        '마른 비만은 근육 생성에 도움이 되는 육류, 생선, 계란, 두부 등 단백질 섭취량을 늘리고 통곡물, 채소, 해조류 위주 식단으로 구성하시면 좋습니다. 두유 또는 식이섬유가 풍부한 오이나 당근 등 채소를 많이 드세요. 규칙적인 식사를 정량으로 하면서 체지방을 천천히 감소시키는 게 중요합니다.';
+
+      workout =
+        '유산소 운동과 근력 운동의 비율은 2대 1 정도가 적당합니다. 공간에 제약받지 않고 할 수 있는 근력 운동으로는 팔굽혀펴기, 윗몸일으키기, 플랭크, 버피 테스트 등이 있습니다. 주 3회 이상, 30분 이상 실시하세요.';
+    } else if (resWeight > 5 && resFat > 5 && resMuscle === 0) {
+      diet =
+        '체지방률이 표준 미만입니다. 고단백, 고열량 식품 위주로 규칙적인 식단을 구성해야 하며 불규칙한 식사는 소화기관의 기능을 저하시켜 체중 증가를 방해하기 때문에 규칙적으로 식사를 해야 합니다.';
+      workout =
+        '과도한 유산소 운동은 지양하고 근력운동에 비중을 더 주고 규칙적으로 운동합니다. 공간에 제약받지 않고 할 수 있는 근력 운동으로는 팔굽혀펴기, 윗몸일으키기, 플랭크, 버피 테스트 등이 있습니다. 주 3회 이상, 30분 이상 실시하세요.';
+    } else if (resWeight > 5 && resFat > 5 && resMuscle === 0) {
+      diet =
+        '적당한 근육량을 가지고 있지만 표준의 체지방률을 유지하는게 건강에 도움이 됩니다. 적당량의 탄수화물과 고단백 식단을 꾸준히 섭취하세요';
+      workout =
+        '표준이상의 근육량으로 꾸준한 운동과 건강한 식단을 병행하면 더욱 더 좋은 몸이 되실거에요';
+    } else if (resWeight < -5 && resFat < -5 && resMuscle > 5) {
+      diet =
+        '체지방량이 표준을 초과하고 근육량이 표준 미만으로 고단백 저탄수화물의 식단으로 관리가 필요한 상태입니다. 더불아 식이섬유가 풍부한 오이나 당근 등 채소를 많이 드세요';
+      workout =
+        '유산소 운동뿐만 아니라 근력운동을 병행하셔야 다이어트에 도움이 됩니다. 하루에 30분 이상 걷는 것을 꾸준히 실행하고 체중을 이용한 팔굽혀펴기, 윗몸일으키기 등을 주 3회 30분 이상 실시하세요';
+    } else if (resWeight < -5 && resFat < -5 && resMuscle === 0) {
+      diet =
+        '근육량은 표준이나 체지방률을 낮추기 위해 고단백 저탄수화물의 식단으로 관리가 필요한 상태입니다. 더불아 식이섬유가 풍부한 오이나 당근 등 채소를 많이 드세요';
+      workout =
+        '근육량의 손실을 줄이며 체지방을 감소시키기 위해 유산소 운동 뿐만 아니라 근력운동을 주 3회 이상 실시하세요';
+    } else if (resWeight === 0 && resFat === 0 && resMuscle === 0) {
+      diet =
+        '모든 수치가 정상 범주로 지금 처럼만 관리한다면 건강한 몸을 유지할 수 있습니다.';
+      workout =
+        '모든 수치가 정상 범주로 지금 처럼만 관리한다면 건강한 몸을 유지할 수 있습니다.';
+    } else {
+      diet =
+        '표준에 가까운 체성분 수치이므로 건강한 식단을 꾸준히 가져가면 더욱더 좋은 몸을 유지하세요';
+      workout =
+        '표준에 가까운 체성분 수치이므로 꾸준한 운동으로 더욱더 좋은 몸을 유지하세요';
+    }
+
+    $('#food-result').text(diet);
+    $('#workout-result').text(workout);
 
     const bodyResults = $('.body-result');
     const avgWeight = $('#avg-weight');
@@ -214,9 +259,15 @@ async function getBodyResults() {
       resMuscle < 0 ? `${resMuscle}kg` : `+${resMuscle}kg`,
     );
 
-    $(avgWeight).text(`평균 체중 : ${avgDatas.avgWgt}kg`);
-    $(avgFat).text(`평균 체지방률 : ${avgDatas.avgFat}%`);
-    $(avgMuscle).text(`평균 골격근량 : ${avgDatas.avgMus}kg`);
+    $(avgWeight).text(
+      `평균 체중 :  ${avgDatas.avgWeight ? avgDatas.avgWeightv : ''}(kg)`,
+    );
+    $(avgFat).text(
+      `평균 체지방률 :  ${avgDatas.avgFat ? avgDatas.avgFat : ''}(%)`,
+    );
+    $(avgMuscle).text(
+      `평균 골격근량 :  ${avgDatas.avgMuscle ? avgDatas.avgMuscle : ''}(kg)`,
+    );
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
