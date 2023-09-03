@@ -215,7 +215,6 @@ $('#searchFriendByEmail').on('click', async () => {
   const email = $('#searchEmail').val();
   const searchUser = $('#searched-friend');
   $(searchUser).html('');
-
   try {
     const response = await axios.get(
       `http://localhost:3000/user/me/searchEmail/?email=${email}`,
@@ -227,28 +226,43 @@ $('#searchFriendByEmail').on('click', async () => {
     );
 
     const user = response.data.data;
+    const userEmail = user.email;
+    const index = userEmail.indexOf('@');
+    const preString = userEmail.slice(0, 3);
+    const nextString = userEmail.slice(index, index + 3);
 
-    const temp = `<div id=${user.id}><img src=${user.imgUrl}><span>${user.name}(${user.email})</span></div> <br/>`;
+    const emailText = `${preString}***${nextString}***`;
+
+    const temp = `<div id=${user.id}><img  class="rounded-circle" src=${
+      user.imgUrl ? user.imgUrl : 'assets/img/avatar/avatar-1.png'
+    } style="width:50px; margin-right:10px"><span>${
+      user.name
+    }(${emailText})</span></div> <br/> `;
     $(searchUser).html(temp);
-    console.log(storedToken);
-    const userId = user.id;
 
+    const userId = user.id;
     $('#send-invite').on('click', async () => {
+      const isChecked = $('#invite-checkbox').prop('checked');
       try {
-        axios.post(
-          `http://localhost:3000/follow/${userId}/request`,
-          {},
-          {
-            headers: { Authorization: `Bearer ${storedToken}` },
-          },
-        );
-        alert(`${user.name}(${user.email})님에게 친구요청을 보냈습니다`);
+        if (isChecked) {
+          await axios.post(
+            `http://localhost:3000/follow/${userId}/request`,
+            {},
+            {
+              headers: { Authorization: `Bearer ${storedToken}` },
+            },
+          );
+          alert(`${user.name}(${user.email})님에게 친구요청을 보냈습니다`);
+          window.location.reload();
+        } else {
+          alert('동의 항목에 체크해주세요');
+        }
       } catch (error) {
-        console.error('Error message:', error.response.data.message);
+        alert(error.response.data.message);
       }
     });
   } catch (error) {
-    console.error('Error message:', error.response.data.message);
+    alert(error.response.data.message);
   }
 });
 
@@ -285,7 +299,7 @@ async function initMessagesBox() {
       }
       const id = msg.userId;
       const temp = `
-      <div class="dropdown-item-avatar" id="friend">
+   
        <a href="user-info.html?userId=${msg.userId}">
           <img
             alt="image"
@@ -295,7 +309,7 @@ async function initMessagesBox() {
           />
        </a>
         <div class="is-online"></div>
-      </div>
+    
       <div class="dropdown-item-desc">      
         <p id="inviteUserMessage" style="margin-bottom:0px;"><span style="font-weight:bold;">${
           msg.name

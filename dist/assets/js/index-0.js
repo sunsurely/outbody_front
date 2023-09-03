@@ -30,7 +30,6 @@ $('.cancel-regist').on('click', () => {
 const token =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNjM4OTI1LCJleHAiOjE2OTM3MTA5MjV9.k7fqbze3LeoZjoM6xGG9K2yGQ2V1JZ-s-Sim0swE2f0';
 
-
 async function initMessagesBox() {
   const messageBox = $('.dropdown-list-message');
   $(messageBox).html('');
