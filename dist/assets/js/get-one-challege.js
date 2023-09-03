@@ -1,8 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkzNzMwNDgxLCJleHAiOjE2OTM3MzQwODF9.ssoKprK0b0rZlHMPk4kL_2_H-S49SvuTifkUaxZUREM';
+const accessToken = localStorage.getItem('cookie');
 
 window.onload = function () {
   getChallengeDetail();
@@ -14,7 +13,7 @@ async function getChallengeDetail() {
   axios
     .get(`http://localhost:3000/challenge/${challengeId}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: accessToken,
       },
     })
     .then((response) => {
@@ -101,7 +100,7 @@ async function getChallengers() {
   axios
     .get(`http://localhost:3000/challenge/${challengeId}/challengers`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: accessToken,
       },
     })
     .then((response) => {
@@ -151,7 +150,7 @@ document.addEventListener('click', async (event) => {
     await axios
       .post(`http://localhost:3000/challenge/${challengeId}/enter`, null, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: accessToken,
         },
       })
       .then((response) => {
@@ -177,7 +176,7 @@ document.addEventListener('click', async (event) => {
       await axios
         .delete(`http://localhost:3000/challenge/${challengeId}/leave`, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: accessToken,
           },
         })
         .then((response) => {
@@ -204,7 +203,7 @@ document.addEventListener('click', async (event) => {
       await axios
         .delete(`http://localhost:3000/challenge/${challengeId}`, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: accessToken,
           },
         })
         .then((response) => {
@@ -230,7 +229,7 @@ $('#send-invitation-button').on('click', async () => {
       `http://localhost:3000/user/me/searchEmail/?email=${emailInput}`,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: accessToken,
         },
       },
     );
@@ -255,7 +254,7 @@ $('#send-invitation-button').on('click', async () => {
       await axios
         .post(`http://localhost:3000/challenge/${challengeId}/invite`, data, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: accessToken,
           },
         })
         .then((response) => {

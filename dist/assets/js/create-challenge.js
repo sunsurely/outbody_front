@@ -1,14 +1,4 @@
-/**
- *
- * You can write your JS code here, DO NOT touch the default style file
- * because it will make it harder for you to update.
- *
- */
-
-'use strict';
-
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNzI3MTQ0LCJleHAiOjE2OTM3MzA3NDR9.LkPGmUh39jqevzuvBxQXKt38gZoyKbWi2vQloQ07AhY';
+const accessToken = localStorage.getItem('cookie');
 
 // 도전 세부 설정
 let startDate = null;
@@ -116,7 +106,7 @@ async function createChallenge() {
   await axios
     .post('http://localhost:3000/challenge', data, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: accessToken,
       },
     })
     .then((response) => {

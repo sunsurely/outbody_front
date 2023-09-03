@@ -47,3 +47,14 @@ const signUp = async () => {
   }
 };
 $('#signUp_btn').click(signUp);
+
+// 카카오 로그인
+const kakaoLoginLoading = async () => {
+  try {
+    await axios.get(`http://localhost:3000/auth/kakao`);
+  } catch (error) {
+    // alert(error.response.data.message);
+    console.error('Error message:', error);
+  }
+};
+$('.kakao-btn').click(kakaoLoginLoading);
