@@ -12,6 +12,15 @@
   margin-right: 5px;
 }
 
+.social-login {
+  color: #98a6ad;
+}
+
+.text-muted {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
 .kakao-btn {
   background-color: #fee500;
   border: none;
