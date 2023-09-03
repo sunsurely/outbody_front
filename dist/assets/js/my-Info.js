@@ -346,6 +346,7 @@ async function initMessagesBox() {
         });
 
         alert('친구요청을 수락했습니다.');
+        window.location.reload();
       });
     });
 
