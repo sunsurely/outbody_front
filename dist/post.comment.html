@@ -112,113 +112,63 @@
                 </form>
                 <ul class="navbar-nav navbar-right">
                     <li class="dropdown dropdown-list-toggle">
-                        <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"
-                            id="requestlists"><i class="far fa-envelope"></i></a>
-                        <div class="dropdown-menu dropdown-list dropdown-menu-right">
-                            <div class="dropdown-header">
-                                Messages
-                                <div class="float-right">
-                                    <a href="#">Mark All As Read</a>
-                                </div>
-                            </div>
-                            <div class="dropdown-list-content dropdown-list-message"
-                                style="overflow-y: scroll; height: 300px">
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" />
-                                        <div class="is-online"></div>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b id="inviteUserName">Kusnaedi</b>
-                                        <b id="inviteUserEmail">abcd@naver.com</b>
-                                        <p id="inviteUserMessage">Hello, Bro!</p>
-                                        <div id="inviteUsercreatedAt">2023.08.31</div>
-                                        <button class="btn btn-sm btn accept-friend"
-                                            data-follower-id="${message.userId}">
-                                            수락
-                                        </button>
-                                        <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
-                                            거절
-                                        </button>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle" />
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b id="inviteUserName">Kusnaedi</b>
-                                        <b id="inviteUserEmail">abcd@naver.com</b>
-                                        <p id="inviteUserMessage">Hello, Bro!</p>
-                                        <div id="inviteUsercreatedAt">2023.08.31</div>
-                                        <button class="btn btn-sm btn accept-friend"
-                                            data-follower-id="${message.userId}">
-                                            수락
-                                        </button>
-                                        <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
-                                            거절
-                                        </button>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-3.png" class="rounded-circle" />
-                                        <div class="is-online"></div>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b id="inviteUserName">Kusnaedi</b>
-                                        <b id="inviteUserEmail">abcd@naver.com</b>
-                                        <p id="inviteUserMessage">Hello, Bro!</p>
-                                        <div id="inviteUsercreatedAt">2023.08.31</div>
-                                        <button class="btn btn-sm btn accept-friend"
-                                            data-follower-id="${message.userId}">
-                                            수락
-                                        </button>
-                                        <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
-                                            거절
-                                        </button>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-4.png" class="rounded-circle" />
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b id="inviteUserName">Kusnaedi</b>
-                                        <b id="inviteUserEmail">abcd@naver.com</b>
-                                        <p id="inviteUserMessage">Hello, Bro!</p>
-                                        <div id="inviteUsercreatedAt">2023.08.31</div>
-                                        <button class="btn btn-sm btn accept-friend"
-                                            data-follower-id="${message.userId}">
-                                            수락
-                                        </button>
-                                        <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
-                                            거절
-                                        </button>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-avatar">
-                                        <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle" />
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b id="inviteUserName">Kusnaedi</b>
-                                        <b id="inviteUserEmail">abcd@naver.com</b>
-                                        <p id="inviteUserMessage">Hello, Bro!</p>
-                                        <div id="inviteUsercreatedAt">2023.08.31</div>
-                                        <button class="btn btn-sm btn accept-friend"
-                                            data-follower-id="${message.userId}">
-                                            수락
-                                        </button>
-                                        <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
-                                            거절
-                                        </button>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="dropdown-footer text-center"></div>
+                      <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep" id="requestlists"><i
+                          class="far fa-envelope"></i></a>
+                      <div class="dropdown-menu dropdown-list dropdown-menu-right" style="width: 450px; padding-left: 10px">
+                        <div class="dropdown-header">
+                          Messages
+                          <div class="float-right">
+                            <a href="#">Mark All As Read</a>
+                          </div>
                         </div>
-                    </li>
+                        <div class="dropdown-list-content dropdown-list-message" style="overflow-y: scroll; height: 300px">
+                          <a href="#" class="dropdown-item dropdown-item-unread">
+                            <!-- 친구요청 메시지함 -->
+                            <div style="width: 50px" class="dropdown-item-avatar" id="friend">
+                              <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" />
+                              <div class="is-online"></div>
+                            </div>
+                            <div class="dropdown-item-desc">
+                              <p id="inviteUserMessage">Hello, Bro!</p>
+                              <div id="inviteUsercreatedAt">2023.08.31</div>
+                              <button class="btn btn-sm btn accept-friend" data-follower-id="${message.userId}">
+                                수락
+                              </button>
+                              <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
+                                거절
+                              </button>
+                            </div>
+          
+                              <!-- 도전 초대메시지함 -->
+                              <div class="dropdown-item-avatar" id="challenger">
+                                <img
+                                  alt="image"
+                                  src="assets/img/avatar/avatar-2.png"
+                                  class="rounded-circle"
+                                />
+                                <div class="is-online"></div>
+                              </div>
+                              <div class="dropdown-item-desc">
+                                <p id="challengeMessage">Hello, Bro!</p>
+                                <div id="challengeCreatedAt">2023.08.31</div>
+                                <button
+                                  class="btn btn-sm btn accept-challenge"
+                                  data-user-id="${message.userId}"
+                                >
+                                  수락
+                                </button>
+                                <button
+                                  class="btn btn-sm btn deny-challenge"
+                                  data-user-id="${message.userId}"
+                                >
+                                  거절
+                                </button>
+                              </div>
+                            </a>
+                          </div>
+                          <div class="dropdown-footer text-center"></div>
+                        </div>
+                      </li>
                     <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                             class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -280,26 +230,20 @@
                         </div>
                     </li>
                     <li class="dropdown"><a href="#" data-toggle="dropdown"
-                            class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                            <div class="d-sm-none d-lg-inline-block">내 정보</div>
+                        class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                        <div class="d-sm-none d-lg-inline-block">내 정보</div>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <div class="dropdown-title">OUTBODY</div>
+                        <a href="my-Info.html" class="dropdown-item has-icon">
+                          <i class="far fa-user"></i> Profile
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="dropdown-title">Logged in 5 min ago</div>
-                            <a href="my-Info.html" class="dropdown-item has-icon">
-                                <i class="far fa-user"></i> Profile
-                            </a>
-                            <a href="features-activities.html" class="dropdown-item has-icon">
-                                <i class="fas fa-bolt"></i> Activities
-                            </a>
-                            <a href="features-settings.html" class="dropdown-item has-icon">
-                                <i class="fas fa-cog"></i> Settings
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item has-icon text-danger">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </a>
-                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item has-icon text-danger">
+                          <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                      </div>
                     </li>
                 </ul>
             </nav>
@@ -313,76 +257,49 @@
                     <a>OB</a>
                   </div>
         
-                  <ul class="sidebar-menu">
-                    <li class="menu-header">Admin</li>
-                    <li class="dropdown">
-                      <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i><span>계정</span></a>
-                      <ul class="dropdown-menu">
-                        <li><a class="nav-link" style="font-size: 12px;" href="signup.html">회원가입</a></li>
-                        <li><a class="nav-link" style="font-size: 12px;" href="login.html">로그인</a></li>
-                      </ul>
-                    </li>
-        
-                    <li class="menu-header">Profile</li>
-                    <li class="dropdown">
-                      <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i><span>프로필</span></a>
-                      <ul class="dropdown-menu">
-                        <li><a class="nav-link" style="font-size: 12px;" href="my-Info.html">내 정보</a></li>
-                      </ul>
-                    </li>
-        
-                    <li class="menu-header">Record</li>
-                    <li class="dropdown">
-                      <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-                        <span>체성분</span></a>
-                      <ul class="dropdown-menu">
-                        <li><a class="nav-link" style="font-size: 12px;" href="index-0.html">체성분 관리</a></li>
-                      </ul>
-                    </li>
-        
-                    <li class="menu-header">Challenge</li>
-                    <li class="dropdown">
-                      <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-fire"></i>
-                        <span>도전</span></a>
-                      <ul class="dropdown-menu">
-                        <li><a class="nav-link" style="font-size: 12px;" href="create-challenge.html">도전 생성</a></li>
-                        <li><a class="nav-link" style="font-size: 12px;" href="get-challenges.html">도전 목록조회</a></li>
-                        <li><a class="nav-link" style="font-size: 12px;" href="get-one-challenge.html">도전 상세조회</a></li>
-                      </ul>
-                    </li>
-                  
-                    <li class="menu-header">Post</li>
-                    <li class="dropdown">
-                      <a href="#" class="nav-link has-dropdown"><i class="fas fa-bicycle"></i> <span>오운완</span></a>
-                      <ul class="dropdown-menu">
-                        <li><a class="nav-link" style="font-size: 12px;" href="get-post.html">오운완 생성&조회</a></li>
-                        <li><a class="nav-link" style="font-size: 12px;" href="post.comment.html">오운완 상세조회</a></li>
-                      </ul>
-                    </li>
-        
-                    <li class="menu-header">Rank</li>
-                    <li class="dropdown">
-                      <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>순위</span></a>
-                      <ul class="dropdown-menu">
-                        <li><a class="nav-link" style="font-size: 12px;" href="ranks.html">순위 조회</a></li>
-                      </ul>
-                    </li>
-        
-                    <li class="menu-header">User</li>
-                    <li class="dropdown">
-                      <a href="#" class="nav-link has-dropdown"><i class="fas fa-search"></i> <span>유저</span></a>
-                      <ul class="dropdown-menu">
-                        <li><a class="nav-link" style="font-size: 12px;" href="user-Info.html">유저 정보</a></li>
-                      </ul>
-                    </li>
-        
-                  <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-                    <a class="btn btn-primary btn-lg btn-block btn-icon-split" style="color: white; font-weight: bold;">
-                      <i class="fas fa-rocket"></i> OUTBODY
-                    </a>
-                  </div>
-                </aside>
-              </div>
+                  <!-- 사이드바 -->
+          <ul class="sidebar-menu">
+
+            <li class="menu-header">Record</li>
+            <li >
+              <a href="index-0.html"><i class="fas fa-columns"></i>
+                <span>체성분</span></a>
+            </li>
+
+            <li class="menu-header">Challenge</li>
+            <li >
+              <a href="get-challenges.html"><i class="fas fa-fire"></i>
+                <span>도전</span></a>
+            </li>
+          
+            <li class="menu-header">Post</li>
+            <li >
+              <a href="오운완주소넣기"><i class="fas fa-bicycle"></i>
+                <span>오운완</span></a>
+            </li>
+
+            <li class="menu-header">Rank</li>
+            <li >
+              <a href="ranks.html"><i class="fas fa-th"></i>
+                <span>순위</span></a>
+            </li>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+          <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+            <a class="btn btn-primary btn-lg btn-block btn-icon-split" style="color: white; font-weight: bold;">
+              <i class="fas fa-rocket"></i> OUTBODY
+            </a>
+          </div>
+        </aside>
+      </div>
 
             <!-- Main Content -->
             <div class="main-content">
