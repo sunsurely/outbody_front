@@ -1,5 +1,5 @@
 const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNzIxMTc2LCJleHAiOjE2OTM3MjQ3NzZ9.e_m2mel9JBgHgtesLEH0bTwhdRin_FyGf9r6NeM-FX8';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNzI1NjQ2LCJleHAiOjE2OTM3OTc2NDZ9.FQUFx0B5MvAtTSrcfQaUc7APFMQKA6_ZCGHCP6tVALs';
 
 // localStorage.setItem('jwtToken', jwtToken);
 // const storedToken = localStorage.getItem('jwtToken');
