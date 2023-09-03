@@ -1,14 +1,4 @@
-/**
- *
- * You can write your JS code here, DO NOT touch the default style file
- * because it will make it harder for you to update.
- *
- */
-
-'use strict';
-
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkzNzMwNDgxLCJleHAiOjE2OTM3MzQwODF9.ssoKprK0b0rZlHMPk4kL_2_H-S49SvuTifkUaxZUREM';
+const accessToken = localStorage.getItem('cookie');
 
 const filterApplyButton = document.querySelector('#filter-apply-button');
 filterApplyButton.addEventListener('click', () => {
@@ -21,7 +11,7 @@ async function getChallenges(option) {
   await axios
     .get(`http://localhost:3000/challenge?filter=${option}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: accessToken,
       },
     })
     .then((response) => {

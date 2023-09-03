@@ -1,8 +1,4 @@
-const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNzI1NjQ2LCJleHAiOjE2OTM3OTc2NDZ9.FQUFx0B5MvAtTSrcfQaUc7APFMQKA6_ZCGHCP6tVALs';
-
-// localStorage.setItem('jwtToken', jwtToken);
-// const storedToken = localStorage.getItem('jwtToken');
+const accessToken = localStorage.getItem('cookie');
 
 $(document).ready(function () {
   initMyPage();
@@ -61,7 +57,7 @@ async function updateUserInfo() {
   await axios
     .patch(`http://localhost:3000/user/me`, formData, {
       headers: {
-        Authorization: `Bearer ${storedToken}`,
+        Authorization: accessToken,
         'Content-Type': 'multipart/form-data',
       },
     })
@@ -92,13 +88,13 @@ async function initMyPage() {
   try {
     const { data } = await axios.get('http://localhost:3000/user/me/profile', {
       headers: {
-        Authorization: `Bearer ${storedToken}`,
+        Authorization: accessToken,
       },
     });
 
     const rankData = await axios.get('http://localhost:3000/user/me/rank', {
       headers: {
-        Authorization: `Bearer ${storedToken}`,
+        Authorization: accessToken,
       },
     });
 
@@ -177,7 +173,7 @@ async function editPassword() {
   await axios
     .patch(`http://localhost:8080/user/me/password`, data, {
       headers: {
-        Authorization: `Bearer ${storedToken}`,
+        Authorization: accessToken,
       },
     })
     .then((response) => {
@@ -200,7 +196,7 @@ $(signoutBtn).click(async () => {
   try {
     await axios.delete('http://localhost:3000/user/me/signout', {
       data,
-      headers: { Authorization: `Bearer ${storedToken}` },
+      headers: { Authorization: accessToken },
     });
 
     alert('서비스를 탈퇴하셨습니다');
@@ -219,7 +215,7 @@ $('#searchFriendByEmail').on('click', async () => {
       `http://localhost:3000/user/me/searchEmail/?email=${email}`,
       {
         headers: {
-          Authorization: `Bearer ${storedToken}`,
+          Authorization: accessToken,
         },
       },
     );
@@ -248,7 +244,7 @@ $('#searchFriendByEmail').on('click', async () => {
             `http://localhost:3000/follow/${userId}/request`,
             {},
             {
-              headers: { Authorization: `Bearer ${storedToken}` },
+              headers: { Authorization: accessToken },
             },
           );
           alert(`${user.name}(${user.email})님에게 친구요청을 보냈습니다`);
@@ -278,7 +274,7 @@ async function initMessagesBox() {
   // 1. 친구요청 메시지
   try {
     const response = await axios.get('http://localhost:3000/follow/request', {
-      headers: { Authorization: `Bearer ${storedToken}` },
+      headers: { Authorization: accessToken },
     });
     const messages = response.data.data;
 
@@ -341,7 +337,7 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'yes' };
         await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-          headers: { Authorization: `Bearer ${storedToken}` },
+          headers: { Authorization: accessToken },
         });
 
         alert('친구요청을 수락했습니다.');
@@ -356,7 +352,7 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'no' };
         await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-          headers: { Authorization: `Bearer ${storedToken}` },
+          headers: { Authorization: accessToken },
         });
 
         alert('친구요청을 거절했습니다.');
@@ -365,7 +361,6 @@ async function initMessagesBox() {
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
-
   // 2. 도전방 초대메시지
 
   try {
