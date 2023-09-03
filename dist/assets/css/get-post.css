@@ -5,3 +5,10 @@
 .user-detail-remove {
   float: right;
 }
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px; /* 원하는 최대 너비로 설정하세요. */
+}

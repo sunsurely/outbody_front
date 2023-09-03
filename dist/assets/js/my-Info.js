@@ -42,42 +42,36 @@ document.getElementById('searchfriendCancel').onclick = function () {
   $('#searchfriendModal').modal('hide');
 };
 
-// localStorage.setItem('jwtToken', jwtToken);
+// 내 정보 수정 (재용 작성)
+$('#update-userInfo-button').click(updateUserInfo);
+async function updateUserInfo() {
+  const profileImage = $('#profile-image-upload')[0].files[0];
+  const birthday = $('#user-birthday').val();
+  const description = $('#user-description').val();
+  console.log(description);
 
-// 저장된 JWT토큰 가져오기 = storedToken
-// const storedToken = localStorage.getItem('jwtToken');
+  const formData = new FormData();
+  formData.append('image', profileImage);
+  formData.append('birthday', birthday);
+  formData.append('description', description);
 
-//   // 이미지 파일이 선택되었을 때
-//   if (photo.files.length > 0) {
-//     formData.append('imgUrl', photo.files[0]);
-//   }
-//   //내정보수정(업로드)
-//   axios
-//     .patch(`http://localhost:3000/user/me`, formData, {
-//       headers: {
-//         // 'Content-Type': 'multipart/form-data',
-//         Authorization: `Bearer ${storedToken}`,
-//       },
-//     })
-//     .then((response) => {
-//       if (response.data.success) {
-//         alert('내 정보가 업데이트되었습니다.');
-//       }
-//     })
-//     .catch((error) => {
-//       console.log('Error message:', error.response.data.message);
-//     });
-// });
-
-// 이미지 파일 선택 시에 호출되는 부분
-// document.querySelector('#image-upload').addEventListener('change', function () {
-//   const imageLabel = document.querySelector('#image-label');
-//   if (this.files.length > 0) {
-//     imageLabel.textContent = this.files[0].name; // 선택한 파일명을 표시
-//   } else {
-//     imageLabel.textContent = 'Choose File';
-//   }
-// });
+  await axios
+    .patch(`http://localhost:3000/user/me`, formData, {
+      headers: {
+        Authorization: `Bearer ${storedToken}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .then((response) => {
+      if (response.data.success === true) {
+        alert('내 정보 수정이 완료되었습니다.');
+        location.reload();
+      }
+    })
+    .catch((error) => {
+      alert(error.response.data.message);
+    });
+}
 
 //내 정보 조회
 async function initMyPage() {
@@ -131,7 +125,9 @@ async function initMyPage() {
     }
     $(profileImg).attr(
       'src',
-      myData.imgUrl ? myData.imgUrl : 'assets/img/avatar/avatar-1.png',
+      myData.imgUrl
+        ? `https://inflearn-nest-cat.s3.amazonaws.com/${myData.imgUrl}`
+        : 'assets/img/avatar/avatar-1.png',
     );
     $(myFriends).html(followTemp);
     const date = new Date(myData.createdAt);

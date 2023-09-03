@@ -2,7 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNjUwOTgzLCJleHAiOjE2OTM2NTQ1ODN9.JYC8K1BLJNt-Ta72ffReQpcPNbfHvUNVNPU8km1_RL4';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkzNzMwNDgxLCJleHAiOjE2OTM3MzQwODF9.ssoKprK0b0rZlHMPk4kL_2_H-S49SvuTifkUaxZUREM';
 
 window.onload = function () {
   getChallengeDetail();
@@ -75,7 +75,9 @@ async function getChallengeDetail() {
           <div class="card-footer bg-whitesmoke">
             <ul class="list-unstyled list-unstyled-border" style="margin-top: 20px;">
               <li class="media">
-                <img alt="image" class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-1.png">
+                <img alt="image" class="mr-3 rounded-circle" width="50" src="https://inflearn-nest-cat.s3.amazonaws.com/${
+                  challenge.userImageUrl
+                }">
                 <div class="media-body">
                   <div class="mt-0 mb-1 font-weight-bold">${
                     challenge.userName
@@ -126,7 +128,8 @@ async function getChallengers() {
       challengerList.innerHTML += response.data.data
         .map((challenger) => {
           return `<li class="media">
-            <img alt="image" class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-1.png">
+            <img alt="image" class="mr-3 rounded-circle" width="50"
+            src="https://inflearn-nest-cat.s3.amazonaws.com/${challenger.userImageUrl}">
             <div class="media-body">
               <div class="mt-0 mb-1 font-weight-bold">${challenger.userName}</div>
               <div class="font-1000-bold"><i class="fas fa-circle"></i> ${challenger.userPoint}점</div>
@@ -261,10 +264,10 @@ $('#send-invitation-button').on('click', async () => {
           );
         })
         .catch((error) => {
-          console.error(error.response.data.message);
+          alert(error.response.data.message);
         });
     });
   } catch (error) {
-    console.error(error.response.data.message);
+    alert(error.response.data.message);
   }
 });

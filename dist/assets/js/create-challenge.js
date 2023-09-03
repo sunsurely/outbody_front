@@ -8,7 +8,7 @@
 'use strict';
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNjMzNjQ1LCJleHAiOjE2OTM2MzcyNDV9.JeZEfbw837WJtpMtC14vBj_goUOzrVlNYaQli_hXsEQ';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNzI3MTQ0LCJleHAiOjE2OTM3MzA3NDR9.LkPGmUh39jqevzuvBxQXKt38gZoyKbWi2vQloQ07AhY';
 
 // 도전 세부 설정
 let startDate = null;
