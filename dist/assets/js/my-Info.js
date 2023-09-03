@@ -1,5 +1,8 @@
 const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNjQ4NTg5LCJleHAiOjE2OTM3MjA1ODl9.Xs0DmK3RWZHRt2-J1nVAJxSqjeC7Jv3IhkOx3E9k0GA';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNzIxMTc2LCJleHAiOjE2OTM3MjQ3NzZ9.e_m2mel9JBgHgtesLEH0bTwhdRin_FyGf9r6NeM-FX8';
+
+// localStorage.setItem('jwtToken', jwtToken);
+// const storedToken = localStorage.getItem('jwtToken');
 
 $(document).ready(function () {
   initMyPage();
@@ -42,44 +45,36 @@ document.getElementById('searchfriendCancel').onclick = function () {
   $('#searchfriendModal').modal('hide');
 };
 
-// 토큰 저장
+// 내 정보 수정 (재용 작성)
+$('#update-userInfo-button').click(updateUserInfo);
+async function updateUserInfo() {
+  const profileImage = $('#profile-image-upload')[0].files[0];
+  const birthday = $('#user-birthday').val();
+  const description = $('#user-description').val();
+  console.log(description);
 
-// localStorage.setItem('jwtToken', jwtToken);
+  const formData = new FormData();
+  formData.append('image', profileImage);
+  formData.append('birthday', birthday);
+  formData.append('description', description);
 
-// 저장된 JWT토큰 가져오기 = storedToken
-// const storedToken = localStorage.getItem('jwtToken');
-
-//   // 이미지 파일이 선택되었을 때
-//   if (photo.files.length > 0) {
-//     formData.append('imgUrl', photo.files[0]);
-//   }
-//   //내정보수정(업로드)
-//   axios
-//     .patch(`http://localhost:3000/user/me`, formData, {
-//       headers: {
-//         // 'Content-Type': 'multipart/form-data',
-//         Authorization: `Bearer ${storedToken}`,
-//       },
-//     })
-//     .then((response) => {
-//       if (response.data.success) {
-//         alert('내 정보가 업데이트되었습니다.');
-//       }
-//     })
-//     .catch((error) => {
-//       console.log('Error message:', error.response.data.message);
-//     });
-// });
-
-// 이미지 파일 선택 시에 호출되는 부분
-// document.querySelector('#image-upload').addEventListener('change', function () {
-//   const imageLabel = document.querySelector('#image-label');
-//   if (this.files.length > 0) {
-//     imageLabel.textContent = this.files[0].name; // 선택한 파일명을 표시
-//   } else {
-//     imageLabel.textContent = 'Choose File';
-//   }
-// });
+  await axios
+    .patch(`http://localhost:3000/user/me`, formData, {
+      headers: {
+        Authorization: `Bearer ${storedToken}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .then((response) => {
+      if (response.data.success === true) {
+        alert('내 정보 수정이 완료되었습니다.');
+        location.reload();
+      }
+    })
+    .catch((error) => {
+      alert(error.response.data.message);
+    });
+}
 
 //내 정보 조회
 async function initMyPage() {
@@ -354,7 +349,7 @@ async function initMessagesBox() {
     console.error('Error message:', error.response.data.message);
   }
 
-  // 2. 도전방 초대메시지
+  // 2. 도전방 초대
   try {
     const response = await axios.get(
       'http://localhost:3000/challenge/invite/list',
@@ -403,7 +398,7 @@ async function initMessagesBox() {
       <div class="dropdown-item-desc">      
         <p id="challengeMessage" style="margin-bottom:0px;"><span style="font-weight:bold;">${
           msg.name
-        }</span>(${emailText})님이 도전방에 초대했습니다. 수락하시겠습니까?.</p>
+        }</span>(${emailText})님이 도전방에 초대했습니다. 수락하시겠습니까?</p>
    
         <button id="accept${id}"
           class="btn btn-sm btn accept-challenge"
@@ -430,6 +425,7 @@ async function initMessagesBox() {
         const tagId = $(this).attr('id');
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'yes' };
+
         await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
           headers: { Authorization: `Bearer ${storedToken}` },
         });

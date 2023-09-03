@@ -2,7 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNjUwOTgzLCJleHAiOjE2OTM2NTQ1ODN9.JYC8K1BLJNt-Ta72ffReQpcPNbfHvUNVNPU8km1_RL4';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNzEzMDA5LCJleHAiOjE2OTM3MTY2MDl9.C7X15wYe2YRvvyuMJaWfXD9NZqszacmlBXK6vZ1d3WI';
 
 window.onload = function () {
   getChallengeDetail();
@@ -261,10 +261,10 @@ $('#send-invitation-button').on('click', async () => {
           );
         })
         .catch((error) => {
-          console.error(error.response.data.message);
+          alert(error.response.data.message);
         });
     });
   } catch (error) {
-    console.error(error.response.data.message);
+    alert(error.response.data.message);
   }
 });
