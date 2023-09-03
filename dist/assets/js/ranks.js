@@ -1,3 +1,5 @@
+const accessToken = localStorage.getItem('cookie');
+
 $(document).ready(function () {
   totalrankPage();
   friendRankPage();
@@ -29,9 +31,6 @@ $(document).ready(function () {
 //   fetchFriendRank(currentPage);
 // });
 
-const thistoken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImlhdCI6MTY5MzU2MzYwNSwiZXhwIjoxNjkzNTcwODA1fQ.0ITkltfHHFSeK5vr7LF9iU5oA9giuUBJYwuirVaq0ww';
-
 //전체랭킹
 async function totalrankPage() {
   // 초기 페이지 설정
@@ -43,7 +42,7 @@ async function totalrankPage() {
       const { data } = axios.get(
         `http://localhost:3000/rank/total`, //?page=${page}&pageSize=${pageSize}`,
         {
-          headers: { Authorization: `Bearer ${thistoken}` },
+          headers: { Authorization: accessToken },
         },
       );
 

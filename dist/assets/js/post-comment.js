@@ -1,10 +1,9 @@
+const accessToken = localStorage.getItem('cookie');
+
 $(document).ready(function () {
   getOnePost();
   getComment();
 });
-
-let token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjkzNTY2MTczLCJleHAiOjE2OTM1NzMzNzN9.jORQn9_igSLn5BjaemMAJa-uv6XywuL-xy_c2ziPrEc';
 
 // 오운완 상세 조회
 // challengeId 받아오는거 아직 안함.
@@ -15,7 +14,7 @@ const getOnePost = async () => {
       `http://localhost:3000/challenge/3/post/25`,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: accessToken,
         },
       },
     );

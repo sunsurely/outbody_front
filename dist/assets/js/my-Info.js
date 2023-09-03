@@ -1,8 +1,4 @@
-const storedToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNzMxNjI0LCJleHAiOjE2OTM3MzUyMjR9.nkBzP12ixmWKqJVDdYx64f-va-uLuIO93XqHbroHxd4';
-
-// localStorage.setItem('jwtToken', jwtToken);
-// const storedToken = localStorage.getItem('jwtToken');
+const accessToken = localStorage.getItem('cookie');
 
 $(document).ready(function () {
   initMyPage();
@@ -61,7 +57,7 @@ async function updateUserInfo() {
   await axios
     .patch(`http://localhost:3000/user/me`, formData, {
       headers: {
-        Authorization: `Bearer ${storedToken}`,
+        Authorization: accessToken,
         'Content-Type': 'multipart/form-data',
       },
     })
@@ -92,13 +88,13 @@ async function initMyPage() {
   try {
     const { data } = await axios.get('http://localhost:3000/user/me/profile', {
       headers: {
-        Authorization: `Bearer ${storedToken}`,
+        Authorization: accessToken,
       },
     });
 
     const rankData = await axios.get('http://localhost:3000/user/me/rank', {
       headers: {
-        Authorization: `Bearer ${storedToken}`,
+        Authorization: accessToken,
       },
     });
 
@@ -177,7 +173,7 @@ async function editPassword() {
   await axios
     .patch(`http://localhost:8080/user/me/password`, data, {
       headers: {
-        Authorization: `Bearer ${storedToken}`,
+        Authorization: accessToken,
       },
     })
     .then((response) => {
@@ -200,7 +196,7 @@ $(signoutBtn).click(async () => {
   try {
     await axios.delete('http://localhost:3000/user/me/signout', {
       data,
-      headers: { Authorization: `Bearer ${storedToken}` },
+      headers: { Authorization: accessToken },
     });
 
     alert('서비스를 탈퇴하셨습니다');
@@ -219,7 +215,7 @@ $('#searchFriendByEmail').on('click', async () => {
       `http://localhost:3000/user/me/searchEmail/?email=${email}`,
       {
         headers: {
-          Authorization: `Bearer ${storedToken}`,
+          Authorization: accessToken,
         },
       },
     );
@@ -248,7 +244,7 @@ $('#searchFriendByEmail').on('click', async () => {
             `http://localhost:3000/follow/${userId}/request`,
             {},
             {
-              headers: { Authorization: `Bearer ${storedToken}` },
+              headers: { Authorization: accessToken },
             },
           );
           alert(`${user.name}(${user.email})님에게 친구요청을 보냈습니다`);
@@ -278,7 +274,7 @@ async function initMessagesBox() {
   // 1. 친구요청 메시지
   try {
     const response = await axios.get('http://localhost:3000/follow/request', {
-      headers: { Authorization: `Bearer ${storedToken}` },
+      headers: { Authorization: accessToken },
     });
     const messages = response.data.data;
 
@@ -341,7 +337,7 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'yes' };
         await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-          headers: { Authorization: `Bearer ${storedToken}` },
+          headers: { Authorization: accessToken },
         });
 
         alert('친구요청을 수락했습니다.');
@@ -356,7 +352,7 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'no' };
         await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-          headers: { Authorization: `Bearer ${storedToken}` },
+          headers: { Authorization: accessToken },
         });
 
         alert('친구요청을 거절했습니다.');
@@ -365,104 +361,4 @@ async function initMessagesBox() {
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
-
-  // // 2. 도전방 초대메시지
-  // try {
-  //   const response = await axios.get(
-  //     'http://localhost:3000/challenge/invite/list',
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${storedToken}`,
-  //       },
-  //     },
-  //   );
-  //   const messages = response.data.data;
-  //   for (const msg of messages) {
-  //     const email = msg.email;
-  //     const index = email.indexOf('@');
-  //     const preString = email.slice(0, index);
-  //     const nextString = email.slice(index, index + 3);
-
-  //     const emailText = `${preString}${nextString}...`;
-
-  //     const now = new Date();
-  //     const msgDate = new Date(msg.createdAt);
-  //     const diffInMilliseconds = now - msgDate;
-  //     const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
-  //     const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
-
-  //     let msgTime;
-
-  //     if (diffInDays >= 1) {
-  //       msgTime = `${diffInDays}일전`;
-  //     } else {
-  //       msgTime = `${diffInHours}시간전`;
-  //     }
-  //     const id = msg.userId;
-  //     const temp = `
-  //     <div class="dropdown-item-avatar" id="challenger">
-  //      <a href="user-info.html?userId=${msg.userId}">
-  //         <img
-  //           alt="image"
-  //           src="${msg.imgUrl ? msg.imgUrl : 'assets/img/avatar/avatar-2.png'}"
-  //           class="rounded-circle"
-  //           style="width:50px; htight:50px;"
-  //         />
-  //      </a>
-  //       <div class="is-online"></div>
-  //     </div>
-  //     <div class="dropdown-item-desc">
-  //       <p id="challengeMessage" style="margin-bottom:0px;"><span style="font-weight:bold;">${
-  //         msg.name
-  //       }</span>(${emailText})님이 도전방에 초대했습니다. 수락하시겠습니까?.</p>
-
-  //       <button id="accept${id}"
-  //         class="btn btn-sm btn accept-challenge"
-  //         style="margin-bottom:20px; margin-left:250px"
-  //       >
-  //         수락
-  //       </button>
-  //       <button
-  //       id="cancel${id}"
-  //         class="btn btn-sm btn deny-challenge"
-  //         style="margin-bottom:20px;"
-  //       >
-  //         거절
-  //       </button>
-  //       <span style="font-size:12px; margin-top:0px; margin-left:10px; font-weight:bold"; >${msgTime}</span>
-  //     </div>
-  //   `;
-
-  //     $(messageBox).append(temp);
-  //   }
-  //   $('.accept-challenge').each(function (idx, acc) {
-  //     $(acc).on('click', async function (e) {
-  //       e.preventDefault();
-  //       const tagId = $(this).attr('id');
-  //       const id = tagId.charAt(tagId.length - 1);
-  //       const data = { response: 'yes' };
-  //       await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-  //         headers: { Authorization: `Bearer ${storedToken}` },
-  //       });
-
-  //       alert('도전방 초대를 수락했습니다.');
-  //     });
-  //   });
-
-  //   $('.deny-challenge').each(function (idx, acc) {
-  //     $(acc).on('click', async function (e) {
-  //       e.preventDefault();
-  //       const tagId = $(this).attr('id');
-  //       const id = tagId.charAt(tagId.length - 1);
-  //       const data = { response: 'no' };
-  //       await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-  //         headers: { Authorization: `Bearer ${storedToken}` },
-  //       });
-
-  //       alert('도전방 초대를 거절했습니다.');
-  //     });
-  //   });
-  // } catch (error) {
-  //   console.error('Error message:', error.answer.data.message);
-  // }
 }
