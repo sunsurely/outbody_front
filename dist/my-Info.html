@@ -195,7 +195,7 @@
                   style="overflow-y: scroll; height: 300px"
                 >
                   <a href="#" class="dropdown-item dropdown-item-unread">
-                    <!-- 친구요청 메시지함 -->
+                    <!-- 1. 친구요청 메시지함 -->
                     <div
                       style="width: 50px"
                       class="dropdown-item-avatar"
@@ -225,8 +225,8 @@
                       </button>
                     </div>
 
-                    <!-- 도전 초대메시지함 -->
-                    <div class="dropdown-item-avatar" id="challenger">
+                     <!-- 도전 초대메시지함 -->
+                     <div class="dropdown-item-avatar" id="challenger">
                       <img
                         alt="image"
                         src="assets/img/avatar/avatar-2.png"
@@ -239,17 +239,20 @@
                       <div id="challengeCreatedAt">2023.08.31</div>
                       <button
                         class="btn btn-sm btn accept-challenge"
-                        id="${message.userId}"
+                        data-challenge-id="${msg.challengeId}"
+                        data-user-id="${msg.userId}"
                       >
                         수락
                       </button>
                       <button
                         class="btn btn-sm btn deny-challenge"
-                        id="${message.userId}"
+                        data-challenge-id="${msg.challengeId}"
+                        data-user-id="${msg.userId}"
                       >
                         거절
                       </button>
                     </div>
+
                   </a>
                 </div>
                 <div class="dropdown-footer text-center"></div>
@@ -551,7 +554,7 @@
                                 id="findChallenges"
                                 data-toggle="modal"
                                 data-target="#exampleModal"
-                                style="font-size: 80%"
+                                style="font-size: 90%"
                                 href="#"
                               >
                                 자세히 보기
@@ -649,15 +652,15 @@
                       </div>
 
                       <div class="card-footer text-right">
-                        <button
-                          class="btn btn-primary"
+                        <a
                           id="searchfriend"
                           data-toggle="modal"
                           data-target="#exampleModal"
-                          style="display: inline-block"
+                          style="font-size: 90%"
+                          href="#"
                         >
                           유저 검색
-                        </button>
+                      </a>
                       </div>
                     </form>
                   </div>
