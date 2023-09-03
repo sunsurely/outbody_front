@@ -5,11 +5,7 @@ const signUp = async () => {
     const email = $('#email').val();
     const password = $('#password').val();
     const confirmPassword = $('#confirm_password').val();
-    const age = $('#age').val();
     const gender = $('#gender').val();
-    const height = $('#height').val();
-    const birthday = $('#birthday').val();
-    console.log(birthday);
 
     if (!name) {
       alert('이름을 입력해주세요');
@@ -31,20 +27,8 @@ const signUp = async () => {
       alert('비밀번호가 일치하지 않습니다.');
       return;
     }
-    if (!age) {
-      alert('나이를 입력해주세요');
-      return;
-    }
     if (gender === '-- 선택 --') {
       alert('성별을 선택해주세요');
-      return;
-    }
-    if (!height) {
-      alert('키를 입력해주세요');
-      return;
-    }
-    if (birthday === '연도-월-일') {
-      alert('생일을 입력해주세요');
       return;
     }
 
@@ -52,10 +36,7 @@ const signUp = async () => {
       name,
       email,
       password,
-      age,
       gender,
-      height,
-      birthday,
     });
 
     alert('회원가입이 완료되었습니다.');
