@@ -409,110 +409,81 @@
                 <i class="far fa-edit"></i> 오운완 생성
               </a>
             </h2>
-
-            <!-- 모달창 -->
-            <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true"
-              data-backdrop="false">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content" style="overflow: hidden;">
-                  <div class="modal-header">
-                    <h5 class="modal-title">오운완 생성</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="form-group">
-                      <label>내용</label>
-                      <input type="text" class="form-control desc_input" placeholder="내용을 입력해주세요">
-                    </div>
-                    <div class="form-group">
-                      <label>이미지 Url</label>
-                      <input type="text" class="form-control url_input" placeholder="이미지 Url을 입력해주세요">
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="createBtn">작성</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                  </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <!-- 오운완 게시글 목록 자리 -->
                 </div>
               </div>
-            </div>
-          </div>
 
-
-          <!-- <p class="section-lead">This page is just an example for you to create your own page.</p> -->
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <!-- <div class="col-12 col-md-4 col-lg-4">
-                                    <article class="article article-style-c">
-                                        <div class="article-header">
-                                            <div class="article-image" data-background="assets/img/news/img14.jpg">
-                                            </div>
-                                        </div>
-                                        <div class="article-details">
-                                            <div class="article-category"><a href="#"></a>
-                                                <div class="bullet"></div> <a href="#">2시간 전</a>
-                                            </div>
-                                            <div class="article-title">
-                                                <h2><a href="#">오운완임다</a></h2>
-                                            </div>
-                                            <div class="article-user">
-                                                <img alt="image" src="assets/img/avatar/avatar-3.png">
-                                                <div class="article-user-details">
-                                                    <div class="user-detail-name">
-                                                        <a href="#">이상우</a>
-                                                    </div>
-                                                    <div class="text-job">나는야 핑크 헬린이</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div> -->
+              <div class="card-footer text-right">
+                <nav class="d-inline-block">
+                  <ul class="pagination mb-0">
+                    <li class="page-item disabled">
+                      <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1 <span
+                          class="sr-only">(current)</span></a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">4</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                    </li>
+                  </ul>
+                </nav>
               </div>
-
             </div>
-
-            <div class="card-footer text-right">
-              <nav class="d-inline-block">
-                <ul class="pagination mb-0">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
-                  </li>
-                  <li class="page-item active"><a class="page-link" href="#">1 <span
-                        class="sr-only">(current)</span></a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">4</a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">5</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
+        </section>
       </div>
-      </section>
+      <footer class="main-footer">
+        <div class="footer-left">
+          Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad
+            Nauval
+            Azhar</a>
+        </div>
+        <div class="footer-right">
+        </div>
+      </footer>
     </div>
-    <footer class="main-footer">
-      <div class="footer-left">
-        Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad
-          Nauval
-          Azhar</a>
-      </div>
-      <div class="footer-right">
-
-      </div>
-    </footer>
   </div>
+
+  <!-- 모달창 -->
+  <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true"
+    data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content" style="overflow: hidden;">
+        <div class="modal-header">
+          <h5 class="modal-title">오운완 작성</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>내용</label>
+            <input type="text" class="form-control desc_input" placeholder="내용을 입력해주세요">
+          </div>
+          <form>
+            <div class="form-group">
+              <label for="post-image-upload">인증 사진</label>
+              <input id="post-image-upload" type="file" class="form-control-file" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="create-button">작성</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- General JS Scripts -->
@@ -525,8 +496,10 @@
   <script src="assets/js/stisla.js"></script>
 
   <!-- JS Libraies -->
+  <script src="assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js"></script>
 
   <!-- Page Specific JS File -->
+  <script src="assets/js/page/features-post-create.js"></script>
 
   <!-- Template JS File -->
   <script src="assets/js/scripts.js"></script>
