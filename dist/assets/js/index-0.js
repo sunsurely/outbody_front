@@ -28,8 +28,7 @@ $('.cancel-regist').on('click', () => {
 });
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNjM4OTI1LCJleHAiOjE2OTM3MTA5MjV9.k7fqbze3LeoZjoM6xGG9K2yGQ2V1JZ-s-Sim0swE2f0';
-
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNzE1MDE4LCJleHAiOjE2OTM3ODcwMTh9.pus-xt0YC7DrpCeRKMy3cdzRwOwtXZwuIg2GAc03qgg';
 
 async function initMessagesBox() {
   const messageBox = $('.dropdown-list-message');
