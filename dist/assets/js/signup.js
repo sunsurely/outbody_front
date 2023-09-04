@@ -40,10 +40,9 @@ const signUp = async () => {
     });
 
     alert('회원가입이 완료되었습니다.');
-    location.reload();
+    location.href = `login.html`;
   } catch (error) {
     alert(error.response.data.message);
-    console.error('Error message:', error);
   }
 };
 $('#signUp_btn').click(signUp);
@@ -64,5 +63,4 @@ $('#signUp_btn').click(signUp);
 const kakaoLoginLoading = () => {
   window.location.href = '리다이렉트 URI 설정';
 };
-
 $('.kakao-btn').click(kakaoLoginLoading);

@@ -30,6 +30,7 @@ async function getChallenges(option) {
         </tr>`;
       challengeTable.innerHTML += response.data.data
         .map((challenge) => {
+          
           let publicView = challenge.publicView;
           if (publicView === true) {
             publicView = '전체';
@@ -101,8 +102,3 @@ async function getChallenges(option) {
       alert(error.response.data.message);
     });
 }
-
-$('#profile-image').attr(
-  'src',
-  `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImgUrl}`,
-);
