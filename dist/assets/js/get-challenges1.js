@@ -8,7 +8,7 @@
 'use strict';
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjkzNzEzMDA5LCJleHAiOjE2OTM3MTY2MDl9.C7X15wYe2YRvvyuMJaWfXD9NZqszacmlBXK6vZ1d3WI';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNzU5MTY2LCJleHAiOjE2OTM4MzExNjZ9.9YRDxnqTZI1QGLo3h-ydR_v4ErnURExqJ5XhL4HYFFY';
 
 const filterApplyButton = document.querySelector('#filter-apply-button');
 filterApplyButton.addEventListener('click', () => {
@@ -37,7 +37,7 @@ async function initChallengeList(option) {
           <th>공개 여부</th>
           <th></th>
         </tr>`;
-      challengeTable.innerHTML += response.data.challenges
+      challengeTable.innerHTML += response.data.data.challenges
         .map((challenge) => {
           let publicView = challenge.publicView;
           if (publicView === true) {
@@ -103,13 +103,15 @@ async function initChallengeList(option) {
         })
         .join('');
 
-      const pagenationTag = $('.pagenation');
+      const pagenationTag = $('.pagination');
       const prevButton = `<li id="prev_button" class="page-item"><a class="page-link">Previous</a></li>`;
       const nextButton = `<li id="next_button" class="page-item"><a class="page-link">next</a></li>`;
+
       let pageNumbers = '';
       let pageNumbersHtml = '';
 
-      totalPages = response.data.totalPages;
+      const totalPages = response.data.data.totalPages;
+
       for (let i = 1; i <= totalPages; i++) {
         pageNumbers += `<li class="page-item page_number">
           <a class="page-link">${i}</a>
@@ -125,6 +127,7 @@ async function initChallengeList(option) {
 
       $(prevBtn).click(async () => {
         if (nowPage > 1) {
+          console.log('해보자');
           try {
             $(pages).find('.page-link').css('background-color', '');
             $(pages).find('.page-link').css('color', '');
@@ -231,7 +234,7 @@ async function initChallengeList(option) {
             $(pages).find('.page-link').css('color', '');
 
             const { data } = await getChallenges(option, nowPage + 1);
-
+            console.log(data);
             challengeTable.innerHTML = `<tr>
             <th>제목</th>
             <th>기간</th>
@@ -431,7 +434,7 @@ async function initChallengeList(option) {
 
 async function getChallenges(option, page) {
   try {
-    const { data } = axios.get(
+    const { data } = await axios.get(
       `http://localhost:3000/challenge?filter=${option}&page=${page}`,
       {
         headers: {

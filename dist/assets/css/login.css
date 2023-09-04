@@ -4,12 +4,17 @@
   align-items: center;
 }
 
-.button-container {
-  margin-top: 10px;
-}
-
 .fa-solid {
   margin-right: 5px;
+}
+
+.text-muted {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.social-login {
+  color: #98a6ad;
 }
 
 .kakao-btn {

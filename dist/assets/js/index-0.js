@@ -2,7 +2,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const challengeId = urlParams.get('id');
 
 const accessToken = localStorage.getItem('cookie');
-
+('use strict');
 let nowPage = 1;
 let orderList = 'normal';
 let totalPages = 0;
@@ -36,7 +36,7 @@ async function initMessagesBox() {
   $(messageBox).html('');
   try {
     const response = await axios.get('http://localhost:3000/follow/request', {
-      headers: { Authorization: accessToken },
+      headers: { Authorization: ` ${accessToken}` },
     });
     const messages = response.data.data;
 
@@ -106,7 +106,7 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'yes' };
         await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-          headers: { Authorization: accessToken },
+          headers: { Authorization: ` ${storedToken}` },
         });
 
         alert('친구요청을 수락했습니다.');
@@ -120,7 +120,7 @@ async function initMessagesBox() {
         const id = tagId.charAt(tagId.length - 1);
         const data = { response: 'no' };
         await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
-          headers: { Authorization: accessToken },
+          headers: { Authorization: ` ${storedToken}` },
         });
 
         alert('친구요청을 거절했습니다.');
@@ -141,7 +141,6 @@ async function initializeChart() {
 
   try {
     const { data } = await getRecordData(1, 7);
-
     const records = data.pageinatedUsersRecords;
 
     for (const rec of records) {
@@ -162,16 +161,17 @@ async function initializeChart() {
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
+
   dateArr.reverse();
   bmrArr.reverse();
   weightArr.reverse();
   muscleArr.reverse();
   fatArr.reverse();
 
-  $(recentDatas[0]).text(bmrArr[6]);
-  $(recentDatas[1]).text(weightArr[6]);
-  $(recentDatas[2]).text(fatArr[6]);
-  $(recentDatas[3]).text(muscleArr[6]);
+  $(recentDatas[0]).text(bmrArr[bmrArr.length - 1]);
+  $(recentDatas[1]).text(weightArr[weightArr.length - 1]);
+  $(recentDatas[2]).text(fatArr[fatArr.length - 1]);
+  $(recentDatas[3]).text(muscleArr[muscleArr.length - 1]);
 
   initChart('myChart', bmrArr, dateArr, 50, '기초대사량(kcal)');
   initChart('myChart2', weightArr, dateArr, 1, '체중(kg)');
@@ -185,10 +185,11 @@ async function getBodyResults() {
       'http://localhost:3000/record/result/detail',
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: ` ${accessToken}`,
         },
       },
     );
+
     const avgDatas = data.data.avgDatas;
     const stdWeight = data.data.stdWeight;
     const stdFat = data.data.stdFat;
@@ -251,16 +252,22 @@ async function getBodyResults() {
     $(bodyResults[1]).text(
       resWeight < 0 ? `${resWeight}kg` : `+${resWeight}kg`,
     );
-    $(bodyResults[2]).text(`${stdFat}%`);
-    $(bodyResults[3]).text(resFat < 0 ? `${resFat}%` : `+${resFat}%`);
+    $(bodyResults[2]).text(`${stdFat}kg`);
+    $(bodyResults[3]).text(resFat < 0 ? `${resFat}kg` : `+${resFat}kg`);
     $(bodyResults[4]).text(`${stdMuscle}kg`);
     $(bodyResults[5]).text(
       resMuscle < 0 ? `${resMuscle}kg` : `+${resMuscle}kg`,
     );
 
-    $(avgWeight).text(`평균 체중 : ${avgDatas.avgWgt}kg`);
-    $(avgFat).text(`평균 체지방률 : ${avgDatas.avgFat}%`);
-    $(avgMuscle).text(`평균 골격근량 : ${avgDatas.avgMus}kg`);
+    $(avgWeight).text(
+      `평균 체중 :  ${avgDatas.avgWeight ? avgDatas.avgWeightv : ''}(kg)`,
+    );
+    $(avgFat).text(
+      `평균 체지방률 :  ${avgDatas.avgFat ? avgDatas.avgFat : ''}(%)`,
+    );
+    $(avgMuscle).text(
+      `평균 골격근량 :  ${avgDatas.avgMuscle ? avgDatas.avgMuscle : ''}(kg)`,
+    );
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
@@ -583,7 +590,7 @@ $('.regist-record').click(async () => {
   try {
     await axios.post('http://localhost:3000/record', data, {
       headers: {
-        Authorization: accessToken,
+        Authorization: ` ${accessToken}`,
       },
     });
     alert('데이터를 등록했습니다.');
@@ -598,7 +605,7 @@ async function getRecordData(page, pageSize) {
     `http://localhost:3000/record/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
-        Authorization: accessToken,
+        Authorization: ` ${accessToken}`,
       },
     },
   );
@@ -712,7 +719,7 @@ async function getDateRangeRecord(startDate, endDate, page) {
 
     {
       headers: {
-        Authorization: accessToken,
+        Authorization: ` ${accessToken}`,
       },
     },
   );
