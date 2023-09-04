@@ -462,28 +462,6 @@ async function initMessagesBox() {
       });
     });
 
-    $('.accept-challenge').each(function (idx, acc) {
-      const userId = $(acc).attr('data-user-id');
-      $(acc).on('click', async function (e) {
-        e.preventDefault();
-        const data = { response: 'yes' };
-        try {
-          await axios.post(
-            `http://localhost:3000/challenge/${userId}/accept`,
-            data,
-            {
-              headers: { Authorization: `Bearer ${storedToken}` },
-            },
-          );
-
-          alert(`도전방 초대를 수락했습니다.`);
-          window.location.reload();
-        } catch (error) {
-          alert(error.response.data.message);
-        }
-      });
-    });
-
     $('.deny-challenge').each(function (idx, acc) {
       const userId = $(acc).attr('data-user-id');
       $(acc).on('click', async function (e) {
