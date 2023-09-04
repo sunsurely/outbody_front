@@ -361,6 +361,7 @@ async function initMessagesBox() {
   } catch (error) {
     console.error('Error message:', error.response.data.message);
   }
+
   // 2. 도전방 초대메시지
 
   try {
