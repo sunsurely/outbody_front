@@ -260,13 +260,13 @@ async function getBodyResults() {
     );
 
     $(avgWeight).text(
-      `평균 체중 :  ${avgDatas.avgWeight ? avgDatas.avgWeightv : ''}(kg)`,
+      `평균 체중 :  ${avgDatas.avgWgt ? avgDatas.avgWgt : ''}(kg)`,
     );
     $(avgFat).text(
       `평균 체지방률 :  ${avgDatas.avgFat ? avgDatas.avgFat : ''}(%)`,
     );
     $(avgMuscle).text(
-      `평균 골격근량 :  ${avgDatas.avgMuscle ? avgDatas.avgMuscle : ''}(kg)`,
+      `평균 골격근량 :  ${avgDatas.avgMus ? avgDatas.avgMus : ''}(kg)`,
     );
   } catch (error) {
     console.error('Error message:', error.response.data.message);
