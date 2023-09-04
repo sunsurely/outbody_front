@@ -1,14 +1,4 @@
-/**
- *
- * You can write your JS code here, DO NOT touch the default style file
- * because it will make it harder for you to update.
- *
- */
-
-'use strict';
-
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNzU5MTY2LCJleHAiOjE2OTM4MzExNjZ9.9YRDxnqTZI1QGLo3h-ydR_v4ErnURExqJ5XhL4HYFFY';
+const accessToken = localStorage.getItem('cookie');
 
 const filterApplyButton = document.querySelector('#filter-apply-button');
 filterApplyButton.addEventListener('click', () => {
@@ -22,10 +12,12 @@ async function initChallengeList(option) {
   await axios
     .get(`http://localhost:3000/challenge?filter=${option}&page=${1}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: accessToken,
       },
     })
     .then((response) => {
+      console.log(response.data.data);
+
       const challengeTable = document.querySelector('#challenge-table');
       challengeTable.innerHTML = `<tr>
           <th>제목</th>
@@ -87,14 +79,17 @@ async function initChallengeList(option) {
           </td>
           <td>${challenge.userNumber} / ${challenge.userNumberLimit}명</td>
           <td>
-            <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle" width="35"
-              data-toggle="title" title="">
+          <img id="profile-image" alt="image"
+          src="https://inflearn-nest-cat.s3.amazonaws.com/${
+            challenge.hostImageUrl
+          }"
+          class="rounded-circle" width="35" data-toggle="title" title="">
             <div class="d-inline-block ml-1">${challenge.hostName}</div>
           </td>
           <td>${publicView}</td>
           <td>
             <a href="get-one-challenge.html?id=${challenge.id}">
-              <button class="btn btn-primary" style="border-radius: 15px;">
+              <button class="btn btn-primary" style="border-radius: 20px;">
                 보기
               </button>
             </a>
@@ -195,14 +190,17 @@ async function initChallengeList(option) {
             </td>
             <td>${challenge.userNumber} / ${challenge.userNumberLimit}명</td>
             <td>
-              <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle" width="35"
-                data-toggle="title" title="">
+            <img id="profile-image" alt="image"
+            src="https://inflearn-nest-cat.s3.amazonaws.com/${
+              challenge.hostImageUrl
+            }"
+            class="rounded-circle" width="35" data-toggle="title" title="">
               <div class="d-inline-block ml-1">${challenge.hostName}</div>
             </td>
             <td>${publicView}</td>
             <td>
               <a href="get-one-challenge.html?id=${challenge.id}">
-                <button class="btn btn-primary" style="border-radius: 15px;">
+                <button class="btn btn-primary" style="border-radius: 20px;">
                   보기
                 </button>
               </a>
@@ -296,14 +294,17 @@ async function initChallengeList(option) {
             </td>
             <td>${challenge.userNumber} / ${challenge.userNumberLimit}명</td>
             <td>
-              <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle" width="35"
-                data-toggle="title" title="">
+            <img id="profile-image" alt="image"
+            src="https://inflearn-nest-cat.s3.amazonaws.com/${
+              challenge.hostImageUrl
+            }"
+            class="rounded-circle" width="35" data-toggle="title" title="">
               <div class="d-inline-block ml-1">${challenge.hostName}</div>
             </td>
             <td>${publicView}</td>
             <td>
               <a href="get-one-challenge.html?id=${challenge.id}">
-                <button class="btn btn-primary" style="border-radius: 15px;">
+                <button class="btn btn-primary" style="border-radius: 20px;">
                   보기
                 </button>
               </a>
@@ -400,14 +401,17 @@ async function initChallengeList(option) {
             </td>
             <td>${challenge.userNumber} / ${challenge.userNumberLimit}명</td>
             <td>
-              <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle" width="35"
-                data-toggle="title" title="">
+            <img id="profile-image" alt="image"
+            src="https://inflearn-nest-cat.s3.amazonaws.com/${
+              challenge.hostImageUrl
+            }"
+            class="rounded-circle" width="35" data-toggle="title" title="">
               <div class="d-inline-block ml-1">${challenge.hostName}</div>
             </td>
             <td>${publicView}</td>
             <td>
               <a href="get-one-challenge.html?id=${challenge.id}">
-                <button class="btn btn-primary" style="border-radius: 15px;">
+                <button class="btn btn-primary" style="border-radius: 20px;">
                   보기
                 </button>
               </a>
@@ -438,7 +442,7 @@ async function getChallenges(option, page) {
       `http://localhost:3000/challenge?filter=${option}&page=${page}`,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: accessToken,
         },
       },
     );
