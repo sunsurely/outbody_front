@@ -100,6 +100,7 @@ async function initMyPage() {
 
     const myData = data.data.rest;
     const followersInfo = data.data.followersInfo;
+    // const followerId = followersInfo.followId;
     $(pointTag).text(myData.point);
     $(friendTag).text(followersInfo.length);
     $(nameTag).text(myData.name);
@@ -262,9 +263,9 @@ $('#searchFriendByEmail').on('click', async () => {
 });
 
 // 내 도전목록조회 페이지 이동
-document.getElementById('findChallenges').onclick = function () {
-  window.location.href = `challenge-list.html`;
-};
+$('#findChallenges').click(function () {
+  window.location.href = 'challenge-list.html';
+});
 
 //친구 & 도전  초대 메세지함  , 초대 수락기능 같이 구현
 async function initMessagesBox() {
@@ -485,15 +486,4 @@ async function initMessagesBox() {
   } catch (error) {
     alert(error.response.data.message);
   }
-}
-
-// 로그아웃
-async function logout() {
-  localStorage.removeItem('cookie');
-  alert('로그아웃되었습니다.');
-  location.href = 'login.html';
-}
-const logoutButton = document.getElementById('logout-button');
-if (logoutButton) {
-  logoutButton.addEventListener('click', logout);
 }
