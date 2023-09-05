@@ -72,6 +72,22 @@ async function updateUserInfo() {
     });
 }
 
+// 올린 사진 미리보기
+const image = document.querySelector('#profile-image-upload');
+image.addEventListener('change', (event) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(event.target.files[0]);
+
+  reader.onload = function (event) {
+    const profileImage = document.createElement('img');
+    profileImage.setAttribute('src', event.target.result);
+    profileImage.style.maxWidth = '50%';
+    profileImage.style.display = 'block';
+    profileImage.style.margin = '0 auto';
+    document.querySelector('#image-container').appendChild(profileImage);
+  };
+});
+
 //내 정보 조회
 async function initMyPage() {
   const pointTag = $('#my-point');
@@ -400,7 +416,7 @@ async function initMessagesBox() {
         },
       },
     );
-    const messages = response.data.data;
+    const mesages = response.data.data;
     console.log('messages', messages);
     console.log('response.data', response.data);
     const userId = response.data.data[0].userId;
