@@ -1,262 +1,322 @@
+const urlParams = new URLSearchParams(window.location.search);
+const challengeId = urlParams.get('id');
+
 const accessToken = localStorage.getItem('cookie');
+('use strict');
+let nowPage = 1;
+let orderList = 'normal';
+let totalPages = 0;
 
 $(document).ready(function () {
-  totalrankPage();
-  friendRankPage();
+  totalrankPage(1, 10);
+  friendRankPage(1, 10);
 });
 
-// // 전체랭킹 페이지 이동 버튼 클릭 이벤트 핸들러
-// $('#total-prev-btn').on('click', function () {
-//   if (currentPage > 1) {
-//     currentPage--;
-//     fetchTotalRank(currentPage); // 전체랭킹 조회 호출
-//   }
-// });
-
-// $('#total-next-btn').on('click', function () {
-//   currentPage++;
-//   fetchTotalRank(currentPage);
-// });
-
-// // 친구랭킹 페이지 이동 버튼 클릭 이벤트 핸들러
-// $('#friend-prev-btn').on('click', function () {
-//   if (currentPage > 1) {
-//     currentPage--;
-//     fetchFriendRank(currentPage); // 친구랭킹 조회 호출
-//   }
-// });
-
-// $('#friend-next-btn').on('click', function () {
-//   currentPage++;
-//   fetchFriendRank(currentPage);
-// });
-
 //전체랭킹
-async function totalrankPage() {
-  // 초기 페이지 설정
-  let currentPage = 1;
-  const pageSize = 10;
+async function totalrankPage(page, pageSize) {
+  const totalTable = $('#total-table');
+  const totalPagenationTag = $('#total-pagenation');
+  const totalPrevButton = `<li id="prev_button" class="page-item"><a class="page-link">◀</a></li>`;
+  const totalNextButton = `<li id="next_button" class="page-item"><a class="page-link">▶</a></li>`;
+  let pageNumbers = '';
+  let pageNumbersHtml = '';
+  let totalRankHtml = '';
 
-  const fetchTotalRankings = (page) => {
-    try {
-      const { data } = axios.get(
-        `http://localhost:3000/rank/total`, //?page=${page}&pageSize=${pageSize}`,
-        {
-          headers: { Authorization: accessToken },
-        },
-      );
+  orderList = 'normal';
+  const data = await getTotaldata(page, pageSize);
+  const totalranks = data.data.paginationTotalRanks;
+  totalPages = data.data.totalPages;
 
-      $('#total-rank-table tbody').empty();
-      console.log('data', data.data);
-      console.log('paginationTotalRanks', data.data.paginationTotalRanks);
+  for (let i = 1; i <= data.data.totalPages; i++) {
+    pageNumbers += `<li class="page-item page_number">
+    <a class="page-link">${i}</a>
+  </li>`;
+  }
 
-      paginationTotalRanks.forEach((user, index) => {
-        const level =
-          user.point >= 15000
-            ? 'Gold'
-            : user.point >= 12000
-            ? 'Silver'
-            : user.point >= 9000
-            ? 'Bronze'
-            : 'Iron';
-        const row = `
-                <tr>
-                    <td>${(page - 1) * pageSize + index + 1}</td>
-                    <td>${user.name}</td>
-                    <td>${user.createdAt}</td>
-                    <td>
-                        <div class="level">${level}</div>
-                    </td>
-                    <td>${user.point}</td>
-                </tr>
-            `;
-        $('#total-rank-table tbody').append(row);
-      });
-      updatePagination(totalPages, currentPage);
-    } catch (error) {
-      console.error('Error fetching user rankings:', error);
+  let num = 1;
+  let totalTemp = '';
+
+  for (ranker of totalranks) {
+    const level =
+      ranker.point >= 15000
+        ? 'Gold'
+        : ranker.point >= 12000
+        ? 'Silver'
+        : ranker.point >= 9000
+        ? 'Bronze'
+        : 'Iron';
+
+    const temp = `<tr>
+ <th scope="row">${num}</th>
+ <td>${ranker.name}</td>
+ <td>${ranker.createdAt}</td>
+ <td>${level}</td>
+ <td>${ranker.point}</td>
+</tr> `;
+    totalTemp += temp;
+    num++;
+  }
+
+  pageNumbersHtml = totalPrevButton + pageNumbers + totalNextButton;
+  totalTable.html(totalTemp);
+  totalPagenationTag.html(
+    `<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`,
+  );
+  const prevBtn = $('#prev_button');
+  const nextBtn = $('#next_button');
+  const pages = $('.page_number');
+
+  $(prevBtn).click(async () => {
+    if (orderList === 'normal') {
+      if (nowPage > 1) {
+        $(pages).find('.page-link').css('background-color', '');
+        $(pages).find('.page-link').css('color', '');
+
+        try {
+          const { data } = await getTotaldata(nowPage - 1, 10);
+          const ranks = data.paginationTotalRanks;
+          setTotalRankList(ranks);
+          nowPage -= 1;
+          totalRankHtml = '';
+
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('background-color', 'blue');
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('color', 'white');
+        } catch (error) {
+          console.log('Error Message', error.response.data.message);
+        }
+      }
     }
-  };
+  });
 
-  // 버튼업데이트
-  const updatePagination = (totalPages, currentPage) => {
-    $('#totalPagination').empty();
+  $(nextBtn).click(async () => {
+    if (orderList === 'normal') {
+      if (nowPage > 0 && nowPage < totalPages) {
+        $(pages).find('.page-link').css('background-color', '');
+        $(pages).find('.page-link').css('color', '');
 
-    // 현재 페이지를 중심으로 좌우로 일정 개수의 페이지 버튼을 표시. 최소값1, 양쪽 4페이지씩
-    // 페이지네이션 버튼의 끝 페이지를 계산. totalPages를 넘어가면 안 되므로 totalPages와 startPage + 9 중에서 작은 값을 선택
-    const startPage = Math.max(1, currentPage - 4);
-    const endPage = Math.min(totalPages, startPage + 9);
+        try {
+          const { data } = await getTotaldata(nowPage + 1, 10);
+          const ranks = data.paginationTotalRanks;
+          setTotalRankList(ranks);
+          nowPage += 1;
+          totalRankHtml = '';
 
-    // previous버튼 추가
-    if (currentPage > 1) {
-      $('#totalPagination').append(`
-        <li class="page-item">
-            <a class="page-link" href="#" id="total-prev-btn"><i class="fas fa-chevron-left"></i></a>
-        </li>
-    `);
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('background-color', 'blue');
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('color', 'white');
+        } catch (error) {
+          console.log('Error Message', error.response.data.message);
+        }
+      }
     }
+  });
 
-    // Next버튼 추가
-    if (currentPage < totalPages) {
-      $('#totalPagination').append(`
-        <li class="page-item">
-            <a class="page-link" href="#" id="total-next-btn"><i class="fas fa-chevron-right"></i></a>
-        </li>
-    `);
-    }
+  $(pages).each((idx, page) => {
+    $(page).click(async () => {
+      if (orderList === 'normal') {
+        $(pages).find('.page-link').css('background-color', '');
+        $(pages).find('.page-link').css('color', '');
 
-    // 숫자가 적힌 버튼 추가
-    for (let i = startPage; i <= endPage; i++) {
-      const liClass = i === currentPage ? 'active' : '';
-      const li = `
-        <li class="page-item ${liClass}">
-            <a class="page-link" href="#" data-page="${i}">${i}</a>
-        </li>
-    `;
-      $('#totalPagination').append(li);
-    }
+        try {
+          const pageNumber = parseInt($(page).find('.page-link').text());
+          const { data } = await getTotaldata(pageNumber, pageSize);
+          const ranks = data.paginationTotalRanks;
+          setTotalRankList(ranks);
 
-    // 페이지네이션 버튼 클릭 이벤트핸들러
-    $('#totalPagination').on('click', '.page-link', function (event) {
-      event.preventDefault();
-      const pageClicked = parseInt($(this).data('page'));
-      if (!isNaN(pageClicked) && pageClicked !== currentPage) {
-        currentPage = pageClicked;
-        fetchTotalRankings(currentPage);
+          $(page).find('.page-link').css('background-color', 'blue');
+          $(page).find('.page-link').css('color', 'white');
+          nowPage = pageNumber;
+
+          totalRankHtml = '';
+        } catch (error) {
+          console.error('Error message:', error.response.data.message);
+        }
       }
     });
-  };
-
-  //"Next", "Previous" 버튼 클릭 이벤트핸들러
-  $('#totalPagination').on('click', '#total-prev-btn', function (event) {
-    event.preventDefault();
-    if (currentPage > 1) {
-      currentPage--;
-      fetchTotalRankings(currentPage);
-    }
   });
+}
 
-  $('#totalPagination').on('click', '#total-next-btn', function (event) {
-    event.preventDefault();
-    currentPage++;
-    fetchTotalRankings(currentPage);
-  });
-
-  //초기페이지 로드 시 데이터 조회
-  fetchTotalRankings(currentPage);
+async function getTotaldata(page, pageSize) {
+  const data = await axios(
+    `http://localhost:3000/rank/total/page/?page=${page}&pageSize=${pageSize}`,
+    {
+      headers: {
+        Authorization: ` ${accessToken}`,
+      },
+    },
+  );
+  orderList = 'normal';
+  return data.data;
 }
 
 // 친구랭킹
-async function friendRankPage() {
-  $(document).ready(function () {
-    const pageSize = 10;
-    let currentPage = 1;
+async function friendRankPage(page, pageSize) {
+  const friendTable = $('#friend-table');
+  const friendPagenationTag = $('#friend-pagenation');
+  const friendPrevButton = `<li id="prev_button" class="page-item"><a class="page-link">◀</a></li>`;
+  const friendNextButton = `<li id="next_button" class="page-item"><a class="page-link">▶</a></li>`;
+  let pageNumbers = '';
+  let pageNumbersHtml = '';
+  let friendRankHtml = '';
 
-    const fetchFriendRankings = (page) => {
-      axios
-        .get(
-          `http://localhost:3000/rank/followings?page=${page}&pageSize=${pageSize}`,
-        )
-        .then((response) => {
-          const { totalPages, paginationFollowerRanks } = response.data;
-          console.log('friendtotalPages', totalPages);
-          console.log('paginationFollowerRanks', paginationFollowerRanks);
+  orderList = 'normal';
+  const data = await getFriendData(page, pageSize);
+  const friendRanks = data.data.paginationFollowerRanks;
+  totalPages = data.data.totalPages;
 
-          $('#friend-rank-table tbody').empty();
+  for (let i = 1; i <= data.data.totalPages; i++) {
+    pageNumbers += `<li class="page-item page_number">
+    <a class="page-link">${i}</a>
+  </li>`;
+  }
 
-          paginationFollowerRanks.forEach((user, index) => {
-            const level =
-              user.point >= 15000
-                ? 'Gold'
-                : user.point >= 12000
-                ? 'Silver'
-                : user.point >= 9000
-                ? 'Bronze'
-                : 'Iron';
+  let num = 1;
+  let totalTemp = '';
 
-            const row = `
-              <tr>
-                <td>${(page - 1) * pageSize + index + 1}</td>
-                <td>${user.name}</td>
-                <td>${user.createdAt}</td>
-                <td>
-                  <div class="level">${level}</div>
-                </td>
-                <td>${user.point}</td>
-              </tr>
-            `;
-            $('#friend-rank-table tbody').append(row);
-          });
+  for (ranker of friendRanks) {
+    const level =
+      ranker.point >= 15000
+        ? 'Gold'
+        : ranker.point >= 12000
+        ? 'Silver'
+        : ranker.point >= 9000
+        ? 'Bronze'
+        : 'Iron';
 
-          updatePagination(totalPages, currentPage);
-        })
-        .catch((error) => {
-          console.error('Error fetching friend rankings:', error);
-        });
-    };
+    const temp = `<tr>
+ <th scope="row">${num}</th>
+ <td>${ranker.name}</td>
+ <td>${ranker.createdAt}</td>
+ <td>${level}</td>
+ <td>${ranker.point}</td>
+</tr> `;
+    totalTemp += temp;
+    num++;
+  }
 
-    //버튼 업데이트
-    const updatePagination = (totalPages, currentPage) => {
-      $('#friendPagination').empty();
+  pageNumbersHtml = friendPrevButton + pageNumbers + friendNextButton;
+  friendTable.html(totalTemp);
+  friendPagenationTag.html(
+    `<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`,
+  );
+  const prevBtn = $('#prev_button');
+  const nextBtn = $('#next_button');
+  const pages = $('.page_number');
 
-      // 버튼 수 계산
-      const startPage = Math.max(1, currentPage - 4);
-      const endPage = Math.min(totalPages, startPage + 9);
+  $(prevBtn).click(async () => {
+    if (orderList === 'normal') {
+      if (nowPage > 1) {
+        $(pages).find('.page-link').css('background-color', '');
+        $(pages).find('.page-link').css('color', '');
 
-      // "Previous" 버튼
-      if (currentPage > 1) {
-        $('#friendPagination').append(`
-          <li class="page-item">
-            <a class="page-link" href="#" id="friend-prev-btn"><i class="fas fa-chevron-left"></i></a>
-          </li>
-        `);
-      }
+        try {
+          const { data } = await getFriendData(nowPage - 1, 10);
+          const ranks = data.paginationFollowerRanks;
+          setFriendRankList(ranks);
+          nowPage -= 1;
+          friendRankHtml = '';
 
-      // 숫자적힌 버튼 추가
-      for (let i = startPage; i <= endPage; i++) {
-        const liClass = i === currentPage ? 'active' : '';
-        const li = `
-          <li class="page-item ${liClass}">
-            <a class="page-link" href="#" data-page="${i}">${i}</a>
-          </li>
-        `;
-        $('#friendPagination').append(li);
-      }
-
-      // "Next" 버튼 추가
-      if (currentPage < totalPages) {
-        $('#friendPagination').append(`
-          <li class="page-item">
-            <a class="page-link" href="#" id="friend-next-btn"><i class="fas fa-chevron-right"></i></a>
-          </li>
-        `);
-      }
-
-      // 페이지네이션버튼 클릭 이벤트핸들러
-      $('#friendPagination').on('click', '.page-link', function (event) {
-        event.preventDefault();
-        const pageClicked = parseInt($(this).data('page'));
-        if (!isNaN(pageClicked) && pageClicked !== currentPage) {
-          currentPage = pageClicked;
-          fetchFriendRankings(currentPage);
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('background-color', 'blue');
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('color', 'white');
+        } catch (error) {
+          console.log('Error Message', error.response.data.message);
         }
-      });
-    };
+      }
+    }
+  });
 
-    $('#friendPagination').on('click', '#friend-prev-btn', function (event) {
-      event.preventDefault();
-      if (currentPage > 1) {
-        currentPage--;
-        fetchFriendRankings(currentPage);
+  $(nextBtn).click(async () => {
+    if (orderList === 'normal') {
+      if (nowPage > 0 && nowPage < totalPages) {
+        $(pages).find('.page-link').css('background-color', '');
+        $(pages).find('.page-link').css('color', '');
+
+        try {
+          const { data } = await getFriendData(nowPage + 1, 10);
+          const ranks = data.paginationFollowerRanks;
+          setFriendRankList(ranks);
+          nowPage += 1;
+          friendRankHtml = '';
+
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('background-color', 'blue');
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('color', 'white');
+        } catch (error) {
+          console.log('Error Message', error.response.data.message);
+        }
+      }
+    }
+  });
+
+  $(pages).each((idx, page) => {
+    $(page).click(async () => {
+      if (orderList === 'normal') {
+        $(pages).find('.page-link').css('background-color', '');
+        $(pages).find('.page-link').css('color', '');
+
+        try {
+          const { data } = await getFriendData(
+            parseInt($(page).find('.page-link').text()),
+            10,
+          );
+          const ranks = data.paginationFollowerRanks;
+          setFriendRankList(ranks);
+
+          $(page).find('.page-link').css('background-color', 'blue');
+          $(page).find('.page-link').css('color', 'white');
+          nowPage = parseInt($(page).find('.page-link').text());
+
+          friendRankHtml = '';
+        } catch (error) {
+          console.error('Error message:', error.response.data.message);
+        }
       }
     });
-
-    $('#friendPagination').on('click', '#friend-next-btn', function (event) {
-      event.preventDefault();
-      currentPage++;
-      fetchFriendRankings(currentPage);
-    });
-
-    fetchFriendRankings(currentPage);
   });
+}
+
+async function getFriendData(page, pageSize) {
+  const data = await axios(
+    `http://localhost:3000/rank/followings/page/?page=${page}&pageSize=${pageSize}`,
+    {
+      headers: {
+        Authorization: ` ${accessToken}`,
+      },
+    },
+  );
+  orderList = 'normal';
+  return data.data;
+}
+
+// 로그아웃
+async function logout() {
+  localStorage.removeItem('cookie');
+  alert('로그아웃되었습니다.');
+  location.href = 'login.html';
+}
+const logoutButton = document.getElementById('logout-button');
+if (logoutButton) {
+  logoutButton.addEventListener('click', logout);
 }

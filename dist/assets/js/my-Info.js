@@ -486,3 +486,14 @@ async function initMessagesBox() {
     alert(error.response.data.message);
   }
 }
+
+// 로그아웃
+async function logout() {
+  localStorage.removeItem('cookie');
+  alert('로그아웃되었습니다.');
+  location.href = 'login.html';
+}
+const logoutButton = document.getElementById('logout-button');
+if (logoutButton) {
+  logoutButton.addEventListener('click', logout);
+}

@@ -175,8 +175,8 @@ async function initializeChart() {
 
   initChart('myChart', bmrArr, dateArr, 50, '기초대사량(kcal)');
   initChart('myChart2', weightArr, dateArr, 1, '체중(kg)');
-  initChart('myChart3', muscleArr, dateArr, 5, '근육량(kg)');
-  initChart('myChart4', fatArr, dateArr, 5, '체지방률');
+  initChart('myChart3', muscleArr, dateArr, 5, '골격근량(kg)');
+  initChart('myChart4', fatArr, dateArr, 5, '체지방률(%)');
 }
 
 async function getBodyResults() {
@@ -260,13 +260,13 @@ async function getBodyResults() {
     );
 
     $(avgWeight).text(
-      `평균 체중 :  ${avgDatas.avgWeight ? avgDatas.avgWeightv : ''}(kg)`,
+      `평균 체중 :  ${avgDatas.avgWgt ? avgDatas.avgWgt : ''}(kg)`,
     );
     $(avgFat).text(
       `평균 체지방률 :  ${avgDatas.avgFat ? avgDatas.avgFat : ''}(%)`,
     );
     $(avgMuscle).text(
-      `평균 골격근량 :  ${avgDatas.avgMuscle ? avgDatas.avgMuscle : ''}(kg)`,
+      `평균 골격근량 :  ${avgDatas.avgMus ? avgDatas.avgMus : ''}(kg)`,
     );
   } catch (error) {
     console.error('Error message:', error.response.data.message);
@@ -725,4 +725,15 @@ async function getDateRangeRecord(startDate, endDate, page) {
   );
 
   return data;
+}
+
+// 로그아웃
+async function logout() {
+  localStorage.removeItem('cookie');
+  alert('로그아웃되었습니다.');
+  location.href = 'login.html';
+}
+const logoutButton = document.getElementById('logout-button');
+if (logoutButton) {
+  logoutButton.addEventListener('click', logout);
 }
