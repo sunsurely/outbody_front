@@ -24,11 +24,15 @@ const getOnePost = async () => {
     let getPost = '';
     const post = response.data.data;
 
+    const profileImage = post.userImage
+      ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.userImage}`
+      : `assets/img/avatar/avatar-1.png`;
+
     let temphtml = `<div class="card-header">
                         <ul class="list-unstyled user-details list-unstyled-border list-unstyled-noborder">
                             <li class="media">
                                 <img alt="image" class="mr-3 rounded-circle" width="50"
-                                    src="https://inflearn-nest-cat.s3.amazonaws.com/${post.userImage}">
+                                    src="${profileImage}">
                                 <div class="media-body">
                                     <div class="media-title">${post.userName}</div>
                                     <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.userPoint}점</div>
@@ -67,8 +71,12 @@ const getComment = async () => {
 
     let allComments = '';
     response.data.data.forEach((comment) => {
+      const profileImage = comment.userImg
+        ? `https://inflearn-nest-cat.s3.amazonaws.com/${comment.userImg}`
+        : `assets/img/avatar/avatar-1.png`;
+
       let temphtml = `<li class="media" id="comment-${comment.commentId}">
-                        <img alt="image" class="mr-3 rounded-circle" width="70" src="https://inflearn-nest-cat.s3.amazonaws.com/${comment.userImg}">
+                        <img alt="image" class="mr-3 rounded-circle" width="70" src="${profileImage}">
                         <div class="media-body">
                             <div class="media-title mb-1">${comment.username}</div>
                             <div class="media-description text-muted">

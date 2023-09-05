@@ -31,6 +31,10 @@ async function initChallengeList(option) {
         </tr>`;
       challengeTable.innerHTML += response.data.data.challenges
         .map((challenge) => {
+          const profileImage = challenge.hostImageUrl
+            ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
+            : `assets/img/avatar/avatar-1.png`;
+
           let publicView = challenge.publicView;
           if (publicView === true) {
             publicView = '전체';
@@ -80,9 +84,7 @@ async function initChallengeList(option) {
           <td>${challenge.userNumber} / ${challenge.userNumberLimit}명</td>
           <td>
           <img id="profile-image" alt="image"
-          src="https://inflearn-nest-cat.s3.amazonaws.com/${
-            challenge.hostImageUrl
-          }"
+          src="${profileImage}"
           class="rounded-circle" width="35" data-toggle="title" title="">
             <div class="d-inline-block ml-1">${challenge.hostName}</div>
           </td>
@@ -99,8 +101,12 @@ async function initChallengeList(option) {
         .join('');
 
       const pagenationTag = $('.pagination');
-      const prevButton = `<li id="prev_button" class="page-item"><a class="page-link">Previous</a></li>`;
-      const nextButton = `<li id="next_button" class="page-item"><a class="page-link">next</a></li>`;
+      const prevButton = `<li id="prev_button" class="page-item">
+                            <a class="page-link">previous</a>
+                          </li>`;
+      const nextButton = `<li id="next_button" class="page-item">
+                            <a class="page-link">next</a>
+                          </li>`;
 
       let pageNumbers = '';
       let pageNumbersHtml = '';
@@ -109,8 +115,8 @@ async function initChallengeList(option) {
 
       for (let i = 1; i <= totalPages; i++) {
         pageNumbers += `<li class="page-item page_number">
-          <a class="page-link">${i}</a>
-        </li>`;
+                          <a id="nowPage-${i}" class="page-link">${i}</a>
+                        </li>`;
       }
 
       pageNumbersHtml = prevButton + pageNumbers + nextButton;
@@ -120,9 +126,12 @@ async function initChallengeList(option) {
       const nextBtn = $('#next_button');
       const pages = $('.page_number');
 
+      $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'blue');
+      $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
+
+      // Previous Button Clicked
       $(prevBtn).click(async () => {
         if (nowPage > 1) {
-          console.log('해보자');
           try {
             $(pages).find('.page-link').css('background-color', '');
             $(pages).find('.page-link').css('color', '');
@@ -130,18 +139,22 @@ async function initChallengeList(option) {
             const { data } = await getChallenges(option, nowPage - 1);
 
             challengeTable.innerHTML = `<tr>
-            <th>제목</th>
-            <th>기간</th>
-            <th>목표</th>
-            <th>점수</th>
-            <th>인원</th>
-            <th>작성자</th>
-            <th>공개 여부</th>
-            <th></th>
-          </tr>`;
+                <th>제목</th>
+                <th>기간</th>
+                <th>목표</th>
+                <th>점수</th>
+                <th>인원</th>
+                <th>작성자</th>
+                <th>공개 여부</th>
+                <th></th>
+              </tr>`;
 
             challengeTable.innerHTML += data.challenges
               .map((challenge) => {
+                const profileImage = challenge.hostImageUrl
+                  ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
+                  : `assets/img/avatar/avatar-1.png`;
+
                 let publicView = challenge.publicView;
                 if (publicView === true) {
                   publicView = '전체';
@@ -191,9 +204,7 @@ async function initChallengeList(option) {
             <td>${challenge.userNumber} / ${challenge.userNumberLimit}명</td>
             <td>
             <img id="profile-image" alt="image"
-            src="https://inflearn-nest-cat.s3.amazonaws.com/${
-              challenge.hostImageUrl
-            }"
+            src="${profileImage}"
             class="rounded-circle" width="35" data-toggle="title" title="">
               <div class="d-inline-block ml-1">${challenge.hostName}</div>
             </td>
@@ -212,19 +223,16 @@ async function initChallengeList(option) {
             nowPage -= 1;
 
             $(pages)
-              .eq(nowPage - 1)
-              .find('.page-link')
+              .find(`#nowPage-${nowPage}`)
               .css('background-color', 'blue');
-            $(pages)
-              .eq(nowPage - 1)
-              .find('.page-link')
-              .css('color', 'white');
+            $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
           } catch (error) {
-            console.error('Error message:', error.response.data.message);
+            alert(error.response.data.message);
           }
         }
       });
 
+      // Next Button Clicked
       $(nextBtn).click(async () => {
         if (nowPage > 0 && nowPage < totalPages) {
           try {
@@ -232,20 +240,24 @@ async function initChallengeList(option) {
             $(pages).find('.page-link').css('color', '');
 
             const { data } = await getChallenges(option, nowPage + 1);
-            console.log(data);
+
             challengeTable.innerHTML = `<tr>
-            <th>제목</th>
-            <th>기간</th>
-            <th>목표</th>
-            <th>점수</th>
-            <th>인원</th>
-            <th>작성자</th>
-            <th>공개 여부</th>
-            <th></th>
-          </tr>`;
+                <th>제목</th>
+                <th>기간</th>
+                <th>목표</th>
+                <th>점수</th>
+                <th>인원</th>
+                <th>작성자</th>
+                <th>공개 여부</th>
+                <th></th>
+              </tr>`;
 
             challengeTable.innerHTML += data.challenges
               .map((challenge) => {
+                const profileImage = challenge.hostImageUrl
+                  ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
+                  : `assets/img/avatar/avatar-1.png`;
+
                 let publicView = challenge.publicView;
                 if (publicView === true) {
                   publicView = '전체';
@@ -295,9 +307,7 @@ async function initChallengeList(option) {
             <td>${challenge.userNumber} / ${challenge.userNumberLimit}명</td>
             <td>
             <img id="profile-image" alt="image"
-            src="https://inflearn-nest-cat.s3.amazonaws.com/${
-              challenge.hostImageUrl
-            }"
+            src="${profileImage}"
             class="rounded-circle" width="35" data-toggle="title" title="">
               <div class="d-inline-block ml-1">${challenge.hostName}</div>
             </td>
@@ -316,20 +326,17 @@ async function initChallengeList(option) {
             nowPage += 1;
 
             $(pages)
-              .eq(nowPage + 1)
-              .find('.page-link')
+              .find(`#nowPage-${nowPage}`)
               .css('background-color', 'blue');
-            $(pages)
-              .eq(nowPage + 1)
-              .find('.page-link')
-              .css('color', 'white');
+            $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
           } catch (error) {
-            console.error('Error message:', error.response.data.message);
+            alert(error.response.data.message);
           }
         }
       });
 
-      $(pages).each((idx, page) => {
+      // Each Page Clicked
+      $(pages).each((index, page) => {
         $(page).click(async () => {
           $(pages).find('.page-link').css('background-color', '');
           $(pages).find('.page-link').css('color', '');
@@ -337,22 +344,26 @@ async function initChallengeList(option) {
           try {
             const { data } = await getChallenges(
               option,
-              parseInt($(page).find('.page-link').text()),
+              parseInt($(page).find(`.page-link`).text()),
             );
 
             challengeTable.innerHTML = `<tr>
-            <th>제목</th>
-            <th>기간</th>
-            <th>목표</th>
-            <th>점수</th>
-            <th>인원</th>
-            <th>작성자</th>
-            <th>공개 여부</th>
-            <th></th>
-          </tr>`;
+                <th>제목</th>
+                <th>기간</th>
+                <th>목표</th>
+                <th>점수</th>
+                <th>인원</th>
+                <th>작성자</th>
+                <th>공개 여부</th>
+                <th></th>
+              </tr>`;
 
             challengeTable.innerHTML += data.challenges
               .map((challenge) => {
+                const profileImage = challenge.hostImageUrl
+                  ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.hostImageUrl}`
+                  : `assets/img/avatar/avatar-1.png`;
+
                 let publicView = challenge.publicView;
                 if (publicView === true) {
                   publicView = '전체';
@@ -402,9 +413,7 @@ async function initChallengeList(option) {
             <td>${challenge.userNumber} / ${challenge.userNumberLimit}명</td>
             <td>
             <img id="profile-image" alt="image"
-            src="https://inflearn-nest-cat.s3.amazonaws.com/${
-              challenge.hostImageUrl
-            }"
+            src="${profileImage}"
             class="rounded-circle" width="35" data-toggle="title" title="">
               <div class="d-inline-block ml-1">${challenge.hostName}</div>
             </td>
@@ -420,13 +429,14 @@ async function initChallengeList(option) {
               })
               .join('');
 
-            nowPage = page;
+            nowPage = parseInt($(page).find(`.page-link`).text());
 
-            $(page).find('.page-link').css('background-color', 'blue');
-            $(page).find('.page-link').css('color', 'white');
-            nowPage = parseInt($(page).find('.page-link').text());
+            $(pages)
+              .find(`#nowPage-${nowPage}`)
+              .css('background-color', 'blue');
+            $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
           } catch (error) {
-            console.error('Error message:', error.response.data.message);
+            alert(error.response.data.message);
           }
         });
       });
@@ -436,6 +446,7 @@ async function initChallengeList(option) {
     });
 }
 
+// 도전 목록 조회 함수
 async function getChallenges(option, page) {
   try {
     const { data } = await axios.get(
@@ -446,9 +457,8 @@ async function getChallenges(option, page) {
         },
       },
     );
-
     return data;
   } catch (error) {
-    console.error(error.response.data.message);
+    alert(error.response.data.message);
   }
 }

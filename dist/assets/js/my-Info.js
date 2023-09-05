@@ -153,9 +153,9 @@ async function initMyPage() {
     $(rankTag).text(rankData.data.data);
     $(email).text(myData.email);
     $(birthday).text(
-      myData.birthday ? myData.birthday : '생일을 입력해 주세요',
+      myData.birthday ? myData.birthday : '미입력',
     );
-    $(gender).text(myData.gender ? myData.gender : '성별을 입력해 주세요');
+    $(gender).text(myData.gender ? myData.gender : '미입력');
     let num = 1;
     let followTemp = '';
     for (follower of followersInfo) {
