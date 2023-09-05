@@ -21,6 +21,10 @@ const getPosts = async () => {
 
     let allPosts = '';
     response.data.data.forEach((post) => {
+      const profileImage = post.userImageUrl
+        ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.userImageUrl}`
+        : `assets/img/avatar/avatar-1.png`;
+
       let temphtml = `<div class="col-12 col-md-4 col-lg-2">
           <article class="article article-style-c">
             <div class="article-header">
@@ -36,7 +40,7 @@ const getPosts = async () => {
                 </h2>
               </div>
               <div class="article-user">
-                <img alt="image" src="https://inflearn-nest-cat.s3.amazonaws.com/${post.userImageUrl}">
+                <img alt="image" src="${profileImage}">
                 <div class="article-user-details">
                   <div class="user-detail-remove">
                     <a href="#" class="btn btn-icon btn-primary"><i class="fas fa-times delPost-btn" postId=${post.id}></i></a>

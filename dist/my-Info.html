@@ -395,36 +395,36 @@
                 <div class="card">
                   <form method="post" class="needs-validation" novalidate="">
                     <div class="card-header">
-                      <h4 id="informationName">Information</h4>
+                      <h4 id="informationName">내 정보</h4>
                     </div>
                     <div class="card-body">
                       <div class="row">
                         <div class="form-group col-md-6 col-12">
-                          <label>E-mail: </label>
-                          <div id="emailaddress">a26484638@gmail.com</div>
+                          <label>계정(e-mail)</label>
+                          <div id="emailaddress"></div>
                           <div class="invalid-feedback"></div>
                         </div>
                         <div class="form-group col-md-6 col-12">
-                          <label>Gender: </label>
-                          <div id="mygender">Male</div>
+                          <label>성별</label>
+                          <div id="mygender"></div>
                           <div class="invalid-feedback"></div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="form-group col-md-6 col-12">
-                          <label>Birth Day: </label>
-                          <div id="bdaytag">September 9th, 1992</div>
+                          <label>생일</label>
+                          <div id="bdaytag"></div>
                           <div class="invalid-feedback"></div>
                         </div>
                         <div class="form-group col-md-6 col-12">
-                          <label>CreatedAt: </label>
-                          <div id="createdate">August 15th, 2023</div>
+                          <label>가입일</label>
+                          <div id="createdate"></div>
                           <div class="invalid-feedback"></div>
                         </div>
                       </div>
                       <div class="row" id="mychatbox2">
                         <div class="form-group col-12" data-toggle="tooltip">
-                          <label>Friends List</label>
+                          <label>친구 목록</label>
                         </div>
                       </div>
                       <div class="table-responsive">
@@ -433,17 +433,17 @@
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">E-mail</th>
-                                <th scope="col">Ranks</th>
+                                <th scope="col">이름</th>
+                                <th scope="col">계정(e-mail)</th>
+                                <th scope="col">순위</th>
                               </tr>
                             </thead>
                             <tbody id="my-friends-list">
                               <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>ABC@naver.com</td>
-                                <td>380</td>
+                                <th scope="row"></th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                               </tr>
                             </tbody>
                           </table>
@@ -454,7 +454,7 @@
                     <div class="card-footer text-right">
                       <a id="searchfriend" data-toggle="modal" data-target="#exampleModal" style="font-size: 90%"
                         href="#">
-                        유저 검색
+                        친구 찾기
                       </a>
                     </div>
                   </form>
@@ -474,7 +474,7 @@
             </div>
             <div class="card-body">
               <div class="form-group">
-                <label>사진 올리기</label>
+                <label>내 사진 올리기</label>
                 <form>
                   <div class="form-group">
                     <input id="profile-image-upload" type="file" class="form-control-file" />
@@ -492,12 +492,10 @@
                 <textarea id="user-description" class="form-control" placeholder="자신을 자유롭게 설명해주세요."></textarea>
               </div>
             </div>
-            <div class="card-footer text-right">
-              <button class="btn btn-primary" id="editcancel">취소</button>
-
-              <button class="btn btn-primary" id="update-userInfo-button">등록</button>
+            <div class="modal-footer" style="margin-bottom: 20px;">
+              <button class="btn btn-primary" id="update-userInfo-button">완료</button>
+              <button class="btn btn-secondary" id="editcancel">취소</button>
             </div>
-            <div class="modal-footer bg-whitesmoke br"></div>
           </div>
         </div>
       </div>
