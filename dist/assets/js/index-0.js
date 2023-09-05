@@ -1,8 +1,5 @@
-const urlParams = new URLSearchParams(window.location.search);
-const challengeId = urlParams.get('id');
-
 const accessToken = localStorage.getItem('cookie');
-('use strict');
+
 let nowPage = 1;
 let orderList = 'normal';
 let totalPages = 0;
@@ -725,15 +722,4 @@ async function getDateRangeRecord(startDate, endDate, page) {
   );
 
   return data;
-}
-
-// 로그아웃
-async function logout() {
-  localStorage.removeItem('cookie');
-  alert('로그아웃되었습니다.');
-  location.href = 'login.html';
-}
-const logoutButton = document.getElementById('logout-button');
-if (logoutButton) {
-  logoutButton.addEventListener('click', logout);
 }
