@@ -72,6 +72,22 @@ async function updateUserInfo() {
     });
 }
 
+// 올린 사진 미리보기
+const image = document.querySelector('#profile-image-upload');
+image.addEventListener('change', (event) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(event.target.files[0]);
+
+  reader.onload = function (event) {
+    const profileImage = document.createElement('img');
+    profileImage.setAttribute('src', event.target.result);
+    profileImage.style.maxWidth = '50%';
+    profileImage.style.display = 'block';
+    profileImage.style.margin = '0 auto';
+    document.querySelector('#image-container').appendChild(profileImage);
+  };
+});
+
 //내 정보 조회
 async function initMyPage() {
   const pointTag = $('#my-point');
@@ -85,6 +101,7 @@ async function initMyPage() {
   const createdAt = $('#createdate');
   const myFriends = $('#my-friends-list');
   const profileImg = $('#profile-image');
+
   try {
     const { data } = await axios.get('http://localhost:3000/user/me/profile', {
       headers: {
@@ -92,6 +109,16 @@ async function initMyPage() {
       },
     });
 
+    const challengeId = data.data.challengeId;
+
+    const challengeData = await axios.get(
+      `http://localhost:3000/challenge/${challengeId}`,
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+      },
+    );
     const rankData = await axios.get('http://localhost:3000/user/me/rank', {
       headers: {
         Authorization: accessToken,
@@ -99,18 +126,32 @@ async function initMyPage() {
     });
 
     const myData = data.data.rest;
+
     const followersInfo = data.data.followersInfo;
     // const followerId = followersInfo.followId;
     $(pointTag).text(myData.point);
     $(friendTag).text(followersInfo.length);
     $(nameTag).text(myData.name);
+
+    const title = $('#title');
+    const challengeDesc = $('#desc');
+    const startDate = $('#startDate');
+    const endDate = $('#endDate');
+
+    $(title).text(`${challengeData.data.data.title}`);
+    $(challengeDesc).text(`${challengeData.data.data.description}`);
+    $(startDate).text(`start: ${challengeData.data.data.startDate}`);
+    $(endDate).text(`end: ${challengeData.data.data.endDate}`);
+
+    $('#challenge-card').on('click', () => {
+      window.location.href = `get-one-challenge.html?id=${challengeId}`;
+    });
+
     $(description).text(myData.description);
     $(rankTag).text(rankData.data.data);
     $(email).text(myData.email);
-    $(birthday).text(
-      myData.birthday ? myData.birthday : '생일을 입력해 주세요',
-    );
-    $(gender).text(myData.gender ? myData.gender : '성별을 입력해 주세요');
+    $(birthday).text(myData.birthday ? myData.birthday : '미입력');
+    $(gender).text(myData.gender ? myData.gender : '미입력');
     let num = 1;
     let followTemp = '';
     for (follower of followersInfo) {
@@ -263,9 +304,9 @@ $('#searchFriendByEmail').on('click', async () => {
 });
 
 // 내 도전목록조회 페이지 이동
-$('#findChallenges').click(function () {
-  window.location.href = 'challenge-list.html';
-});
+document.getElementById('#findChallenges').onclick = function () {
+  window.location.href = `challenge-list.html`;
+};
 
 //친구 & 도전  초대 메세지함  , 초대 수락기능 같이 구현
 async function initMessagesBox() {

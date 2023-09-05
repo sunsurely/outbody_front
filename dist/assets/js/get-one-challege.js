@@ -20,6 +20,10 @@ async function getChallengeDetail() {
       console.log(response.data.data);
       const challenge = response.data.data;
 
+      const profileImage = challenge.userImageUrl
+        ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.userImageUrl}`
+        : `assets/img/avatar/avatar-1.png`;
+
       const challengeDetail = document.querySelector('#challenge-detail');
       challengeDetail.innerHTML = `<div class="card card-primary">
           <div class="card-header">
@@ -74,9 +78,7 @@ async function getChallengeDetail() {
           <div class="card-footer bg-whitesmoke">
             <ul class="list-unstyled list-unstyled-border" style="margin-top: 20px;">
               <li class="media">
-                <img alt="image" class="mr-3 rounded-circle" width="50" src="https://inflearn-nest-cat.s3.amazonaws.com/${
-                  challenge.userImageUrl
-                }">
+                <img alt="image" class="mr-3 rounded-circle" width="50" src="${profileImage}">
                 <div class="media-body">
                   <div class="mt-0 mb-1 font-weight-bold">${
                     challenge.userName
@@ -126,9 +128,13 @@ async function getChallengers() {
       const challengerList = document.querySelector('#challenger-list');
       challengerList.innerHTML += response.data.data
         .map((challenger) => {
+          const profileImage = challenger.userImageUrl
+            ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenger.userImageUrl}`
+            : `assets/img/avatar/avatar-1.png`;
+
           return `<li class="media">
             <img alt="image" class="mr-3 rounded-circle" width="50"
-            src="https://inflearn-nest-cat.s3.amazonaws.com/${challenger.userImageUrl}">
+            src="${profileImage}">
             <div class="media-body">
               <div class="mt-0 mb-1 font-weight-bold">${challenger.userName}</div>
               <div class="font-1000-bold"><i class="fas fa-circle"></i> ${challenger.userPoint}점</div>
