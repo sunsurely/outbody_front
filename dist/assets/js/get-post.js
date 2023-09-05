@@ -97,6 +97,22 @@ const createPost = async () => {
 };
 $('#create-button').click(createPost);
 
+// 올린 사진 미리보기
+const image = document.querySelector('#post-image-upload');
+image.addEventListener('change', (event) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(event.target.files[0]);
+
+  reader.onload = function (event) {
+    const profileImage = document.createElement('img');
+    profileImage.setAttribute('src', event.target.result);
+    profileImage.style.maxWidth = '50%';
+    profileImage.style.display = 'block';
+    profileImage.style.margin = '0 auto';
+    document.querySelector('#image-container').appendChild(profileImage);
+  };
+});
+
 // 오운완 삭제
 const deletePost = async (postId) => {
   try {
