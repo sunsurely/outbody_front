@@ -373,7 +373,7 @@ async function initMessagesBox() {
         },
       },
     );
-    const messages = response.data.data;
+    const mesages = response.data.data;
     console.log('messages', messages);
     console.log('response.data', response.data);
     const userId = response.data.data[0].userId;
@@ -485,15 +485,4 @@ async function initMessagesBox() {
   } catch (error) {
     alert(error.response.data.message);
   }
-}
-
-// 로그아웃
-async function logout() {
-  localStorage.removeItem('cookie');
-  alert('로그아웃되었습니다.');
-  location.href = 'login.html';
-}
-const logoutButton = document.getElementById('logout-button');
-if (logoutButton) {
-  logoutButton.addEventListener('click', logout);
 }
