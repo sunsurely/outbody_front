@@ -21,8 +21,6 @@ const getPosts = async () => {
 
     let allPosts = '';
     response.data.data.forEach((post) => {
-      console.log(response.data.data);
-
       let temphtml = `<div class="col-12 col-md-4 col-lg-2">
           <article class="article article-style-c">
             <div class="article-header">
@@ -34,7 +32,7 @@ const getPosts = async () => {
             <div class="article-details">
               <div class="article-title">
                 <h2 class="ellipsis">
-                  <a href="http://localhost:3000/challenge/${challengeId}/post/${post.id}">${post.description}</a>
+                  <a href="post-comment.html?cid=${challengeId}&pid=${post.id}">${post.description}</a>
                 </h2>
               </div>
               <div class="article-user">
@@ -45,6 +43,7 @@ const getPosts = async () => {
                   </div>
                   <div class="user-detail-name">
                     <a href="http://localhost:3000/user/${post.userId}">${post.userName}</a>
+                    <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.userPoint}점</div>
                   </div>
                 </div>
               </div>

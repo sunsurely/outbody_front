@@ -374,7 +374,7 @@ async function initMessagesBox() {
         },
       },
     );
-    const messages = response.data.data;
+    const mesages = response.data.data;
     console.log('messages', messages);
     console.log('response.data', response.data);
     const userId = response.data.data[0].userId;
