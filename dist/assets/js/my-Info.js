@@ -101,6 +101,7 @@ async function initMyPage() {
   const createdAt = $('#createdate');
   const myFriends = $('#my-friends-list');
   const profileImg = $('#profile-image');
+
   try {
     const { data } = await axios.get('http://localhost:3000/user/me/profile', {
       headers: {
@@ -108,6 +109,16 @@ async function initMyPage() {
       },
     });
 
+    const challengeId = data.data.challengeId;
+
+    const challengeData = await axios.get(
+      `http://localhost:3000/challenge/${challengeId}`,
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+      },
+    );
     const rankData = await axios.get('http://localhost:3000/user/me/rank', {
       headers: {
         Authorization: accessToken,
@@ -115,10 +126,26 @@ async function initMyPage() {
     });
 
     const myData = data.data.rest;
+
     const followersInfo = data.data.followersInfo;
     $(pointTag).text(myData.point);
     $(friendTag).text(followersInfo.length);
     $(nameTag).text(myData.name);
+
+    const title = $('#title');
+    const challengeDesc = $('#desc');
+    const startDate = $('#startDate');
+    const endDate = $('#endDate');
+
+    $(title).text(`${challengeData.data.data.title}`);
+    $(challengeDesc).text(`${challengeData.data.data.description}`);
+    $(startDate).text(`start: ${challengeData.data.data.startDate}`);
+    $(endDate).text(`end: ${challengeData.data.data.endDate}`);
+
+    $('#challenge-card').on('click', () => {
+      window.location.href = `get-one-challenge.html?id=${challengeId}`;
+    });
+
     $(description).text(myData.description);
     $(rankTag).text(rankData.data.data);
     $(email).text(myData.email);
@@ -278,7 +305,7 @@ $('#searchFriendByEmail').on('click', async () => {
 });
 
 // 내 도전목록조회 페이지 이동
-document.getElementById('findChallenges').onclick = function () {
+document.getElementById('#findChallenges').onclick = function () {
   window.location.href = `challenge-list.html`;
 };
 
