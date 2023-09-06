@@ -2,7 +2,6 @@ const accessToken = localStorage.getItem('cookie');
 
 $(document).ready(function () {
   initMyPage();
-  initMessagesBox();
 });
 
 // 1. 정보수정 모달

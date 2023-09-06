@@ -5,7 +5,6 @@ $(document).ready(function () {
 async function initMessagesBox() {
   const messageBox = $('.dropdown-list-message');
   $(messageBox).html('');
-
   let followResponse, challengeResponse;
   try {
     followResponse = await axios.get('http://localhost:3000/follow/request', {

@@ -108,32 +108,36 @@
                     <a href="#">Mark All As Read</a>
                   </div>
                 </div>
-                <div
-                  class="dropdown-list-content dropdown-list-message"
-                  style="overflow-y: scroll; height: 300px"
-                >
+                <div class="dropdown-list-content dropdown-list-message" style="overflow-y: scroll; height: 300px">
                   <a href="#" class="dropdown-item dropdown-item-unread">
-                    <div class="dropdown-item-avatar">
-                      <img
-                        alt="image"
-                        src="assets/img/avatar/avatar-1.png"
-                        class="rounded-circle"
-                      />
+                    <!-- 친구요청 메시지함 -->
+                    <div style="width: 50px" class="dropdown-item-avatar" id="friend">
+                      <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle" />
                       <div class="is-online"></div>
                     </div>
                     <div class="dropdown-item-desc">
                       <p id="inviteUserMessage">Hello, Bro!</p>
                       <div id="inviteUsercreatedAt">2023.08.31</div>
-                      <button
-                        class="btn btn-sm btn accept-friend"
-                        data-follower-id="${message.userId}"
-                      >
+                      <button class="btn btn-sm btn accept-friend" data-follower-id="${message.userId}">
                         수락
                       </button>
-                      <button
-                        class="btn btn-sm btn deny-friend"
-                        data-follower-id="${message.userId}"
-                      >
+                      <button class="btn btn-sm btn deny-friend" data-follower-id="${message.userId}">
+                        거절
+                      </button>
+                    </div>
+  
+                    <!-- 도전 초대메시지함 -->
+                    <div class="dropdown-item-avatar" id="challenger">
+                      <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle" />
+                      <div class="is-online"></div>
+                    </div>
+                    <div class="dropdown-item-desc">
+                      <p id="challengeMessage">Hello, Bro!</p>
+                      <div id="challengeCreatedAt">2023.08.31</div>
+                      <button class="btn btn-sm btn accept-challenge" data-user-id="${message.userId}">
+                        수락
+                      </button>
+                      <button class="btn btn-sm btn deny-challenge" data-user-id="${message.userId}">
                         거절
                       </button>
                     </div>
@@ -267,7 +271,7 @@
           
             <li class="menu-header">Post</li>
             <li >
-              <a href="get-post.html"><i class="fas fa-bicycle"></i>
+              <a href="sns.html"><i class="fas fa-bicycle"></i>
                 <span>오운완</span></a>
             </li>
 
@@ -681,6 +685,7 @@
     <script src="assets/js/scripts.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/user-Info.js"></script>
+    <script src="assets/js/notice.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </body>
