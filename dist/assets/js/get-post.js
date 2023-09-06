@@ -1,5 +1,6 @@
 const postParams = new URLSearchParams(window.location.search);
 const challengeId = postParams.get('id');
+console.log('challengeId', challengeId);
 
 const accessToken = localStorage.getItem('cookie');
 
@@ -15,20 +16,64 @@ $(document).ready(function () {
 const getPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/${challengeId}/post?page=${page}&pageSize=${pageSize}`,
+      `http://localhost:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
         },
       },
     );
+    console.log(response);
+    console.log(response.data.data);
+    console.log(challengeId);
 
     let allPosts = '';
+    console.log(response.data.data);
     response.data.data.forEach((post) => {
       const profileImage = post.userImageUrl
         ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.userImageUrl}`
         : `assets/img/avatar/avatar-1.png`;
 
+      const createdAt = post.createdAt;
+      const date = new Date(createdAt);
+      const months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ];
+      const month = months[date.getMonth()];
+      const day = date.getDate();
+
+      const ordinalSuffix = getOrdinalSuffix(day);
+      const formattedDate = `${month} ${day}${ordinalSuffix}, ${date.getFullYear()}`;
+
+      function getOrdinalSuffix(day) {
+        if (day >= 11 && day <= 13) {
+          return 'th';
+        }
+        switch (day % 10) {
+          case 1:
+            return 'st';
+          case 2:
+            return 'nd';
+          case 3:
+            return 'rd';
+          default:
+            return 'th';
+        }
+      }
+
+      const userId = post.userId;
+      console.log('userId', userId);
       let temphtml = `<div class="col-12 col-md-4 col-lg-2">
           <article class="article article-style-c">
             <div class="article-header">
@@ -50,8 +95,9 @@ const getPosts = async (page, pageSize) => {
                     <a href="#" class="btn btn-icon btn-primary"><i class="fas fa-times delPost-btn" postId=${post.id}></i></a>
                   </div>
                   <div class="user-detail-name">
-                    <a href="http://localhost:3000/user/${post.userId}">${post.userName}</a>
+                    <a href="http://localhost:3000/user/${userId}">${post.userName}</a>
                     <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.userPoint}점</div>
+                    <p>${formattedDate}</p>
                   </div>
                 </div>
               </div>
@@ -62,7 +108,8 @@ const getPosts = async (page, pageSize) => {
     });
     $('.row').html(allPosts);
   } catch (error) {
-    alert(error.response.data.message);
+    console.log(error.response.data.message);
+    // alert(error.response.data.message);
   }
 
   const pagenationTag = $('#total-posts');
@@ -180,6 +227,8 @@ const getPosts = async (page, pageSize) => {
         },
       },
     );
+    console.log('data', data);
+    console.log('challengeId', challengeId);
     orderList = 'normal';
     return data;
   }
@@ -244,7 +293,7 @@ image.addEventListener('change', (event) => {
 const deletePost = async (postId) => {
   try {
     await axios.delete(
-      `http://localhost:3000/challenge/${challengeId}/post/${postId}`,
+      `http://localhost:3000/challenge/${challengeId}/post/${postId}/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
