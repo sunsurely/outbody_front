@@ -15,7 +15,7 @@ $(document).ready(function () {
 const getAllPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/post/page/?page=${page}&pageSize=${pageSize}`,
+      `http://localhost:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
@@ -67,6 +67,7 @@ const getAllPosts = async (page, pageSize) => {
         }
       }
 
+      const userId = post.userId;
       let temphtml = `
       <div class="col-12 col-sm-6 col-md-6 col-lg-3">
       <article class="article">
@@ -80,23 +81,22 @@ const getAllPosts = async (page, pageSize) => {
         <div class="article-details">
 
           <div class="user-id-container">
-            <p>user Id: <span class="user-id">${post.userId}</span></p>
+            <p>user Id: <span class="user-id">${userId}</span></p>
             <p>${post.description}</p>
             <p>${formattedDate}</p>
             <div class="article-cta">
-              <a href="#" class="btn btn-primary" data-user-id="${post.userId}">더보기</a>
+              <a href="#" class="btn btn-primary" data-user-id="${userId}">더보기</a>
             </div>
           </div>
         </div>
       </article>
     </div>`;
       allPosts += temphtml;
-    });
-    document.querySelectorAll('.btn btn-primary').forEach((button) => {
-      button.addEventListener('click', (event) => {
+      console.log('userId', userId);
+
+      $('.btn btn-primary').on('click', function (event) {
         event.preventDefault();
-        const userId = event.target.getAttribute('data-user-id');
-        localStorage.setItem('selectedUserId', userId);
+        window.location.href = `user-info.html?id=${userId}`;
       });
     });
 
@@ -213,7 +213,7 @@ const getAllPosts = async (page, pageSize) => {
 
   async function getTotaldata(page, pageSize) {
     const data = await axios.get(
-      `http://localhost:3000/challenge/post/page/?page=${page}&pageSize=${pageSize}`,
+      `http://localhost:3000/challenge/publishedpost/allpost/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: ` ${accessToken}`,
