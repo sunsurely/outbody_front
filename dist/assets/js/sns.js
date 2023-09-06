@@ -47,7 +47,7 @@ const getAllPosts = async () => {
     `;
       allPosts += temphtml;
     });
-    $('#postcardList').html(allPosts);
+    $('#').html(allPosts);
 
     const pagenationTag = $('.total-posts');
     const prevButton = `<li id="prev_button" class="page-item"><a class="page-link">◀</a></li>`;
