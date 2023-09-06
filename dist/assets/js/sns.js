@@ -3,7 +3,6 @@ const challengeId = urlParams.get('id');
 
 const accessToken = localStorage.getItem('cookie');
 
-('use strict');
 let nowPage = 1;
 let orderList = 'normal';
 let totalPages = 0;
@@ -18,40 +17,89 @@ const getAllPosts = async (page, pageSize) => {
     const response = await axios.get(
       `http://localhost:3000/challenge/post/page/?page=${page}&pageSize=${pageSize}`,
       {
-        heaers: {
+        headers: {
           Authorization: accessToken,
         },
       },
     );
-    console.log('response', response);
 
     let allPosts = '';
-    response.data.data.forEach((post) => {
+    response.data.data.pageinatedTotalPosts.forEach((post) => {
       const profileImage = post.imgUrl
-        ? `https://inflearn-nest-cat.s3.amazonaws.com/${profileImage}`
+        ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl}`
         : `assets/img/avatar/avatar-1.png`;
+
+      const createdAt = post.createdAt;
+      const date = new Date(createdAt);
+      const months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ];
+      const month = months[date.getMonth()];
+      const day = date.getDate();
+
+      const ordinalSuffix = getOrdinalSuffix(day);
+      const formattedDate = `${month} ${day}${ordinalSuffix}, ${date.getFullYear()}`;
+
+      function getOrdinalSuffix(day) {
+        if (day >= 11 && day <= 13) {
+          return 'th';
+        }
+        switch (day % 10) {
+          case 1:
+            return 'st';
+          case 2:
+            return 'nd';
+          case 3:
+            return 'rd';
+          default:
+            return 'th';
+        }
+      }
 
       let temphtml = `
       <div class="col-12 col-sm-6 col-md-6 col-lg-3">
       <article class="article">
         <div class="article-header">
-          <div class="article-image" style="background-image: url(https://inflearn-nest-cat.s3.amazonaws.com/${profileImage});>
+          <div class="article-image" style="background-image: url(${profileImage});">
           </div>
           <div class="article-title">
-            <h2><a>${post.id}</a></h2>
+            <h2><a></a></h2>
           </div>
         </div>
         <div class="article-details">
-          <p>${post.description}</p>
-          <p>${post.createdAt}</p>
-          <div class="article-cta">
-            <a href="#" class="btn btn-primary">Read More</a>
+
+          <div class="user-id-container">
+            <p>user Id: <span class="user-id">${post.userId}</span></p>
+            <p>${post.description}</p>
+            <p>${formattedDate}</p>
+            <div class="article-cta">
+              <a href="#" class="btn btn-primary" data-user-id="${post.userId}">더보기</a>
+            </div>
           </div>
         </div>
       </article>
     </div>`;
       allPosts += temphtml;
     });
+    document.querySelectorAll('.btn btn-primary').forEach((button) => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        const userId = event.target.getAttribute('data-user-id');
+        localStorage.setItem('selectedUserId', userId);
+      });
+    });
+
     $('#postcardList').html(allPosts);
   } catch (error) {
     console.log(error);
@@ -63,10 +111,10 @@ const getAllPosts = async (page, pageSize) => {
 
   let pageNumbers = '';
   let pageNumbersHtml = '';
+  let getTotalHtml = '';
 
   orderList = 'normal';
   const data = await getTotaldata(page, pageSize);
-  const totalposts = data.data.pageinatedTotalPosts;
   totalPages = data.data.totalPages;
 
   for (let i = 1; i <= totalPages; i++) {
@@ -75,7 +123,9 @@ const getAllPosts = async (page, pageSize) => {
       </li>`;
   }
   pageNumbersHtml = prevButton + pageNumbers + nextButton;
-  $(pagenationTag).html(pageNumbersHtml);
+  pagenationTag.html(
+    `<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`,
+  );
 
   const prevBtn = $('#prev_button');
   const nextBtn = $('#next_button');
@@ -88,10 +138,11 @@ const getAllPosts = async (page, pageSize) => {
         $(pages).find('.page-link').css('color', '');
 
         try {
-          const { data } = await getTotaldata(nowPage - 1, 10);
+          const { data } = await getTotaldata(nowPage - 1, 10); //
           const allPost = data.pageinatedTotalPosts;
           setTotalPost(allPost);
           nowPage -= 1;
+          getTotalHtml = '';
 
           $(pages)
             .eq(nowPage - 1)
@@ -119,6 +170,7 @@ const getAllPosts = async (page, pageSize) => {
           const allPost = data.pageinatedTotalPosts;
           setTotalPost(allPost);
           nowPage += 1;
+          getTotalHtml = '';
 
           $(pages)
             .eq(nowPage - 1)
@@ -150,10 +202,25 @@ const getAllPosts = async (page, pageSize) => {
           $(page).find('.page-link').css('background-color', 'blue');
           $(page).find('.page-link').css('color', 'white');
           nowPage = pageNumber;
+
+          getTotalHtml = '';
         } catch (error) {
           console.error('Error message:', error.response.data.message);
         }
       }
     });
   });
+
+  async function getTotaldata(page, pageSize) {
+    const data = await axios.get(
+      `http://localhost:3000/challenge/post/page/?page=${page}&pageSize=${pageSize}`,
+      {
+        headers: {
+          Authorization: ` ${accessToken}`,
+        },
+      },
+    );
+    orderList = 'normal';
+    return data;
+  }
 };

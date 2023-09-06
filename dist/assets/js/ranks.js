@@ -148,7 +148,7 @@ async function totalrankPage(page, pageSize) {
 }
 
 async function getTotaldata(page, pageSize) {
-  const data = await axios(
+  const data = await axios.get(
     `http://localhost:3000/rank/total/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
@@ -298,7 +298,7 @@ async function friendRankPage(page, pageSize) {
 }
 
 async function getFriendData(page, pageSize) {
-  const data = await axios(
+  const data = await axios.get(
     `http://localhost:3000/rank/followings/page/?page=${page}&pageSize=${pageSize}`,
     {
       headers: {
