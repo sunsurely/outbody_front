@@ -1,6 +1,3 @@
-const urlParams = new URLSearchParams(window.location.search);
-const challengeId = urlParams.get('id');
-
 const accessToken = localStorage.getItem('cookie');
 
 let nowPage = 1;
@@ -22,6 +19,7 @@ const getAllPosts = async (page, pageSize) => {
         },
       },
     );
+    console.log(response.data.data);
 
     let allPosts = '';
     response.data.data.pageinatedTotalPosts.forEach((post) => {
@@ -68,31 +66,37 @@ const getAllPosts = async (page, pageSize) => {
       }
 
       const userId = post.userId;
-      let temphtml = `
-      <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-      <article class="article">
+      console.log('userId', userId);
+      let temphtml = `<div class="col-12 col-md-4 col-lg-3">
+      <article class="article article-style-c">
         <div class="article-header">
-          <div class="article-image" style="background-image: url(${profileImage});">
-          </div>
-          <div class="article-title">
-            <h2><a></a></h2>
+          <div class="article-image"
+          style="background-image: url(https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl});
+          background-position: center; background-size: cover;">
           </div>
         </div>
         <div class="article-details">
-
-          <div class="user-id-container">
-            <p>user Id: <span class="user-id">${userId}</span></p>
-            <p>${post.description}</p>
-            <p>${formattedDate}</p>
-            <div class="article-cta">
-              <a href="#" class="btn btn-primary" data-user-id="${userId}">더보기</a>
+          <div class="article-title">
+            <h2 class="ellipsis">
+              <a href="post-comment.html?cid=${post.challenges.id}&pid=${post.id}">${post.description}</a>
+            </h2>
+          </div>
+          <div class="article-user">
+            <img alt="image" src="${profileImage}">
+            <div class="article-user-details">
+              <div class="user-detail-remove">
+                <a href="#" class="btn btn-icon btn-primary"><i class="fas fa-times delPost-btn" postId=${post.id}></i></a>
+              </div>
+              <div class="user-detail-name">
+                <a href="http://localhost:3000/user/${userId}">${post.user.name}</a>
+                <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.user.point}점</div>
+              </div>
             </div>
           </div>
         </div>
       </article>
     </div>`;
       allPosts += temphtml;
-      console.log('userId', userId);
 
       $('.btn btn-primary').on('click', function (event) {
         event.preventDefault();
