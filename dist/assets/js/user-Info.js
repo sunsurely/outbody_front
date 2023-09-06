@@ -1,4 +1,4 @@
-const accessToken = localStorage.getItem('cookie');
+const accessTokenForUser = localStorage.getItem('cookie');
 
 $(document).ready(function () {
   userPage();
@@ -20,7 +20,7 @@ const requestlists = $('#requestlists');
 $(requestlists).click(async () => {
   try {
     const response = await axios.get('http://localhost:3000/follow/request', {
-      headers: { Authorization: accessToken },
+      headers: { Authorization: accessTokenForUser },
     });
     const messages = response.data;
 
@@ -58,7 +58,7 @@ $(requestlists).click(async () => {
           `http://localhost:3000/follow/${Number(followerId)}/accept`,
           data,
           {
-            headers: { Authorization: accessToken },
+            headers: { Authorization: accessTokenForUser },
           },
         );
         alert(`${response.data.name}님의 친구 요청을 수락했습니다.`);
@@ -78,7 +78,7 @@ $(requestlists).click(async () => {
           `http://localhost:3000/follow/${Number(followerId)}/accept`,
           data,
           {
-            headers: { Authorization: accessToken },
+            headers: { Authorization: accessTokenForUser },
           },
         );
         alert(`${response.data.name}님의 친구 요청을 거절했습니다.`);
@@ -95,13 +95,20 @@ $(requestlists).click(async () => {
   }
 });
 
-// 비동기함수 //
-
 // 자동실행함수, 사용자 정보조회
 async function userPage() {
   // href="userinfo.html" // 연오님이 오운완에서 userId보내면 연결시키면 됨
   const urlParams = new URLSearchParams(window.location.search);
   const userId = urlParams.get('id');
+  localStorage.setItem('userId', userId);
+
+  // 다른 데이터 저장
+  const someData = 'Some other data';
+  localStorage.setItem('someKey', someData);
+
+  // 다른 데이터 가져오기
+  const storedSomeData = localStorage.getItem('someKey');
+  console.log('Stored someData:', storedSomeData);
 
   const nameTag = $('#nametag');
   const statusTag = $('#statustag');
@@ -119,13 +126,13 @@ async function userPage() {
       `http://localhost:3000/user/${Number(userId)}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: accessTokenForUser,
         },
       },
     );
     const rankData = await axios.get('http://localhost:3000/user/me/rank', {
       headers: {
-        Authorization: accessToken,
+        Authorization: accessTokenForUser,
       },
     });
 
@@ -150,7 +157,7 @@ async function userPage() {
     const myCreatedAt = `${year}.${month}.${day}`;
     $(createdAtTag).text(myCreatedAt);
   } catch (error) {
-    alert(error.response.data.message);
+    console.error(error.response.data.message);
   }
 
   // 유저 추천목록 (나와 follow관계가 아닌 유저들 추천목록)
@@ -159,7 +166,7 @@ async function userPage() {
       'http://localhost:3000/user/me/recommendation',
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: accessTokenForUser,
         },
       },
     );
@@ -202,7 +209,7 @@ async function userPage() {
               `http://localhost:3000/follow/${Number(targetUserId)}/request`,
               null,
               {
-                headers: { Authorization: accessToken },
+                headers: { Authorization: accessTokenForUser },
               },
             )
             .then((response) => {
@@ -213,7 +220,7 @@ async function userPage() {
         } else if (action === 'unfollow') {
           await axios
             .delete(`http://localhost:3000/follow/${Number(targetUserId)}`, {
-              headers: { Authorization: accessToken },
+              headers: { Authorization: accessTokenForUser },
             })
             .then((response) => {
               alert(`${response.data.name}님과 친구 취소되었습니다.`);
@@ -236,17 +243,6 @@ async function userPage() {
       }
     });
   } catch (error) {
-    alert('Error:', error.response.data.message);
+    console.error('Error:', error.response.data.message);
   }
-}
-
-// 로그아웃
-async function logout() {
-  localStorage.removeItem('cookie');
-  alert('로그아웃되었습니다.');
-  location.href = 'login.html';
-}
-const logoutButton = document.getElementById('logout-button');
-if (logoutButton) {
-  logoutButton.addEventListener('click', logout);
 }
