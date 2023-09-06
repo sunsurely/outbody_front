@@ -11,11 +11,11 @@ $(document).ready(function () {
   getPosts(1, 10);
 });
 
-// 오운완 전체 조회
+// 오운완 전체 조회(페이지네이션)
 const getPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      `http://localhost:3000/challenge/${challengeId}/post?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
@@ -63,6 +63,125 @@ const getPosts = async (page, pageSize) => {
     $('.row').html(allPosts);
   } catch (error) {
     alert(error.response.data.message);
+  }
+
+  const pagenationTag = $('#total-posts');
+  const prevButton = `<li id="prev_button" class="page-item"><a class="page-link">◀</a></li>`;
+  const nextButton = `<li id="next_button" class="page-item"><a class="page-link">▶</a></li>`;
+
+  let pageNumbers = '';
+  let pageNumbersHtml = '';
+  let getTotalHtml = '';
+
+  orderList = 'normal';
+  const data = await getTotalpost(page, pageSize);
+  totalPages = data.data.totalPages;
+
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers += `<li class="page-item page_number">
+      <a class="page-link">${i}</a>
+    </li>`;
+  }
+
+  pageNumbersHtml = prevButton + pageNumbers + nextButton;
+  pagenationTag.html(
+    `<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`,
+  );
+
+  const prevBtn = $('#prev_button');
+  const nextBtn = $('#next_button');
+  const pages = $('.page_number');
+
+  $(prevBtn).click(async () => {
+    if (orderList === 'normal') {
+      if (nowPage > 1) {
+        $(pages).find('.page-link').css('background-color', '');
+        $(pages).find('.page-link').css('color', '');
+
+        try {
+          const { data } = await getTotalpost(nowPage - 1, 10);
+          const allPost = data.result;
+          setTotalPost(allPost);
+          nowPage -= 1;
+          getTotalHtml = '';
+
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('background-color', 'blue');
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('color', 'white');
+        } catch (error) {
+          console.log('Error Message', error.response.data.message);
+        }
+      }
+    }
+  });
+
+  $(nextBtn).click(async () => {
+    if (orderList === 'normal') {
+      if (nowPage > 0 && nowPage < totalPages) {
+        $(pages).find('.page-link').css('background-color', '');
+        $(pages).find('.page-link').css('color', '');
+
+        try {
+          const { data } = await getTotalpost(nowPage + 1, 10);
+          const allPost = data.result;
+          setTotalPost(allPost);
+          nowPage += 1;
+          getTotalHtml = '';
+
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('background-color', 'blue');
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('color', 'white');
+        } catch (error) {
+          console.log('Error Message', error.response.data.message);
+        }
+      }
+    }
+  });
+
+  $(pages).each((idx, page) => {
+    $(page).click(async () => {
+      if (orderList === 'normal') {
+        $(pages).find('.page-link').css('background-color', '');
+        $(pages).find('.page-link').css('color', '');
+
+        try {
+          const pageNumber = parseInt($(page).find('.page-link').text());
+          const { data } = await getTotalpost(pageNumber, pageSize);
+          const allPost = data.result;
+          setTotalPost(allPost);
+
+          $(page).find('.page-link').css('background-color', 'blue');
+          $(page).find('.page-link').css('color', 'white');
+          nowPage = pageNumber;
+
+          getTotalHtml = '';
+        } catch (error) {
+          console.error('Error message:', error.response.data.message);
+        }
+      }
+    });
+  });
+  async function getTotalpost(page, pageSize) {
+    const data = await axios.get(
+      `http://localhost:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      {
+        headers: {
+          Authorization: ` ${accessToken}`,
+        },
+      },
+    );
+    orderList = 'normal';
+    return data;
   }
 };
 
