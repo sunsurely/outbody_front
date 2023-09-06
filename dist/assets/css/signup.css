@@ -1,3 +1,13 @@
+.signUp-box {
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.form-group {
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
 .sm-gutters {
   display: flex;
   justify-content: center;
