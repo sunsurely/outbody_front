@@ -181,33 +181,23 @@
                       </button>
                     </div>
   
-                      <!-- 도전 초대메시지함 -->
-                      <div class="dropdown-item-avatar" id="challenger">
-                        <img
-                          alt="image"
-                          src="assets/img/avatar/avatar-2.png"
-                          class="rounded-circle"
-                        />
-                        <div class="is-online"></div>
-                      </div>
-                      <div class="dropdown-item-desc">
-                        <p id="challengeMessage">Hello, Bro!</p>
-                        <div id="challengeCreatedAt">2023.08.31</div>
-                        <button
-                          class="btn btn-sm btn accept-challenge"
-                          data-user-id="${message.userId}"
-                        >
-                          수락
-                        </button>
-                        <button
-                          class="btn btn-sm btn deny-challenge"
-                          data-user-id="${message.userId}"
-                        >
-                          거절
-                        </button>
-                      </div>
-                    </a>
-                  </div>
+                    <!-- 도전 초대메시지함 -->
+                    <div class="dropdown-item-avatar" id="challenger">
+                      <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle" />
+                      <div class="is-online"></div>
+                    </div>
+                    <div class="dropdown-item-desc">
+                      <p id="challengeMessage">Hello, Bro!</p>
+                      <div id="challengeCreatedAt">2023.08.31</div>
+                      <button class="btn btn-sm btn accept-challenge" data-user-id="${message.userId}">
+                        수락
+                      </button>
+                      <button class="btn btn-sm btn deny-challenge" data-user-id="${message.userId}">
+                        거절
+                      </button>
+                    </div>
+                  </a>
+                </div>
                   <div class="dropdown-footer text-center"></div>
                 </div>
               </li>
@@ -480,6 +470,7 @@
     <script src="assets/js/scripts.js"></script>
     <!-- <script src="assets/js/users.js"></script> -->
     <script src="assets/js/ranks.js"></script>
+    <script src="assets/js/notice.js"></script>
     <!-- <script src="assets/js/user-Info.js"></script> -->
   </body>
 </html>
