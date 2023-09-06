@@ -1,4 +1,4 @@
-const accessToken = localStorage.getItem('cookie');
+const accessTokenForUser = localStorage.getItem('cookie');
 
 $(document).ready(function () {
   userPage();
@@ -20,7 +20,7 @@ const requestlists = $('#requestlists');
 $(requestlists).click(async () => {
   try {
     const response = await axios.get('http://localhost:3000/follow/request', {
-      headers: { Authorization: accessToken },
+      headers: { Authorization: accessTokenForUser },
     });
     const messages = response.data;
 
@@ -58,7 +58,7 @@ $(requestlists).click(async () => {
           `http://localhost:3000/follow/${Number(followerId)}/accept`,
           data,
           {
-            headers: { Authorization: accessToken },
+            headers: { Authorization: accessTokenForUser },
           },
         );
         alert(`${response.data.name}님의 친구 요청을 수락했습니다.`);
@@ -78,7 +78,7 @@ $(requestlists).click(async () => {
           `http://localhost:3000/follow/${Number(followerId)}/accept`,
           data,
           {
-            headers: { Authorization: accessToken },
+            headers: { Authorization: accessTokenForUser },
           },
         );
         alert(`${response.data.name}님의 친구 요청을 거절했습니다.`);
@@ -126,13 +126,13 @@ async function userPage() {
       `http://localhost:3000/user/${Number(userId)}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: accessTokenForUser,
         },
       },
     );
     const rankData = await axios.get('http://localhost:3000/user/me/rank', {
       headers: {
-        Authorization: accessToken,
+        Authorization: accessTokenForUser,
       },
     });
 
@@ -157,7 +157,7 @@ async function userPage() {
     const myCreatedAt = `${year}.${month}.${day}`;
     $(createdAtTag).text(myCreatedAt);
   } catch (error) {
-    alert(error.response.data.message);
+    console.error(error.response.data.message);
   }
 
   // 유저 추천목록 (나와 follow관계가 아닌 유저들 추천목록)
@@ -166,7 +166,7 @@ async function userPage() {
       'http://localhost:3000/user/me/recommendation',
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: accessTokenForUser,
         },
       },
     );
@@ -209,7 +209,7 @@ async function userPage() {
               `http://localhost:3000/follow/${Number(targetUserId)}/request`,
               null,
               {
-                headers: { Authorization: accessToken },
+                headers: { Authorization: accessTokenForUser },
               },
             )
             .then((response) => {
@@ -220,7 +220,7 @@ async function userPage() {
         } else if (action === 'unfollow') {
           await axios
             .delete(`http://localhost:3000/follow/${Number(targetUserId)}`, {
-              headers: { Authorization: accessToken },
+              headers: { Authorization: accessTokenForUser },
             })
             .then((response) => {
               alert(`${response.data.name}님과 친구 취소되었습니다.`);
@@ -243,6 +243,6 @@ async function userPage() {
       }
     });
   } catch (error) {
-    alert('Error:', error.response.data.message);
+    console.error('Error:', error.response.data.message);
   }
 }

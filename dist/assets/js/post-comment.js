@@ -1,8 +1,8 @@
-const urlParams = new URLSearchParams(window.location.search);
-const challengeId = urlParams.get('cid');
-const postId = urlParams.get('pid');
+const commentParams = new URLSearchParams(window.location.search);
+const challengeIdForComment = commentParams.get('cid');
+const postId = commentParams.get('pid');
 
-const accessToken = localStorage.getItem('cookie');
+const token = localStorage.getItem('cookie');
 
 $(document).ready(function () {
   getOnePost();
@@ -13,10 +13,10 @@ $(document).ready(function () {
 const getOnePost = async () => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/${challengeId}/post/${postId}`,
+      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: token,
         },
       },
     );
@@ -61,10 +61,10 @@ const getOnePost = async () => {
 const getComment = async () => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/${challengeId}/post/${postId}/comment`,
+      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: token,
         },
       },
     );
@@ -120,11 +120,11 @@ const createComment = async () => {
     }
 
     await axios.post(
-      `http://localhost:3000/challenge/${challengeId}/post/${postId}/comment`,
+      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment`,
       { comment: $('#comment_input').val() },
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: token,
         },
       },
     );
@@ -153,11 +153,11 @@ const updateComment = async (commentId) => {
     }
 
     await axios.patch(
-      `http://localhost:3000/challenge/${challengeId}/post/${postId}/comment/${commentId}`,
+      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       { comment: $('#updateCmt_input').val() },
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: token,
         },
       },
     );
@@ -176,10 +176,10 @@ $(document).on('click', '#updateCmt_btn', function () {
 const deleteComment = async (commentId) => {
   try {
     await axios.delete(
-      `http://localhost:3000/challenge/${challengeId}/post/${postId}/comment/${commentId}`,
+      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/comment/${commentId}`,
       {
         headers: {
-          Authorization: accessToken,
+          Authorization: token,
         },
       },
     );

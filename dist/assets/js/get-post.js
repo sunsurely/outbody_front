@@ -1,5 +1,5 @@
-const urlParams = new URLSearchParams(window.location.search);
-const challengeId = urlParams.get('id');
+const postParams = new URLSearchParams(window.location.search);
+const challengeId = postParams.get('id');
 
 const accessToken = localStorage.getItem('cookie');
 
