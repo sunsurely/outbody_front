@@ -126,7 +126,9 @@ async function initChallengeList(option) {
       const nextBtn = $('#next_button');
       const pages = $('.page_number');
 
-      $(pages).find(`#nowPage-${nowPage}`).css('background-color', 'blue');
+      $(pages)
+        .find(`#nowPage-${nowPage}`)
+        .css('background-color', 'rgb(103,119,239)');
       $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
 
       // Previous Button Clicked
@@ -224,7 +226,7 @@ async function initChallengeList(option) {
 
             $(pages)
               .find(`#nowPage-${nowPage}`)
-              .css('background-color', 'blue');
+              .css('background-color', 'rgb(103,119,239)');
             $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
           } catch (error) {
             alert(error.response.data.message);
@@ -327,7 +329,7 @@ async function initChallengeList(option) {
 
             $(pages)
               .find(`#nowPage-${nowPage}`)
-              .css('background-color', 'blue');
+              .css('background-color', 'rgb(103,119,239)');
             $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
           } catch (error) {
             alert(error.response.data.message);
@@ -433,7 +435,7 @@ async function initChallengeList(option) {
 
             $(pages)
               .find(`#nowPage-${nowPage}`)
-              .css('background-color', 'blue');
+              .css('background-color', 'rgb(103,119,239)');
             $(pages).find(`#nowPage-${nowPage}`).css('color', 'white');
           } catch (error) {
             alert(error.response.data.message);
