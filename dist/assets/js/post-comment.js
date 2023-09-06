@@ -13,7 +13,7 @@ $(document).ready(function () {
 const getOnePost = async () => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}`,
+      `http://localhost:3000/challenge/${challengeIdForComment}/post/${postId}/detail`,
       {
         headers: {
           Authorization: token,
