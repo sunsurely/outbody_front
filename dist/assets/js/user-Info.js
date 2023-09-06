@@ -1,3 +1,4 @@
+const userInfoParams = new URLSearchParams(window.location.search);
 const accessTokenForUser = localStorage.getItem('cookie');
 
 $(document).ready(function () {
@@ -16,18 +17,8 @@ $('#backtopage').click(function () {
 
 // 자동실행함수, 사용자 정보조회
 async function userPage() {
-  // href="userinfo.html" // 연오님이 오운완에서 userId보내면 연결시키면 됨
-  const urlParams = new URLSearchParams(window.location.search);
-  const userId = urlParams.get('id');
-  localStorage.setItem('userId', userId);
-
-  // 다른 데이터 저장
-  const someData = 'Some other data';
-  localStorage.setItem('someKey', someData);
-
-  // 다른 데이터 가져오기
-  const storedSomeData = localStorage.getItem('someKey');
-  console.log('Stored someData:', storedSomeData);
+  const userId = userInfoParams.get('id');
+  console.log('userId', userId);
 
   const nameTag = $('#nametag');
   const statusTag = $('#statustag');
@@ -41,14 +32,11 @@ async function userPage() {
   const createdAtTag = $('#createdAttag');
 
   try {
-    const { data } = await axios.get(
-      `http://localhost:3000/user/${Number(userId)}`,
-      {
-        headers: {
-          Authorization: accessTokenForUser,
-        },
+    const { data } = await axios.get(`http://localhost:3000/user/${userId}`, {
+      headers: {
+        Authorization: accessTokenForUser,
       },
-    );
+    });
     const rankData = await axios.get('http://localhost:3000/user/me/rank', {
       headers: {
         Authorization: accessTokenForUser,
