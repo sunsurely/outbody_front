@@ -99,6 +99,7 @@ $(requestlists).click(async () => {
 // 자동실행함수, 사용자 정보조회
 async function userPage() {
   const userId = userInfoParams.get('id');
+  console.log('userId', userId);
 
   const nameTag = $('#nametag');
   const statusTag = $('#statustag');
