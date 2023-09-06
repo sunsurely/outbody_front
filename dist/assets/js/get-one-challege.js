@@ -128,16 +128,16 @@ async function getChallengers() {
       const challengerList = document.querySelector('#challenger-list');
       challengerList.innerHTML += response.data.data
         .map((challenger) => {
-          const profileImage = challenger.userImageUrl
-            ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenger.userImageUrl}`
+          const profileImage = challenger.user.imgUrl
+            ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenger.user.imgUrl}`
             : `assets/img/avatar/avatar-1.png`;
 
           return `<li class="media">
             <img alt="image" class="mr-3 rounded-circle" width="50"
             src="${profileImage}">
             <div class="media-body">
-              <div class="mt-0 mb-1 font-weight-bold">${challenger.userName}</div>
-              <div class="font-1000-bold"><i class="fas fa-circle"></i> ${challenger.userPoint}점</div>
+              <div class="mt-0 mb-1 font-weight-bold">${challenger.user.name}</div>
+              <div class="font-1000-bold"><i class="fas fa-circle"></i> ${challenger.user.point}점</div>
             </div>
           </li>`;
         })
