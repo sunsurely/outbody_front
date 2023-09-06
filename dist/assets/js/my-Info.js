@@ -152,9 +152,7 @@ async function initMyPage() {
     $(description).text(myData.description);
     $(rankTag).text(rankData.data.data);
     $(email).text(myData.email);
-    $(birthday).text(
-      myData.birthday ? myData.birthday : '미입력',
-    );
+    $(birthday).text(myData.birthday ? myData.birthday : '미입력');
     $(gender).text(myData.gender ? myData.gender : '미입력');
     let num = 1;
     let followTemp = '';
@@ -347,7 +345,7 @@ async function initMessagesBox() {
   } else {
     mergedResponse = [];
   }
-  console.log(mergedResponse);
+
   const sortedResponse = mergedResponse.sort((a, b) => {
     return new Date(b.createdAt) - new Date(a.createdAt);
   });
