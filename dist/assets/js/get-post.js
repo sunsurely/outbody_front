@@ -1,30 +1,79 @@
 const postParams = new URLSearchParams(window.location.search);
 const challengeId = postParams.get('id');
+console.log('challengeId', challengeId);
 
 const accessToken = localStorage.getItem('cookie');
 
+let nowPage = 1;
+let orderList = 'normal';
+let totalPages = 0;
+
 $(document).ready(function () {
-  getPosts();
+  getPosts(1, 10);
 });
 
-// 오운완 전체 조회
-const getPosts = async () => {
+// 오운완 전체 조회(페이지네이션)
+const getPosts = async (page, pageSize) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/challenge/${challengeId}/post?page=1&pageSize=6`,
+      `http://localhost:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
         },
       },
     );
+    console.log(response);
+    console.log(response.data.data);
+    console.log(challengeId);
 
     let allPosts = '';
+    console.log(response.data.data);
     response.data.data.forEach((post) => {
       const profileImage = post.userImageUrl
         ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.userImageUrl}`
         : `assets/img/avatar/avatar-1.png`;
 
+      const createdAt = post.createdAt;
+      const date = new Date(createdAt);
+      const months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ];
+      const month = months[date.getMonth()];
+      const day = date.getDate();
+
+      const ordinalSuffix = getOrdinalSuffix(day);
+      const formattedDate = `${month} ${day}${ordinalSuffix}, ${date.getFullYear()}`;
+
+      function getOrdinalSuffix(day) {
+        if (day >= 11 && day <= 13) {
+          return 'th';
+        }
+        switch (day % 10) {
+          case 1:
+            return 'st';
+          case 2:
+            return 'nd';
+          case 3:
+            return 'rd';
+          default:
+            return 'th';
+        }
+      }
+
+      const userId = post.userId;
+      console.log('userId', userId);
       let temphtml = `<div class="col-12 col-md-4 col-lg-2">
           <article class="article article-style-c">
             <div class="article-header">
@@ -46,8 +95,9 @@ const getPosts = async () => {
                     <a href="#" class="btn btn-icon btn-primary"><i class="fas fa-times delPost-btn" postId=${post.id}></i></a>
                   </div>
                   <div class="user-detail-name">
-                    <a href="http://localhost:3000/user/${post.userId}">${post.userName}</a>
+                    <a href="http://localhost:3000/user/${userId}">${post.userName}</a>
                     <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.userPoint}점</div>
+                    <p>${formattedDate}</p>
                   </div>
                 </div>
               </div>
@@ -58,7 +108,129 @@ const getPosts = async () => {
     });
     $('.row').html(allPosts);
   } catch (error) {
-    alert(error.response.data.message);
+    console.log(error.response.data.message);
+    // alert(error.response.data.message);
+  }
+
+  const pagenationTag = $('#total-posts');
+  const prevButton = `<li id="prev_button" class="page-item"><a class="page-link">◀</a></li>`;
+  const nextButton = `<li id="next_button" class="page-item"><a class="page-link">▶</a></li>`;
+
+  let pageNumbers = '';
+  let pageNumbersHtml = '';
+  let getTotalHtml = '';
+
+  orderList = 'normal';
+  const data = await getTotalpost(page, pageSize);
+  totalPages = data.data.totalPages;
+
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers += `<li class="page-item page_number">
+      <a class="page-link">${i}</a>
+    </li>`;
+  }
+
+  pageNumbersHtml = prevButton + pageNumbers + nextButton;
+  pagenationTag.html(
+    `<ul class="pagination justify-content-center">${pageNumbersHtml}</ul>`,
+  );
+
+  const prevBtn = $('#prev_button');
+  const nextBtn = $('#next_button');
+  const pages = $('.page_number');
+
+  $(prevBtn).click(async () => {
+    if (orderList === 'normal') {
+      if (nowPage > 1) {
+        $(pages).find('.page-link').css('background-color', '');
+        $(pages).find('.page-link').css('color', '');
+
+        try {
+          const { data } = await getTotalpost(nowPage - 1, 10);
+          const allPost = data.result;
+          setTotalPost(allPost);
+          nowPage -= 1;
+          getTotalHtml = '';
+
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('background-color', 'blue');
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('color', 'white');
+        } catch (error) {
+          console.log('Error Message', error.response.data.message);
+        }
+      }
+    }
+  });
+
+  $(nextBtn).click(async () => {
+    if (orderList === 'normal') {
+      if (nowPage > 0 && nowPage < totalPages) {
+        $(pages).find('.page-link').css('background-color', '');
+        $(pages).find('.page-link').css('color', '');
+
+        try {
+          const { data } = await getTotalpost(nowPage + 1, 10);
+          const allPost = data.result;
+          setTotalPost(allPost);
+          nowPage += 1;
+          getTotalHtml = '';
+
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('background-color', 'blue');
+          $(pages)
+            .eq(nowPage - 1)
+            .find('.page-link')
+            .css('color', 'white');
+        } catch (error) {
+          console.log('Error Message', error.response.data.message);
+        }
+      }
+    }
+  });
+
+  $(pages).each((idx, page) => {
+    $(page).click(async () => {
+      if (orderList === 'normal') {
+        $(pages).find('.page-link').css('background-color', '');
+        $(pages).find('.page-link').css('color', '');
+
+        try {
+          const pageNumber = parseInt($(page).find('.page-link').text());
+          const { data } = await getTotalpost(pageNumber, pageSize);
+          const allPost = data.result;
+          setTotalPost(allPost);
+
+          $(page).find('.page-link').css('background-color', 'blue');
+          $(page).find('.page-link').css('color', 'white');
+          nowPage = pageNumber;
+
+          getTotalHtml = '';
+        } catch (error) {
+          console.error('Error message:', error.response.data.message);
+        }
+      }
+    });
+  });
+  async function getTotalpost(page, pageSize) {
+    const data = await axios.get(
+      `http://localhost:3000/challenge/${challengeId}/post/?page=${page}&pageSize=${pageSize}`,
+      {
+        headers: {
+          Authorization: ` ${accessToken}`,
+        },
+      },
+    );
+    console.log('data', data);
+    console.log('challengeId', challengeId);
+    orderList = 'normal';
+    return data;
   }
 };
 
@@ -121,7 +293,7 @@ image.addEventListener('change', (event) => {
 const deletePost = async (postId) => {
   try {
     await axios.delete(
-      `http://localhost:3000/challenge/${challengeId}/post/${postId}`,
+      `http://localhost:3000/challenge/${challengeId}/post/${postId}/?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: accessToken,
