@@ -32,10 +32,6 @@ const signUp = async () => {
       alert('성별을 선택해주세요');
       return;
     }
-    if (!birthday) {
-      alert('생일을 입력해주세요');
-      return;
-    }
 
     await axios.post(`http://localhost:3000/user/signup`, {
       name,
