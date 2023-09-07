@@ -27,44 +27,6 @@ const getAllPosts = async (page, pageSize) => {
         ? `https://inflearn-nest-cat.s3.amazonaws.com/${post.imgUrl}`
         : `assets/img/avatar/avatar-1.png`;
 
-      const createdAt = post.createdAt;
-      const date = new Date(createdAt);
-      const months = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ];
-      const month = months[date.getMonth()];
-      const day = date.getDate();
-
-      const ordinalSuffix = getOrdinalSuffix(day);
-      const formattedDate = `${month} ${day}${ordinalSuffix}, ${date.getFullYear()}`;
-
-      function getOrdinalSuffix(day) {
-        if (day >= 11 && day <= 13) {
-          return 'th';
-        }
-        switch (day % 10) {
-          case 1:
-            return 'st';
-          case 2:
-            return 'nd';
-          case 3:
-            return 'rd';
-          default:
-            return 'th';
-        }
-      }
-
       const userId = post.userId;
       console.log('userId', userId);
       let temphtml = `<div class="col-12 col-md-4 col-lg-3">
@@ -90,7 +52,7 @@ const getAllPosts = async (page, pageSize) => {
               <div class="user-detail-name">
                 <a href="http://localhost:3000/user/${userId}">${post.user.name}</a>
                 <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.user.point}점</div>
-              </div>
+                </div>
             </div>
           </div>
         </div>
