@@ -2,6 +2,7 @@ $(document).ready(function () {
   initMessagesBox();
   initLogBox();
 });
+
 //친구 & 도전  초대 메세지함  , 초대 수락기능 같이 구현
 async function initMessagesBox() {
   const messageBox = $('.dropdown-list-message');
