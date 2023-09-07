@@ -166,7 +166,7 @@ async function initMyPage() {
       <td style="padding-top: 15px;">${follower.point}점</td>
       <td style="padding-top: 15px;">${follower.ranking}위</td>
       <td>
-        <button id="delete-friend-button" followerId=${follower.id} class="btn btn-primary" style="border-radius: 15px;">
+        <button id="${follower.id}" class="btn btn-primary delete-friend-button" style="border-radius: 15px;">
           친구 삭제
         </button>
       </td>
@@ -194,22 +194,25 @@ async function initMyPage() {
 }
 
 // 친구 삭제
-$(document).on('click', '#delete-friend-button', function () {
-  deleteFriend($(this).attr('followerId'));
+$(document).on('click', '.delete-friend-button', function (event) {
+  const followerId = $(this).attr('id');
+  deleteFriend(followerId);
 });
 async function deleteFriend(followerId) {
-  try {
-    await axios.delete(`http://localhost:3000/follow/${followerId}`, {
+  await axios
+    .delete(`http://localhost:3000/follow/${followerId}`, {
       headers: {
         Authorization: accessToken,
       },
+    })
+    .then((response) => {
+      alert('친구 삭제 완료');
+      location.reload();
+    })
+    .catch((error) => {
+      alert(error.response.data.message);
+      location.reload();
     });
-    alert('친구 삭제 완료');
-    location.reload();
-  } catch {
-    alert(error.response.data.message);
-    location.reload();
-  }
 }
 
 // 비밀번호변경 (성공)
