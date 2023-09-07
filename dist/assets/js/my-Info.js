@@ -122,13 +122,15 @@ async function initMyPage() {
 
       const title = $('#title');
       const challengeDesc = $('#desc');
-      const startDate = $('#startDate');
-      const endDate = $('#endDate');
+      const date = $('#date');
 
-      $(title).text(`${challengeData.data.data.title}`);
-      $(challengeDesc).text(`${challengeData.data.data.description}`);
-      $(startDate).text(`start: ${challengeData.data.data.startDate}`);
-      $(endDate).text(`end: ${challengeData.data.data.endDate}`);
+      $(title).text(`제목: ${challengeData.data.data.title}`);
+      $(challengeDesc).text(
+        `설명: ${challengeData.data.data.description.replace(/<[^>]*>/g, '')}`,
+      );
+      $(date).text(
+        `도전 기간: ${challengeData.data.data.startDate} ~ ${challengeData.data.data.endDate}`,
+      );
     }
 
     const rankData = await axios.get('http://localhost:3000/user/me/rank', {
@@ -158,11 +160,17 @@ async function initMyPage() {
     let num = 1;
     let followTemp = '';
     for (follower of followersInfo) {
-      const temp = `  <tr>
-      <th scope="row">${num}</th>
-      <td>${follower.name}</td>
-      <td>${follower.email}</td>
-      <td>${follower.ranking}</td>
+      const temp = `<tr>
+      <th style="padding-top: 15px;" scope="row">${num}</th>
+      <td style="padding-top: 15px;">${follower.name}</td>
+      <td style="padding-top: 15px;">${follower.email}</td>
+      <td style="padding-top: 15px;">${follower.point}점</td>
+      <td style="padding-top: 15px;">${follower.ranking}위</td>
+      <td>
+        <button id="delete-friend-button" followerId=${follower.id} class="btn btn-primary" style="border-radius: 15px;">
+          친구 삭제
+        </button>
+      </td>
     </tr>`;
       followTemp += temp;
       num++;
@@ -183,6 +191,25 @@ async function initMyPage() {
     $(createdAt).text(myCreatedAt);
   } catch (error) {
     console.error('Error message:', error.response.data.message);
+  }
+}
+
+// 친구 삭제
+$(document).on('click', '#delete-friend-button', function () {
+  deleteFriend($(this).attr('followerId'));
+});
+async function deleteFriend(followerId) {
+  try {
+    await axios.delete(`http://localhost:3000/follow/${followerId}`, {
+      headers: {
+        Authorization: accessToken,
+      },
+    });
+    alert('친구 삭제 완료');
+    location.reload();
+  } catch {
+    alert(error.response.data.message);
+    location.reload();
   }
 }
 
