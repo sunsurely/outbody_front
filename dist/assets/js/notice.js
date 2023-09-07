@@ -1,12 +1,12 @@
 $(document).ready(function () {
   initMessagesBox();
+  initLogBox();
 });
 
 //친구 & 도전  초대 메세지함  , 초대 수락기능 같이 구현
 async function initMessagesBox() {
   const messageBox = $('.dropdown-list-message');
   $(messageBox).html('');
-
   let followResponse, challengeResponse;
   try {
     followResponse = await axios.get('http://localhost:3000/follow/request', {
@@ -169,4 +169,49 @@ async function initMessagesBox() {
       }
     });
   });
+}
+
+//도전 관련 로그 조회
+async function initLogBox() {
+  const logBox = $('#log-box');
+  $(logBox).html('');
+
+  try {
+    const { data } = await axios.get(
+      'http://localhost:3000/challenge/message/log',
+      {
+        headers: { Authorization: accessToken },
+      },
+    );
+
+    const logMessages = data.data;
+    let logTemp = '';
+    for (const log of logMessages) {
+      const now = new Date();
+      const msgDate = new Date(log.createdAt);
+      const diffInMilliseconds = now - msgDate;
+      const diffInHours = Math.floor(diffInMilliseconds / (1000 * 60 * 60));
+      const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
+
+      let msgTime;
+
+      if (diffInDays >= 1) {
+        msgTime = `${diffInDays}일전`;
+      } else {
+        msgTime = `${diffInHours}시간전`;
+      }
+
+      const temp = ` <a href="#" class="dropdown-item dropdown-item-unread">
+      <div class="dropdown-item-desc">
+       ${log.message}
+        <div class="time text-primary">${msgTime}</div>
+      </div>
+    </a>`;
+
+      logTemp += temp;
+    }
+    $(logBox).html(logTemp);
+  } catch (error) {
+    console.error('Error message:', error.response.data.message);
+  }
 }

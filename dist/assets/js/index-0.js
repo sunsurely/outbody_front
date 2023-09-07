@@ -5,7 +5,6 @@ let orderList = 'normal';
 let totalPages = 0;
 
 $(document).ready(function () {
-  initMessagesBox();
   initializeChart();
   getBodyResults();
   initializeList(1, 10);
@@ -609,7 +608,6 @@ async function getRecordData(page, pageSize) {
   orderList = 'normal';
   return data.data;
 }
-Chart.register(ChartDataLabels);
 
 async function initChart(chartName, recordArr, dateArr, stepSize, title) {
   var statistics_chart = document.getElementById(chartName).getContext('2d');
