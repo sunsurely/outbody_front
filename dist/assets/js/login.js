@@ -76,7 +76,6 @@ $('#login-btn').click(login);
 // 카카오 로그인
 // 배포하고 리다이렉트 URI 설정해야 요청보낼 수 있음
 const kakaoLogin = async () => {
-  const { data } = await axios.get('http://localhost:3000/auth/kakao');
-  console.log(data);
+  window.location.href = `https://accounts.kakao.com/login/?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A3000%252Fauth%252Fkakao%252Foauth%26through_account%3Dtrue%26client_id%3Ddae6d4e105dcbf37d7fb9fdedec4f936#login`;
 };
 $('.kakao-btn').click(kakaoLogin);
