@@ -2,18 +2,22 @@
   margin: 0px 300px 0px 300px;
 }
 
-.card-body {
-  margin: 0px 100px 0px 100px;
-}
-
 .comment-title {
   margin-left: 300px;
 }
 
-.form-group {
+.comment-body {
   margin: 0px 300px 0px 300px;
 }
 
-.comment-body {
-  margin: 0px 300px 0px 300px;
+#comment_input {
+  margin-left: 300px;
+}
+
+#createCmt_btn {
+  margin-right: 300px;
+}
+
+#updateCmt_btn {
+  margin-right: 80px;
 }

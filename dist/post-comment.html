@@ -34,6 +34,33 @@
 </head>
 
 <body>
+
+  <!-- 댓글 신고 모달 -->
+  <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true"
+    data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content" style="overflow: hidden;">
+        <div class="modal-header">
+          <h5 class="modal-title">댓글 신고</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>신고 사유</label>
+            <input type="text" class="form-control desc_input" placeholder="신고 사유를 입력해주세요">
+          </div>
+        </div>
+        <div id="image-container"></div>
+        <div class="modal-footer" style="margin-top: 20px; margin-bottom: 20px;">
+          <button type="button" class="btn btn-primary" id="create-button">작성</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
       <div class="navbar-bg"></div>
@@ -350,44 +377,6 @@
                       <a href="#" class="text-danger">Report</a>
                     </div>
                   </div>
-
-
-
-                  <!-- 댓글 신고 모달
-                  <div class="row">
-                    <div class="col-12 col-md-6 col-lg-6">
-                      <div class="card">
-                        <form>
-                          <div class="card-header">
-                            <h4>댓글 신고</h4>
-                          </div>
-                          <div class="card-body">
-                            <div class="form-group">
-                              <label>Your Name</label>
-                              <input type="text" class="form-control" required="" />
-                            </div>
-
-                            <div class="form-group mb-0">
-                              <label>Message</label>
-                              <textarea placeholder="신고 내용을 작성해주세요." class="form-control" required="">
-                                  </textarea>
-                              <br />
-                              ☞ 경고: 신고 내용이 정당하지 않을 경우, 불이익을 받을
-                              수 있습니다.
-                            </div>
-                          </div>
-                          <div class="card-footer text-right">
-                            <button class="btn btn-primary" id="cancel">
-                              취소
-                            </button>
-                            <button class="btn btn-primary" id="submit">
-                              제출
-                            </button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div> -->
 
                 </li>
               </ul>
