@@ -1,4 +1,8 @@
 const userInfoParams = new URLSearchParams(window.location.search);
+const userId = userInfoParams.get('id');
+
+console.log(userId);
+
 const accessTokenForUser = localStorage.getItem('cookie');
 
 $(document).ready(function () {
@@ -17,9 +21,6 @@ $('#backtopage').click(function () {
 
 // 자동실행함수, 사용자 정보조회
 async function userPage() {
-  const userId = userInfoParams.get('id');
-  console.log('userId', userId);
-
   const nameTag = $('#nametag');
   const statusTag = $('#statustag');
   const descriptionTag = $('#descriptiontag');
