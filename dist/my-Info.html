@@ -61,64 +61,6 @@
               <a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a>
             </li>
           </ul>
-          <div class="search-element">
-            <!-- <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250" />
-            <button class="btn" type="submit"> -->
-            <i class="fas fa-search"></i>
-            </button>
-            <div class="search-backdrop"></div>
-            <div class="search-result">
-              <div class="search-header">Histories</div>
-              <div class="search-item">
-                <a href="#">How to hack NASA using CSS</a>
-                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
-              </div>
-              <div class="search-item">
-                <a href="#">Kodinger.com</a>
-                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
-              </div>
-              <div class="search-item">
-                <a>OUTBODY</a>
-                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
-              </div>
-              <div class="search-header">Result</div>
-              <div class="search-item">
-                <a href="#">
-                  <img class="mr-3 rounded" width="30" src="assets/img/products/product-3-50.png" alt="product" />
-                  oPhone S9 Limited Edition
-                </a>
-              </div>
-              <div class="search-item">
-                <a href="#">
-                  <img class="mr-3 rounded" width="30" src="assets/img/products/product-2-50.png" alt="product" />
-                  Drone X2 New Gen-7
-                </a>
-              </div>
-              <div class="search-item">
-                <a href="#">
-                  <img class="mr-3 rounded" width="30" src="assets/img/products/product-1-50.png" alt="product" />
-                  Headphone Blitz
-                </a>
-              </div>
-              <div class="search-header">Projects</div>
-              <div class="search-item">
-                <a href="#">
-                  <div class="search-icon bg-danger text-white mr-3">
-                    <i class="fas fa-code"></i>
-                  </div>
-                  OutBody Admin Template
-                </a>
-              </div>
-              <div class="search-item">
-                <a href="#">
-                  <div class="search-icon bg-primary text-white mr-3">
-                    <i class="fas fa-laptop"></i>
-                  </div>
-                  Create a new Homepage Design
-                </a>
-              </div>
-            </div>
-          </div>
         </form>
         <ul class="navbar-nav navbar-right">
           <li class="dropdown dropdown-list-toggle">
@@ -180,7 +122,7 @@
                   <a href="#">Mark All As Read</a>
                 </div>
               </div>
-              <div class="dropdown-list-content dropdown-list-icons">
+              <div id="log-box" class="dropdown-list-content dropdown-list-icons">
                 <a href="#" class="dropdown-item dropdown-item-unread">
                   <div class="dropdown-item-icon bg-primary text-white">
                     <i class="fas fa-code"></i>
@@ -190,46 +132,6 @@
                     <div class="time text-primary">2 Min Ago</div>
                   </div>
                 </a>
-                <a href="#" class="dropdown-item">
-                  <div class="dropdown-item-icon bg-info text-white">
-                    <i class="far fa-user"></i>
-                  </div>
-                  <div class="dropdown-item-desc">
-                    <b>You</b> and <b>Dedik Sugiharto</b> are now friends
-                    <div class="time">10 Hours Ago</div>
-                  </div>
-                </a>
-                <a href="#" class="dropdown-item">
-                  <div class="dropdown-item-icon bg-success text-white">
-                    <i class="fas fa-check"></i>
-                  </div>
-                  <div class="dropdown-item-desc">
-                    <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to
-                    <b>Done</b>
-                    <div class="time">12 Hours Ago</div>
-                  </div>
-                </a>
-                <a href="#" class="dropdown-item">
-                  <div class="dropdown-item-icon bg-danger text-white">
-                    <i class="fas fa-exclamation-triangle"></i>
-                  </div>
-                  <div class="dropdown-item-desc">
-                    Low disk space. Let's clean it!
-                    <div class="time">17 Hours Ago</div>
-                  </div>
-                </a>
-                <a href="#" class="dropdown-item">
-                  <div class="dropdown-item-icon bg-info text-white">
-                    <i class="fas fa-bell"></i>
-                  </div>
-                  <div class="dropdown-item-desc">
-                    Welcome to OutBody template!
-                    <div class="time">Yesterday</div>
-                  </div>
-                </a>
-              </div>
-              <div class="dropdown-footer text-center">
-                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
               </div>
             </div>
           </li>
@@ -305,28 +207,24 @@
             <h1>내 정보</h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active">
-                <!-- <a href="#">Dashboard</a> -->
                 <a id="signout" data-toggle="modal" data-target="#exampleModal" style="margin-right: 5px" href="#">
                   회원 탈퇴
                 </a>
-                /
                 <a id="passwordEdit" data-toggle="modal" data-target="#exampleModal" style="margin-right: 5px" href="#">
-                  비밀번호 수정 
+                  비밀번호 수정
                 </a>
-                /
                 <a id="userInfoEdit" data-toggle="modal" data-target="#exampleModal" style="display: inline-block"
                   href="#">
-                   내 정보 수정
+                  내 정보 수정
                 </a>
               </div>
-              <!-- <div class="breadcrumb-item">Profile</div> -->
             </div>
           </div>
-          <div class="section-body">
-            <h2 class="section-title" id="greeting"></h2>
-            <p class="section-lead">Out Body에 오신 것을 환영합니다.</p>
 
-            <div class="row mt-sm-4">
+          <div class="section-body">
+            <h2 class="section-title" id="greeting">회원님의 정보</h2>
+
+            <div class="row">
               <div class="col-12 col-md-12 col-lg-5">
                 <div class="card profile-widget">
                   <div class="profile-widget-header">
@@ -334,19 +232,19 @@
                       class="rounded-circle profile-widget-picture" />
                     <div class="profile-widget-items">
                       <div class="profile-widget-item">
-                        <div class="profile-widget-item-label">Point</div>
+                        <div class="profile-widget-item-label">- 점수 -</div>
                         <div class="profile-widget-item-value" id="my-point">
                           <!-- 사용자 점수 -->
                         </div>
                       </div>
                       <div class="profile-widget-item">
-                        <div class="profile-widget-item-label">Ranks</div>
+                        <div class="profile-widget-item-label">- 순위 -</div>
                         <div id="my-rank" class="profile-widget-item-value">
                           <!-- 사용자 순위 -->
                         </div>
                       </div>
                       <div class="profile-widget-item">
-                        <div class="profile-widget-item-label">friends</div>
+                        <div class="profile-widget-item-label">- 친구 수 -</div>
                         <div class="profile-widget-item-value" id="friend-count">
                           <!-- 사용자 친구 수 -->
                         </div>
@@ -355,41 +253,38 @@
                   </div>
                   <div class="profile-widget-description">
                     <div class="profile-widget-name">
-                      <div id="descriptionName" style="font-weight: bold">
+                      <div id="descriptionName" style="font-weight: bold; margin-left: 20px;">
                         <!-- 사용자 이름 -->
                       </div>
                       <div class="text-muted d-inline font-weight-normal">
                       </div>
                     </div>
-                    <div id="self-description">
+                    <div id="self-description" style="margin-left: 20px;">
                       <!-- 자기소개 -->
                     </div>
                     <br />
 
                     <div style="position: relative; overflow: hidden">
-                      <div class="col-12 col-md-6 col-lg-12">
+                      <div id="challenge-card" class="col-12 col-md-6 col-lg-12">
                         <div class="card card-primary">
                           <div class="card-header">
-                            <h4>
-                              <a href="#" class="currentChallenge" id="findChallenges">현재 참여중인 도전</a>
-                            </h4>
+                            <h4>회원님이 현재 참여중인 도전</h4>
                           </div>
-                          <div id="challenge-card" class="card-body" style="cursor: pointer;">
-                            <b id="title" style="font-size: 100%">Title</b>
-                            <p id="desc" style="font-size: 80%">description</p>
-                            <p id="startDate" style="font-size: 80%">startDate</p>
-                            <p id="endDate" style="font-size: 80%">endDate</p>
+                          <div class="card-body" style="cursor: pointer;">
+                            <p id="title">제목: </p>
+                            <p id="desc" style="margin-top: 15px;">내용: </p>
+                            <p id="date">도전 기간: </p>
                           </div>
                         </div>
                       </div>
                     </div>
 
                   </div>
-                  <div class="card-footer text-right"></div>
                 </div>
               </div>
+
               <div class="col-12 col-md-12 col-lg-7">
-                <div class="card">
+                <div class="card card-primary">
                   <form method="post" class="needs-validation" novalidate="">
                     <div class="card-header">
                       <h4 id="informationName">내 정보</h4>
@@ -432,7 +327,9 @@
                                 <th scope="col">#</th>
                                 <th scope="col">이름</th>
                                 <th scope="col">계정(e-mail)</th>
+                                <th scope="col">점수</th>
                                 <th scope="col">순위</th>
+                                <th scope="col"></th>
                               </tr>
                             </thead>
                             <tbody id="my-friends-list">
@@ -449,9 +346,8 @@
                     </div>
 
                     <div class="card-footer text-right">
-                      <a id="searchfriend" data-toggle="modal" data-target="#exampleModal" style="font-size: 90%"
-                        href="#">
-                        친구 찾기
+                      <a id="searchfriend" data-toggle="modal" data-target="#exampleModal" style="font-size: 90%" href="#">
+                        <button class="btn btn-primary" style="border-radius: 15px;">친구 찾기</button>
                       </a>
                     </div>
                   </form>
@@ -630,8 +526,8 @@
 
   <!-- Template JS File -->
   <script src="assets/js/scripts.js"></script>
-  <script src="assets/js/my-Info.js"></script>
   <script src="assets/js/notice.js"></script>
+  <script src="assets/js/my-Info.js"></script>
 </body>
 
 </html>

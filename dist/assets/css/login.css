@@ -1,3 +1,13 @@
+.login-box {
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.form-group {
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
 .sm-gutters {
   display: flex;
   justify-content: center;
@@ -21,7 +31,7 @@
   background-color: #fee500;
   border: none;
   height: 50px;
-  width: 150px;
+  width: 250px;
   border-radius: 12px;
   color: #000000 85%;
 }
