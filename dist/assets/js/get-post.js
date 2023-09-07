@@ -95,7 +95,7 @@ const getPosts = async (page, pageSize) => {
                     <a href="#" class="btn btn-icon btn-primary"><i class="fas fa-times delPost-btn" postId=${post.id}></i></a>
                   </div>
                   <div class="user-detail-name">
-                    <a href="http://localhost:3000/user/${userId}">${post.userName}</a>
+                    <a href="user-info.html?id=${userId}">${post.userName}</a>
                     <div class="font-1000-bold"><i class="fas fa-circle"></i> ${post.userPoint}점</div>
                     <p>${formattedDate}</p>
                   </div>

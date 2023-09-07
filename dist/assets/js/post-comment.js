@@ -88,7 +88,7 @@ const getComment = async () => {
                                 <div class="bullet"></div>
                                 <a href="#" class='delCmt_btn' commentId="${comment.commentId}">삭제</a>
                                 <div class="bullet"></div>
-                                <a href="#" class="text-danger" data-toggle="modal" data-target="#reportModal">신고</a>
+                                <a href="#" class="text-danger" id="report-btn" data-toggle="modal" data-target="#reportModal" commentId="${comment.commentId}">신고</a>
                                 <div class="collapse" id="editInput-${comment.commentId}">
                                     <div class="section-title">댓글 수정</div>
                                     <div class="form-group">
@@ -192,4 +192,51 @@ const deleteComment = async (commentId) => {
 };
 $(document).on('click', '.delCmt_btn', function () {
   deleteComment($(this).attr('commentid'));
+});
+
+// 신고 클릭시 모달
+$(document).on('click', '#report-btn', function () {
+  const commentId = $(this).attr('commentId');
+
+  $('#reportModal').modal('show');
+  $('#reportModal .modal-footer').html(
+    `<button type="button" class="btn btn-primary" id="report-button" commentid=${commentId}>신고</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>`,
+  );
+});
+
+// 댓글 신고
+const reportComment = async (commentId) => {
+  try {
+    if (!$('.report_input').val()) {
+      alert('신고 사유를 입력해주세요.');
+      return;
+    }
+    if ($('.report_input').val().length < 10) {
+      alert('신고 사유를 10자 이상 입력해주세요.');
+      return;
+    }
+    if ($('.report_input').val().length > 100) {
+      alert('신고 사유를 100자 이하 입력해주세요.');
+      return;
+    }
+
+    await axios.post(
+      `http://localhost:3000/report/${commentId}`,
+      { description: $('.report_input').val() },
+      {
+        headers: {
+          Authorization: token,
+        },
+      },
+    );
+
+    alert('댓글이 신고되었습니다.');
+    location.reload();
+  } catch (error) {
+    console.error('Error message:', error);
+  }
+};
+$(document).on('click', '#report-button', function () {
+  reportComment($(this).attr('commentid'));
 });
