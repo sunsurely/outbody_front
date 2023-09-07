@@ -88,7 +88,7 @@ const getComment = async () => {
                                 <div class="bullet"></div>
                                 <a href="#" class='delCmt_btn' commentId="${comment.commentId}">삭제</a>
                                 <div class="bullet"></div>
-                                <a href="#" class="text-danger">신고</a>
+                                <a href="#" class="text-danger" data-toggle="modal" data-target="#reportModal">신고</a>
                                 <div class="collapse" id="editInput-${comment.commentId}">
                                     <div class="section-title">댓글 수정</div>
                                     <div class="form-group">
