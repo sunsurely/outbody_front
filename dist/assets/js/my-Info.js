@@ -158,7 +158,7 @@ async function initMyPage() {
     $(gender).text(myData.gender ? myData.gender : '미입력');
     let num = 1;
     let followTemp = '';
-    for (follower of followersInfo) {
+    for (const follower of followersInfo) {
       const temp = `<tr>
       <th style="padding-top: 15px;" scope="row">${num}</th>
       <td style="padding-top: 15px;">${follower.name}</td>
@@ -166,9 +166,9 @@ async function initMyPage() {
       <td style="padding-top: 15px;">${follower.point}점</td>
       <td style="padding-top: 15px;">${follower.ranking}위</td>
       <td>
-        <button id="delete-friend-button" followerId=${follower.id} class="btn btn-primary" style="border-radius: 15px;">
+        <div followerId="${follower.id}" class="btn btn-primary delete-friend-button" style="border-radius: 15px;">
           친구 삭제
-        </button>
+        </div>
       </td>
     </tr>`;
       followTemp += temp;
@@ -194,7 +194,7 @@ async function initMyPage() {
 }
 
 // 친구 삭제
-$(document).on('click', '#delete-friend-button', function () {
+$(document).on('click', '.delete-friend-button', function () {
   deleteFriend($(this).attr('followerId'));
 });
 async function deleteFriend(followerId) {
@@ -206,7 +206,7 @@ async function deleteFriend(followerId) {
     });
     alert('친구 삭제 완료');
     location.reload();
-  } catch {
+  } catch (error) {
     alert(error.response.data.message);
     location.reload();
   }
