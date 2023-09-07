@@ -245,7 +245,11 @@ $('#send-invitation-button').on('click', async () => {
     <div class="card card-primary">
       <div class="card-body">
         <div id=${friend.id}>
-          <img src="" />
+          <img class="rounded-circle" src=${
+            friend.imgUrl
+              ? `https://inflearn-nest-cat.s3.amazonaws.com/${friend.imgUrl}`
+              : 'assets/img/avatar/avatar-1.png'
+          } style="width:50px; margin-right:10px">
           <span> ${friend.name}(${friend.email})</span>
         </div>
       </div>
