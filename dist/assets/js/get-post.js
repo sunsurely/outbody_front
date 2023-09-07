@@ -74,7 +74,7 @@ const getPosts = async (page, pageSize) => {
 
       const userId = post.userId;
       console.log('userId', userId);
-      let temphtml = `<div class="col-12 col-md-4 col-lg-2">
+      let temphtml = `<div class="col-12 col-md-4 ">
           <article class="article article-style-c">
             <div class="article-header">
               <div class="article-image"
