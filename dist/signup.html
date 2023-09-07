@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
   <link rel="stylesheet" href="assets/css/signup.css" />
+
   <!-- Start GA -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
   <script>
@@ -44,6 +45,7 @@
       <div class="container mt-5">
         <div class="row">
           <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+
             <div class="login-brand">
               <img src="../dist/assets/img/Free_Sample_By_Wix.jpg" alt="logo" width="100"
                 class="shadow-light rounded-circle" />
@@ -55,87 +57,80 @@
                   <h4>회원가입</h4>
                 </div>
 
-                <!-- <div class="card-body">
-                  <div class="row"> -->
-                <div class="form-group" style="margin-top: 20px;">
-                  <label for="frist_name">이름</label>
-                  <input id="name" type="text" class="form-control" name="name" autofocus />
-                </div>
-                <div class="form-group">
-                  <label for="email">계정(e-mail)</label>
-                  <input id="email" type="email" class="form-control" name="email" autofocus />
-                </div>
-                <!-- </div> -->
-
-                <!-- <div class="row"> -->
-                <div class="form-group">
-                  <label for="password" class="d-block">비밀번호</label>
-                  <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator"
-                    name="password" />
-                  <div id="pwindicator" class="pwindicator">
-                    <div class="bar"></div>
-                    <div class="label"></div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="frist_name">이름</label>
+                    <input id="name" type="text" class="form-control" name="name" autofocus />
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="password2" class="d-block">비밀번호 확인</label>
-                  <input id="confirm_password" type="password" class="form-control" name="password-confirm" />
-                </div>
-                <!-- </div> -->
-
-                <!-- <div class="row"> -->
-                <div class="form-group">
-                  <label>성별</label>
-                  <select id="gender" class="form-control selectric">
-                    <option>- 선택 -</option>
-                    <option>남자</option>
-                    <option>여자</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label>생일</label>
-                  <input id="user-birthday" type="text" class="form-control datepicker"
-                    placeholder="YYYY-MM-DD (ex: 2000-01-01)" />
-                </div>
-                <!-- </div> -->
-
-                <div class="text-center mt-4 mb-3">
-                  <div class="social-login" style="font-size: small">
-                    또는 간편 로그인
+                  <div class="form-group">
+                    <label for="email">계정(e-mail)</label>
+                    <input id="email" type="email" class="form-control" name="email" autofocus />
                   </div>
-                </div>
-                <div class="row sm-gutters">
-                  <div class="button-container">
-                    <button class="kakao-btn">
-                      <i class="fa-solid fa-comment" style="color: #000000"></i>카카오 로그인
+
+                  <div class="form-group">
+                    <label for="password" class="d-block">비밀번호</label>
+                    <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator"
+                      name="password" />
+                    <div id="pwindicator" class="pwindicator">
+                      <div class="bar"></div>
+                      <div class="label"></div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="password2" class="d-block">비밀번호 확인</label>
+                    <input id="confirm_password" type="password" class="form-control" name="password-confirm" />
+                  </div>
+
+                  <div class="form-group">
+                    <label>성별</label>
+                    <select id="gender" class="form-control selectric">
+                      <option>-- 선택 --</option>
+                      <option>남자</option>
+                      <option>여자</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label>생일 (체성분 기반 개인 맞춤형 조언 제공을 위함)</label>
+                    <input id="user-birthday" type="text" class="form-control datepicker"
+                      placeholder="예: 2000-01-01" />
+                  </div>
+
+                  <div class="text-center mt-4 mb-3">
+                    <div class="social-login" style="font-size: small">
+                      또는 간편 로그인
+                    </div>
+                  </div>
+
+                  <div class="row sm-gutters">
+                    <div class="button-container">
+                      <button class="kakao-btn">
+                        <i class="fa-solid fa-comment" style="color: #000000"></i>카카오 로그인
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="text-muted text-center">
+                    이미 회원가입 하셨나요? <a href="./login.html">로그인</a>
+                  </div>
+
+                  <div class="form-group">
+                    <button style="margin-bottom: 20px;" type="button" class="btn btn-primary btn-lg btn-block"
+                      id="signUp_btn">
+                      회원가입
                     </button>
                   </div>
-                </div>
 
-
-
-                <div class="text-muted text-center">
-                  이미 회원가입 하셨나요? <a href="./login.html">로그인</a>
-                </div>
-
-                <div class="form-group">
-                  <button type="button" class="btn btn-primary btn-lg btn-block" id="signUp_btn">
-                    회원가입
-                  </button>
                 </div>
               </div>
+
+              <div class="simple-footer">Copyright &copy; 2023 <a style="font-weight: bold;">WildBody</a></div>
+
             </div>
-
-
-
-            <div class="simple-footer">Copyright &copy; 2023 <a
-                style="font-weight: bold;">WildBody</a></div>
           </div>
         </div>
       </div>
-  </div>
-  </section>
+    </section>
   </div>
 
   <!-- General JS Scripts -->
@@ -156,7 +151,6 @@
 
   <!-- Template JS File -->
   <script src="assets/js/scripts.js"></script>
-  <!-- <script src="assets/js/custom.js"></script> -->
   <script src="assets/js/signup.js"></script>
 </body>
 
