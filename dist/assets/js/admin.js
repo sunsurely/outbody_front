@@ -72,62 +72,59 @@ $('#findBlackList').on('click', async () => {
 });
 
 // 이메일로 블랙리스트 조회 (블랙리스트만 조회가능) & 강제 탈퇴
-async function findByEmail() {
-  $('#findwithdrawal').on('click', async () => {
-    const userEmail = $('#withdrawalEmail').val();
-    if (!userEmail) {
-      alert('E-mail을 입력해주세요');
-      return;
-    }
-    const withdrawUser = $('#searched-withdraw-user');
-    $(withdrawUser).html('');
 
-    const data = { email };
-    try {
-      const response = await axios.get(
-        `http://localhost:3000/blacklist/detail`,
-        data,
-        {
-          headers: {
-            Authorization: adminToken,
-          },
+$('#findwithdrawal').on('click', async () => {
+  const userEmail = $('#withdrawalEmail').val();
+  if (!userEmail) {
+    alert('E-mail을 입력해주세요');
+    return;
+  }
+  const withdrawUser = $('#searched-withdraw-user');
+  $(withdrawUser).html('');
+
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/user/me/searchEmail/?email=${email}`,
+      {
+        headers: {
+          Authorization: adminToken,
         },
-      );
-      const user = response.data.data;
-      const userEmail = user.email;
-      const userId = user.id;
+      },
+    );
+    const user = response.data.data;
+    const userEmail = user.email;
+    const userId = user.id;
 
-      const userInfoHTML = `
+    const userInfoHTML = `
     <div id=${userId}>
       <span>Email: ${userEmail}</span><br />
       <span>User ID: ${userId}</span><br />
       <span>Created At: ${user.createdAt}</span>
     </div> <br/>`;
-      $(withdrawUser).html(userInfoHTML);
+    $(withdrawUser).html(userInfoHTML);
 
-      $('#deleteUser').on('click', async () => {
-        const email = $('#searchEmail').val();
-        const description = $('#withdrawaldescription').val();
-        if (!description) {
-          alert('해당 회원의 계정삭제 사유를 입력해주세요');
-          return;
-        }
-        const data = { email, description };
-        try {
-          await axios.delete(`http://localhost:3000/blacklist/withdraw`, data, {
-            headers: { Authorization: adminToken },
-          });
-          alert(`${user.email} 해당 계정을 OutBody 서비스에서 삭제했습니다.`);
-          window.location.reload();
-        } catch (error) {
-          alert(error);
-        }
-      });
-    } catch (error) {
-      alert(error);
-    }
-  });
-}
+    $('#deleteUser').on('click', async () => {
+      const email = $('#searchEmail').val();
+      const description = $('#withdrawaldescription').val();
+      if (!description) {
+        alert('해당 회원의 계정삭제 사유를 입력해주세요');
+        return;
+      }
+      const data = { email, description };
+      try {
+        await axios.delete(`http://localhost:3000/blacklist/withdraw`, data, {
+          headers: { Authorization: adminToken },
+        });
+        alert(`${user.email} 해당 계정을 OutBody 서비스에서 삭제했습니다.`);
+        window.location.reload();
+      } catch (error) {
+        alert(error);
+      }
+    });
+  } catch (error) {
+    alert(error);
+  }
+});
 
 $(document).ready(function () {
   recordPage(1, 10);
@@ -148,8 +145,6 @@ async function recordPage(page, pageSize) {
       },
     })
     .then((response) => {
-      console.log(response.data.data);
-
       const data = response.data.data.pageinatedReports;
       const reportTable = document.querySelector('#report-table');
       reportTable.innerHTML = `<tr>
@@ -160,14 +155,24 @@ async function recordPage(page, pageSize) {
       <th>신고날짜</th>
       <th></th>
     </tr>`;
+
+      function formatDate(dateString) {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      }
+
       reportTable.innerHTML += response.data.data.pageinatedReports
         .map((report) => {
+          const formattedDate = formatDate(report.report_createdAt);
           return `<tr id="${report.comment_userId}">
       <td><span class="badge badge-transparent">${report.report_commentId}</span></td>
       <td><span class="badge badge-transparent">${report.comment_userId}</span></td>
       <td><span class="badge badge-transparent">${report.comment_comment}</span></td>
       <td><span class="badge badge-transparent">${report.report_description}</span></td>
-      <td><span class="badge badge-transparent">${report.report_createdAt}</span></td>
+      <td><span class="badge badge-transparent">${formattedDate}</span></td>
       <td><a href="#" id="${report.comment_userId}" class="blacklist-link">
       <button class="btn btn-primary" style="border-radius: 15px;">
       블랙리스트 추가
@@ -186,7 +191,6 @@ async function recordPage(page, pageSize) {
           event.preventDefault();
           const id = $(this).attr('id');
           const userId = id.charAt(id.length - 1);
-          console.log('userId', userId);
           $('#addBlackUser').modal('show');
 
           $('#blackuser').on('click', function () {
@@ -199,7 +203,7 @@ async function recordPage(page, pageSize) {
             alert(`userId: ${userId}님을 블랙리스트에 추가했습니다.`);
           });
         } catch (error) {
-          console.error('Error message:', error.response.data.message);
+          alert('Error message:', error.response.data.message);
         }
 
         // 취소 버튼 클릭 시 모달 창 닫기
@@ -255,11 +259,12 @@ async function recordPage(page, pageSize) {
     </tr>`;
             reportTable.innerHTML += data.pageinatedReports
               .map((report) => {
+                const formattedDate = formatDate(report.report_createdAt);
                 return `<tr id="${report.report_id}">
       <td><span class="badge badge-transparent">${report.report_commentId}</span></td>
       <td><span class="badge badge-transparent">${report.comment_comment}</span></td>
       <td><span class="badge badge-transparent">${report.report_description}</span></td>
-      <td><span class="badge badge-transparent">${report.report_createdAt}</span></td>
+      <td><span class="badge badge-transparent">${formattedDate}</span></td>
       <td><a href="#" id="${report.report_id}">
       <button class="btn btn-primary" style="border-radius: 15px;">
       블랙리스트 추가
@@ -291,7 +296,6 @@ async function recordPage(page, pageSize) {
             $(pages).find('.page-link').css('color', '');
 
             const { data } = await getReports(nowPage + 1, 10);
-            console.log(data);
             $(reportTable).innerHTML = `<tr>
         <th>Id</th>
         <th>comment</th>
@@ -301,11 +305,12 @@ async function recordPage(page, pageSize) {
       </tr>`;
             reportTable.innerHTML += data.pageinatedReports
               .map((report) => {
+                const formattedDate = formatDate(report.report_createdAt);
                 return `<tr id="${report.report_id}">
         <td><span class="badge badge-transparent">${report.report_commentId}</span></td>
         <td><span class="badge badge-transparent">${report.comment_comment}</span></td>
         <td><span class="badge badge-transparent">${report.report_description}</span></td>
-        <td><span class="badge badge-transparent">${report.report_createdAt}</span></td>
+        <td><span class="badge badge-transparent">${formattedDate}</span></td>
         <td><a href="#" id="${report.report_id}">
         <button class="btn btn-primary" style="border-radius: 15px;">
         블랙리스트 추가
@@ -348,11 +353,12 @@ async function recordPage(page, pageSize) {
       </tr>`;
             reportTable.innerHTML += data.pageinatedReports
               .map((report) => {
+                const formattedDate = formatDate(report.report_createdAt);
                 return `<tr id="${report.report_id}">
         <td><span class="badge badge-transparent">${report.report_commentId}</span></td>
         <td><span class="badge badge-transparent">${report.comment_comment}</span></td>
         <td><span class="badge badge-transparent">${report.report_description}</span></td>
-        <td><span class="badge badge-transparent">${report.report_createdAt}</span></td>
+        <td><span class="badge badge-transparent">${formattedDate}</span></td>
         <td><a href="#" id="${report.report_id}">
         <button class="btn btn-primary" style="border-radius: 15px;">
         블랙리스트 추가
