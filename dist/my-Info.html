@@ -205,20 +205,6 @@
         <section class="section">
           <div class="section-header">
             <h1>내 정보</h1>
-            <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active">
-                <a id="signout" data-toggle="modal" data-target="#exampleModal" style="margin-right: 5px" href="#">
-                  회원 탈퇴
-                </a>
-                <a id="passwordEdit" data-toggle="modal" data-target="#exampleModal" style="margin-right: 5px" href="#">
-                  비밀번호 수정
-                </a>
-                <a id="userInfoEdit" data-toggle="modal" data-target="#exampleModal" style="display: inline-block"
-                  href="#">
-                  내 정보 수정
-                </a>
-              </div>
-            </div>
           </div>
 
           <div class="section-body">
@@ -288,6 +274,14 @@
                   <form method="post" class="needs-validation" novalidate="">
                     <div class="card-header">
                       <h4 id="informationName">내 정보</h4>
+                      <div class="card-header-action">
+                        <a id="userInfoEdit" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary"
+                          style="color: white;">내 정보 수정</a>
+                        <a id="passwordEdit" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary"
+                          style="color: white;">비밀번호 수정</a>
+                        <a id="signout" data-toggle="modal" data-target="#exampleModal" class="btn btn-danger"
+                          style="color: white;">회원탈퇴</a>
+                      </div>
                     </div>
                     <div class="card-body">
                       <div class="row">
@@ -316,7 +310,7 @@
                       </div>
                       <div class="row" id="mychatbox2">
                         <div class="form-group col-12" data-toggle="tooltip">
-                          <label>친구 목록</label>
+                          <div class="section-title mt-0">친구 목록</div>
                         </div>
                       </div>
                       <div class="table-responsive">
@@ -346,7 +340,8 @@
                     </div>
 
                     <div class="card-footer text-right">
-                      <a id="searchfriend" data-toggle="modal" data-target="#exampleModal" style="font-size: 90%" href="#">
+                      <a id="searchfriend" data-toggle="modal" data-target="#exampleModal" style="font-size: 90%"
+                        href="#">
                         <button class="btn btn-primary" style="border-radius: 15px;">친구 찾기</button>
                       </a>
                     </div>
@@ -363,7 +358,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">회원정보 수정</h5>
+              <h5 class="modal-title">내 정보 수정</h5>
             </div>
             <div class="card-body">
               <div class="form-group">
@@ -377,8 +372,7 @@
               <div id="image-container"></div>
               <div class="form-group">
                 <label>생일</label>
-                <input id="user-birthday" type="text" class="form-control datepicker"
-                  placeholder="YYYY-MM-DD (ex: 2000-01-01)" />
+                <input id="user-birthday" type="text" class="form-control datepicker" placeholder="예: 2000-01-01" />
               </div>
               <div class="form-group mb-0">
                 <label>자기소개</label>
@@ -403,30 +397,26 @@
             <div class="card-body">
               <div class="form-group">
                 <label>현재 비밀번호</label>
-                <input type="text" class="form-control datemask" placeholder="Current Password" id="current" />
+                <input type="text" class="form-control datemask" placeholder="" id="current" />
               </div>
               <div class="form-group">
-                <label>변경 비밀번호</label>
-                <input type="text" class="form-control datemask" placeholder="New Password" id="newpw" />
+                <label>새로운 비밀번호</label>
+                <input type="text" class="form-control datemask" placeholder="" id="newpw" />
               </div>
               <div class="form-group">
-                <label>변경된 비밀번호 확인</label>
-                <input type="text" class="form-control datemask" placeholder="Confirm Password" id="confirmpw" />
+                <label>새로운 비밀번호 확인</label>
+                <input type="text" class="form-control datemask" placeholder="" id="confirmpw" />
               </div>
-              <br />
-              ☞ 비밀번호는 최소 8자 이상, 영문 대소문자 및 숫자로 이루어져야
-              합니다.
+              비밀번호는 최소 8자 이상, 영문 대소문자, 숫자를 포함해야 합니다.
             </div>
-            <div class="card-footer text-right">
-              <button class="btn btn-primary" id="passwordcancel">
+            <div class="modal-footer" style="margin-bottom: 20px;">
+              <button class="btn btn-primary" id="submit" onclick="editPassword();">
+                완료
+              </button>
+              <button class="btn btn-secondary" id="passwordcancel">
                 취소
               </button>
-
-              <button class="btn btn-primary" id="submit" onclick="editPassword();">
-                수정
-              </button>
             </div>
-            <div class="odal-footer bg-whitesmoke br"></div>
           </div>
         </div>
       </div>
@@ -436,22 +426,20 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">회원 탈퇴</h5>
+              <h5 class="modal-title">회원탈퇴</h5>
             </div>
             <div class="card-body">
               <div class="form-group mb-0">
-                <label>Password</label>
-                <input type="text" class="form-control" required="" placeholder="비밀번호를 입력해주세요." id="signoutpassword" />
+                <label>비밀번호</label>
+                <input type="text" class="form-control" required="" placeholder="" id="signoutpassword" />
                 <br />
-                ☞ 제출 버튼 클릭 시 회원님의 계정은 삭제 처리됩니다.
+                탈퇴를 누를 시, 회원님의 계정은 즉시 삭제 처리됩니다.
               </div>
             </div>
-            <div class="card-footer text-right">
-              <button class="btn btn-primary" id="signoutcancel">취소</button>
-
-              <button class="btn btn-primary" id="signout-btn">제출</button>
+            <div class="modal-footer" style="margin-bottom: 20px;">
+              <button class="btn btn-primary" id="signout-btn">탈퇴</button>
+              <button class="btn btn-secondary" id="signoutcancel">취소</button>
             </div>
-            <div class="modal-footer bg-whitesmoke br"></div>
           </div>
         </div>
       </div>
@@ -461,12 +449,12 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">유저 찾기</h5>
+              <h5 class="modal-title">친구 찾기</h5>
             </div>
             <div class="card-body">
               <div class="form-group">
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="친구요청을 보내고 싶은 유저의 E-mail을 입력해주세요." aria-label=""
+                  <input type="text" class="form-control" placeholder="친구 요청을 보낼 회원의 계정(e-mail)을 입력해주세요." aria-label=""
                     id="searchEmail" />
                   <div class="input-group-append">
                     <button class="btn btn-primary" type="button" id="searchFriendByEmail">
@@ -480,17 +468,18 @@
                 <br />
               </div>
             </div>
-            <div class="card-footer text-right">
+
+            <div class="modal-footer">
+              <div style="margin-top: 5px; margin-right: 20px;">
+                <span style="margin-left: 5px">친구 요청시 회원님의 계정이 노출됩니다.&nbsp;</span>
+                <input id="invite-checkbox" type="checkbox" />
+              </div>
               <button class="btn btn-primary" type="button" id="send-invite">
-                친구요청
+                친구 요청
               </button>
-              <button class="btn btn-primary" id="searchfriendCancel">
+              <button class="btn btn-secondary" id="searchfriendCancel">
                 취소
               </button>
-              <div style="margin-top: 10px">
-                <input id="invite-checkbox" type="checkbox" style="margin-top: 9px" /><span
-                  style="margin-top: 6px; margin-left: 5px">친구요청시 회원님의 이메일이 노출됩니다.</span>
-              </div>
             </div>
           </div>
         </div>
@@ -506,6 +495,7 @@
       </footer>
     </div>
   </div>
+
   <!-- General JS Scripts -->
   <script src="assets/modules/jquery.min.js"></script>
   <script src="assets/modules/popper.js"></script>

@@ -46,7 +46,6 @@ async function updateUserInfo() {
   const profileImage = $('#profile-image-upload')[0].files[0];
   const birthday = $('#user-birthday').val();
   const description = $('#user-description').val();
-  console.log(description);
 
   const formData = new FormData();
   formData.append('image', profileImage);
@@ -182,7 +181,7 @@ async function initMyPage() {
     );
     $(myFriends).html(followTemp);
     const date = new Date(myData.createdAt);
-    const year = date.getFullYear().toString().slice(-2);
+    const year = date.getFullYear().toString();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
 
@@ -299,11 +298,19 @@ $('#searchFriendByEmail').on('click', async () => {
 
     const emailText = `${preString}***${nextString}***`;
 
-    const temp = `<div id=${user.id}><img  class="rounded-circle" src=${
-      user.imgUrl ? user.imgUrl : 'assets/img/avatar/avatar-1.png'
-    } style="width:50px; margin-right:10px"><span>${
-      user.name
-    }(${emailText})</span></div> <br/> `;
+    const temp = `
+    <div class="card card-primary">
+      <div class="card-body">
+        <div id=${user.id}>
+          <img class="rounded-circle" src=${
+            user.imgUrl
+              ? `https://inflearn-nest-cat.s3.amazonaws.com/${user.imgUrl}`
+              : 'assets/img/avatar/avatar-1.png'
+          } style="width:50px; margin-right:10px">
+          <span>${user.name}(${emailText})</span>
+        </div>
+      </div>
+    </div>`;
     $(searchUser).html(temp);
 
     const userId = user.id;
@@ -318,10 +325,10 @@ $('#searchFriendByEmail').on('click', async () => {
               headers: { Authorization: accessToken },
             },
           );
-          alert(`${user.name}(${user.email})님에게 친구요청을 보냈습니다`);
+          alert(`${user.name}(${user.email})님에게 친구요청을 보냈습니다.`);
           window.location.reload();
         } else {
-          alert('동의 항목에 체크해주세요');
+          alert('안내 사항에 동의해주세요.');
         }
       } catch (error) {
         alert(error.response.data.message);
