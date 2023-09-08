@@ -23,6 +23,7 @@ const login = async () => {
         `cookie`,
         `Bearer ${response.data.data.accessToken}`,
       );
+
       // setCookie('Authorization', response.data.data.accessToken, 2);
       alert('반갑습니다 회원님!');
       location.href = `index-0.html?id=${response.data.data.userId}`;
