@@ -33,6 +33,7 @@ async function initMessagesBox() {
   try {
     const response = await axios.get('http://localhost:3000/follow/request', {
       headers: { Authorization: ` ${accessToken}` },
+      withCredentials: true,
     });
     const messages = response.data.data;
 
@@ -103,6 +104,7 @@ async function initMessagesBox() {
         const data = { response: 'yes' };
         await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
           headers: { Authorization: ` ${storedToken}` },
+          withCredentials: true,
         });
 
         alert('친구요청을 수락했습니다.');
@@ -117,6 +119,7 @@ async function initMessagesBox() {
         const data = { response: 'no' };
         await axios.post(`http://localhost:3000/follow/${id}/accept`, data, {
           headers: { Authorization: ` ${storedToken}` },
+          withCredentials: true,
         });
 
         alert('친구요청을 거절했습니다.');
@@ -183,6 +186,7 @@ async function getBodyResults() {
         headers: {
           Authorization: ` ${accessToken}`,
         },
+        withCredentials: true,
       },
     );
 
@@ -588,6 +592,7 @@ $('.regist-record').click(async () => {
       headers: {
         Authorization: ` ${accessToken}`,
       },
+      withCredentials: true,
     });
     alert('데이터를 등록했습니다.');
     window.location.reload();
@@ -603,6 +608,7 @@ async function getRecordData(page, pageSize) {
       headers: {
         Authorization: ` ${accessToken}`,
       },
+      withCredentials: true,
     },
   );
   orderList = 'normal';
@@ -716,6 +722,7 @@ async function getDateRangeRecord(startDate, endDate, page) {
       headers: {
         Authorization: ` ${accessToken}`,
       },
+      withCredentials: true,
     },
   );
 
