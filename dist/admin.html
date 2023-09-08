@@ -322,90 +322,17 @@
                 href="#"
                 >블랙리스트</a
               >
+              <!-- 회원탈퇴버튼 -->
               <a
                 id="removeUser"
                 data-toggle="modal"
                 data-target="#exampleModal"
                 style="float: right; margin-right: 10px;"
                 href="#"
-                >회원탈퇴</a
+                ></a
               >
 
               <div style="clear: both"></div>
-              <div class="row">
-                <div class="col-12 col-md-6 col-lg-6">
-                  <div class="card">
-                    <div class="card-header">
-                      <h4>일반 유저</h4>
-                    </div>
-                    <div class="card-body">
-                      <div class="table-responsive">
-                        <table 
-                        class="table table-bordered table-md"
-                        id="normal-user-table">
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">userId</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Birthday</th>
-                            <th scope="col">E-mail</th>
-                            <th scope="col">Gender</th>
-                            <th scope="col">point</th>
-                            <th scope="col">createdAt</th>
-                          </tr>
-                          <tbody id="normal-table">
-                            <tr>
-                              <td scope="row"></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <div class="card-footer text-right">
-                      <nav class="d-inline-block">
-                        <ul class="normal-pagenation" id="normal-pagenation">
-                        </ul>
-                      </nav>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-6">
-                  <div class="card">
-                    <div class="card-header">
-                      <h4>블랙리스트 유저</h4>
-                    </div>
-                    <div class="card-body">
-                      <div class="table-responsive">
-                        <table 
-                          class="table table-bordered table-md"
-                          id="blacklist-user-table">
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">userId</th>
-                          <th scope="col">Name</th>
-                          <th scope="col">Birthday</th>
-                          <th scope="col">E-mail</th>
-                          <th scope="col">Gender</th>
-                          <th scope="col">point</th>
-                          <th scope="col">createdAt</th>
-                        </tr>
-                        <tbody id="black-table">
-                          <tr>
-                          <th scope="row"></th>
-                        </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <div class="card-footer text-right">
-                      <nav class="d-inline-block">
-                        <ul class="blacklist-pagenation" id="blacklist-pagenation">
-                        </ul>
-                      </nav>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="row">
               <div class="col-12">
@@ -518,6 +445,31 @@
                 <div style="margin-top: 10px">
                   <input id="invite-checkbox" type="checkbox" style="margin-top: 9px" /><span
                   style="margin-top: 6px; margin-left: 5px">해당 회원을 OutBody 서비스에서 영구 탈퇴시킵니다.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 모달 3: 신고유저 블랙리스트 추가모달  -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="addBlackUser">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">블랙리스트 추가</h5>
+              </div>
+              <div class="card-body">
+                  <textarea type="text" id="blackdescription" class="form-control" placeholder="사유를 입력해주세요."></textarea>
+                  <br />
+              </div>
+              <div class="card-footer text-right">
+                <button class="btn btn-primary" type="button" id="blackuser">
+                  추가
+                </button>
+                <button class="btn btn-primary" id="canceluser">
+                  취소
+                </button>
+                <div style="margin-top: 10px">
                 </div>
               </div>
             </div>

@@ -21,49 +21,111 @@ $('#backtopage').click(function () {
 
 // 자동실행함수, 사용자 정보조회
 async function userPage() {
-  const nameTag = $('#nametag');
-  const statusTag = $('#statustag');
-  const descriptionTag = $('#descriptiontag');
-  const pointTag = $('#pointtag');
-  const ranksTag = $('#rankstag');
-  const friendTag = $('#friendtag');
-  const emailTag = $('#emailtag');
-  const genderTag = $('#gendertag');
-  const bdayTag = $('#birthdaytag');
-  const createdAtTag = $('#createdAttag');
-
   try {
     const { data } = await axios.get(`http://localhost:3000/user/${userId}`, {
       headers: {
         Authorization: accessTokenForUser,
       },
     });
+
     const rankData = await axios.get('http://localhost:3000/user/me/rank', {
       headers: {
         Authorization: accessTokenForUser,
       },
     });
 
-    const myData = data.data.rest;
-    const followersInfo = data.data.followersInfo;
+    const user = data.data;
+    const userRank = rankData.data;
 
-    $(nameTag).text(myData.point);
-    $(statusTag).text(myData.status);
-    $(descriptionTag).text(myData.description);
-    $(pointTag).text(myData.point);
-    $(ranksTag).text(rankData.data.data);
-    $(friendTag).text(followersInfo.length);
-    $(emailTag).text(myData.email);
-    $(genderTag).text(myData.gender ? myData.gender : '성별을 입력해 주세요');
-    $(bdayTag).text(myData.birthday ? myData.birthday : '생일을 입력해 주세요');
+    console.log(user);
+    console.log(userRank);
 
-    const date = new Date(myData.createdAt);
-    const year = date.getFullYear().toString().slice(-2);
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
+    if (!user.description) {
+      user.description = '';
+    }
+    // if (user.imgUrl === null) {
+    //   user.imgUrl = 'assets/img/avatar/avatar-1.png';
+    // }
 
-    const myCreatedAt = `${year}.${month}.${day}`;
-    $(createdAtTag).text(myCreatedAt);
+    // let userImg = `<div class="author-box-left">
+    //                   <img alt="image" src="${user.imgUrl}" class="rounded-circle author-box-picture" />
+    //                   <div class="clearfix"></div>
+    //                   <a href="#" class="btn btn-primary mt-3 follow-btn" data-follow-action="alert('follow clicked');"
+    //                     data-unfollow-action="alert('unfollow clicked');">Follow</a>
+    //                 </div>`;
+    // $('.userImg-Box').html(userImg);
+
+    let userBox = `<div class="author-box-details">
+                      <div class="author-box-name">
+                        <a href="#" id="nametag">${user.name}</a>
+                      </div>
+                      <div class="author-box-description">
+                        <p id="descriptiontag">
+                          ${user.description}
+                        </p>
+                      </div>
+                      <div class="mb-2 mt-3">
+                      </div>
+                      <div class="w-100 d-sm-none"></div>
+                      <div class="float-right mt-sm-0 mt-3">
+                        <button class="btn btn-primary" id="postlist" data-toggle="modal" data-target="#exampleModal"
+                          style="display: inline-block">
+                          오운완 목록보기 <i class="fas fa-chevron-right"></i>
+                        </button>
+                      </div>
+                    </div>`;
+
+    $('.user-head').html(userBox);
+
+    let userInfoTop = `<div class="profile-widget-items">
+                        <div class="profile-widget-item">
+                          <div class="profile-widget-item-label">Point</div>
+                          <div class="profile-widget-item-value" id="pointtag">
+                            ${user.point}
+                          </div>
+                        </div>
+                        <div class="profile-widget-item">
+                          <div class="profile-widget-item-label">Ranks</div>
+                          <div class="profile-widget-item-value" id="rankstag">
+                            ${userRank.data}
+                          </div>
+                        </div>
+                        <div class="profile-widget-item">
+                          <div class="profile-widget-item-label">Friends</div>
+                          <div class="profile-widget-item-value" id="friendtag">
+                            54
+                          </div>
+                        </div>
+                      </div>`;
+    $('.profile-widget-header').html(userInfoTop);
+
+    let userInfoBottom = `<div class="profile-widget-description pb-0">
+                            <div class="form-group col-md-6 col-12">
+                              <br />
+                              <h4>Information</h4>
+                              <br />
+                              <label>E-mail: </label>
+                              <div id="emailtag">${user.email}</div>
+                              <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="form-group col-md-6 col-12">
+                              <label>Gender: </label>
+                              <div id="gendertag">${user.gender}</div>
+                              <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="form-group col-md-6 col-12">
+                              <label>Birthday: </label>
+                              <div id="birthdaytag">${user.birthday}</div>
+                              <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="form-group col-md-6 col-12">
+                              <label>CreatedAt: </label>
+                              <div id="createdAttag">August 15th, 2023</div>
+                              <div class="invalid-feedback"></div>
+                            </div>
+                            <br />
+                          </div>`;
+    $('.userInfo-Bottom').html(userInfoBottom);
   } catch (error) {
     console.error(error.response.data.message);
   }
@@ -78,6 +140,9 @@ async function userPage() {
         },
       },
     );
+
+    $('#users-carousel').html(recommendedUser);
+
     const recommendations = response.data;
     const usersCarousel = $('#users-carousel');
     recommendations.forEach((user) => {
