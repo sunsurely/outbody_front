@@ -8,6 +8,41 @@ window.onload = function () {
   getChallengers();
 };
 
+// // 남은 시간 설정
+// const endDate = new Date('2023-12-31');
+
+// function formatTimeRemaining(timeDifference) {
+//   const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+//   const hours = Math.floor(
+//     (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+//   );
+//   const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+//   const seconds = Math.floor(timeDifference / 1000) % 60;
+
+//   return `${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남음`;
+// }
+
+// function updateTime() {
+//   const now = new Date();
+//   const timeDifference = endDate - now;
+
+//   if (timeDifference <= 0) {
+//     // 도전 종료 시간이 지났을 때의 처리
+//     $('#countdown').text('도전이 종료되었습니다.');
+//   } else {
+//     // 남은 시간을 재가공하여 HTML에 최신화
+//     const formattedTimeRemaining = formatTimeRemaining(timeDifference);
+//     console.log(formattedTimeRemaining);
+//     $('#countdown').text(formattedTimeRemaining);
+//   }
+// }
+
+// // 초기 최신화
+// updateTime();
+
+// // 1분마다 최신화
+// setInterval(updateTime, 1000);
+
 // 도전 상세 조회 (도전)
 async function getChallengeDetail() {
   axios
@@ -19,6 +54,43 @@ async function getChallengeDetail() {
     .then((response) => {
       console.log(response.data.data);
       const challenge = response.data.data;
+
+      // 남은 시간 설정
+      const endDate = new Date(challenge.endDate);
+      const twoHourBefore = endDate.getTime() - 2 * 60 * 60 * 1000;
+
+      function formatTimeRemaining(timeDifference) {
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        );
+        const minutes = Math.floor(
+          (timeDifference % (1000 * 60 * 60)) / (1000 * 60),
+        );
+        const seconds = Math.floor(timeDifference / 1000) % 60;
+
+        return `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
+      }
+
+      function updateTime() {
+        const now = new Date();
+        const timeDifference = twoHourBefore - now;
+
+        if (timeDifference <= 0) {
+          // 도전 종료 시간이 지났을 때의 처리
+          $('#countdown').text('도전이 종료되었습니다.');
+        } else {
+          // 남은 시간을 재가공하여 HTML에 최신화
+          const formattedTimeRemaining = formatTimeRemaining(timeDifference);
+          $('#countdown').text(formattedTimeRemaining);
+        }
+      }
+
+      // 초기 최신화
+      updateTime();
+
+      // 1분마다 최신화
+      setInterval(updateTime, 1000);
 
       const profileImage = challenge.userImageUrl
         ? `https://inflearn-nest-cat.s3.amazonaws.com/${challenge.userImageUrl}`
@@ -40,8 +112,18 @@ async function getChallengeDetail() {
           <div class="card-body">
             <div class="section-title mt-0">설명</div>
             <p>${challenge.description}</p>
-            <div class="section-title mt-0">기간</div>
-            <p>${challenge.startDate} ~ ${challenge.endDate}</p>
+            <div class="section-title mt-0" style="margin-bottom: 20px;">기간</div>          
+            <button class="btn btn-primary" style="margin-bottom: 20px;">시작일
+              <span class="badge badge-transparent">${
+                challenge.startDate
+              }</span>
+              &nbsp종료일 <span class="badge badge-transparent">${
+                challenge.endDate
+              }</span>&nbsp
+            </button>
+            <button class="btn btn-primary" style="margin-bottom: 20px;">
+              도전 종료까지 <span id="countdown" class="badge badge-transparent"></span>&nbsp남음
+            </button>
             <div class="section-title mt-0" style="margin-bottom: 20px;">목표</div>
             <button class="btn btn-primary" style="margin-bottom: 20px;">
               오운완 출석<span class="badge badge-transparent">${
