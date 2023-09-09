@@ -29,7 +29,7 @@ const login = async () => {
       } else {
         // setCookie('Authorization', response.data.data.accessToken, 2);
         alert('반갑습니다 회원님!');
-        location.href = `index-0.html?id=${response.data.data.userId}`;
+        location.href = `main.html?id=${response.data.data.userId}`;
       }
     })
     .catch((error) => {

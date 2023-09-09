@@ -61,7 +61,7 @@ async function initMessagesBox() {
       const id = msg.userId;
       const temp = `
       <div class="dropdown-item-avatar">
-       <a href="user-info.html?userId=${msg.userId}">
+        <a href="user-info.html?userId=${msg.userId}">
           <img
             alt="image"
             src="${msg.imgUrl ? msg.imgUrl : 'assets/img/avatar/avatar-1.png'}"
@@ -167,10 +167,26 @@ async function initializeChart() {
   muscleArr.reverse();
   fatArr.reverse();
 
-  $(recentDatas[0]).text(`${bmrArr[bmrArr.length - 1]} kcal`);
-  $(recentDatas[1]).text(`${weightArr[weightArr.length - 1]} kg`);
-  $(recentDatas[2]).text(`${fatArr[fatArr.length - 1]} %`);
-  $(recentDatas[3]).text(`${muscleArr[muscleArr.length - 1]} kg`);
+  $(recentDatas[0]).text(
+    weightArr[weightArr.length - 1] !== undefined
+      ? `${weightArr[weightArr.length - 1]} kg`
+      : 'kg',
+  );
+  $(recentDatas[1]).text(
+    fatArr[fatArr.length - 1] !== undefined
+      ? `${fatArr[fatArr.length - 1]} %`
+      : '%',
+  );
+  $(recentDatas[2]).text(
+    muscleArr[muscleArr.length - 1] !== undefined
+      ? `${muscleArr[muscleArr.length - 1]} kg`
+      : 'kg',
+  );
+  $(recentDatas[3]).text(
+    bmrArr[bmrArr.length - 1] !== undefined
+      ? `${bmrArr[bmrArr.length - 1]} kcal`
+      : 'kcal',
+  );
 
   initChart('myChart', bmrArr, dateArr, 50, '기초대사량(kcal)');
   initChart('myChart2', weightArr, dateArr, 1, '체중(kg)');
@@ -233,9 +249,10 @@ async function getBodyResults() {
       workout =
         '모든 수치가 정상 범주에 속해있으며, 지금처럼만 관리한다면 건강한 몸을 유지할 수 있습니다.';
     } else {
-      diet = '표준에 가까운 체성분 수치이므로 건강한 식단을 꾸준히 유지하세요.';
+      diet =
+        '표준에 가까운 체성분 수치이므로, 건강한 식단을 꾸준히 유지하세요.';
       workout =
-        '표준에 가까운 체성분 수치이므로 적절한 유산소 운동과 근력 운동을 꾸준히 실시하세요.';
+        '표준에 가까운 체성분 수치이므로, 유산소 운동과 근력 운동을 꾸준히 실시하세요.';
     }
 
     $('#food-result').text(diet);
@@ -274,8 +291,8 @@ async function getBodyResults() {
 async function initializeList(page, pageSize) {
   const recordTable = $('#record-table');
   const pagenationTag = $('#record-pagenation');
-  const prevButton = `<li id="prev_button" class="page-item"><a class="page-link">Previous</a></li>`;
-  const nextButton = `<li id="next_button" class="page-item"><a class="page-link">next</a></li>`;
+  const prevButton = `<li id="prev_button" class="page-item"><a class="page-link">이전</a></li>`;
+  const nextButton = `<li id="next_button" class="page-item"><a class="page-link">다음</a></li>`;
   let pageNumbers = '';
   let pageNumbersHtml = '';
   let recordsHtml = '';
@@ -343,7 +360,7 @@ async function initializeList(page, pageSize) {
           $(pages)
             .eq(nowPage - 1)
             .find('.page-link')
-            .css('background-color', 'blue');
+            .css('background-color', 'rgb(103,119,239)');
           $(pages)
             .eq(nowPage - 1)
             .find('.page-link')
@@ -370,7 +387,7 @@ async function initializeList(page, pageSize) {
           $(pages)
             .eq(nowPage - 1)
             .find('.page-link')
-            .css('background-color', 'blue');
+            .css('background-color', 'rgb(103,119,239)');
           $(pages)
             .eq(nowPage - 1)
             .find('.page-link')
@@ -396,7 +413,9 @@ async function initializeList(page, pageSize) {
           const records = data.pageinatedUsersRecords;
           setRecordList(records);
 
-          $(page).find('.page-link').css('background-color', 'blue');
+          $(page)
+            .find('.page-link')
+            .css('background-color', 'rgb(103,119,239)');
           $(page).find('.page-link').css('color', 'white');
           nowPage = parseInt($(page).find('.page-link').text());
 
@@ -414,8 +433,8 @@ async function initializeList(page, pageSize) {
     nowPage = 1;
     const recordTable = $('#record-table');
     const pagenationTag = $('#record-pagenation');
-    const prevButton = `<li id="prev_button" class="page-item"><a class="page-link">Previous</a></li>`;
-    const nextButton = `<li id="next_button" class="page-item"><a class="page-link">next</a></li>`;
+    const prevButton = `<li id="prev_button" class="page-item"><a class="page-link">이전</a></li>`;
+    const nextButton = `<li id="next_button" class="page-item"><a class="page-link">다음</a></li>`;
     let pageNumbers = '';
     let pageNumbersHtml = '';
     let recordsHtml = '';
@@ -467,7 +486,10 @@ async function initializeList(page, pageSize) {
     pageNumbersHtml = prevButton + pageNumbers + nextButton;
     recordTable.html(recordsHtml);
     pagenationTag.html(pageNumbersHtml);
-    $('.page_number').eq(0).find('.page-link').css('background-color', 'blue');
+    $('.page_number')
+      .eq(0)
+      .find('.page-link')
+      .css('background-color', 'rgb(103,119,239)');
     $('.page_number').eq(0).find('.page-link').css('color', 'white');
     const prevBtn = $('#prev_button');
     const nextBtn = $('#next_button');
@@ -532,7 +554,7 @@ async function initializeList(page, pageSize) {
             $(pages)
               .eq(nowPage - 1)
               .find('.page-link')
-              .css('background-color', 'blue');
+              .css('background-color', 'rgb(103,119,239)');
             $(pages)
               .eq(nowPage - 1)
               .find('.page-link')
@@ -562,7 +584,9 @@ async function initializeList(page, pageSize) {
             const records = data.pageinatedUsersRecords;
             setRecordList(records);
 
-            $(page).find('.page-link').css('background-color', 'blue');
+            $(page)
+              .find('.page-link')
+              .css('background-color', 'rgb(103,119,239)');
             $(page).find('.page-link').css('color', 'white');
 
             recordsHtml = '';
@@ -625,10 +649,10 @@ async function initChart(chartName, recordArr, dateArr, stepSize, title) {
           label: title,
           data: [...recordArr],
           borderWidth: 2,
-          borderColor: '#6777ef',
+          borderColor: 'rgb(103,119,239)',
           backgroundColor: 'transparent',
-          pointBackgroundColor: '#fff',
-          pointBorderColor: 'red',
+          pointBackgroundColor: 'rgb(103,119,239)',
+          pointBorderColor: 'rgb(103,119,239)',
           pointRadius: 2,
           tension: 0,
         },
