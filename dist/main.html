@@ -159,7 +159,7 @@
 
             <li class="menu-header">Record</li>
             <li>
-              <a href="index-0.html"><i class="fas fa-columns"></i>
+              <a href="main.html"><i class="fas fa-columns"></i>
                 <span>체성분</span></a>
             </li>
 
@@ -235,17 +235,6 @@
                 style="background-color:rgb(103,119,239); border-radius: 20px; height: 90px;">
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4 style="color: white;">기초대사량</h4>
-                  </div>
-                  <div class="card-body recent-bodyData" style="color: white;"></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-              <div class="card card-statistic-1"
-                style="background-color:rgb(103,119,239); border-radius: 20px; height: 90px;">
-                <div class="card-wrap">
-                  <div class="card-header">
                     <h4 style="color: white;">체중</h4>
                   </div>
                   <div class="card-body recent-bodyData" style="color: white;"></div>
@@ -269,6 +258,17 @@
                 <div class="card-wrap">
                   <div class="card-header">
                     <h4 style="color: white;" style="color: white;">골격근량</h4>
+                  </div>
+                  <div class="card-body recent-bodyData" style="color: white;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+              <div class="card card-statistic-1"
+                style="background-color:rgb(103,119,239); border-radius: 20px; height: 90px;">
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4 style="color: white;">기초대사량</h4>
                   </div>
                   <div class="card-body recent-bodyData" style="color: white;"></div>
                 </div>
@@ -342,58 +342,63 @@
                         <ul>
                           <li style="font-weight: bold">
                             적정 체중 :
-                            <span class="body-result" style="margin-left: 5px"></span>
+                            <span class="body-result"></span>
                           </li>
                           <li style="font-weight: bold">
                             체중 조절 :
-                            <span class="body-result" style="margin-left: 5px"></span>
+                            <span class="body-result"></span>
                           </li>
                           <li style="font-weight: bold">
                             적정 체지방률 :
-                            <span class="body-result" style="margin-left: 5px"></span>
+                            <span class="body-result"></span>
                           </li>
                           <li style="font-weight: bold">
                             체지방 조절 :
-                            <span class="body-result" style="margin-left: 5px"></span>
+                            <span class="body-result"></span>
                           </li>
                           <li style="font-weight: bold">
                             적정 골격근량 :
-                            <span class="body-result" style="margin-left: 5px"></span>
+                            <span class="body-result"></span>
                           </li>
                           <li style="font-weight: bold">
                             골격근량 조절 :
-                            <span class="body-result" style="margin-left: 5px"></span>
+                            <span class="body-result"></span>
                           </li>
                         </ul>
                       </div>
                     </li>
+
                     <li class="media">
                       <div class="media-body">
-                        <div class="media-title">식단 조절</div>
+                        <div class="section-title mt-0" style="margin-bottom: 25px;">운동</div>
+                        <span id="workout-result" class="text-small text-muted"></span>
+                      </div>
+                    </li>
+
+                    <li class="media">
+                      <div class="media-body">
+                        <div class="section-title mt-0" style="margin-bottom: 25px;">식단</div>
                         <span id="food-result" class="text-small text-muted">
                         </span>
                       </div>
                     </li>
+
                     <li class="media">
                       <div class="media-body">
-                        <div class="media-title">운동법</div>
-                        <span id="workout-result" class="text-small text-muted"></span>
-                      </div>
-                    </li>
-                    <li class="media">
-                      <div class="media-body">
-                        <div id="avg-body" class="media-title">전체 회원의 체성분 평균
+                        <div id="avg-body" class="section-title mt-0" style="margin-bottom: 25px;">전체 회원의 체성분 평균
                           <span class="text-small text-muted">(동일 나이대, 성별 기준)</span>
                         </div>
-                        <P id="avg-weight" style="margin-top:20px; margin-left:20px; color:black; font-weight:bold">
-                          <span>평균 체중: </span>
-                        </P>
-                        <P id="avg-fat" style="margin-left:20px; margin-top:0; color:black; font-weight:bold">
-                          <span>평균 체지방률: </span>
-                        </P>
-                        <P id="avg-muscle" style="margin-left:20px; margin-top:0; color:black; font-weight:bold">
-                          <span>평균 골격근량: </span>
-                        </P>
+                        <ul>
+                          <li id="avg-weight" style="font-weight:bold">
+                            <span style="margin-left: 5px">평균 체중: </span>
+                          </li>
+                          <li id="avg-fat" style="font-weight:bold">
+                            <span style="margin-left: 5px">평균 체지방률: </span>
+                          </li>
+                          <li id="avg-muscle" style="font-weight:bold">
+                            <span style="margin-left: 5px">평균 골격근량: </span>
+                          </li>
+                        </ul>
                       </div>
                     </li>
                   </ul>
@@ -473,7 +478,7 @@
   <script src="assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
 
   <!-- Page Specific JS File -->
-  <script src="assets/js/index-0.js"></script>
+  <script src="assets/js/main.js"></script>
   <script src="assets/js/page/forms-advanced-forms.js"></script>
   <script src="./jquery-3.4.1.min.js"></script>
 
