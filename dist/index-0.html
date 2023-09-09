@@ -177,7 +177,7 @@
 
             <li class="menu-header">Rank</li>
             <li>
-              <a href="ranks.html"><i class="fas fa-th"></i>
+              <a href="rank.html"><i class="fas fa-th"></i>
                 <span>순위</span></a>
             </li>
             <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
@@ -192,99 +192,102 @@
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>체성분관리</h1>
+            <h1>체성분 관리</h1>
+          </div>
+          <div class="section-body">
             <div class="form-group" style="width: 350px; height: 50px; margin-top:25px;">
               <div class="input-group" style="
                     position: absolute;
-                    width: 400px;
                     height: 50px;
-                    margin-bottom: 50px;
-                    margin-left: 100px;
                     right: 0;
                   ">
                 <div class="input-group-prepend">
-                  <div class="input-group-text" style="height: 36px; margin-top: 1px">
+                  <div class="input-group-text" style="height: 36px;">
                     <i class="fas fa-calendar"></i>
                   </div>
                 </div>
                 <input type="text" class="daterange-cus" style="
                       width: 200px;
                       height: 36px;
-                      margin-top: 1px;
                       text-align: center;
                     " />
-                <a href="javascript:;" class="btn btn-primary daterange-btn icon-left btn-icon" style="
-                      border-radius: 0;
+                <a class="btn btn-primary daterange-btn icon-left btn-icon" style="
+                      border-radius: 20;
                       height: 36px;
                       padding-top: 5px;
-                      margin-bottom: 5px;
                       margin-left: 5px;
+                      color: white;
                     ">조회</a>
-                <a href="javascript:;" class="btn btn-primary modal-up  icon-left btn-icon" style="
-                      border-radius: 0;
+                <a id="createRecord" data-toggle="modal" data-target="#createRecordModal" class="btn btn-primary" style="
+                      border-radius: 20;
                       height: 36px;
                       padding-top: 5px;
-                      margin-bottom: 5px;
                       margin-left: 5px;
-                    ">등록</a>
+                      color: white;
+                    ">체성분 등록</a>
               </div>
             </div>
           </div>
 
           <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-              <div class="card card-statistic-1" style="border:2px solid rgba(3, 62, 255, 0.288);">
+              <div class="card card-statistic-1"
+                style="background-color:rgb(103,119,239); border-radius: 20px; height: 90px;">
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>기초대사량</h4>
+                    <h4 style="color: white;">기초대사량</h4>
                   </div>
-                  <div class="card-body recent-bodyData"></div>
+                  <div class="card-body recent-bodyData" style="color: white;"></div>
                 </div>
               </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-              <div class="card card-statistic-1" style="border:2px solid rgba(3, 62, 255, 0.288);">
+              <div class="card card-statistic-1"
+                style="background-color:rgb(103,119,239); border-radius: 20px; height: 90px;">
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>체중</h4>
+                    <h4 style="color: white;">체중</h4>
                   </div>
-                  <div class="card-body recent-bodyData"></div>
+                  <div class="card-body recent-bodyData" style="color: white;"></div>
                 </div>
               </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-              <div class="card card-statistic-1" style="border:2px solid rgba(3, 62, 255, 0.288);">
+              <div class="card card-statistic-1"
+                style="background-color:rgb(103,119,239); border-radius: 20px; height: 90px;">
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>체지방률</h4>
+                    <h4 style="color: white;">체지방률</h4>
                   </div>
-                  <div class="card-body recent-bodyData"></div>
+                  <div class="card-body recent-bodyData" style="color: white;"></div>
                 </div>
               </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-              <div class="card card-statistic-1" style="border:2px solid rgba(3, 62, 255, 0.288);">
+              <div class="card card-statistic-1"
+                style="background-color:rgb(103,119,239); border-radius: 20px; height: 90px;">
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>골격근량</h4>
+                    <h4 style="color: white;" style="color: white;">골격근량</h4>
                   </div>
-                  <div class="card-body recent-bodyData"></div>
+                  <div class="card-body recent-bodyData" style="color: white;"></div>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="row">
             <div class="col-lg-4 col-md-12 col-12 col-sm-12">
-              <div class="card" style="height: 950px;border:2px solid rgba(3, 62, 255, 0.288); padding:5px;">
+              <div class="card card-primary" style="padding: 5px;">
                 <div class="card-header">
-                  <h4 style="margin-left: 200px">측정표</h4>
+                  <h4>측정표 기록</h4>
                 </div>
-                <div class="card-body p-0">
-                  <div class="table-responsive" style="height:800px">
+                <div class="card-body">
+                  <div class="table-responsive">
                     <table class="table">
                       <thead>
                         <tr>
-                          <th style="padding:0 10px 0 40px">날짜</th>
+                          <th style="padding:0 10px 0 40px">일자</th>
                           <th style="padding:0 30px">체중</th>
                           <th style="padding:0 10px">체지방률</th>
                           <th style="padding:0 15px">골격근량</th>
@@ -295,34 +298,31 @@
                     </table>
                   </div>
                 </div>
-                <div class="card-body" style="width: 200px; display: flex; justify-content: center; margin-left:150px;">
-                  <nav aria-label="Page navigation example">
-                    <ul id="record-pagenation" class="pagination"></ul>
-                  </nav>
+                <div class="card-body">
+                  <div class="float-right">
+                    <nav aria-label="Page navigation example">
+                      <ul id="record-pagenation" class="pagination"></ul>
+                    </nav>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-md-12 col-12 col-sm-12">
-              <div class="card"
-                style="width:550px; height: 950px;border:2px solid rgba(3, 62, 255, 0.288); padding:5px;">
-                <div class="card-header">
-                  <h4 style="margin-left:200px ; ">변화그래프</h4>
-                  <div class="card-header-action">
 
-                  </div>
+            <div class="col-lg-4 col-md-12 col-12 col-sm-12">
+              <div class="card card-primary" style="padding: 5px;">
+                <div class="card-header">
+                  <h4>체성분 변화 기록</h4>
+                  <div class="card-header-action"></div>
                 </div>
                 <div class="card-body">
                   <canvas id="myChart" height="100"></canvas>
                 </div>
-
                 <div class="card-body">
                   <canvas id="myChart2" height="100"></canvas>
                 </div>
-
                 <div class="card-body">
                   <canvas id="myChart3" height="100"></canvas>
                 </div>
-
                 <div class="card-body">
                   <canvas id="myChart4" height="100"></canvas>
                 </div>
@@ -330,51 +330,46 @@
 
             </div>
             <div class="col-lg-4 col-md-12 col-12 col-sm-12">
-              <div class="card"
-                style="height:950px; width:450px; margin-left:50px; height: 950px;border:2px solid rgba(3, 62, 255, 0.288); padding:5px;">
+              <div class="card card-primary" style="padding: 5px;">
                 <div class="card-header">
-                  <h4 style="margin-left: 170px;">종합 평가</h4>
+                  <h4>종합 평가</h4>
                 </div>
                 <div class="card-body">
                   <ul class="list-unstyled list-unstyled-border">
                     <li class="media">
                       <div class="media-body">
-                        <div class="media-title">체중조절</div>
+                        <div class="section-title mt-0" style="margin-bottom: 25px;">체중 조절</div>
                         <ul>
                           <li style="font-weight: bold">
-                            적정체중
-                            <span class="body-result" style="margin-left: 20px"></span>
+                            적정 체중 :
+                            <span class="body-result" style="margin-left: 5px"></span>
                           </li>
                           <li style="font-weight: bold">
-                            체중조절
-                            <span class="body-result" style="margin-left: 20px"></span>
+                            체중 조절 :
+                            <span class="body-result" style="margin-left: 5px"></span>
                           </li>
                           <li style="font-weight: bold">
-                            적정체지방률
-                            <span class="body-result" style="margin-left: 20px">
-                            </span>
+                            적정 체지방률 :
+                            <span class="body-result" style="margin-left: 5px"></span>
                           </li>
                           <li style="font-weight: bold">
-                            체지방 조절
-                            <span class="body-result" style="margin-left: 20px">
-                            </span>
+                            체지방 조절 :
+                            <span class="body-result" style="margin-left: 5px"></span>
                           </li>
                           <li style="font-weight: bold">
-                            적정 골격근량
-                            <span class="body-result" style="margin-left: 20px">
-                            </span>
+                            적정 골격근량 :
+                            <span class="body-result" style="margin-left: 5px"></span>
                           </li>
                           <li style="font-weight: bold">
-                            골격근량 조절
-                            <span class="body-result" style="margin-left: 20px">
-                            </span>
+                            골격근량 조절 :
+                            <span class="body-result" style="margin-left: 5px"></span>
                           </li>
                         </ul>
                       </div>
                     </li>
                     <li class="media">
                       <div class="media-body">
-                        <div class="media-title">식단조절</div>
+                        <div class="media-title">식단 조절</div>
                         <span id="food-result" class="text-small text-muted">
                         </span>
                       </div>
@@ -387,20 +382,19 @@
                     </li>
                     <li class="media">
                       <div class="media-body">
-                        <div id="avg-body" class="media-title">사이트 이용자 체성분 평균 <span class="text-small text-muted">(동일
-                            나이대 , 성별 기준)</span< /div>
-
-
-                            <P id="avg-weight" style="margin-top:20px; margin-left:20px; color:black; font-weight:bold">
-                              <span>평균체중 : </span>
-                            </P>
-                            <P id="avg-fat" style="margin-left:20px; margin-top:0; color:black; font-weight:bold">
-                              <span>평균체지방률 : </span>
-                            </P>
-                            <P id="avg-muscle" style="margin-left:20px; margin-top:0; color:black; font-weight:bold">
-                              <span>평균골격근량 : </span>
-                            </P>
+                        <div id="avg-body" class="media-title">전체 회원의 체성분 평균
+                          <span class="text-small text-muted">(동일 나이대, 성별 기준)</span>
                         </div>
+                        <P id="avg-weight" style="margin-top:20px; margin-left:20px; color:black; font-weight:bold">
+                          <span>평균 체중: </span>
+                        </P>
+                        <P id="avg-fat" style="margin-left:20px; margin-top:0; color:black; font-weight:bold">
+                          <span>평균 체지방률: </span>
+                        </P>
+                        <P id="avg-muscle" style="margin-left:20px; margin-top:0; color:black; font-weight:bold">
+                          <span>평균 골격근량: </span>
+                        </P>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -408,6 +402,44 @@
             </div>
         </section>
       </div>
+
+      <!-- 체성분 등록 모달 -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="createRecordModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">체성분 등록</h5>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label>키(cm)</label>
+                <input type="text" name="title" class="form-control body-data" required />
+              </div>
+              <div class="form-group">
+                <label>체중(kg)</label>
+                <input type="text" name="title" class="form-control body-data" required />
+              </div>
+              <div class="form-group">
+                <label>체지방률(%)</label>
+                <input type="text" name="title" class="form-control body-data" required />
+              </div>
+              <div class="form-group">
+                <label>골격근량(kg)</label>
+                <input type="text" name="title" class="form-control body-data" required />
+              </div>
+              <div class="form-group">
+                <label>기초대사량(kcal)</label>
+                <input type="text" name="title" class="form-control body-data" required />
+              </div>
+            </div>
+            <div class="modal-footer" style="margin-bottom: 20px;">
+              <button class="btn btn-primary regist-record">완료</button>
+              <button class="btn btn-secondary cancel-regist" data-dismiss="modal">취소</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <footer class="main-footer">
         <div class="footer-left">
           Copyright &copy; 2023
@@ -416,66 +448,10 @@
         </div>
         <div class="footer-right"></div>
       </footer>
+
     </div>
   </div>
 
-  <div id="modal-background" style="
-        width: 100%;
-        height: 1500px;
-        background-color: rgba(0, 0, 0, 0.5);
-        position: absolute;
-        top: 0;
-        z-index: 10;
-        display: none;
-      ">
-    <div class="card" style="
-          position: absolute;
-          z-index: 15;
-          left: 45%;
-          top: 10%;
-          width: 500px;
-          padding: 10px;
-        ">
-      <div class="card-header">
-        <h4 style="margin-top: 30px; margin-left:170px;">측정표 등록</h4>
-      </div>
-      <div class="card-body pb-0">
-        <div class="form-group" style="margin-top: 20px">
-          <label>키(cm)</label>
-          <input type="text" name="title" class="form-control body-data" required />
-          <div class="invalid-feedback">Please fill in the title</div>
-        </div>
-        <div class="form-group" style="margin-top: 30px">
-          <label>체중(kg)</label>
-          <input type="text" name="title" class="form-control body-data" required />
-          <div class="invalid-feedback">Please fill in the title</div>
-        </div>
-        <div class="form-group" style="margin-top: 30px">
-          <label>체지방률(%)</label>
-          <input type="text" name="title" class="form-control body-data" required />
-          <div class="invalid-feedback">Please fill in the title</div>
-        </div>
-        <div class="form-group" style="margin-top: 30px">
-          <label>골격근량(kg)</label>
-          <input type="text" name="title" class="form-control body-data" required />
-          <div class="invalid-feedback">Please fill in the title</div>
-        </div>
-        <div class="form-group" style="margin-top: 30px">
-          <label>기초대사량(kcal)</label>
-          <input type="text" name="title" class="form-control body-data" required />
-          <div class="invalid-feedback">Please fill in the title</div>
-        </div>
-      </div>
-      <div class="card-footer pt-0" style="display: flex">
-        <button class="btn btn-primary regist-record" style="margin-top: 35px; margin-left: 150px">
-          등록
-        </button>
-        <button class="btn btn-primary cancel-regist" style="margin-top: 35px; margin-left: 20px">
-          취소
-        </button>
-      </div>
-    </div>
-  </div>
   <!-- General JS Scripts -->
   <script src="assets/modules/jquery.min.js"></script>
   <script src="assets/modules/popper.js"></script>
@@ -489,6 +465,7 @@
     src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@1.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
 
   <!-- JS Libraies -->
+  <script src="assets/js/page/bootstrap-modal.js"></script>
   <script src="assets/modules/chart.min.js"></script>
   <script src="assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
   <script src="assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
@@ -498,10 +475,10 @@
   <!-- Page Specific JS File -->
   <script src="assets/js/index-0.js"></script>
   <script src="assets/js/page/forms-advanced-forms.js"></script>
+  <script src="./jquery-3.4.1.min.js"></script>
 
   <!-- Template JS File -->
   <script src="assets/js/scripts.js"></script>
-  <script src="assets/js/custom.js"></script>
   <script src="assets/js/user-Info.js"></script>
   <script src="assets/js/notice.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
